@@ -1115,6 +1115,83 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
 
+/* ====== DATE GROUP HEADER ====== */
+.date-group {
+    margin-bottom: 30px;
+}
+
+.date-group-header {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffcc33;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(93,45,232,0.3), rgba(0,212,255,0.15));
+    border: 1.5px solid rgba(255,204,51,0.5);
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255,204,51,0.25);
+    text-shadow: 0 0 15px rgba(255,204,51,0.8);
+}
+
+/* ====== TOGGLE PERTANDINGAN SELESAI ====== */
+.selesai-section {
+    margin-top: 18px;
+    margin-bottom: 10px;
+}
+
+.selesai-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1));
+    border: 1.5px solid rgba(16,185,129,0.5);
+    color: #10b981;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.35s;
+    box-shadow: 0 0 20px rgba(16,185,129,0.15);
+}
+
+.selesai-toggle:hover {
+    background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.2));
+    border-color: rgba(16,185,129,0.9);
+    box-shadow: 0 0 30px rgba(16,185,129,0.4);
+    transform: translateY(-2px);
+}
+
+.selesai-toggle.open {
+    border-color: rgba(16,185,129,0.9);
+    background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.2));
+}
+
+.selesai-icon { font-size: 16px; }
+.selesai-text { flex: 1; text-align: center; }
+.selesai-arrow { font-size: 12px; transition: transform 0.3s; }
+
+.selesai-content {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1.5px dashed rgba(16,185,129,0.3);
+    animation: fadeInSelesai 0.4s ease;
+}
+
+@keyframes fadeInSelesai {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .league {
     margin-bottom: 30px;
     border-radius: 22px;
@@ -1701,6 +1778,24 @@ nav a.nav-daftar:hover {
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
 
+    .date-group { margin-bottom: 22px; }
+    .date-group-header {
+        font-size: 14px;
+        letter-spacing: 2px;
+        padding: 11px 15px;
+        margin-bottom: 14px;
+        border-radius: 12px;
+    }
+
+    .selesai-toggle {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        padding: 11px 14px;
+        gap: 8px;
+    }
+    .selesai-icon { font-size: 14px; }
+    .selesai-arrow { font-size: 10px; }
+
     .league { border-radius: 16px; }
     .league-header { padding: 14px 30px; font-size: 12.5px; letter-spacing: 2.5px; }
     .single-column-wrap { gap: 16px; padding: 20px 10px 14px; }
@@ -1822,6 +1917,7 @@ nav a.nav-daftar:hover {
     .footer-title { font-size: 18px; letter-spacing: 6px; }
     .footer-tagline { font-size: 10px; letter-spacing: 2px; }
 
+    .date-group-header { font-size: 12px; padding: 10px 12px; letter-spacing: 1.5px; }
     .league-header { font-size: 12px; padding: 14px 34px; letter-spacing: 2px; }
     .tab-filter { padding: 9px 4px; font-size: 10px; gap: 4px; }
     .tab-icon { font-size: 12px; }
@@ -2073,7 +2169,7 @@ let semuaData = [];
 // ============================================================
 // CACHE
 // ============================================================
-const CACHE_KEY = "kiper4d_data_cache_v18";
+const CACHE_KEY = "kiper4d_data_cache_v20";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) {
@@ -2231,7 +2327,6 @@ function getLogoForTeam(name, logoFromDb) {
     return null;
 }
 
-// ====== LOGO UNTUK BIG MATCH TICKER (dengan fallback inisial) ======
 function bmtLogo(name, logoFromDb) {
     const resolved = getLogoForTeam(name, logoFromDb);
     if (resolved) {
@@ -2262,13 +2357,11 @@ function normalizeDate(input) {
     if (!input) return "";
     let s = String(input).trim().toLowerCase();
 
-    // Format YYYY-MM-DD
     if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
         const [y, m, d] = s.split("-");
         return y + "-" + m.padStart(2, "0") + "-" + d.padStart(2, "0");
     }
 
-    // Format "24 September 2026" atau "24 Sep 2026"
     const bulanMatch = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
     if (bulanMatch) {
         const d = bulanMatch[1].padStart(2, "0");
@@ -2277,7 +2370,6 @@ function normalizeDate(input) {
         return y + "-" + m + "-" + d;
     }
 
-    // Format "September 24, 2026"
     const bulanMatch2 = s.match(/^([a-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
     if (bulanMatch2) {
         const m = BULAN_MAP[bulanMatch2[1]] || "01";
@@ -2286,7 +2378,6 @@ function normalizeDate(input) {
         return y + "-" + m + "-" + d;
     }
 
-    // Format DD/MM/YYYY atau DD-MM-YYYY
     const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
     if (dmy) {
         const d = dmy[1].padStart(2, "0");
@@ -2295,7 +2386,6 @@ function normalizeDate(input) {
         return y + "-" + m + "-" + d;
     }
 
-    // Fallback: cari YYYY
     const yyyy = s.match(/(\d{4})/);
     if (yyyy) {
         const m = s.match(/(\d{1,2})/g);
@@ -2363,16 +2453,6 @@ function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 function matchKey(data) { return [normalizeDate(clean(data.date)), normalizeTime(clean(data.time)), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
 
-function groupLiga(data) {
-    const groups = {};
-    data.forEach(item => {
-        const liga = clean(item.league) || "LAINNYA";
-        if (!groups[liga]) groups[liga] = [];
-        groups[liga].push(item);
-    });
-    return groups;
-}
-
 function getKickoffWIBMs(data) {
     const date = normalizeDate(clean(data.date));
     const time = normalizeTime(clean(data.time));
@@ -2397,7 +2477,9 @@ function getMatchStatus(data) {
     if (aH !== "" && aA !== "") return "selesai";
     const kickoffWIB = getKickoffWIBMs(data);
     if (!kickoffWIB) return "akan";
-    const diff = kickoffWIB - getNowWIBMs();
+    const now = getNowWIBMs();
+    const diff = kickoffWIB - now;
+
     if (diff <= 0 && diff > -105 * 60 * 1000) return "live";
     if (diff <= -105 * 60 * 1000) return "selesai";
     return "akan";
@@ -2610,6 +2692,9 @@ function renderMatchRowSingle(data) {
     `;
 }
 
+// ============================================================
+// RENDER PREDIKSI — GROUP BY TANGGAL → LIGA → SELESAI TOGGLE
+// ============================================================
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
     if (!container) return;
@@ -2617,19 +2702,109 @@ function renderPrediksi(data) {
         container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok dengan filter</div></div>`;
         return;
     }
-    const groups = groupLiga(data);
-    let html = "";
-    Object.keys(groups).sort().forEach(liga => {
-        const matches = groups[liga].sort((a, b) => {
-            const aTime = getKickoffWIBMs(a) || 0;
-            const bTime = getKickoffWIBMs(b) || 0;
-            return aTime - bTime;
-        });
-        const rows = matches.map(renderMatchRowSingle).join("");
-        html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+
+    // 1. Group by tanggal
+    const groupTanggal = {};
+    data.forEach(item => {
+        const d = normalizeDate(clean(item.date)) || "0000-00-00";
+        if (!groupTanggal[d]) groupTanggal[d] = [];
+        groupTanggal[d].push(item);
     });
+
+    const tanggalSorted = Object.keys(groupTanggal).sort();
+    let html = "";
+
+    tanggalSorted.forEach(tanggal => {
+        const matches = groupTanggal[tanggal];
+
+        // Header tanggal
+        const dateObj = new Date(tanggal + "T00:00:00Z");
+        const hari = HARI_INDO[dateObj.getUTCDay()];
+        const tgl = dateObj.getUTCDate();
+        const bulan = BULAN_INDO[dateObj.getUTCMonth()];
+        const tahun = dateObj.getUTCFullYear();
+        const headerTgl = `${hari}, ${tgl} ${bulan} ${tahun}`;
+
+        // 2. Pisahkan aktif & selesai
+        const aktif = matches.filter(m => getMatchStatus(m) !== "selesai");
+        const selesai = matches.filter(m => getMatchStatus(m) === "selesai");
+
+        html += `<div class="date-group">`;
+        html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
+
+        // 3. Render yang AKTIF (group by liga)
+        if (aktif.length) {
+            const groupLiga = {};
+            aktif.forEach(item => {
+                const liga = clean(item.league) || "LAINNYA";
+                if (!groupLiga[liga]) groupLiga[liga] = [];
+                groupLiga[liga].push(item);
+            });
+
+            Object.keys(groupLiga).sort().forEach(liga => {
+                const matchList = groupLiga[liga].sort((a, b) => {
+                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
+                });
+                const rows = matchList.map(renderMatchRowSingle).join("");
+                html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+            });
+        }
+
+        // 4. Render yang SELESAI (collapsed by default)
+        if (selesai.length) {
+            const groupLigaSelesai = {};
+            selesai.forEach(item => {
+                const liga = clean(item.league) || "LAINNYA";
+                if (!groupLigaSelesai[liga]) groupLigaSelesai[liga] = [];
+                groupLigaSelesai[liga].push(item);
+            });
+
+            let selesaiHtml = "";
+            Object.keys(groupLigaSelesai).sort().forEach(liga => {
+                const matchList = groupLigaSelesai[liga].sort((a, b) => {
+                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
+                });
+                const rows = matchList.map(renderMatchRowSingle).join("");
+                selesaiHtml += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+            });
+
+            const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
+
+            html += `
+                <div class="selesai-section">
+                    <button type="button" class="selesai-toggle" onclick="toggleSelesai('${uniqueId}', this)">
+                        <span class="selesai-icon">✅</span>
+                        <span class="selesai-text">LIHAT ${selesai.length} PERTANDINGAN SELESAI</span>
+                        <span class="selesai-arrow">▼</span>
+                    </button>
+                    <div class="selesai-content" id="${uniqueId}" style="display:none;">
+                        ${selesaiHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        html += `</div>`;
+    });
+
     container.innerHTML = html;
 }
+
+// Toggle show/hide pertandingan selesai (global scope)
+window.toggleSelesai = function(id, btn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const arrow = btn.querySelector(".selesai-arrow");
+    if (el.style.display === "none") {
+        el.style.display = "block";
+        if (arrow) arrow.textContent = "▲";
+        btn.classList.add("open");
+    } else {
+        el.style.display = "none";
+        if (arrow) arrow.textContent = "▼";
+        btn.classList.remove("open");
+    }
+};
 
 // ============================================================
 // FILTER
@@ -2763,7 +2938,7 @@ function updateStats(data) {
 }
 
 // ============================================================
-// BIG MATCH TICKER — TAMPILKAN SEMUA (logo atau inisial)
+// BIG MATCH TICKER
 // ============================================================
 function bigMatchCard(data) {
     const home = clean(data.home);
@@ -3044,6 +3219,11 @@ setInterval(() => {
     if (semuaData.length > 0) {
         updateNewsTicker(semuaData);
         renderBigMatch(semuaData);
+        // Auto-refresh kalau tab LIVE aktif
+        const tabAktif = document.querySelector(".tab-filter.active");
+        if (tabAktif && tabAktif.dataset.date === "live") {
+            applyFilter();
+        }
     }
 }, 60000);
 
