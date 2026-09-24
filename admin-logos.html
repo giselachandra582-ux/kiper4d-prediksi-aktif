@@ -30,7 +30,6 @@ body {
     50% { background-position: 100% 100%, 100% 100%, 100% 100%, 0% 0%; }
 }
 
-/* Grid halus di background */
 body::before {
     content: "";
     position: fixed;
@@ -43,7 +42,6 @@ body::before {
     z-index: 0;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #0a0e27; }
 ::-webkit-scrollbar-thumb {
@@ -55,7 +53,6 @@ body::before {
     background: linear-gradient(180deg, #00d4ff, #ffd700, #a855f7);
 }
 
-/* Header */
 header {
     position: relative;
     z-index: 2;
@@ -106,7 +103,6 @@ header p {
     letter-spacing: 0.5px;
 }
 
-/* Container */
 .container {
     position: relative;
     z-index: 2;
@@ -115,7 +111,6 @@ header p {
     padding: 0 16px;
 }
 
-/* Status Badge */
 .status {
     position: relative;
     padding: 14px 18px;
@@ -168,7 +163,6 @@ header p {
     color: #fca5a5;
 }
 
-/* Card Glassmorphism */
 .card {
     position: relative;
     background: rgba(28, 17, 48, 0.55);
@@ -234,7 +228,6 @@ header p {
     line-height: 1.65;
 }
 
-/* Textarea */
 textarea {
     width: 100%;
     min-height: 400px;
@@ -261,7 +254,6 @@ textarea::placeholder {
     color: #4a4a5a;
 }
 
-/* Buttons */
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -295,55 +287,25 @@ button::after {
 }
 
 button:hover::after { opacity: 1; }
-
-button:hover {
-    transform: translateY(-3px);
-}
-
+button:hover { transform: translateY(-3px); }
 button:active { transform: translateY(-1px); }
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none !important;
-}
+.btn-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.btn-blue:hover { box-shadow: 0 8px 25px rgba(59,130,246,0.55), 0 0 40px rgba(59,130,246,0.3); }
 
-.btn-blue {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-}
-.btn-blue:hover {
-    box-shadow: 0 8px 25px rgba(59,130,246,0.55), 0 0 40px rgba(59,130,246,0.3);
-}
+.btn-green { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.btn-green:hover { box-shadow: 0 8px 25px rgba(34,197,94,0.55), 0 0 40px rgba(34,197,94,0.3); }
 
-.btn-green {
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-}
-.btn-green:hover {
-    box-shadow: 0 8px 25px rgba(34,197,94,0.55), 0 0 40px rgba(34,197,94,0.3);
-}
+.btn-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.btn-purple:hover { box-shadow: 0 8px 25px rgba(168,85,247,0.55), 0 0 40px rgba(168,85,247,0.35); }
 
-.btn-purple {
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
-}
-.btn-purple:hover {
-    box-shadow: 0 8px 25px rgba(168,85,247,0.55), 0 0 40px rgba(168,85,247,0.35);
-}
+.btn-red { background: linear-gradient(135deg, #dc2626, #ef4444); }
+.btn-red:hover { box-shadow: 0 8px 25px rgba(239,68,68,0.55), 0 0 40px rgba(239,68,68,0.3); }
 
-.btn-red {
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-}
-.btn-red:hover {
-    box-shadow: 0 8px 25px rgba(239,68,68,0.55), 0 0 40px rgba(239,68,68,0.3);
-}
+.btn-dark { background: linear-gradient(135deg, #334155, #475569); }
+.btn-dark:hover { box-shadow: 0 8px 25px rgba(71,85,105,0.55); }
 
-.btn-dark {
-    background: linear-gradient(135deg, #334155, #475569);
-}
-.btn-dark:hover {
-    box-shadow: 0 8px 25px rgba(71,85,105,0.55);
-}
-
-/* Stat Grid */
 .stat-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -397,7 +359,6 @@ button:disabled {
     font-weight: 600;
 }
 
-/* Skeleton Loading */
 .skeleton {
     background: linear-gradient(90deg,
         rgba(255,255,255,0.05) 25%,
@@ -427,7 +388,6 @@ button:disabled {
     letter-spacing: 0.5px;
 }
 
-/* Warnbox */
 .warnbox {
     background: rgba(245,158,11,0.1);
     border: 1px solid rgba(245,158,11,0.4);
@@ -440,12 +400,29 @@ button:disabled {
     backdrop-filter: blur(10px);
 }
 
-/* Preview area */
-#previewArea > div {
-    transition: all 0.3s;
+.infobox {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.35);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    color: #7dd3fc;
+    font-size: 12.5px;
+    line-height: 1.7;
+    backdrop-filter: blur(10px);
 }
 
-/* Toast */
+.infobox b { color: #ffd700; }
+.infobox code {
+    background: rgba(0,0,0,0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    color: #86efac;
+}
+
+#previewArea > div { transition: all 0.3s; }
+
 .toast {
     position: fixed;
     top: 30px;
@@ -468,18 +445,9 @@ button:disabled {
 }
 
 .toast.show { transform: translateX(0); }
-.toast.error {
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #fca5a5;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.3);
-}
-.toast.warning {
-    border-color: rgba(245, 158, 11, 0.5);
-    color: #fcd34d;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.3);
-}
+.toast.error { border-color: rgba(239, 68, 68, 0.5); color: #fca5a5; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.3); }
+.toast.warning { border-color: rgba(245, 158, 11, 0.5); color: #fcd34d; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.3); }
 
-/* Responsive */
 @media (max-width: 600px) {
     header { padding: 28px 15px 22px; }
     header img { width: 110px; }
@@ -516,12 +484,16 @@ button:disabled {
 
         <div class="card">
             <h2>📝 Input URL Logo</h2>
-            <p class="small">
-                Format: <b>Nama Tim | URL Logo</b> (1 baris per tim)
+            <div class="infobox">
+                <b>✨ Panel admin PINTAR — bisa baca 3 format input:</b><br>
+                <b>1. Pakai pipa (paling akurat):</b> <code>Hungary | https://...</code><br>
+                <b>2. Tanpa pipa (auto-extract dari URL):</b> <code>https://...</code><br>
+                <b>3. Spasi biasa:</b> <code>Hungary https://...</code><br>
                 <br>
-                Contoh: <code>Lecce | https://res.cloudinary.com/.../Lecce.png</code>
-            </p>
-            <textarea id="inputLogos" placeholder="Lecce | https://res.cloudinary.com/kc9b3mmz/image/upload/v.../Lecce.png&#10;Monza | https://res.cloudinary.com/kc9b3mmz/image/upload/v.../Monza.png&#10;Napoli | https://res.cloudinary.com/kc9b3mmz/image/upload/v.../Napoli.png"></textarea>
+                💡 Bisa input <b>banyak sekaligus</b> (1 baris per tim).<br>
+                📥 Nama tim diambil otomatis dari URL kalau tidak ditulis.
+            </div>
+            <textarea id="inputLogos" placeholder="Format 1 (pipa):&#10;Hungary | https://static.vecteezy.com/.../hungary-3d-rounded-flag.png&#10;Uzbekistan | https://png.pngtree.com/.../uzbekistan-round-flag.png&#10;Yemen | https://image.shutterstock.com/.../yemen-flag-button.jpg&#10;&#10;Format 2 (URL saja, auto-detect):&#10;https://static.vecteezy.com/.../hungary-3d-rounded-flag.png&#10;https://png.pngtree.com/.../uzbekistan-round-flag.png&#10;&#10;Format 3 (nama + spasi + URL):&#10;Hungary https://static.vecteezy.com/.../hungary-3d-rounded-flag.png"></textarea>
             <div class="buttons">
                 <button id="btnParse" class="btn-blue">👁️ Preview</button>
                 <button id="btnSave" class="btn-green">💾 Save ke Firestore</button>
@@ -616,16 +588,6 @@ const analyzeResult = document.getElementById("analyzeResult");
 
 function clean(v) { return String(v || "").trim(); }
 
-function normalizeTeamKey(name) {
-    return clean(name).toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/&/g, " and ")
-        .replace(/[.'’`]/g, "")
-        .replace(/[-_/]/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-}
-
 function slugify(name) {
     return clean(name).toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -641,7 +603,7 @@ function isRandomId(id) {
 }
 
 // ============================================================
-// TOAST (ganti alert)
+// TOAST
 // ============================================================
 function showToast(message, type = "success") {
     const toast = document.createElement("div");
@@ -704,11 +666,10 @@ onAuthStateChanged(auth, (user) => {
 btnLogin.addEventListener("click", () => { window.location.href = "/login.html"; });
 
 // ============================================================
-// LOAD STATS dengan skeleton + counter
+// LOAD STATS
 // ============================================================
 async function loadStats() {
     try {
-        // Skeleton loading
         statTotal.classList.add("skeleton");
         statAda.classList.add("skeleton");
         statKosong.classList.add("skeleton");
@@ -739,22 +700,127 @@ async function loadStats() {
 }
 
 // ============================================================
-// PARSE INPUT
+// SMART PARSER — Bisa baca 3 format input
 // ============================================================
+
+// Daftar kata umum yang dibuang dari nama tim
+const KATA_UMUM = /\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk|club|team|national|the|of|and|de|do|da|la|le|el|city|united|utd)\b/gi;
+
+// Extract nama tim dari URL
+function extractNameFromUrl(url) {
+    if (!url) return "";
+    try {
+        // Ambil bagian path terakhir
+        const parts = url.split("/");
+        let filename = parts[parts.length - 1];
+        // Hapus query string
+        filename = filename.split("?")[0];
+        // Hapus ekstensi
+        filename = filename.replace(/\.(png|jpg|jpeg|webp|svg|gif)$/i, "");
+        // Hapus suffix ukuran (_512x512, -512x512, dll)
+        filename = filename.replace(/[_\-]\d+x\d+$/i, "");
+        // Hapus hash panjang di akhir (32+ karakter alfanumerik)
+        filename = filename.replace(/[_\-][a-f0-9]{20,}$/i, "");
+        // Hapus prefix umum (flag-of-, round-, dll)
+        filename = filename.replace(/^(flag[_\-]?of[_\-]?|round[_\-]?|3d[_\-]?|glossy[_\-]?|glass[_\-]?)/gi, "");
+        // Hapus suffix umum (flag, logo, button, icon, etc)
+        filename = filename.replace(/[_\-](flag|logo|button|icon|crest|badge|emblem|national[_\-]?team|round|3d|glossy|glass)/gi, "");
+        // Ganti _ dan - dengan spasi
+        filename = filename.replace(/[_\-]+/g, " ");
+        // Hapus spasi berlebih
+        filename = filename.trim();
+        // Kalau kosong, return empty
+        if (!filename) return "";
+        // Capitalize tiap kata
+        return filename.split(/\s+/).map(w => 
+            w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+        ).join(" ");
+    } catch (e) {
+        return "";
+    }
+}
+
+// Cek apakah string adalah URL
+function isUrl(str) {
+    return /^https?:\/\//i.test(clean(str));
+}
+
+// Parser pintar: baca 3 format input
 function parseInput(text) {
     const lines = text.split(/\r?\n/);
     const hasil = [];
+    
     for (const line of lines) {
         const trimmed = line.trim();
         if (!trimmed || trimmed.startsWith("#")) continue;
-        const parts = trimmed.split("|").map(p => p.trim());
-        if (parts.length < 2) continue;
-        const nama = parts[0];
-        const url = parts[1];
-        if (!nama || !url) continue;
-        hasil.push({ nama, url, key: slugify(nama) });
+
+        let nama = "";
+        let url = "";
+
+        // ===== FORMAT 1: Pakai pipa | =====
+        if (trimmed.includes("|")) {
+            const parts = trimmed.split("|").map(p => p.trim());
+            if (parts.length >= 2) {
+                // Cari mana yang URL dan mana yang nama
+                const part0 = parts[0];
+                const part1 = parts[1];
+                if (isUrl(part0) && !isUrl(part1)) {
+                    // Kebalik: URL dulu, nama belakang
+                    url = part0;
+                    nama = part1;
+                } else {
+                    nama = part0;
+                    url = part1;
+                }
+            }
+        }
+        // ===== FORMAT 3: Nama + spasi + URL =====
+        else {
+            const urlMatch = trimmed.match(/(https?:\/\/\S+)/i);
+            if (urlMatch) {
+                url = urlMatch[1];
+                // Nama = teks sebelum URL
+                nama = trimmed.substring(0, urlMatch.index).trim();
+                // Kalau nama kosong, extract dari URL
+                if (!nama) nama = extractNameFromUrl(url);
+            }
+        }
+
+        // Validasi
+        if (!url || !isUrl(url)) continue;
+
+        // Kalau nama kosong, extract dari URL        if (!nama) {
+            nama = extractNameFromUrl(url);
+        }
+
+        // Kalau nama masih kosong, skip
+        if (!nama) continue;
+
+        // Bersihkan nama (title case)
+        nama = nama.replace(/\s+/g, " ").trim();
+        // Capitalize tiap kata
+        nama = nama.split(" ").map(w => 
+            w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+        ).join(" ");
+
+        hasil.push({ 
+            nama, 
+            url, 
+            key: slugify(nama) 
+        });
     }
-    return hasil;
+    
+    // Hapus duplikat (berdasarkan slug nama)
+    const seen = new Set();
+    const unique = [];
+    for (const item of hasil) {
+        if (!item.key) continue;
+        if (seen.has(item.key)) continue;
+        seen.add(item.key);
+        unique.push(item);
+    }
+    
+    return unique;
 }
 
 // ============================================================
@@ -765,22 +831,25 @@ btnParse.addEventListener("click", () => {
     if (!text) { showToast("⚠️ Paste data dulu", "warning"); return; }
     const data = parseInput(text);
     if (data.length === 0) {
-        previewArea.innerHTML = '<div class="status error">❌ Tidak ada data valid.</div>';
+        previewArea.innerHTML = '<div class="status error">❌ Tidak ada data valid. Cek format input.</div>';
         return;
     }
     let html = '<div class="status success" style="margin-bottom:12px;">✅ ' + data.length + ' tim terdeteksi.</div>';
     data.forEach((d, i) => {
         html += '<div style="padding:10px 12px; background:rgba(0,0,0,0.35); border:1px solid rgba(168,85,247,0.15); border-radius:10px; margin-bottom:6px; display:flex; align-items:center; gap:10px;">'
-            + '<img src="' + d.url + '" style="width:30px; height:30px; object-fit:contain; background:white; border-radius:50%; padding:2px;" onerror="this.style.display=\'none\'">'
-            + '<b style="flex:1; font-size:13px;">' + (i+1) + '. ' + d.nama + '</b>'
-            + '<span style="color:#8a8a9a; font-size:10px; font-family:monospace;">' + d.key + '</span>'
+            + '<img src="' + d.url + '" style="width:36px; height:36px; object-fit:contain; background:white; border-radius:50%; padding:2px;" onerror="this.style.display=\'none\'">'
+            + '<div style="flex:1;">'
+            + '<b style="font-size:13px; display:block;">' + (i+1) + '. ' + d.nama + '</b>'
+            + '<span style="color:#8a8a9a; font-size:10px; font-family:monospace;">ID: ' + d.key + '</span>'
+            + '</div>'
+            + '<span style="color:#86efac; font-size:14px;">✓</span>'
             + '</div>';
     });
     previewArea.innerHTML = html;
 });
 
 // ============================================================
-// SAVE
+// SAVE — Smart update: skip yang sudah ada, tambah yang baru
 // ============================================================
 btnSave.addEventListener("click", async () => {
     if (!auth.currentUser) { showToast("⚠️ Login dulu", "warning"); return; }
@@ -788,7 +857,11 @@ btnSave.addEventListener("click", async () => {
     if (!text) { showToast("⚠️ Paste data dulu", "warning"); return; }
     const data = parseInput(text);
     if (data.length === 0) { showToast("❌ Tidak ada data valid", "error"); return; }
-    if (!confirm("Save " + data.length + " logo ke Firestore?\n\nDocument ID akan dibuat otomatis dari nama tim (contoh: 'lecce', 'monza', 'napoli').")) return;
+    
+    if (!confirm("Save " + data.length + " logo ke Firestore?\n\n" +
+        "• Yang sudah ada → di-update\n" +
+        "• Yang baru → ditambah\n" +
+        "• Duplikat dalam input → di-skip")) return;
 
     try {
         btnSave.disabled = true;
@@ -797,10 +870,20 @@ btnSave.addEventListener("click", async () => {
         let batch = writeBatch(db);
         let count = 0;
         let saved = 0;
+        let updated = 0;
+
+        // Cek dulu mana yang sudah ada (biar bisa kasih info update vs tambah)
+        const existingSnap = await getDocs(collection(db, "team-logos"));
+        const existingIds = new Set();
+        existingSnap.forEach(d => existingIds.add(d.id));
 
         for (const d of data) {
             if (!d.key) continue;
             const ref = doc(db, "team-logos", d.key);
+            
+            const isUpdate = existingIds.has(d.key);
+            if (isUpdate) updated++;
+            
             batch.set(ref, {
                 name: d.nama,
                 teamName: d.nama,
@@ -810,6 +893,7 @@ btnSave.addEventListener("click", async () => {
             });
             count++;
             saved++;
+            
             if (count >= 400) {
                 await batch.commit();
                 batch = writeBatch(db);
@@ -818,7 +902,8 @@ btnSave.addEventListener("click", async () => {
         }
         if (count > 0) await batch.commit();
 
-        showToast("✅ Berhasil save " + saved + " logo!");
+        const newCount = saved - updated;
+        showToast("✅ Save " + saved + " logo! (Baru: " + newCount + ", Update: " + updated + ")");
         loadStats();
     } catch (e) {
         showToast("❌ Gagal: " + e.message, "error");
