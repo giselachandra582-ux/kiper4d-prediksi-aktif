@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="icon" type="image/png" href="favicon.png">
-
 <title>Admin Prediksi Bola - KIPER4D</title>
-
 <style>
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top left, #24104f 0%, transparent 35%),
-        radial-gradient(circle at top right, #3a0b42 0%, transparent 30%),
-        #090611;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     color: #f8fafc;
     min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,0.35) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0,212,255,0.25) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255,215,0,0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0e27 0%, #050813 100%);
+    background-size: 200% 200%;
+    animation: auroraMove 20s ease infinite;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+@keyframes auroraMove {
+    0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+    50% { background-position: 100% 100%, 100% 100%, 100% 100%, 0% 0%; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0a0e27; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #a855f7, #00d4ff, #ffd700);
+    border-radius: 20px;
+    border: 2px solid #0a0e27;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00d4ff, #ffd700, #a855f7);
 }
 
 header {
-    background: linear-gradient(135deg, rgba(19, 8, 38, 0.98), rgba(35, 10, 55, 0.98));
-    border-bottom: 1px solid rgba(255, 215, 0, 0.25);
-    padding: 24px 15px;
-    text-align: center;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
     position: relative;
+    z-index: 2;
+    padding: 40px 20px 30px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(19,8,38,0.85), rgba(19,8,38,0));
+    border-bottom: 1px solid rgba(168,85,247,0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     overflow: hidden;
 }
 
@@ -42,11 +70,12 @@ header::before {
     position: absolute;
     width: 300px;
     height: 300px;
-    background: rgba(255, 193, 7, 0.08);
+    background: radial-gradient(circle, rgba(255,193,7,0.15), transparent 70%);
     border-radius: 50%;
-    top: -180px;
+    top: -150px;
     left: 50%;
     transform: translateX(-50%);
+    pointer-events: none;
 }
 
 .logo {
@@ -54,150 +83,293 @@ header::before {
     height: 105px;
     object-fit: contain;
     display: block;
-    margin: 0 auto 10px;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.35));
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 0 25px rgba(168,85,247,0.8)) drop-shadow(0 0 50px rgba(0,212,255,0.4));
     position: relative;
     z-index: 1;
+    animation: floatLogo 3.5s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 header h1 {
     margin: 0;
-    font-size: 27px;
+    font-size: 28px;
     font-weight: 900;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg, #ffd700, #ffffff, #c084fc);
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, #ffd700, #ffffff, #c084fc, #00d4ff, #ffd700);
+    background-size: 300% auto;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: shineText 6s linear infinite;
     position: relative;
     z-index: 1;
 }
 
+@keyframes shineText {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
 .header-subtitle {
-    margin-top: 7px;
+    margin-top: 8px;
     color: #cbd5e1;
-    font-size: 13px;
-    letter-spacing: 1px;
+    font-size: 12.5px;
+    letter-spacing: 2px;
+    font-weight: 500;
     position: relative;
     z-index: 1;
 }
 
 .container {
+    position: relative;
+    z-index: 2;
     max-width: 1150px;
-    margin: 30px auto;
-    padding: 0 15px;
+    margin: 28px auto;
+    padding: 0 16px;
 }
 
 .status {
-    padding: 14px 17px;
-    border-radius: 12px;
+    position: relative;
+    padding: 14px 18px;
+    border-radius: 14px;
     margin-bottom: 20px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.08);
     color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.success { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); color: #86efac; }
-.error { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #fca5a5; }
-.warning { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); color: #fcd34d; }
+.status.success {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.35);
+    color: #86efac;
+    box-shadow: 0 0 25px rgba(34,197,94,0.15);
+}
+
+.status.success::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 10px;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+.status.error { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #fca5a5; }
+.status.warning { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); color: #fcd34d; }
 
 .card {
-    background: linear-gradient(145deg, rgba(28, 17, 48, 0.96), rgba(15, 10, 27, 0.96));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 22px;
+    position: relative;
+    background: rgba(28, 17, 48, 0.55);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-radius: 20px;
+    padding: 24px;
     margin-bottom: 22px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
-    backdrop-filter: blur(10px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
 }
 
-.card h2 { margin-top: 0; margin-bottom: 8px; font-size: 20px; color: #ffffff; }
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(90deg, #a855f7, #00d4ff, #ffd700, #a855f7);
+    background-size: 300% 100%;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderRotate 5s linear infinite;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+@keyframes borderRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 45px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(168,85,247,0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
 .card h2::first-letter { color: #ffd700; }
 
-.small { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+.small { font-size: 13px; color: #94a3b8; line-height: 1.65; }
 
-.jadwal-card { border-top: 3px solid #3b82f6; }
-.prediksi-card { border-top: 3px solid #a855f7; }
-.database-card { border-top: 3px solid #f59e0b; }
+.jadwal-card::before { background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6); }
+.prediksi-card::before { background: linear-gradient(90deg, #a855f7, #c084fc, #a855f7); }
+.database-card::before { background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b); }
 
 .section-label {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 30px;
     background: rgba(255,215,0,0.08);
-    border: 1px solid rgba(255,215,0,0.18);
+    border: 1px solid rgba(255,215,0,0.2);
     color: #ffd700;
     font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     margin-bottom: 12px;
 }
 
 .contoh {
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.35);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 12px;
-    padding: 15px;
+    padding: 15px 18px;
     margin-bottom: 15px;
     font-size: 13px;
     line-height: 1.7;
     white-space: pre-wrap;
     color: #cbd5e1;
+    font-family: 'Courier New', monospace;
+    backdrop-filter: blur(10px);
 }
 
 textarea {
     width: 100%;
     min-height: 300px;
     padding: 16px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px;
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 14px;
     resize: vertical;
     font-size: 14px;
     line-height: 1.6;
     outline: none;
-    background: #08050f;
+    background: rgba(8, 5, 15, 0.75);
     color: #f8fafc;
-    transition: 0.25s;
+    transition: 0.3s;
     font-family: 'Courier New', monospace;
+    backdrop-filter: blur(10px);
 }
 
-textarea::placeholder { color: #64748b; }
+textarea::placeholder { color: #4a4a5a; }
 
 textarea:focus {
     border-color: #a855f7;
-    box-shadow: 0 0 0 3px rgba(168,85,247,0.12), 0 0 20px rgba(168,85,247,0.08);
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.15), 0 0 30px rgba(168,85,247,0.25);
 }
 
-.buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 
 button {
+    position: relative;
+    overflow: hidden;
     border: 0;
-    padding: 13px 19px;
-    border-radius: 10px;
+    padding: 13px 22px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 14px;
+    letter-spacing: 0.4px;
     color: white;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-button:hover { transform: translateY(-2px); }
-button:active { transform: translateY(0); }
-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.35), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
 
-.btn-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); box-shadow: 0 7px 20px rgba(37,99,235,0.25); }
-.btn-green { background: linear-gradient(135deg, #16a34a, #22c55e); box-shadow: 0 7px 20px rgba(34,197,94,0.2); }
-.btn-orange { background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 7px 20px rgba(245,158,11,0.2); }
-.btn-red { background: linear-gradient(135deg, #dc2626, #ef4444); box-shadow: 0 7px 20px rgba(239,68,68,0.2); }
-.btn-dark { background: linear-gradient(135deg, #334155, #475569); }
+button:hover::after { opacity: 1; }
+button:hover { transform: translateY(-3px); }
+button:active { transform: translateY(-1px); }
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+.btn-blue {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+.btn-blue:hover {
+    box-shadow: 0 8px 25px rgba(59,130,246,0.55), 0 0 40px rgba(59,130,246,0.3);
+}
+
+.btn-green {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+.btn-green:hover {
+    box-shadow: 0 8px 25px rgba(34,197,94,0.55), 0 0 40px rgba(34,197,94,0.3);
+}
+
+.btn-orange {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+}
+.btn-orange:hover {
+    box-shadow: 0 8px 25px rgba(245,158,11,0.55), 0 0 40px rgba(245,158,11,0.3);
+}
+
+.btn-red {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+.btn-red:hover {
+    box-shadow: 0 8px 25px rgba(239,68,68,0.55), 0 0 40px rgba(239,68,68,0.3);
+}
+
+.btn-dark {
+    background: linear-gradient(135deg, #334155, #475569);
+}
+.btn-dark:hover {
+    box-shadow: 0 8px 25px rgba(71,85,105,0.55);
+}
 
 .match {
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(168,85,247,0.15);
     border-radius: 13px;
     padding: 16px;
     margin-bottom: 10px;
-    background: rgba(0,0,0,0.22);
+    background: rgba(0,0,0,0.35);
     color: #cbd5e1;
-    line-height: 1.6;
+    line-height: 1.7;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.match:hover {
+    border-color: rgba(168,85,247,0.4);
+    box-shadow: 0 0 20px rgba(168,85,247,0.15);
 }
 
 .match strong { color: #60a5fa; }
@@ -205,12 +377,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .hidden { display: none; }
 
 .login-box { text-align: center; padding: 45px 20px; }
-.login-box h2 { color: #ffd700; }
+.login-box h2 { color: #ffd700; justify-content: center; }
 .login-box p { color: #94a3b8; }
 .login-box button {
     background: linear-gradient(135deg, #7c3aed, #a855f7);
     box-shadow: 0 8px 25px rgba(168,85,247,0.3);
-    padding: 13px 35px;
+    padding: 14px 36px;
+    margin-top: 14px;
 }
 
 .admin-welcome {
@@ -219,33 +392,77 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     justify-content: space-between;
     gap: 15px;
     margin-bottom: 22px;
-    padding: 18px 20px;
+    padding: 18px 22px;
     border-radius: 16px;
     background: linear-gradient(135deg, rgba(124,58,237,0.16), rgba(255,215,0,0.06));
-    border: 1px solid rgba(168,85,247,0.2);
+    border: 1px solid rgba(168,85,247,0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-.admin-welcome-title { font-size: 17px; font-weight: bold; }
-.admin-welcome-text { margin-top: 4px; color: #94a3b8; font-size: 12px; }
+.admin-welcome-title { font-size: 17px; font-weight: 800; }
+.admin-welcome-text { margin-top: 5px; color: #94a3b8; font-size: 12px; }
 
-.footer { text-align: center; color: #64748b; font-size: 12px; padding: 15px 0 30px; }
+.footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    padding: 25px 0 40px;
+    letter-spacing: 0.5px;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 16px 24px;
+    border-radius: 14px;
+    background: rgba(28, 17, 48, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(34, 197, 94, 0.45);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(34, 197, 94, 0.3);
+    color: #86efac;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    z-index: 99999;
+    transform: translateX(500px);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 400px;
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+.toast.show { transform: translateX(0); }
+.toast.error {
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.3);
+}
+.toast.warning {
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #fcd34d;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.3);
+}
 
 @media (max-width: 600px) {
-    header { padding: 20px 12px; }
+    header { padding: 28px 15px 22px; }
     .logo { width: 85px; height: 85px; }
     header h1 { font-size: 22px; }
-    .container { margin-top: 20px; padding: 0 10px; }
-    .card { padding: 17px; border-radius: 15px; }
+    .container { margin-top: 20px; padding: 0 12px; }
+    .card { padding: 18px; border-radius: 16px; }
     .buttons { flex-direction: column; }
     button { width: 100%; }
     textarea { min-height: 250px; }
     .admin-welcome { flex-direction: column; align-items: flex-start; }
+    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; padding: 14px 18px; }
 }
-
 </style>
-
 </head>
-
 <body>
 
 <header>
@@ -417,18 +634,39 @@ let dataJadwal = [];
 let dataPrediksi = [];
 let logoCache = new Map();
 
-// ⚡ EXPOSE untuk debug di Console
 window.getCache = () => logoCache;
 window.getTeamLogo = getTeamLogo;
 window.normalizeTeam = normalizeTeam;
 window.getJadwal = () => dataJadwal;
+
+// Toast
+function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = "toast " + type;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 50);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 4000);
+}
+
+// Ripple effect
+document.addEventListener("mousemove", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty("--x", (e.clientX - rect.left) + "px");
+    btn.style.setProperty("--y", (e.clientY - rect.top) + "px");
+});
 
 await setPersistence(auth, browserLocalPersistence);
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         loginStatus.className = "status success";
-        loginStatus.textContent = "✅ Login berhasil: " + user.email;
+        loginStatus.textContent = "Login berhasil: " + user.email;
         adminContent.classList.remove("hidden");
         notLogged.classList.add("hidden");
         loadLogoCache();
@@ -507,7 +745,7 @@ function convertDate(tanggal) {
 
 
 /* ============================
-   🎨 LOAD LOGO CACHE DARI FIRESTORE
+   LOAD LOGO CACHE DARI FIRESTORE
    ============================ */
 
 async function loadLogoCache() {
@@ -516,9 +754,9 @@ async function loadLogoCache() {
         logoCache.clear();
         snapshot.forEach((item) => {
             const data = item.data();
-            const url = clean(data.url || "");
+            const url = clean(data.url || data.logo || "");
             const keyFromId = clean(item.id).toLowerCase();
-            const keyFromName = normalizeTeam(data.teamName || "");
+            const keyFromName = normalizeTeam(data.teamName || data.name || "");
 
             const isHash = /^[a-f0-9]{25,}/i.test(keyFromId);
             if (isHash) return;
@@ -547,7 +785,7 @@ async function loadLogoCache() {
 
 
 /* ============================
-   ⚡ GET TEAM LOGO — FUZZY MATCH SUPER AGRESIF
+   GET TEAM LOGO — FUZZY MATCH
    ============================ */
 
 function getTeamLogo(teamName) {
@@ -818,7 +1056,7 @@ function prosesJadwal() {
     const text = inputJadwal.value.trim();
 
     if (!text) {
-        alert("Silakan masukkan data jadwal.");
+        showToast("⚠️ Silakan masukkan data jadwal", "warning");
         return;
     }
 
@@ -835,6 +1073,7 @@ function prosesJadwal() {
     }
 
     tampilkanPreviewJadwal();
+    showToast("✅ " + dataJadwal.length + " jadwal berhasil diproses");
 }
 
 
@@ -854,10 +1093,10 @@ function tampilkanPreviewJadwal() {
         if (!awayLogo) tanpaLogo++;
 
         const homeIcon = homeLogo
-            ? '<img src="' + homeLogo + '" style="width:20px;height:20px;object-fit:contain;background:#fff;border-radius:50%;vertical-align:middle;margin-right:4px;">'
+            ? '<img src="' + homeLogo + '" style="width:22px;height:22px;object-fit:contain;background:#fff;border-radius:50%;vertical-align:middle;margin-right:6px;padding:2px;">'
             : '';
         const awayIcon = awayLogo
-            ? '<img src="' + awayLogo + '" style="width:20px;height:20px;object-fit:contain;background:#fff;border-radius:50%;vertical-align:middle;margin-right:4px;">'
+            ? '<img src="' + awayLogo + '" style="width:22px;height:22px;object-fit:contain;background:#fff;border-radius:50%;vertical-align:middle;margin-right:6px;padding:2px;">'
             : '';
 
         html += `
@@ -881,41 +1120,10 @@ function tampilkanPreviewJadwal() {
         infoHtml += '<div class="status warning">🎨 ' + tanpaLogo + ' logo tim nggak ketemu di Firestore (akan tampil inisial).</div>';
     }
 
-    // ⚡ DEBUG INFO — TAMPIL DI HALAMAN
-    let debugHtml = '<div style="background:#000; padding:15px; border-radius:10px; font-family:monospace; font-size:11px; color:#0f0; margin-top:15px; max-height:500px; overflow:auto; border:2px solid #0f0; white-space:pre-wrap; word-break:break-word; line-height:1.5;">';
-    debugHtml += '<b style="color:#ff0; font-size:14px;">═══ DEBUG INFO ═══</b>\n\n';
-    debugHtml += '<b>Total cache:</b> ' + logoCache.size + ' entry\n';
-    debugHtml += '<b>Total jadwal:</b> ' + dataJadwal.length + '\n\n';
-
-    debugHtml += '<b style="color:#0ff; font-size:13px;">▶ 30 KEYS PERTAMA DI CACHE:</b>\n';
-    [...logoCache.keys()].slice(0, 30).forEach((k, i) => {
-        debugHtml += (i+1) + '. ' + k + '\n';
-    });
-    debugHtml += '\n';
-
-    debugHtml += '<b style="color:#0ff; font-size:13px;">▶ TEST MATCH 15 TIM:</b>\n';
-    dataJadwal.slice(0, 15).forEach((d, i) => {
-        const hKey = normalizeTeam(d.home);
-        const aKey = normalizeTeam(d.away);
-        const hLogo = getTeamLogo(d.home);
-        const aLogo = getTeamLogo(d.away);
-        debugHtml += (i+1) + '. ' + d.home + ' [key: "' + hKey + '"] → ' + (hLogo ? '✅ ADA' : '❌ KOSONG') + '\n';
-        debugHtml += '   ' + d.away + ' [key: "' + aKey + '"] → ' + (aLogo ? '✅ ADA' : '❌ KOSONG') + '\n';
-    });
-    debugHtml += '\n';
-
-    debugHtml += '<b style="color:#0ff; font-size:13px;">▶ CEK MANUAL:</b>\n';
-    debugHtml += 'cache.has("rayo vallecano") = ' + logoCache.has("rayo vallecano") + '\n';
-    debugHtml += 'cache.has("espanyol") = ' + logoCache.has("espanyol") + '\n';
-    debugHtml += 'cache.has("vasco da gama") = ' + logoCache.has("vasco da gama") + '\n';
-    debugHtml += 'getTeamLogo("Rayo Vallecano") = "' + getTeamLogo("Rayo Vallecano") + '"\n';
-    debugHtml += 'getTeamLogo("Espanyol") = "' + getTeamLogo("Espanyol") + '"\n';
-    debugHtml += '</div>';
-
     hasilJadwal.innerHTML =
         '<div class="status success">' +
         '✅ Berhasil membaca ' + dataJadwal.length + ' jadwal pertandingan.' +
-        '</div>' + infoHtml + html + debugHtml;
+        '</div>' + infoHtml + html;
 }
 
 
@@ -928,7 +1136,7 @@ function prosesPrediksi() {
     const text = inputPrediksi.value.trim();
 
     if (!text) {
-        alert("Silakan masukkan data prediksi.");
+        showToast("⚠️ Silakan masukkan data prediksi", "warning");
         return;
     }
 
@@ -945,6 +1153,7 @@ function prosesPrediksi() {
     }
 
     tampilkanPreviewPrediksi();
+    showToast("✅ " + dataPrediksi.length + " prediksi berhasil diproses");
 }
 
 
@@ -980,12 +1189,12 @@ function tampilkanPreviewPrediksi() {
 async function publishJadwal() {
 
     if (!auth.currentUser) {
-        alert("Silakan login terlebih dahulu.");
+        showToast("⚠️ Silakan login terlebih dahulu", "warning");
         return;
     }
 
     if (dataJadwal.length === 0) {
-        alert("Belum ada data jadwal yang diproses.");
+        showToast("⚠️ Belum ada data jadwal yang diproses", "warning");
         return;
     }
 
@@ -1111,18 +1320,16 @@ async function publishJadwal() {
 
         if (jumlah > 0) await batch.commit();
 
-        alert(
-            "✅ Berhasil publish " + dataJadwal.length + " jadwal!\n\n" +
-            "📝 Update: " + updated + "\n" +
-            "🆕 Baru: " + created + "\n" +
-            "🎨 Logo terpasang: " + logoTerpasang + "\n" +
-            "📦 Cache logo: " + logoCache.size +
-            (duplikatRefs.length > 0 ? "\n\n🧹 Hapus " + duplikatRefs.length + " duplikat." : "")
+        showToast(
+            "✅ Berhasil publish " + dataJadwal.length + " jadwal!\n" +
+            "📝 Update: " + updated + " | 🆕 Baru: " + created + "\n" +
+            "🎨 Logo terpasang: " + logoTerpasang + " | 📦 Cache: " + logoCache.size +
+            (duplikatRefs.length > 0 ? "\n🧹 Hapus " + duplikatRefs.length + " duplikat." : "")
         );
 
     } catch (error) {
         console.error(error);
-        alert("❌ Publish Jadwal gagal:\n\n" + error.message);
+        showToast("❌ Publish Jadwal gagal:\n" + error.message, "error");
     }
 
     btnPublishJadwal.disabled = false;
@@ -1137,12 +1344,12 @@ async function publishJadwal() {
 async function publishPrediksi() {
 
     if (!auth.currentUser) {
-        alert("Silakan login terlebih dahulu.");
+        showToast("⚠️ Silakan login terlebih dahulu", "warning");
         return;
     }
 
     if (dataPrediksi.length === 0) {
-        alert("Belum ada data prediksi yang diproses.");
+        showToast("⚠️ Belum ada data prediksi yang diproses", "warning");
         return;
     }
 
@@ -1241,21 +1448,19 @@ async function publishPrediksi() {
         if (jumlah > 0) await batch.commit();
 
         let pesan =
-            "✅ Berhasil publish " + dataPrediksi.length + " prediksi!\n\n" +
-            "📝 Update: " + matched + "\n" +
-            "🆕 Baru: " + createdBaru;
+            "✅ Berhasil publish " + dataPrediksi.length + " prediksi!\n" +
+            "📝 Update: " + matched + " | 🆕 Baru: " + createdBaru;
 
         if (tidakMatch.length > 0) {
-            pesan += "\n\n⚠️ Tidak ketemu jadwalnya (" + tidakMatch.length + "):\n" +
-                tidakMatch.slice(0, 10).join("\n") +
-                (tidakMatch.length > 10 ? "\n...dan " + (tidakMatch.length - 10) + " lainnya" : "");
+            pesan += "\n⚠️ Tidak ketemu jadwalnya (" + tidakMatch.length + ")";
+            showToast(pesan, "warning");
+        } else {
+            showToast(pesan);
         }
-
-        alert(pesan);
 
     } catch (error) {
         console.error(error);
-        alert("❌ Publish Prediksi gagal:\n\n" + error.message);
+        showToast("❌ Publish Prediksi gagal:\n" + error.message, "error");
     }
 
     btnPublishPrediksi.disabled = false;
@@ -1270,7 +1475,7 @@ async function publishPrediksi() {
 async function cekDuplikat() {
 
     if (!auth.currentUser) {
-        alert("Silakan login terlebih dahulu.");
+        showToast("⚠️ Silakan login terlebih dahulu", "warning");
         return;
     }
 
@@ -1350,7 +1555,7 @@ async function cekDuplikat() {
 async function bersihkanDuplikat() {
 
     if (!auth.currentUser) {
-        alert("Silakan login terlebih dahulu.");
+        showToast("⚠️ Silakan login terlebih dahulu", "warning");
         return;
     }
 
@@ -1378,7 +1583,7 @@ async function bersihkanDuplikat() {
         });
 
         if (refsHapus.length === 0) {
-            alert("✅ Tidak ada duplikat ditemukan.");
+            showToast("✅ Tidak ada duplikat ditemukan");
         } else {
 
             let batch = writeBatch(db);
@@ -1395,12 +1600,12 @@ async function bersihkanDuplikat() {
             }
             if (count > 0) await batch.commit();
 
-            alert("🧹 Berhasil menghapus " + refsHapus.length + " duplikat.");
+            showToast("🧹 Berhasil menghapus " + refsHapus.length + " duplikat");
         }
 
     } catch (error) {
         console.error(error);
-        alert("❌ Gagal bersihkan duplikat:\n\n" + error.message);
+        showToast("❌ Gagal bersihkan duplikat:\n" + error.message, "error");
     }
 
     btnBersihkan.disabled = false;
@@ -1411,7 +1616,7 @@ async function bersihkanDuplikat() {
 async function hapusSemuaData() {
 
     if (!auth.currentUser) {
-        alert("Silakan login terlebih dahulu.");
+        showToast("⚠️ Silakan login terlebih dahulu", "warning");
         return;
     }
 
@@ -1444,11 +1649,11 @@ async function hapusSemuaData() {
 
         if (count > 0) await batch.commit();
 
-        alert("🗑️ Berhasil menghapus " + total + " dokumen.");
+        showToast("🗑️ Berhasil menghapus " + total + " dokumen");
 
     } catch (error) {
         console.error(error);
-        alert("❌ Gagal hapus semua data:\n\n" + error.message);
+        showToast("❌ Gagal hapus semua data:\n" + error.message, "error");
     }
 
     btnHapusSemua.disabled = false;
@@ -1474,15 +1679,16 @@ btnLogout.addEventListener("click", async () => {
     if (!confirm("Yakin mau logout?")) return;
     try {
         await signOut(auth);
-        alert("✅ Berhasil logout.");
-        window.location.href = "/login.html";
+        showToast("✅ Berhasil logout");
+        setTimeout(() => {
+            window.location.href = "/login.html";
+        }, 800);
     } catch (error) {
-        alert("❌ Gagal logout:\n\n" + error.message);
+        showToast("❌ Gagal logout:\n" + error.message, "error");
     }
 });
 
 </script>
 
 </body>
-
 </html>
