@@ -1,50 +1,503 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Logos Manual - KIPER4D</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <style>
 * { box-sizing: border-box; }
-body { margin: 0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #24204a 0%, #0b0b18 35%, #000 100%); color: #fff; min-height: 100vh; }
-header { background: linear-gradient(135deg, rgba(19,8,38,0.98), rgba(35,10,55,0.98)); border-bottom: 1px solid rgba(255,215,0,0.25); padding: 20px; text-align: center; }
-header h1 { margin: 0; font-size: 24px; background: linear-gradient(90deg, #ffd700, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-header p { margin: 5px 0 0; color: #94a3b8; font-size: 12px; }
-.container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
-.status { padding: 14px; border-radius: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); font-size: 13px; }
-.success { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); color: #86efac; }
-.error { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #fca5a5; }
-.warning { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); color: #fcd34d; }
-.card { background: linear-gradient(145deg, rgba(28,17,48,0.96), rgba(15,10,27,0.96)); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 22px; margin-bottom: 20px; }
-.card h2 { margin-top: 0; color: #fff; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,0.35) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0,212,255,0.25) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255,215,0,0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0e27 0%, #050813 100%);
+    background-size: 200% 200%;
+    animation: auroraMove 20s ease infinite;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+@keyframes auroraMove {
+    0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+    50% { background-position: 100% 100%, 100% 100%, 100% 100%, 0% 0%; }
+}
+
+/* Grid halus di background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0a0e27; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #a855f7, #00d4ff, #ffd700);
+    border-radius: 20px;
+    border: 2px solid #0a0e27;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00d4ff, #ffd700, #a855f7);
+}
+
+/* Header */
+header {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px 32px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(19,8,38,0.85), rgba(19,8,38,0));
+    border-bottom: 1px solid rgba(168,85,247,0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+header img {
+    width: 140px;
+    height: auto;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 0 25px rgba(168,85,247,0.8)) drop-shadow(0 0 50px rgba(0,212,255,0.4));
+    animation: floatLogo 3.5s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, #ffd700, #fff, #c084fc, #00d4ff, #ffd700);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 6s linear infinite;
+}
+
+@keyframes shineText {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+header p {
+    margin: 8px 0 0;
+    color: #94a3b8;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 920px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+/* Status Badge */
+.status {
+    position: relative;
+    padding: 14px 18px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.4s;
+}
+
+.status.success {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.35);
+    color: #86efac;
+    box-shadow: 0 0 25px rgba(34,197,94,0.15);
+}
+
+.status.success::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 10px;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+.status.warning {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.35);
+    color: #fcd34d;
+}
+
+.status.error {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.35);
+    color: #fca5a5;
+}
+
+/* Card Glassmorphism */
+.card {
+    position: relative;
+    background: rgba(28, 17, 48, 0.55);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(90deg, #a855f7, #00d4ff, #ffd700, #a855f7);
+    background-size: 300% 100%;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderRotate 5s linear infinite;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes borderRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 45px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(168,85,247,0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card h2 {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .card h2::first-letter { color: #ffd700; }
-.small { font-size: 13px; color: #94a3b8; line-height: 1.6; }
-textarea { width: 100%; min-height: 400px; padding: 14px; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; resize: vertical; font-size: 13px; line-height: 1.6; outline: none; background: #08050f; color: #f8fafc; font-family: 'Courier New', monospace; }
-textarea:focus { border-color: #a855f7; box-shadow: 0 0 0 3px rgba(168,85,247,0.12); }
-.buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-button { border: 0; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 13px; color: white; transition: 0.2s; }
-button:hover { transform: translateY(-2px); }
-button:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); }
-.btn-green { background: linear-gradient(135deg, #16a34a, #22c55e); }
-.btn-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
-.btn-red { background: linear-gradient(135deg, #dc2626, #ef4444); }
-.btn-dark { background: linear-gradient(135deg, #334155, #475569); }
-.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-.stat-box { padding: 12px; border-radius: 12px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(229,189,82,0.22); }
-.stat-num { display: block; font-size: 22px; font-weight: 1000; color: #f1ce6b; }
-.stat-label { font-size: 10px; color: #9696a5; text-transform: uppercase; }
+
+.small {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.65;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    min-height: 400px;
+    padding: 16px;
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 14px;
+    resize: vertical;
+    font-size: 13px;
+    line-height: 1.7;
+    outline: none;
+    background: rgba(8, 5, 15, 0.75);
+    color: #f8fafc;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+textarea:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.15), 0 0 30px rgba(168,85,247,0.25);
+}
+
+textarea::placeholder {
+    color: #4a4a5a;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+button {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    padding: 13px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    color: white;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.35), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+button:hover::after { opacity: 1; }
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+button:active { transform: translateY(-1px); }
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-blue {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+.btn-blue:hover {
+    box-shadow: 0 8px 25px rgba(59,130,246,0.55), 0 0 40px rgba(59,130,246,0.3);
+}
+
+.btn-green {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+.btn-green:hover {
+    box-shadow: 0 8px 25px rgba(34,197,94,0.55), 0 0 40px rgba(34,197,94,0.3);
+}
+
+.btn-purple {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+}
+.btn-purple:hover {
+    box-shadow: 0 8px 25px rgba(168,85,247,0.55), 0 0 40px rgba(168,85,247,0.35);
+}
+
+.btn-red {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+.btn-red:hover {
+    box-shadow: 0 8px 25px rgba(239,68,68,0.55), 0 0 40px rgba(239,68,68,0.3);
+}
+
+.btn-dark {
+    background: linear-gradient(135deg, #334155, #475569);
+}
+.btn-dark:hover {
+    box-shadow: 0 8px 25px rgba(71,85,105,0.55);
+}
+
+/* Stat Grid */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.stat-box {
+    position: relative;
+    padding: 20px 12px;
+    border-radius: 16px;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(20, 12, 35, 0.7), rgba(10, 6, 20, 0.85));
+    border: 1px solid rgba(229, 189, 82, 0.2);
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.stat-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    opacity: 0.6;
+}
+
+.stat-box:hover {
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,215,0,0.15);
+}
+
+.stat-num {
+    display: block;
+    font-size: 30px;
+    font-weight: 900;
+    color: #f1ce6b;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(241, 206, 107, 0.4);
+}
+
+.stat-label {
+    font-size: 10.5px;
+    color: #9696a5;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(90deg,
+        rgba(255,255,255,0.05) 25%,
+        rgba(255,255,255,0.15) 50%,
+        rgba(255,255,255,0.05) 75%) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+    color: transparent !important;
+    text-shadow: none !important;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
 .hidden { display: none; }
-.footer { text-align: center; color: #64748b; font-size: 12px; padding: 15px 0 30px; }
-.warnbox { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.4); border-radius: 12px; padding: 14px; margin-top: 15px; color: #fcd34d; font-size: 12.5px; line-height: 1.6; }
-@media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr; } .buttons { flex-direction: column; } button { width: 100%; } }
+
+.footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    padding: 25px 0 40px;
+    letter-spacing: 0.5px;
+}
+
+/* Warnbox */
+.warnbox {
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.4);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    color: #fcd34d;
+    font-size: 12.5px;
+    line-height: 1.65;
+    backdrop-filter: blur(10px);
+}
+
+/* Preview area */
+#previewArea > div {
+    transition: all 0.3s;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 16px 24px;
+    border-radius: 14px;
+    background: rgba(28, 17, 48, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(34, 197, 94, 0.45);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(34, 197, 94, 0.3);
+    color: #86efac;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    z-index: 99999;
+    transform: translateX(500px);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 380px;
+}
+
+.toast.show { transform: translateX(0); }
+.toast.error {
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.3);
+}
+.toast.warning {
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #fcd34d;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header { padding: 28px 15px 22px; }
+    header img { width: 110px; }
+    header h1 { font-size: 20px; }
+    .container { padding: 0 12px; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .buttons { flex-direction: column; }
+    button { width: 100%; }
+    .stat-num { font-size: 26px; }
+    .card { padding: 18px; border-radius: 16px; }
+    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; padding: 14px 18px; }
+}
 </style>
 </head>
 <body>
 
 <header>
-    <img src="logo-kiper4d.png" alt="KIPER4D" style="width:120px; height:auto; margin-bottom:10px; filter: drop-shadow(0 0 20px rgba(168,85,247,0.6));">
+    <img src="logo-kiper4d.png" alt="KIPER4D">
     <h1>🎨 ADMIN LOGOS MANUAL</h1>
     <p>Input URL logo tim ke Firestore — KIPER4D</p>
 </header>
@@ -54,9 +507,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
     <div id="loginStatus" class="status">Memeriksa login Firebase...</div>
 
     <div id="notLogged" class="card hidden" style="text-align:center; padding:40px;">
-        <h2>🔐 Belum Login</h2>
+        <h2 style="justify-content:center;">🔐 Belum Login</h2>
         <p class="small">Silakan login dulu lewat halaman admin.</p>
-        <button id="btnLogin" class="btn-purple" style="padding:12px 30px; margin-top:10px;">🔑 LOGIN</button>
+        <button id="btnLogin" class="btn-purple" style="padding:14px 36px; margin-top:14px;">🔑 LOGIN</button>
     </div>
 
     <div id="adminContent" class="hidden">
@@ -115,7 +568,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
                 <button id="btnCleanOld" class="btn-red">🗑️ Hapus Data Lama (ID Acak)</button>
                 <button id="btnAnalyze" class="btn-dark">📊 Analisa Data</button>
             </div>
-            <div id="analyzeResult" class="small" style="margin-top:12px;"></div>
+            <div id="analyzeResult" class="small" style="margin-top:14px;"></div>
         </div>
 
     </div>
@@ -181,18 +634,62 @@ function slugify(name) {
         .replace(/^-|-$/g, "");
 }
 
-// Deteksi apakah ID dokumen = ID acak (Firebase auto-ID)
 function isRandomId(id) {
     if (!id) return false;
-    // Firebase auto-ID: 20 char alfanumerik, tanpa tanda hubung
     if (id.length >= 20 && /^[a-zA-Z0-9]+$/.test(id) && !id.includes("-")) return true;
     return false;
 }
 
+// ============================================================
+// TOAST (ganti alert)
+// ============================================================
+function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = "toast " + type;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 50);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 3500);
+}
+
+// ============================================================
+// COUNTER ANIMATION
+// ============================================================
+function animateNumber(el, target, duration = 1200) {
+    if (!el) return;
+    const startTime = performance.now();
+    const from = parseInt(el.textContent.replace(/\D/g, "")) || 0;
+    function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(from + (target - from) * eased);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(update);
+}
+
+// ============================================================
+// RIPPLE EFFECT
+// ============================================================
+document.addEventListener("mousemove", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty("--x", (e.clientX - rect.left) + "px");
+    btn.style.setProperty("--y", (e.clientY - rect.top) + "px");
+});
+
+// ============================================================
+// AUTH STATE
+// ============================================================
 onAuthStateChanged(auth, (user) => {
     if (user) {
         loginStatus.className = "status success";
-        loginStatus.textContent = "✅ Login: " + user.email;
+        loginStatus.textContent = "Login: " + user.email;
         adminContent.classList.remove("hidden");
         notLogged.classList.add("hidden");
         loadStats();
@@ -206,8 +703,16 @@ onAuthStateChanged(auth, (user) => {
 
 btnLogin.addEventListener("click", () => { window.location.href = "/login.html"; });
 
+// ============================================================
+// LOAD STATS dengan skeleton + counter
+// ============================================================
 async function loadStats() {
     try {
+        // Skeleton loading
+        statTotal.classList.add("skeleton");
+        statAda.classList.add("skeleton");
+        statKosong.classList.add("skeleton");
+
         const snap = await getDocs(collection(db, "team-logos"));
         let total = 0, ada = 0, kosong = 0;
         snap.forEach((item) => {
@@ -216,12 +721,26 @@ async function loadStats() {
             const url = clean(d.logo || d.url || "");
             if (url) ada++; else kosong++;
         });
-        statTotal.textContent = total;
-        statAda.textContent = ada;
-        statKosong.textContent = kosong;
-    } catch (e) { console.error(e); }
+
+        statTotal.classList.remove("skeleton");
+        statAda.classList.remove("skeleton");
+        statKosong.classList.remove("skeleton");
+
+        animateNumber(statTotal, total);
+        animateNumber(statAda, ada);
+        animateNumber(statKosong, kosong);
+    } catch (e) {
+        console.error(e);
+        statTotal.classList.remove("skeleton");
+        statAda.classList.remove("skeleton");
+        statKosong.classList.remove("skeleton");
+        showToast("❌ Gagal load statistik", "error");
+    }
 }
 
+// ============================================================
+// PARSE INPUT
+// ============================================================
 function parseInput(text) {
     const lines = text.split(/\r?\n/);
     const hasil = [];
@@ -238,31 +757,37 @@ function parseInput(text) {
     return hasil;
 }
 
+// ============================================================
+// PREVIEW
+// ============================================================
 btnParse.addEventListener("click", () => {
     const text = inputLogos.value.trim();
-    if (!text) { alert("Paste data dulu."); return; }
+    if (!text) { showToast("⚠️ Paste data dulu", "warning"); return; }
     const data = parseInput(text);
     if (data.length === 0) {
         previewArea.innerHTML = '<div class="status error">❌ Tidak ada data valid.</div>';
         return;
     }
-    let html = '<div class="status success">✅ ' + data.length + ' tim terdeteksi.</div>';
+    let html = '<div class="status success" style="margin-bottom:12px;">✅ ' + data.length + ' tim terdeteksi.</div>';
     data.forEach((d, i) => {
-        html += '<div style="padding:6px 10px; background:rgba(0,0,0,0.3); border-radius:6px; margin-bottom:4px; display:flex; align-items:center; gap:8px;">'
-            + '<img src="' + d.url + '" style="width:24px; height:24px; object-fit:contain; background:white; border-radius:50%;" onerror="this.style.display=\'none\'">'
-            + '<b style="flex:1;">' + (i+1) + '. ' + d.nama + '</b>'
-            + '<span style="color:#8a8a9a; font-size:10px;">' + d.key + '</span>'
+        html += '<div style="padding:10px 12px; background:rgba(0,0,0,0.35); border:1px solid rgba(168,85,247,0.15); border-radius:10px; margin-bottom:6px; display:flex; align-items:center; gap:10px;">'
+            + '<img src="' + d.url + '" style="width:30px; height:30px; object-fit:contain; background:white; border-radius:50%; padding:2px;" onerror="this.style.display=\'none\'">'
+            + '<b style="flex:1; font-size:13px;">' + (i+1) + '. ' + d.nama + '</b>'
+            + '<span style="color:#8a8a9a; font-size:10px; font-family:monospace;">' + d.key + '</span>'
             + '</div>';
     });
     previewArea.innerHTML = html;
 });
 
+// ============================================================
+// SAVE
+// ============================================================
 btnSave.addEventListener("click", async () => {
-    if (!auth.currentUser) { alert("Login dulu."); return; }
+    if (!auth.currentUser) { showToast("⚠️ Login dulu", "warning"); return; }
     const text = inputLogos.value.trim();
-    if (!text) { alert("Paste data dulu."); return; }
+    if (!text) { showToast("⚠️ Paste data dulu", "warning"); return; }
     const data = parseInput(text);
-    if (data.length === 0) { alert("Tidak ada data valid."); return; }
+    if (data.length === 0) { showToast("❌ Tidak ada data valid", "error"); return; }
     if (!confirm("Save " + data.length + " logo ke Firestore?\n\nDocument ID akan dibuat otomatis dari nama tim (contoh: 'lecce', 'monza', 'napoli').")) return;
 
     try {
@@ -276,12 +801,11 @@ btnSave.addEventListener("click", async () => {
         for (const d of data) {
             if (!d.key) continue;
             const ref = doc(db, "team-logos", d.key);
-            // 🔥 SIMPAN DENGAN 4 FIELD BIAR KOMPATIBEL
             batch.set(ref, {
-                name: d.nama,       // ← field "name"
-                teamName: d.nama,   // ← field "teamName" (backup)
-                logo: d.url,        // ← field "logo"
-                url: d.url,         // ← field "url" (backup)
+                name: d.nama,
+                teamName: d.nama,
+                logo: d.url,
+                url: d.url,
                 updatedAt: new Date()
             });
             count++;
@@ -294,10 +818,10 @@ btnSave.addEventListener("click", async () => {
         }
         if (count > 0) await batch.commit();
 
-        alert("✅ Berhasil save " + saved + " logo!");
+        showToast("✅ Berhasil save " + saved + " logo!");
         loadStats();
     } catch (e) {
-        alert("❌ Gagal: " + e.message);
+        showToast("❌ Gagal: " + e.message, "error");
         console.error(e);
     }
     btnSave.disabled = false;
@@ -313,10 +837,10 @@ btnLogout.addEventListener("click", async () => {
 });
 
 // ============================================================
-// ANALISA DATA — cek berapa yang ID acak vs ID rapi
+// ANALISA DATA
 // ============================================================
 btnAnalyze?.addEventListener("click", async () => {
-    if (!auth.currentUser) { alert("Login dulu."); return; }
+    if (!auth.currentUser) { showToast("⚠️ Login dulu", "warning"); return; }
 
     btnAnalyze.disabled = true;
     btnAnalyze.textContent = "⏳ Menganalisa...";
@@ -349,7 +873,7 @@ btnAnalyze?.addEventListener("click", async () => {
         html += '</div>';
 
         if (randomSamples.length > 0) {
-            html += '<div style="margin-top:10px; font-size:11px; color:#94a3b8;">';
+            html += '<div style="margin-top:12px; font-size:11px; color:#94a3b8;">';
             html += '<b>Contoh ID acak (perlu dihapus):</b><br>';
             randomSamples.forEach(s => {
                 html += '• <code>' + s.id + '</code> → ' + s.name + '<br>';
@@ -358,7 +882,7 @@ btnAnalyze?.addEventListener("click", async () => {
         }
 
         if (slugSamples.length > 0) {
-            html += '<div style="margin-top:10px; font-size:11px; color:#94a3b8;">';
+            html += '<div style="margin-top:12px; font-size:11px; color:#94a3b8;">';
             html += '<b>Contoh ID rapi (dipertahankan):</b><br>';
             slugSamples.forEach(s => {
                 html += '• <code>' + s.id + '</code> → ' + s.name + '<br>';
@@ -376,12 +900,11 @@ btnAnalyze?.addEventListener("click", async () => {
 });
 
 // ============================================================
-// HAPUS DATA LAMA (ID ACAK)
+// HAPUS DATA LAMA
 // ============================================================
 btnCleanOld?.addEventListener("click", async () => {
-    if (!auth.currentUser) { alert("Login dulu."); return; }
+    if (!auth.currentUser) { showToast("⚠️ Login dulu", "warning"); return; }
 
-    // Konfirmasi 1
     const c1 = confirm(
         "⚠️ PERINGATAN PENTING!\n\n" +
         "Tombol ini akan MENGHAPUS permanen semua dokumen team-logos yang ID-nya ACAP (dari versi lama panel admin).\n\n" +
@@ -391,7 +914,6 @@ btnCleanOld?.addEventListener("click", async () => {
     );
     if (!c1) return;
 
-    // Konfirmasi 2 (double confirm biar aman)
     const c2 = confirm(
         "⚠️ KONFIRMASI TERAKHIR\n\n" +
         "Data yang dihapus TIDAK BISA dikembalikan.\n\n" +
@@ -440,11 +962,11 @@ btnCleanOld?.addEventListener("click", async () => {
         if (count > 0) await batch.commit();
 
         analyzeResult.innerHTML = '<div class="status success">✅ Berhasil hapus <b>' + deleted + '</b> dokumen ID acak!</div>';
-        alert("✅ Berhasil hapus " + deleted + " dokumen ID acak!");
+        showToast("✅ Berhasil hapus " + deleted + " dokumen!");
         loadStats();
     } catch (e) {
         analyzeResult.innerHTML = '<div class="status error">❌ Gagal: ' + e.message + '</div>';
-        alert("❌ Gagal: " + e.message);
+        showToast("❌ Gagal: " + e.message, "error");
     }
 
     btnCleanOld.disabled = false;
