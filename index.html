@@ -28,8 +28,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
     margin: 0;
     font-family: 'Inter', Arial, sans-serif;
@@ -40,27 +42,8 @@ body {
     -webkit-font-smoothing: antialiased;
     letter-spacing: 0.2px;
 }
-/* FITUR 3D SCENE THREE.JS */
-#three3dCanvas {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%; height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.4;
-}
 
-/* FITUR WEBGL SHADER BACKGROUND */
-#shaderCanvas {
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    pointer-events: none;
-    opacity: 0.55;
-}
-
-/* AURORA BACKGROUND */
+/* FITUR #10: AURORA BACKGROUND */
 .aurora-bg {
     position: fixed;
     inset: 0;
@@ -68,6 +51,7 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
+
 .aurora-bg::before {
     content: "";
     position: absolute;
@@ -80,13 +64,14 @@ body {
     animation: auroraMove 25s ease-in-out infinite;
     filter: blur(60px);
 }
+
 @keyframes auroraMove {
     0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
     33% { transform: translate(5%, -5%) rotate(120deg) scale(1.1); }
     66% { transform: translate(-5%, 5%) rotate(240deg) scale(0.95); }
 }
 
-/* LIQUID MORPHING BACKGROUND */
+/* FITUR #18: LIQUID MORPHING BACKGROUND */
 .liquid-bg {
     position: fixed;
     inset: 0;
@@ -94,29 +79,35 @@ body {
     pointer-events: none;
     opacity: 0.5;
 }
+
 .liquid-blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
     animation: liquidMove 20s ease-in-out infinite;
 }
+
 .liquid-blob:nth-child(1) {
     width: 500px; height: 500px;
     background: radial-gradient(circle, rgba(93,45,232,0.6), transparent 70%);
     top: -100px; left: -100px;
+    animation-delay: 0s;
 }
+
 .liquid-blob:nth-child(2) {
     width: 600px; height: 600px;
     background: radial-gradient(circle, rgba(0,212,255,0.4), transparent 70%);
     bottom: -200px; right: -200px;
     animation-delay: -7s;
 }
+
 .liquid-blob:nth-child(3) {
     width: 400px; height: 400px;
     background: radial-gradient(circle, rgba(255,204,51,0.3), transparent 70%);
     top: 40%; left: 50%;
     animation-delay: -14s;
 }
+
 @keyframes liquidMove {
     0%, 100% { transform: translate(0, 0) scale(1); }
     25% { transform: translate(80px, -60px) scale(1.2); }
@@ -124,7 +115,7 @@ body {
     75% { transform: translate(60px, 60px) scale(1.1); }
 }
 
-/* PARTICLE CANVAS */
+/* FITUR #1: PARTICLE BACKGROUND */
 #particleCanvas {
     position: fixed;
     inset: 0;
@@ -133,31 +124,53 @@ body {
     opacity: 0.7;
 }
 
-/* MORPHING SVG BLOB */
-.morphing-blob {
+/* FITUR #16: CURSOR TRAIL */
+.cursor-trail {
     position: fixed;
-    z-index: -5;
     pointer-events: none;
-    opacity: 0.3;
-    filter: blur(40px);
+    z-index: 99998;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: trailFade 0.8s ease-out forwards;
 }
-.morphing-blob.blob-1 { top: -10%; left: -10%; width: 600px; height: 600px; }
-.morphing-blob.blob-2 { bottom: -10%; right: -10%; width: 700px; height: 700px; }
-.morphing-blob .blob-shape {
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(93,45,232,0.7), rgba(0,212,255,0.5));
-    animation: morphBlob 12s ease-in-out infinite;
+
+@keyframes trailFade {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
 }
-.morphing-blob.blob-2 .blob-shape {
-    background: radial-gradient(circle, rgba(0,212,255,0.6), rgba(255,204,51,0.4));
-    animation-delay: -6s;
+
+/* FITUR #28: READING PROGRESS BAR */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #ffcc33, #00d4ff, #5d2de8);
+    background-size: 200% auto;
+    z-index: 99999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 15px rgba(0,212,255,0.8);
+    animation: progressShine 3s linear infinite;
 }
-@keyframes morphBlob {
-    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-    50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
-    75% { border-radius: 60% 40% 60% 30% / 70% 30% 60% 40%; }
+
+@keyframes progressShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
+
+/* FITUR #15: CUSTOM SCROLLBAR */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #050813; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5d2de8, #00d4ff, #ffcc33);
+    border-radius: 20px;
+    border: 2px solid #050813;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ffcc33, #00d4ff, #5d2de8);
+}
+
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -170,6 +183,7 @@ body {
     transition: opacity 0.8s, visibility 0.8s;
     overflow: hidden;
 }
+
 #loadingScreen.hide { opacity: 0; visibility: hidden; }
 
 .loading-particles {
@@ -178,6 +192,7 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
+
 .loading-particle {
     position: absolute;
     width: 3px; height: 3px;
@@ -186,6 +201,7 @@ body {
     box-shadow: 0 0 10px #00d4ff, 0 0 20px #5d2de8;
     animation: floatParticle 6s ease-in-out infinite;
 }
+
 @keyframes floatParticle {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
     50% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 1; }
@@ -198,6 +214,7 @@ body {
     justify-content: center;
     margin-bottom: 45px;
 }
+
 .loading-ring {
     position: absolute;
     width: 200px; height: 200px;
@@ -206,6 +223,7 @@ body {
     border-top-color: rgba(93,45,232,1);
     animation: loadingRingSpin 2.2s linear infinite;
 }
+
 .loading-ring:nth-child(2) {
     width: 245px; height: 245px;
     border: 1.5px solid rgba(0,212,255,0.15);
@@ -213,10 +231,12 @@ body {
     animation-duration: 3.2s;
     animation-direction: reverse;
 }
+
 @keyframes loadingRingSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 .loading-logo-wrap img {
     width: 145px;
     height: 145px;
@@ -226,6 +246,7 @@ body {
     filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(0,212,255,0.6));
     animation: floatLogo 2.5s ease-in-out infinite;
 }
+
 @keyframes floatLogo {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -240,6 +261,7 @@ body {
     justify-content: center;
     margin-bottom: 24px;
 }
+
 .loading-text {
     position: absolute;
     inset: 0;
@@ -256,6 +278,7 @@ body {
     transform: translateY(12px);
     transition: opacity 0.5s, transform 0.5s;
 }
+
 .loading-text.active { opacity: 1; transform: translateY(0); }
 .loading-text.exit { opacity: 0; transform: translateY(-12px); }
 
@@ -266,6 +289,7 @@ body {
     overflow: hidden;
     margin-bottom: 18px;
 }
+
 .loading-bar-fill {
     height: 100%; width: 0%;
     background: linear-gradient(90deg, #5d2de8, #00d4ff, #ffcc33);
@@ -273,6 +297,7 @@ body {
     transition: width 0.3s ease-out;
     box-shadow: 0 0 15px rgba(0,212,255,0.8);
 }
+
 .loading-percent {
     font-family: 'Teko', sans-serif;
     font-size: 42px;
@@ -285,12 +310,14 @@ body {
     align-items: baseline;
     gap: 4px;
 }
+
 .loading-percent::after {
     content: "%";
     font-size: 22px;
     color: #00d4ff;
     -webkit-text-fill-color: #00d4ff;
 }
+
 .loading-brand {
     margin-top: 20px;
     font-family: 'Orbitron', sans-serif;
@@ -300,7 +327,7 @@ body {
     color: #ffcc33;
     opacity: 0.85;
 }
-/* HEADER */
+
 header {
     position: sticky;
     top: 0;
@@ -311,6 +338,7 @@ header {
     border-bottom: 1.5px solid rgba(93,45,232,0.45);
     overflow: hidden;
 }
+
 header::before {
     content: "";
     position: absolute;
@@ -320,6 +348,7 @@ header::before {
     background-size: 200% 100%;
     animation: headerBorder 8s linear infinite;
 }
+
 @keyframes headerBorder {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
@@ -344,7 +373,9 @@ header::before {
     text-decoration: none;
     transition: transform 0.3s;
 }
+
 .logo:hover { transform: scale(1.04); }
+
 .logo img {
     display: block;
     width: 150px;
@@ -354,9 +385,11 @@ header::before {
     transition: filter 0.3s;
     animation: floatLogo 3.5s ease-in-out infinite;
 }
+
 .logo:hover img {
     filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(0,212,255,0.6));
 }
+
 .logo-subtitle {
     margin-top: 4px;
     font-family: 'Rajdhani', sans-serif;
@@ -370,13 +403,14 @@ header::before {
     -webkit-text-fill-color: transparent;
     animation: logoShine 7s linear infinite;
 }
+
 @keyframes logoShine {
     0% { background-position: 0% center; }
     100% { background-position: 250% center; }
 }
 
-/* NAVIGATION */
 nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
 nav a.nav-link {
     color: #c8c8d4;
     text-decoration: none;
@@ -390,6 +424,7 @@ nav a.nav-link {
     border: 1px solid transparent;
     transition: all 0.3s;
 }
+
 nav a.nav-link:hover {
     color: #00d4ff;
     background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15));
@@ -397,6 +432,7 @@ nav a.nav-link:hover {
     box-shadow: 0 0 25px rgba(0,212,255,0.45);
     transform: translateY(-2px);
 }
+
 nav a.nav-login {
     color: #00d4ff;
     text-decoration: none;
@@ -411,12 +447,14 @@ nav a.nav-login {
     box-shadow: 0 0 15px rgba(0,212,255,0.3);
     transition: all 0.3s;
 }
+
 nav a.nav-login:hover {
     color: #0a0e27;
     background: linear-gradient(135deg, #00d4ff, #5d2de8);
     box-shadow: 0 0 30px rgba(0,212,255,0.8);
     transform: translateY(-2px);
 }
+
 nav a.nav-daftar {
     color: #0a0e27;
     text-decoration: none;
@@ -433,16 +471,17 @@ nav a.nav-daftar {
     animation: btnShine 3.5s ease-in-out infinite;
     transition: all 0.3s;
 }
+
 @keyframes btnShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
+
 nav a.nav-daftar:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 45px rgba(255,204,51,0.9);
 }
 
-/* CONTAINER */
 .container {
     max-width: 1250px;
     margin: auto;
@@ -450,7 +489,7 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 1;
 }
-/* LUX TEXT WRAPPER */
+
 .lux-text-wrap {
     position: relative;
     width: 100%;
@@ -467,6 +506,7 @@ nav a.nav-daftar:hover {
     align-items: center;
     justify-content: center;
 }
+
 .lux-text-wrap::before,
 .lux-text-wrap::after {
     content: "";
@@ -476,6 +516,7 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 5;
 }
+
 .lux-text-wrap::before { top: 6px; left: 6px; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
 .lux-text-wrap::after { top: 6px; right: 6px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
 
@@ -487,6 +528,7 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 5;
 }
+
 .lux-text-wrap .corner-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
 .lux-text-wrap .corner-br { bottom: 6px; right: 6px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
 
@@ -500,6 +542,7 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 3;
 }
+
 .lux-text-wrap .icon-side.left { left: 28px; }
 .lux-text-wrap .icon-side.right { right: 28px; animation-direction: reverse; }
 
@@ -518,6 +561,7 @@ nav a.nav-daftar:hover {
     justify-content: center;
     z-index: 2;
 }
+
 .lux-text-item {
     position: absolute;
     inset: 0;
@@ -542,14 +586,15 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: luxTextShine 6s linear infinite;
 }
+
 @keyframes luxTextShine {
     0% { background-position: 0% center; }
     100% { background-position: 250% center; }
 }
+
 .lux-text-item.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .lux-text-item.exit-up { opacity: 0; transform: translateY(-22px) scale(0.94); filter: blur(8px); }
 
-/* BANNER */
 .banner {
     position: relative;
     width: 100%;
@@ -561,6 +606,7 @@ nav a.nav-daftar:hover {
     line-height: 0;
     box-shadow: 0 0 40px rgba(93,45,232,0.35), 0 0 80px rgba(0,212,255,0.15);
 }
+
 .banner img {
     display: block;
     width: 100%;
@@ -568,6 +614,7 @@ nav a.nav-daftar:hover {
     object-fit: contain;
     content-visibility: auto;
 }
+
 .banner::after {
     content: "";
     position: absolute;
@@ -578,13 +625,13 @@ nav a.nav-daftar:hover {
     animation: bannerShine 7s infinite;
     pointer-events: none;
 }
+
 @keyframes bannerShine {
     0% { left: -120%; }
     35% { left: 140%; }
     100% { left: 140%; }
 }
 
-/* BIG MATCH TICKER */
 .big-match-ticker-wrap {
     position: relative;
     width: 100%;
@@ -596,6 +643,7 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(93,45,232,0.5);
 }
+
 .big-match-ticker-wrap::before,
 .big-match-ticker-wrap::after {
     content: "";
@@ -607,12 +655,15 @@ nav a.nav-daftar:hover {
     animation: tickerBorderTop 8s linear infinite;
     z-index: 3;
 }
+
 .big-match-ticker-wrap::before { top: 0; }
 .big-match-ticker-wrap::after { bottom: 0; animation-direction: reverse; }
+
 @keyframes tickerBorderTop {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
 }
+
 .big-match-ticker-wrap .fade-left,
 .big-match-ticker-wrap .fade-right {
     position: absolute;
@@ -621,14 +672,17 @@ nav a.nav-daftar:hover {
     z-index: 4;
     pointer-events: none;
 }
+
 .big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(5,8,19,1), transparent); }
 .big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(5,8,19,1), transparent); }
+
 .big-match-ticker {
     position: relative;
     width: 100%;
     padding: 16px 0;
     overflow: hidden;
 }
+
 .big-match-ticker-track {
     display: flex;
     align-items: center;
@@ -636,10 +690,12 @@ nav a.nav-daftar:hover {
     width: max-content;
     animation: tickerRun 40s linear infinite;
 }
+
 @keyframes tickerRun {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
+
 .big-match-ticker-empty {
     padding: 25px 30px;
     font-size: 11px;
@@ -649,7 +705,7 @@ nav a.nav-daftar:hover {
     text-align: center;
     text-transform: uppercase;
 }
-/* BMT CARD (Big Match Card) */
+
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
@@ -663,6 +719,8 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.4s;
 }
+
+/* FITUR #17: HOLOGRAPHIC CARD */
 .bmt-card::before {
     content: "";
     position: absolute;
@@ -681,14 +739,17 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 1;
 }
+
 .bmt-card:hover::before {
     opacity: 1;
     animation: holoShift 2s linear infinite;
 }
+
 @keyframes holoShift {
     0% { background-position: 0% 0%; }
     100% { background-position: 200% 200%; }
 }
+
 .bmt-card::after {
     content: "";
     position: absolute;
@@ -700,7 +761,9 @@ nav a.nav-daftar:hover {
     transition: left 0.6s ease;
     z-index: 2;
 }
+
 .bmt-card:hover::after { left: 140%; }
+
 .bmt-card:hover {
     border-color: rgba(0,212,255,0.9);
     box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(0,212,255,0.55);
@@ -725,6 +788,7 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 3;
 }
+
 .bmt-league {
     display: block;
     font-family: 'Rajdhani', sans-serif;
@@ -740,6 +804,7 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 3;
 }
+
 .bmt-teams {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -749,7 +814,9 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 3;
 }
+
 .bmt-team { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; min-width: 0; }
+
 .bmt-logo {
     width: 40px; height: 40px;
     border-radius: 50%;
@@ -764,8 +831,10 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     flex-shrink: 0;
 }
+
 .bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
 .bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(255,204,51,0.9); }
+
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
     font-size: 10.5px;
@@ -776,6 +845,7 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .bmt-vs {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px;
@@ -783,6 +853,7 @@ nav a.nav-daftar:hover {
     color: #ffcc33;
     letter-spacing: 1.5px;
 }
+
 .bmt-time {
     display: flex;
     align-items: center;
@@ -802,7 +873,6 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
-/* NEWS TICKER */
 .news-ticker {
     position: relative;
     width: 100%;
@@ -818,6 +888,7 @@ nav a.nav-daftar:hover {
     min-height: 46px;
     box-shadow: 0 0 30px rgba(93,45,232,0.25);
 }
+
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 20px;
@@ -830,17 +901,21 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     z-index: 2;
 }
+
 .news-ticker-label::before {
     content: "●";
     display: inline-block;
     margin-right: 10px;
     animation: newsBlink 1.3s ease-in-out infinite;
 }
+
 @keyframes newsBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
 }
+
 .news-ticker-wrap { flex: 1; overflow: hidden; position: relative; height: 46px; }
+
 .news-ticker-content {
     position: absolute;
     top: 50%;
@@ -853,18 +928,19 @@ nav a.nav-daftar:hover {
     animation: newsScroll 150s linear infinite;
     padding-left: 100%;
 }
+
 @keyframes newsScroll {
     0% { transform: translate(0, -50%); }
     100% { transform: translate(-100%, -50%); }
 }
 
-/* STATS */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     margin-bottom: 32px;
 }
+
 .stat-box {
     position: relative;
     padding: 20px 14px 18px;
@@ -877,11 +953,13 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.4s;
 }
+
 .stat-box:hover {
     border-color: rgba(0,212,255,0.9);
     box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(0,212,255,0.45);
     transform: translateY(-4px);
 }
+
 .stat-box::before {
     content: "★";
     position: absolute;
@@ -892,6 +970,7 @@ nav a.nav-daftar:hover {
     color: #ffcc33;
     opacity: 0.7;
 }
+
 .stat-box::after {
     content: "";
     position: absolute;
@@ -899,6 +978,7 @@ nav a.nav-daftar:hover {
     width: 70%; height: 1px;
     background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #5d2de8, transparent);
 }
+
 .stat-number {
     display: block;
     font-family: 'Teko', sans-serif;
@@ -912,6 +992,7 @@ nav a.nav-daftar:hover {
     line-height: 1;
     text-shadow: 0 0 30px rgba(255,204,51,0.5);
 }
+
 .stat-label {
     color: #a0b8d0;
     font-family: 'Rajdhani', sans-serif;
@@ -921,6 +1002,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     margin-top: 4px;
 }
+
 #pertandingan { scroll-margin-top: 30px; }
 
 .section-head {
@@ -930,6 +1012,7 @@ nav a.nav-daftar:hover {
     gap: 18px;
     margin: 28px 0 22px;
 }
+
 .section-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 26px;
@@ -938,6 +1021,7 @@ nav a.nav-daftar:hover {
     margin: 0;
     text-transform: uppercase;
 }
+
 .section-title span {
     background: linear-gradient(90deg, #ffcc33, #00d4ff, #ffcc33);
     background-size: 200% auto;
@@ -946,12 +1030,12 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: titleGradient 6s linear infinite;
 }
+
 @keyframes titleGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
 
-/* FILTER ROW */
 .filter-row {
     display: flex;
     align-items: center;
@@ -966,7 +1050,6 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 30px rgba(93,45,232,0.15);
 }
 
-/* NEXT MATCH BAR */
 .next-match-bar-inline {
     position: relative;
     width: 100%;
@@ -979,7 +1062,9 @@ nav a.nav-daftar:hover {
     display: none;
     margin-bottom: 10px;
 }
+
 .next-match-bar-inline.show { display: block; }
+
 .next-match-inner {
     padding: 12px 20px;
     display: flex;
@@ -988,6 +1073,7 @@ nav a.nav-daftar:hover {
     gap: 18px;
     flex-wrap: wrap;
 }
+
 .next-match-label {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11px;
@@ -996,6 +1082,7 @@ nav a.nav-daftar:hover {
     color: #00d4ff;
     text-transform: uppercase;
 }
+
 .next-match-teams {
     font-family: 'Rajdhani', sans-serif;
     font-size: 15px;
@@ -1003,6 +1090,7 @@ nav a.nav-daftar:hover {
     color: #fff;
     text-transform: uppercase;
 }
+
 .next-match-countdown {
     font-family: 'Teko', monospace;
     font-size: 22px;
@@ -1015,12 +1103,12 @@ nav a.nav-daftar:hover {
     color: #0a0e27;
     animation: nextMatchShine 3s linear infinite;
 }
+
 @keyframes nextMatchShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
 
-/* TAB FILTER ROW */
 .tab-filter-row {
     display: flex;
     align-items: center;
@@ -1029,6 +1117,7 @@ nav a.nav-daftar:hover {
     margin-bottom: 8px;
     width: 100%;
 }
+
 .tab-clock {
     display: flex;
     align-items: center;
@@ -1041,6 +1130,7 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(255,204,51,0.6);
     flex-shrink: 0;
 }
+
 .tab-clock-icon { font-size: 14px; }
 .tab-clock-value {
     font-family: 'Teko', monospace;
@@ -1056,10 +1146,12 @@ nav a.nav-daftar:hover {
     animation: blink 1s infinite;
     margin: 0 2px;
 }
+
 @keyframes blink {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0.2; }
 }
+
 .tab-clock-label {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11px;
@@ -1068,9 +1160,9 @@ nav a.nav-daftar:hover {
     color: #ffcc33;
     text-transform: uppercase;
 }
+
 .tab-filter-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; }
 
-/* TAB FILTER BUTTON */
 .tab-filter {
     display: flex;
     align-items: center;
@@ -1092,6 +1184,7 @@ nav a.nav-daftar:hover {
     position: relative;
     overflow: hidden;
 }
+
 .tab-filter::before {
     content: "";
     position: absolute;
@@ -1101,13 +1194,16 @@ nav a.nav-daftar:hover {
     transform: skewX(-20deg);
     transition: left 0.5s ease;
 }
+
 .tab-filter:hover {
     color: #00d4ff;
     border-color: rgba(0,212,255,0.7);
     box-shadow: 0 0 20px rgba(0,212,255,0.4);
     transform: translateY(-2px);
 }
+
 .tab-filter:hover::before { left: 140%; }
+
 .tab-filter.active {
     color: #0a0e27;
     background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33);
@@ -1116,14 +1212,15 @@ nav a.nav-daftar:hover {
     box-shadow: 0 4px 25px rgba(255,204,51,0.6);
     animation: tabActiveShine 3s linear infinite;
 }
+
 @keyframes tabActiveShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
+
 .tab-icon { font-size: 14px; }
 .tab-text { font-size: 12.5px; }
 
-/* SEARCH BOX */
 .search-box {
     position: relative;
     display: flex;
@@ -1136,11 +1233,14 @@ nav a.nav-daftar:hover {
     border-radius: 14px;
     transition: all 0.4s;
 }
+
 .search-box:focus-within {
     border-color: rgba(0,212,255,0.9);
     box-shadow: 0 0 30px rgba(0,212,255,0.5);
 }
+
 .search-icon { padding: 0 14px; color: #00d4ff; font-size: 14px; pointer-events: none; }
+
 #searchInput {
     flex: 1;
     border: none;
@@ -1152,7 +1252,9 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     font-size: 14px;
 }
+
 #searchInput::placeholder { color: #6b7b9d; }
+
 .search-clear {
     background: transparent;
     border: none;
@@ -1162,10 +1264,10 @@ nav a.nav-daftar:hover {
     font-size: 15px;
     font-weight: bold;
 }
+
 .search-clear:hover { color: #00d4ff; }
 .search-clear.hidden { display: none; }
 
-/* DATE FILTER */
 .date-filter { display: flex; align-items: center; gap: 10px; }
 .date-filter label {
     color: #b0a8d8;
@@ -1175,6 +1277,7 @@ nav a.nav-daftar:hover {
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
+
 #tanggalFilter,
 #ligaFilter,
 #statusFilter {
@@ -1198,6 +1301,7 @@ nav a.nav-daftar:hover {
     background-size: 100% 100%, 12px 12px;
     color-scheme: dark;
 }
+
 #tanggalFilter option,
 #ligaFilter option,
 #statusFilter option {
@@ -1205,13 +1309,14 @@ nav a.nav-daftar:hover {
     color: #fff;
     font-weight: 700;
 }
+
 #tanggalFilter:focus,
 #ligaFilter:focus,
 #statusFilter:focus {
     border-color: #00d4ff;
     box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
-/* DATE GROUP */
+
 .date-group { margin-bottom: 30px; }
 
 .date-group-header {
@@ -1234,6 +1339,7 @@ nav a.nav-daftar:hover {
     position: relative;
     overflow: hidden;
 }
+
 .date-group-header::after {
     content: "";
     position: absolute;
@@ -1244,14 +1350,15 @@ nav a.nav-daftar:hover {
     animation: shineSweep 5s ease-in-out infinite;
     pointer-events: none;
 }
+
 @keyframes shineSweep {
     0% { left: -120%; }
     40% { left: 140%; }
     100% { left: 140%; }
 }
 
-/* SELESAI TOGGLE */
 .selesai-section { margin-top: 18px; margin-bottom: 10px; }
+
 .selesai-toggle {
     display: flex;
     align-items: center;
@@ -1274,31 +1381,35 @@ nav a.nav-daftar:hover {
     transition: all 0.35s;
     box-shadow: 0 0 20px rgba(16,185,129,0.15);
 }
+
 .selesai-toggle:hover {
     background: rgba(16,185,129,0.25);
     border-color: rgba(16,185,129,0.9);
     box-shadow: 0 0 30px rgba(16,185,129,0.4);
     transform: translateY(-2px);
 }
+
 .selesai-toggle.open {
     border-color: rgba(16,185,129,0.9);
     background: rgba(16,185,129,0.25);
 }
+
 .selesai-icon { font-size: 16px; }
 .selesai-text { flex: 1; text-align: center; }
 .selesai-arrow { font-size: 12px; transition: transform 0.3s; }
+
 .selesai-content {
     margin-top: 18px;
     padding-top: 18px;
     border-top: 1.5px dashed rgba(16,185,129,0.3);
     animation: fadeInSelesai 0.4s ease;
 }
+
 @keyframes fadeInSelesai {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* LEAGUE */
 .league {
     margin-bottom: 30px;
     border-radius: 22px;
@@ -1310,9 +1421,11 @@ nav a.nav-daftar:hover {
     box-shadow: 0 25px 70px rgba(0,0,0,0.5);
     transition: transform 0.4s, box-shadow 0.4s;
 }
+
 .league:hover {
     box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 50px rgba(93,45,232,0.25);
 }
+
 .league-header {
     position: relative;
     padding: 20px 25px;
@@ -1329,6 +1442,7 @@ nav a.nav-daftar:hover {
     border-bottom: 1.5px solid rgba(93,45,232,0.5);
     text-shadow: 0 0 25px rgba(0,212,255,1);
 }
+
 @keyframes leagueAurora {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -1341,7 +1455,6 @@ nav a.nav-daftar:hover {
     padding: 24px 16px 18px;
 }
 
-/* MATCH ROW SINGLE */
 .match-row-single {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
@@ -1368,6 +1481,7 @@ nav a.nav-daftar:hover {
         0 8px 25px rgba(0, 0, 0, 0.7),
         inset 0 0 30px rgba(0, 212, 255, 0.12);
 }
+
 .match-row-single::before {
     content: "";
     position: absolute;
@@ -1388,6 +1502,7 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 1;
 }
+
 @keyframes matchShine {
     0%   { left: -80%; opacity: 0; }
     10%  { opacity: 1; }
@@ -1395,6 +1510,7 @@ nav a.nav-daftar:hover {
     55%  { left: 130%; opacity: 0; }
     100% { left: 130%; opacity: 0; }
 }
+
 .match-row-single:hover {
     border-color: rgba(255, 204, 51, 0.95);
     transform: translateX(5px) translateY(-4px);
@@ -1406,7 +1522,7 @@ nav a.nav-daftar:hover {
         0 12px 35px rgba(0, 0, 0, 0.8),
         inset 0 0 40px rgba(0, 212, 255, 0.2);
 }
-/* LIVE BADGE */
+
 .match-live-badge {
     position: absolute;
     top: 8px;
@@ -1427,12 +1543,12 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 20px rgba(255,42,61,0.9), inset 0 0 12px rgba(255,255,255,0.2);
     animation: liveGradient 4s linear infinite;
 }
+
 @keyframes liveGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
 
-/* FINISHED BADGE */
 .match-finished-badge {
     position: absolute;
     top: 8px;
@@ -1453,12 +1569,12 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 20px rgba(16,185,129,0.9), inset 0 0 12px rgba(255,255,255,0.2);
     animation: finishedGradient 5s linear infinite;
 }
+
 @keyframes finishedGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
 
-/* COUNTDOWN BADGE */
 .match-countdown-badge {
     position: absolute;
     bottom: 8px;
@@ -1477,13 +1593,13 @@ nav a.nav-daftar:hover {
     white-space: nowrap;
     box-shadow: 0 0 20px rgba(0,212,255,0.9);
 }
+
 .match-countdown-badge.soon {
     background: linear-gradient(135deg, rgba(255,204,51,0.98), rgba(255,140,0,0.98));
     border-color: rgba(255,240,160,1);
     color: #0a0e27;
 }
 
-/* SPECIAL BADGES */
 .match-special-badges {
     position: absolute;
     top: 6px;
@@ -1493,6 +1609,7 @@ nav a.nav-daftar:hover {
     z-index: 11;
     pointer-events: none;
 }
+
 .special-badge {
     display: inline-flex;
     align-items: center;
@@ -1505,12 +1622,12 @@ nav a.nav-daftar:hover {
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
+
 .special-badge.hot { color: #fff5e0; background: linear-gradient(135deg, #dc2626, #ff6b35, #dc2626); border: 1px solid rgba(255,180,100,0.8); }
 .special-badge.vip { color: #0a0e27; background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33); border: 1px solid #fff5d0; }
 .special-badge.premium { color: #fff; background: linear-gradient(135deg, #5d2de8, #00d4ff, #5d2de8); border: 1px solid rgba(180,240,255,0.8); }
 .special-badge .icon-mini { font-size: 9px; }
 
-/* MATCH CLOCK LINE */
 .match-clock-line {
     grid-area: clock;
     display: flex;
@@ -1530,6 +1647,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     width: 100%;
 }
+
 .match-clock-icon { font-size: 14px; flex-shrink: 0; }
 .match-clock-label { color: #b0a8d8; font-size: 11px; font-weight: 700; }
 .match-clock-value {
@@ -1543,18 +1661,17 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     font-size: 14px;
 }
+
 @keyframes clockShine {
     0% { background-position: 0% center; }
     100% { background-position: 250% center; }
 }
 
-/* GRID AREAS */
 .match-row-single .match-time-badge { grid-area: time; }
 .match-row-single .match-teams-block { grid-area: teams; }
 .match-row-single .match-value-box.hdp { grid-area: hdp; }
 .match-row-single .match-value-box.pred { grid-area: pred; }
 
-/* MATCH TIME BADGE */
 .match-time-badge {
     display: flex;
     flex-direction: column;
@@ -1571,6 +1688,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
+
 .match-time-badge .time-value {
     font-family: 'Teko', monospace;
     font-size: 18px;
@@ -1578,6 +1696,7 @@ nav a.nav-daftar:hover {
     color: #fff;
     line-height: 1;
 }
+
 .match-time-badge .time-date {
     font-family: 'Rajdhani', sans-serif;
     font-size: 10px;
@@ -1585,7 +1704,7 @@ nav a.nav-daftar:hover {
     color: #a0b8d0;
     letter-spacing: 1.2px;
 }
-/* MATCH TEAMS BLOCK */
+
 .match-teams-block {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -1595,15 +1714,18 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
+
 .match-team-mini {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 0;
 }
+
 .match-team-mini.right {
     justify-content: center;
 }
+
 .match-team-mini .mini-name {
     font-family: 'Rajdhani', sans-serif;
     font-size: 15px;
@@ -1617,6 +1739,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .match-vs-mini {
     font-family: 'Orbitron', sans-serif;
     font-size: 12px;
@@ -1625,7 +1748,6 @@ nav a.nav-daftar:hover {
     letter-spacing: 2px;
 }
 
-/* MATCH VALUE BOX */
 .match-value-box {
     display: flex;
     flex-direction: column;
@@ -1638,18 +1760,21 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
+
 .match-value-box.hdp {
     background: rgba(93,45,232,0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(93,45,232,0.75);
 }
+
 .match-value-box.pred {
     background: rgba(0,212,255,0.22);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(0,212,255,0.85);
 }
+
 .match-value-box .val-label {
     font-family: 'Rajdhani', sans-serif;
     font-size: 9px;
@@ -1658,6 +1783,7 @@ nav a.nav-daftar:hover {
     color: #b0a8d8;
     text-transform: uppercase;
 }
+
 .match-value-box .val-number {
     font-family: 'Teko', monospace;
     font-size: 22px;
@@ -1666,12 +1792,12 @@ nav a.nav-daftar:hover {
     line-height: 1;
     color: #fff;
 }
+
 .match-value-box.hdp .val-number { text-shadow: 0 0 18px rgba(93,45,232,1); }
 .match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(0,212,255,1); }
 .match-value-box.empty { opacity: 0.5; }
 .match-value-box.empty .val-number { color: #555568; text-shadow: none; }
 
-/* EMPTY STATE */
 .single-col-empty {
     padding: 50px 20px;
     text-align: center;
@@ -1683,7 +1809,6 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 
-/* FOOTER */
 .site-footer {
     position: relative;
     margin-top: 60px;
@@ -1694,6 +1819,7 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px);
     border-top: 1.5px solid rgba(93,45,232,0.5);
 }
+
 .footer-logo-wrap {
     position: relative;
     display: inline-flex;
@@ -1702,6 +1828,7 @@ nav a.nav-daftar:hover {
     margin-bottom: 22px;
     min-height: 90px;
 }
+
 .footer-logo-wrap img {
     width: 140px;
     height: 60px;
@@ -1709,6 +1836,7 @@ nav a.nav-daftar:hover {
     filter: drop-shadow(0 0 30px rgba(93,45,232,0.9));
     animation: floatLogo 3.5s ease-in-out infinite;
 }
+
 .footer-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 26px;
@@ -1723,6 +1851,7 @@ nav a.nav-daftar:hover {
     animation: logoShine 7s linear infinite;
     text-transform: uppercase;
 }
+
 .footer-tagline {
     font-family: 'Rajdhani', sans-serif;
     font-size: 13px;
@@ -1732,6 +1861,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     margin-bottom: 25px;
 }
+
 .footer-copy {
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px;
@@ -1740,9 +1870,9 @@ nav a.nav-daftar:hover {
     color: #6b7b9d;
     margin-top: 15px;
 }
+
 .footer-copy span { color: #ffcc33; font-weight: 800; }
 
-/* BOTTOM NAV */
 .bottom-nav {
     display: none;
     position: fixed;
@@ -1756,6 +1886,7 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-top: 1.5px solid rgba(93,45,232,0.55);
 }
+
 .bottom-nav-inner {
     max-width: 500px;
     margin: auto;
@@ -1763,6 +1894,7 @@ nav a.nav-daftar:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
 }
+
 .bottom-nav-item {
     display: flex;
     flex-direction: column;
@@ -1781,14 +1913,15 @@ nav a.nav-daftar:hover {
     border: 1.5px solid transparent;
     transition: all 0.4s;
 }
+
 .bottom-nav-item:hover {
     color: #00d4ff;
     background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(0,212,255,0.18));
     border-color: rgba(0,212,255,0.7);
 }
+
 .bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
 
-/* TOAST */
 .toast {
     position: fixed;
     top: 30px;
@@ -1808,6 +1941,7 @@ nav a.nav-daftar:hover {
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     max-width: 400px;
 }
+
 .toast.show { transform: translateX(0); }
 
 /* CONFETTI */
@@ -1818,17 +1952,19 @@ nav a.nav-daftar:hover {
     z-index: 9999;
     overflow: hidden;
 }
+
 .confetti {
     position: absolute;
     width: 8px;
     height: 8px;
     animation: confettiFall 3s linear forwards;
 }
+
 @keyframes confettiFall {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
-/* MEDIA QUERIES */
+
 @media (max-width: 800px) {
     body { padding-bottom: 85px; }
     .bottom-nav { display: block; }
@@ -1840,37 +1976,22 @@ nav a.nav-daftar:hover {
     nav a.nav-login { padding: 6px 14px; font-size: 11px; }
     nav a.nav-daftar { padding: 7px 16px; font-size: 11px; }
     .container { padding: 14px 10px 45px; }
-
     .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
     .news-ticker-content { font-size: 11px !important; animation-duration: 45s !important; }
     .news-ticker-wrap { height: 36px; }
     .news-ticker { min-height: 36px; margin-bottom: 18px; }
-
     .lux-text-wrap { padding: 12px 38px; min-height: 54px; height: auto; margin-bottom: 14px; border-radius: 14px; }
     .lux-text-wrap .icon-side { font-size: 13px; }
     .lux-text-wrap .icon-side.left { left: 15px; }
     .lux-text-wrap .icon-side.right { right: 15px; }
     .lux-text-wrap::before, .lux-text-wrap::after,
     .lux-text-wrap .corner-bl, .lux-text-wrap .corner-br { width: 16px; height: 16px; }
-
     .lux-text-slide { height: auto; min-height: 46px; position: relative; }
-    .lux-text-item {
-        position: relative;
-        inset: auto;
-        display: none;
-        font-size: 11.5px;
-        letter-spacing: 1.2px;
-        line-height: 1.45;
-        white-space: normal;
-        padding: 4px 0;
-        word-break: break-word;
-    }
+    .lux-text-item { position: relative; inset: auto; display: none; font-size: 11.5px; letter-spacing: 1.2px; line-height: 1.45; white-space: normal; padding: 4px 0; word-break: break-word; }
     .lux-text-item.active { display: flex; }
     .lux-text-item.exit-up { display: none; }
-
     .banner { border-radius: 16px; margin-bottom: 16px; }
     .banner img { width: 100%; height: auto; object-fit: contain; }
-
     .bmt-card { width: 130px !important; padding: 9px !important; border-radius: 12px !important; }
     .bmt-badge { font-size: 7.5px !important; padding: 3px 8px !important; }
     .bmt-league { font-size: 7.5px !important; letter-spacing: 1.2px !important; }
@@ -1881,113 +2002,61 @@ nav a.nav-daftar:hover {
     .bmt-time { font-size: 9.5px !important; padding: 5px 0 !important; }
     .big-match-ticker-track { gap: 8px !important; }
     .big-match-ticker { padding: 12px 0 !important; }
-
     .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
     .stat-box { padding: 14px 6px 12px; border-radius: 14px; }
     .stat-number { font-size: 26px; }
     .stat-label { font-size: 9px; letter-spacing: 1px; }
-
     .filter-row { display: flex; flex-direction: column; gap: 10px; padding: 12px; width: 100%; }
-
     .next-match-bar-inline { width: 100%; margin-bottom: 4px; }
     .next-match-inner { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; text-align: center; }
     .next-match-label { font-size: 10px; letter-spacing: 2.5px; }
     .next-match-teams { font-size: 13.5px; text-align: center; }
     .next-match-countdown { font-size: 20px; padding: 4px 20px; }
-
     .tab-filter-row { display: flex; flex-direction: column; gap: 10px; width: 100%; }
     .tab-clock { display: flex; justify-content: center; padding: 10px 16px; width: 100%; }
     .tab-clock-icon { font-size: 15px; }
     .tab-clock-value { font-size: 21px; }
     .tab-clock-label { font-size: 11.5px; letter-spacing: 1.5px; }
-
     .tab-filter-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; }
-    .tab-filter {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        padding: 10px 6px;
-        font-size: 10.5px;
-        width: 100%;
-        letter-spacing: 0.5px;
-        text-align: center;
-        min-width: 0;
-    }
+    .tab-filter { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px 6px; font-size: 10.5px; width: 100%; letter-spacing: 0.5px; text-align: center; min-width: 0; }
     .tab-icon { font-size: 13px; }
     .tab-text { font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
     .search-box { width: 100%; min-width: unset; }
     #searchInput { font-size: 13px; }
-
     .date-filter { width: 100%; }
     .date-filter label { font-size: 11px; letter-spacing: 1px; min-width: 55px; }
     #ligaFilter, #statusFilter { flex: 1; width: 100%; max-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
-
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
-
     .date-group { margin-bottom: 22px; }
     .date-group-header { font-size: 14px; letter-spacing: 2px; padding: 11px 15px; margin-bottom: 14px; border-radius: 12px; }
-
     .selesai-toggle { font-size: 11px; letter-spacing: 1.5px; padding: 11px 14px; gap: 8px; }
     .selesai-icon { font-size: 14px; }
     .selesai-arrow { font-size: 10px; }
-
     .league { border-radius: 16px; }
     .league-header { padding: 14px 30px; font-size: 12.5px; letter-spacing: 2.5px; }
     .single-column-wrap { gap: 16px; padding: 20px 10px 14px; }
-
-    .match-row-single {
-        padding: 28px 12px 28px;
-        gap: 8px;
-        row-gap: 10px;
-        border-width: 1.5px;
-        box-shadow:
-            0 0 0 1px rgba(0, 212, 255, 0.55),
-            0 0 15px rgba(0, 212, 255, 0.55),
-            0 0 30px rgba(93, 45, 232, 0.4),
-            0 6px 20px rgba(0, 0, 0, 0.7),
-            inset 0 0 20px rgba(0, 212, 255, 0.12);
-    }
-
+    .match-row-single { padding: 28px 12px 28px; gap: 8px; row-gap: 10px; border-width: 1.5px; }
     .match-clock-line { font-size: 10.5px; padding: 7px 14px; gap: 7px; }
     .match-clock-icon { font-size: 12px; }
     .match-clock-label { font-size: 10px; }
     .match-clock-value { font-size: 12px; }
-
-    .match-row-single {
-        grid-template-columns: auto 1fr auto;
-        grid-template-areas:
-            "clock clock clock"
-            "time teams hdp"
-            "time teams pred";
-    }
+    .match-row-single { grid-template-columns: auto 1fr auto; grid-template-areas: "clock clock clock" "time teams hdp" "time teams pred"; }
     .match-row-single .match-time-badge { grid-area: time; align-self: center; }
     .match-row-single .match-teams-block { grid-area: teams; }
     .match-row-single .match-value-box.hdp { grid-area: hdp; min-width: 72px; padding: 6px 10px; }
     .match-row-single .match-value-box.pred { grid-area: pred; min-width: 72px; padding: 6px 10px; }
-
-    .match-live-badge, .match-finished-badge {
-        top: 6px;
-        padding: 3px 14px;
-        font-size: 10px;
-        letter-spacing: 2px;
-    }
+    .match-live-badge, .match-finished-badge { top: 6px; padding: 3px 14px; font-size: 10px; letter-spacing: 2px; }
     .match-countdown-badge { bottom: 6px; padding: 2px 10px; font-size: 10px; }
-
     .match-team-mini .mini-name { max-width: 120px; font-size: 13px; }
     .match-value-box .val-number { font-size: 18px; }
     .match-value-box .val-label { font-size: 8.5px; }
-
     .match-special-badges { top: 5px; left: 6px; }
     .special-badge { padding: 2px 7px; font-size: 7.5px; letter-spacing: 1px; }
-
     .footer-logo-wrap { min-height: 70px; }
     .footer-logo-wrap img { width: 110px; height: 48px; }
     .footer-title { font-size: 20px; letter-spacing: 7px; }
     .footer-tagline { font-size: 11px; letter-spacing: 2.5px; }
-
     .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
     .liquid-blob { filter: blur(60px); }
 }
@@ -1998,53 +2067,36 @@ nav a.nav-daftar:hover {
     nav a.nav-link { padding: 6px 10px; font-size: 10px; }
     nav a.nav-login { padding: 5px 12px; font-size: 10px; }
     nav a.nav-daftar { padding: 6px 14px; font-size: 10px; }
-
     .loading-logo-wrap img { width: 110px; height: 110px; }
     .loading-ring { width: 165px; height: 165px; }
     .loading-ring:nth-child(2) { width: 200px; height: 200px; }
     .loading-percent { font-size: 34px; }
-
     .news-ticker-label { font-size: 9px; padding: 6px 10px; letter-spacing: 1.2px; }
     .news-ticker-content { font-size: 10px !important; animation-duration: 40s !important; }
-
     .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
     .lux-text-wrap .icon-side { font-size: 11px; }
     .lux-text-wrap .icon-side.left { left: 11px; }
     .lux-text-wrap .icon-side.right { right: 11px; }
     .lux-text-slide { height: auto; min-height: 42px; }
     .lux-text-item { font-size: 10.5px; letter-spacing: 0.8px; line-height: 1.45; }
-
     .banner { border-radius: 14px; margin-bottom: 14px; }
     .single-column-wrap { gap: 14px; padding: 18px 8px 12px; }
-
     .match-clock-line { font-size: 9.5px; padding: 6px 11px; gap: 5px; }
     .match-clock-icon { font-size: 11px; }
     .match-clock-label { font-size: 9px; }
     .match-clock-value { font-size: 11px; }
-
-    .match-row-single {
-        grid-template-columns: auto 1fr;
-        grid-template-areas:
-            "clock clock"
-            "time teams"
-            "hdp pred";
-        gap: 8px;
-        padding: 26px 10px 26px;
-    }
+    .match-row-single { grid-template-columns: auto 1fr; grid-template-areas: "clock clock" "time teams" "hdp pred"; gap: 8px; padding: 26px 10px 26px; }
     .match-row-single .match-time-badge { grid-area: time; }
     .match-row-single .match-teams-block { grid-area: teams; }
     .match-row-single .match-value-box.hdp { grid-area: hdp; min-width: unset; padding: 6px 9px; }
     .match-row-single .match-value-box.pred { grid-area: pred; min-width: unset; padding: 6px 9px; }
-
     .match-live-badge, .match-finished-badge { font-size: 9px; padding: 3px 12px; letter-spacing: 1.5px; }
     .match-countdown-badge { font-size: 9px; padding: 2px 8px; }
-
     .match-time-badge { min-width: 62px; padding: 5px 9px; }
     .match-time-badge .time-value { font-size: 15px; }
     .match-time-badge .time-date { font-size: 9px; }
     .match-team-mini .mini-name { font-size: 12px; max-width: 95px; }
     .match-value-box .val-number { font-size: 16px; }
-
     .bmt-card { width: 115px !important; padding: 8px !important; }
     .bmt-logo { width: 24px !important; height: 24px !important; }
     .bmt-logo img { width: 18px !important; height: 18px !important; }
@@ -2052,12 +2104,10 @@ nav a.nav-daftar:hover {
     .bmt-time { font-size: 9px !important; }
     .bmt-league { font-size: 7px !important; }
     .big-match-ticker-track { gap: 6px !important; }
-
     .footer-logo-wrap { min-height: 60px; }
     .footer-logo-wrap img { width: 90px; height: 40px; }
     .footer-title { font-size: 18px; letter-spacing: 6px; }
     .footer-tagline { font-size: 10px; letter-spacing: 2px; }
-
     .date-group-header { font-size: 12px; padding: 10px 12px; letter-spacing: 1.5px; }
     .league-header { font-size: 12px; padding: 14px 34px; letter-spacing: 2px; }
     .tab-filter { padding: 9px 4px; font-size: 10px; gap: 4px; }
@@ -2068,35 +2118,25 @@ nav a.nav-daftar:hover {
     #ligaFilter, #statusFilter { font-size: 12px; padding: 10px 30px 10px 12px; }
     .section-title { font-size: 16px; }
 }
-
 </style>
-</head><body id="top">
+</head>
+<body id="top">
 
-<!-- READING PROGRESS -->
+<!-- READING PROGRESS BAR -->
 <div class="reading-progress" id="readingProgress"></div>
 
-<!-- AURORA BACKGROUND -->
+<!-- FITUR #10: AURORA BACKGROUND -->
 <div class="aurora-bg"></div>
 
-<!-- LIQUID MORPHING -->
+<!-- FITUR #18: LIQUID MORPHING BACKGROUND -->
 <div class="liquid-bg">
     <div class="liquid-blob"></div>
     <div class="liquid-blob"></div>
     <div class="liquid-blob"></div>
 </div>
 
-<!-- MORPHING SVG BLOB -->
-<div class="morphing-blob blob-1"><div class="blob-shape"></div></div>
-<div class="morphing-blob blob-2"><div class="blob-shape"></div></div>
-
-<!-- PARTICLES -->
+<!-- FITUR #1: PARTICLE CANVAS -->
 <canvas id="particleCanvas"></canvas>
-
-<!-- THREE.JS CANVAS -->
-<canvas id="three3dCanvas"></canvas>
-
-<!-- SHADER CANVAS -->
-<canvas id="shaderCanvas"></canvas>
 
 <div id="loadingScreen">
     <div class="loading-particles" id="loadingParticles"></div>
@@ -2326,221 +2366,490 @@ const db = getFirestore(app);
 let semuaData = [];
 
 // ============================================================
-// FITUR BARU 1: 3D SCENE THREE.JS
+// FITUR #1: PARTICLE BACKGROUND
 // ============================================================
-(function initThreeJS() {
-    const container = document.getElementById("three3dCanvas");
-    if (!container) return;
-    const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-    script.onload = function() {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-        const material = new THREE.MeshPhongMaterial({
-            color: 0xffcc33,
-            emissive: 0x5d2de8,
-            emissiveIntensity: 0.3,
-            shininess: 100
-        });
-        const sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
-
-        const wireGeo = new THREE.SphereGeometry(1.6, 16, 16);
-        const wireMat = new THREE.MeshBasicMaterial({
-            color: 0x00d4ff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        const wireSphere = new THREE.Mesh(wireGeo, wireMat);
-        scene.add(wireSphere);
-
-        const light1 = new THREE.PointLight(0xffcc33, 1, 100);
-        light1.position.set(5, 5, 5);
-        scene.add(light1);
-        const light2 = new THREE.PointLight(0x00d4ff, 1, 100);
-        light2.position.set(-5, -5, 5);
-        scene.add(light2);
-        const ambientLight = new THREE.AmbientLight(0x5d2de8, 0.5);
-        scene.add(ambientLight);
-
-        camera.position.z = 5;
-
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener("mousemove", (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-            sphere.rotation.x += 0.003;
-            sphere.rotation.y += 0.005;
-            wireSphere.rotation.x -= 0.002;
-            wireSphere.rotation.y -= 0.003;
-            sphere.rotation.y += mouseX * 0.01;
-            sphere.rotation.x += mouseY * 0.01;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener("resize", () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    };
-    document.head.appendChild(script);
-})();
-
-// ============================================================
-// FITUR BARU 2: WEBGL SHADER BACKGROUND
-// ============================================================
-(function initShader() {
-    const canvas = document.getElementById("shaderCanvas");
+(function initParticles() {
+    const canvas = document.getElementById("particleCanvas");
     if (!canvas) return;
-    const gl = canvas.getContext("webgl");
-    if (!gl) return;
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let w, h;
+    const PARTICLE_COUNT = 60;
+    const MAX_DISTANCE = 120;
+    let mouse = { x: -9999, y: -9999 };
 
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
     }
     resize();
     window.addEventListener("resize", resize);
 
-    const vertexShader = `
-        attribute vec2 position;
-        void main() {
-            gl_Position = vec4(position, 0.0, 1.0);
-        }
-    `;
-    const fragmentShader = `
-        precision highp float;
-        uniform float u_time;
-        uniform vec2 u_resolution;
-        void main() {
-            vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-            float t = u_time * 0.3;
-            vec3 color1 = vec3(0.36, 0.18, 0.91);
-            vec3 color2 = vec3(0.0, 0.83, 1.0);
-            vec3 color3 = vec3(1.0, 0.80, 0.20);
-            float noise1 = sin(uv.x * 3.0 + t) * cos(uv.y * 3.0 + t * 0.7);
-            float noise2 = sin(uv.x * 5.0 - t * 0.5) * cos(uv.y * 4.0 + t);
-            float noise3 = sin((uv.x + uv.y) * 2.0 + t * 0.3);
-            vec3 finalColor = mix(color1, color2, (noise1 + 1.0) * 0.5);
-            finalColor = mix(finalColor, color3, (noise2 + 1.0) * 0.3);
-            float alpha = 0.15 + (noise3 + 1.0) * 0.1;
-            gl_FragColor = vec4(finalColor, alpha);
-        }
-    `;
+    document.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    document.addEventListener("mouseleave", () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+    });
 
-    function createShader(type, source) {
-        const shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        return shader;
+    function createParticle() {
+        const colors = ["93,45,232", "0,212,255", "255,204,51"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        return {
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            size: Math.random() * 2 + 1,
+            color: color,
+            alpha: Math.random() * 0.5 + 0.3
+        };
     }
 
-    const program = gl.createProgram();
-    gl.attachShader(program, createShader(gl.VERTEX_SHADER, vertexShader));
-    gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fragmentShader));
-    gl.linkProgram(program);
-    gl.useProgram(program);
-
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-        -1, -1, 1, -1, -1, 1,
-        -1, 1, 1, -1, 1, 1
-    ]), gl.STATIC_DRAW);
-
-    const position = gl.getAttribLocation(program, "position");
-    gl.enableVertexAttribArray(position);
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-    const timeLoc = gl.getUniformLocation(program, "u_time");
-    const resLoc = gl.getUniformLocation(program, "u_resolution");
-
-    let startTime = Date.now();
-    function render() {
-        const t = (Date.now() - startTime) / 1000;
-        gl.uniform1f(timeLoc, t);
-        gl.uniform2f(resLoc, canvas.width, canvas.height);
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-        requestAnimationFrame(render);
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(createParticle());
     }
-    render();
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+                const angle = Math.atan2(dy, dx);
+                p.x += Math.cos(angle) * 0.5;
+                p.y += Math.sin(angle) * 0.5;
+            }
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h;
+            if (p.y > h) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = `rgba(${p.color}, 0.8)`;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DISTANCE) {
+                    const opacity = (1 - dist / MAX_DISTANCE) * 0.15;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
 })();
 
 // ============================================================
-// FITUR BARU 3: SMOOTH SCROLL (LENIS)
+// FITUR #16: CURSOR TRAIL EMAS
 // ============================================================
-(function initLenis() {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js";
-    script.onload = function() {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true
-        });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-    };
-    document.head.appendChild(script);
-})();
-
-// ============================================================
-// FITUR BARU 4: TEXT REVEAL PER HURUF
-// ============================================================
-(function initTextReveal() {
-    const titles = document.querySelectorAll(".section-title span");
-    titles.forEach(el => {
-        const text = el.textContent;
-        el.textContent = "";
-        el.classList.add("reveal-text");
-        [...text].forEach((char, i) => {
-            const span = document.createElement("span");
-            span.className = "char";
-            span.textContent = char === " " ? "\u00A0" : char;
-            span.style.animationDelay = (i * 0.05) + "s";
-            el.appendChild(span);
-        });
+(function initCursorTrail() {
+    if (window.innerWidth <= 800) return;
+    let lastTime = 0;
+    document.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastTime < 40) return;
+        lastTime = now;
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+        const colors = ["#ffcc33", "#00d4ff", "#5d2de8"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 8 + 4;
+        trail.style.cssText = `
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, ${color}, transparent 70%);
+            box-shadow: 0 0 10px ${color}, 0 0 20px ${color};
+            animation: trailFade 0.8s ease-out forwards;
+        `;
+        document.body.appendChild(trail);
+        setTimeout(() => trail.remove(), 800);
     });
 })();
 
 // ============================================================
-// FITUR BARU 5: PARALLAX 3D DEPTH
+// FITUR #21: RIPPLE ON CLICK
 // ============================================================
-(function initParallax3D() {
+(function initRippleOnClick() {
+    document.addEventListener("click", (e) => {
+        const ripple = document.createElement("div");
+        ripple.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.6), rgba(93,45,232,0.3), transparent);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            z-index: 99999;
+            animation: rippleExpand 0.6s ease-out forwards;
+        `;
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+
+    if (!document.getElementById("rippleStyle")) {
+        const style = document.createElement("style");
+        style.id = "rippleStyle";
+        style.textContent = `
+            @keyframes rippleExpand {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+})();
+
+// ============================================================
+// FITUR #28: READING PROGRESS BAR
+// ============================================================
+(function initReadingProgress() {
+    const bar = document.getElementById("readingProgress");
+    if (!bar) return;
     window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const aurora = document.querySelector(".aurora-bg");
-        if (aurora) aurora.style.transform = `translateY(${scrollY * 0.3}px)`;
-        const liquid = document.querySelector(".liquid-bg");
-        if (liquid) liquid.style.transform = `translateY(${scrollY * 0.15}px)`;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = percent + "%";
     }, { passive: true });
 })();
 
 // ============================================================
-// FITUR BARU 6: GLASS REFRACT
+// FITUR #26: BLUR ON SCROLL
 // ============================================================
-(function initGlassRefract() {
-    document.querySelectorAll(".bmt-card, .stat-box, .match-row-single").forEach(el => {
-        el.classList.add("glass-refract");
+(function initBlurOnScroll() {
+    let lastScroll = 0;
+    window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const banner = document.querySelector(".banner");
+        if (banner) {
+            const blur = Math.min(scrollTop / 30, 8);
+            const opacity = Math.max(1 - scrollTop / 800, 0);
+            banner.style.filter = `blur(${blur}px)`;
+            banner.style.opacity = opacity;
+        }
+        lastScroll = scrollTop;
+    }, { passive: true });
+})();
+
+// ============================================================
+// FITUR #27: PARALLAX LAYERS
+// ============================================================
+(function initParallaxLayers() {
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const liquidBlobs = document.querySelectorAll(".liquid-blob");
+        liquidBlobs.forEach((blob, i) => {
+            const speed = (i + 1) * 0.15;
+            blob.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+        const aurora = document.querySelector(".aurora-bg::before");
+    }, { passive: true });
+})();
+
+// ============================================================
+// FITUR #13: SKELETON LOADING PREMIUM
+// ============================================================
+(function injectSkeletonStyle() {
+    if (document.getElementById("skeletonStyle")) return;
+    const style = document.createElement("style");
+    style.id = "skeletonStyle";
+    style.textContent = `
+        .skeleton {
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0.05) 25%,
+                rgba(255,255,255,0.15) 50%,
+                rgba(255,255,255,0.05) 75%) !important;
+            background-size: 200% 100% !important;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+            color: transparent !important;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
+// ============================================================
+// FITUR #19: TEXT SCRAMBLE EFFECT
+// ============================================================
+window.scrambleText = function(el, finalText, duration = 800) {
+    if (!el) return;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+    const length = finalText.length;
+    const iterations = Math.floor(duration / 30);
+    let currentIteration = 0;
+    const interval = setInterval(() => {
+        let scrambled = "";
+        for (let i = 0; i < length; i++) {
+            if (currentIteration / iterations * length > i) {
+                scrambled += finalText[i];
+            } else {
+                scrambled += chars[Math.floor(Math.random() * chars.length)];
+            }
+        }
+        el.textContent = scrambled;
+        currentIteration++;
+        if (currentIteration >= iterations) {
+            clearInterval(interval);
+            el.textContent = finalText;
+        }
+    }, 30);
+};
+
+// ============================================================
+// FITUR #34: AUTO-DETECT LOW-END DEVICE
+// ============================================================
+window.IS_LOW_END = (function detectLowEnd() {
+    if (window.innerWidth <= 480) return true;
+    const memory = navigator.deviceMemory || 4;
+    if (memory <= 2) return true;
+    const cores = navigator.hardwareConcurrency || 4;
+    if (cores <= 2) return true;
+    return false;
+})();
+
+// ============================================================
+// FITUR #17: HOLOGRAPHIC CARD
+// ============================================================
+(function initHolographic() {
+    if (window.IS_LOW_END) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const percentX = (x / rect.width) * 100;
+        const percentY = (y / rect.height) * 100;
+        card.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%,
+            rgba(255, 100, 255, 0.15) 0%,
+            rgba(100, 255, 255, 0.1) 30%,
+            rgba(255, 255, 100, 0.08) 60%,
+            rgba(30,20,60,0.75) 100%)`;
     });
 })();
+
+// ============================================================
+// FITUR #20: MAGNETIC CARDS
+// ============================================================
+(function initMagneticCards() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".match-row-single");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+        const distX = e.clientX - cardCenterX;
+        const distY = e.clientY - cardCenterY;
+        const dist = Math.sqrt(distX * distX + distY * distY);
+        if (dist < 200) {
+            const strength = (1 - dist / 200) * 8;
+            const angle = Math.atan2(distY, distX);
+            const moveX = Math.cos(angle) * strength;
+            const moveY = Math.sin(angle) * strength;
+            card.style.transform = `translate(${moveX}px, ${moveY}px) translateX(5px) translateY(-4px)`;
+        }
+    });
+})();
+
+// ============================================================
+// FITUR #8: 3D CARD TILT
+// ============================================================
+(function initCardTilt() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rotX = ((y - cy) / cy) * -5;
+        const rotY = ((x - cx) / cx) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
+})();
+
+// ============================================================
+// FITUR #12: MAGNETIC BUTTON
+// ============================================================
+(function initMagneticButton() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.querySelectorAll(".tab-filter, nav a").forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "";
+        });
+    });
+})();
+
+// ============================================================
+// FITUR #32: PAGE TRANSITION
+// ============================================================
+(function initPageTransition() {
+    window.fadeInContent = function() {
+        const container = document.getElementById("prediksiContainer");
+        if (!container) return;
+        container.style.opacity = "0";
+        container.style.transform = "translateY(20px)";
+        container.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        requestAnimationFrame(() => {
+            container.style.opacity = "1";
+            container.style.transform = "translateY(0)";
+        });
+    };
+})();
+
+// ============================================================
+// FITUR #23: CONFETTI SAAT LIVE
+// ============================================================
+window.triggerConfetti = function() {
+    if (window.IS_LOW_END) return;
+    if (document.querySelector(".confetti-container")) return;
+    const container = document.createElement("div");
+    container.className = "confetti-container";
+    document.body.appendChild(container);
+    const colors = ["#ffcc33", "#00d4ff", "#5d2de8", "#dc2626", "#10b981"];
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + "s";
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(confetti);
+    }
+    setTimeout(() => container.remove(), 5000);
+};
+
+// ============================================================
+// FITUR #35: EASTER EGG (KONAMI CODE)
+// ============================================================
+(function initEasterEgg() {
+    const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    let index = 0;
+    document.addEventListener("keydown", (e) => {
+        if (e.key === konamiCode[index] || e.key.toLowerCase() === konamiCode[index]) {
+            index++;
+            if (index === konamiCode.length) {
+                index = 0;
+                triggerEasterEgg();
+            }
+        } else {
+            index = 0;
+        }
+    });
+})();
+
+function triggerEasterEgg() {
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255,204,51,0.3), rgba(93,45,232,0.5), rgba(0,0,0,0.95));
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        animation: fadeInEaster 0.5s ease;
+        font-family: 'Orbitron', sans-serif;
+    `;
+    overlay.innerHTML = `
+        <div style="font-size: 80px; animation: bounceEaster 1s infinite;">🎉</div>
+        <div style="font-size: 32px; font-weight: 900; background: linear-gradient(90deg, #ffcc33, #00d4ff, #ffcc33); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: logoShine 2s linear infinite; letter-spacing: 8px;">KIPER4D</div>
+        <div style="color: #fff; font-size: 14px; letter-spacing: 3px;">🎊 EASTER EGG DITEMUKAN! 🎊</div>
+        <div style="color: #00d4ff; font-size: 12px; letter-spacing: 2px; margin-top: 20px;">Klik di mana saja untuk menutup</div>
+    `;
+    overlay.addEventListener("click", () => overlay.remove());
+    document.body.appendChild(overlay);
+    triggerConfetti();
+
+    if (!document.getElementById("easterStyle")) {
+        const style = document.createElement("style");
+        style.id = "easterStyle";
+        style.textContent = `
+            @keyframes fadeInEaster { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes bounceEaster { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// ============================================================
+// FITUR #9: TYPING TEXT ANIMATION
+// ============================================================
+(function initTypingText() {
+    const el = document.querySelector(".section-title span");
+    if (!el) return;
+    const fullText = el.textContent;
+    el.textContent = "";
+    let i = 0;
+    function type() {
+        if (i <= fullText.length) {
+            el.textContent = fullText.slice(0, i);
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+    setTimeout(type, 1500);
+})();
+
+// ============================================================
+// LOADING PARTICLES
+// ============================================================
+(function initLoadingParticles() {
+    const container = document.getElementById("loadingParticles");
+    if (!container) return;
+    for (let i = 0; i < 20; i++) {
+        const p = document.createElement("div");
+        p.className = "loading-particle";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.setProperty("--tx", (Math.random() - 0.5) * 200 + "px");
+        p.style.setProperty("--ty", (Math.random() - 0.5) * 200 + "px");
+        p.style.animationDelay = Math.random() * 3 + "s";
+        p.style.animationDuration = (4 + Math.random() * 4) + "s";
+        container.appendChild(p);
+    }
+})();
+
 // ============================================================
 // CACHE
 // ============================================================
@@ -2550,6 +2859,7 @@ const CACHE_DURATION = 3 * 60 * 60 * 1000;
 function saveCache(data) {
     try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {}
 }
+
 function loadCache(maxAge) {
     try {
         const raw = localStorage.getItem(CACHE_KEY);
@@ -2560,12 +2870,13 @@ function loadCache(maxAge) {
         return parsed.data;
     } catch (error) { return null; }
 }
+
 function clearCache() {
     try { localStorage.removeItem(CACHE_KEY); } catch (error) {}
 }
 
 // ============================================================
-// LOGO TIM CACHE
+// LOGO TIM — CACHE
 // ============================================================
 const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v35";
 const teamLogoCache = new Map();
@@ -2585,15 +2896,29 @@ async function loadTeamLogosFromDB() {
         const snap = await getDocs(collection(db, "team-logos"));
         snap.forEach(doc => {
             const data = doc.data();
-            const name = clean(data.name || data.teamName || data.team || data.nama || data.namaTim || doc.id);
-            const logo = clean(data.logo || data.url || data.badge || data.gambar || data.gambarTim || "");
+            const name = clean(
+                data.name ||
+                data.teamName ||
+                data.team ||
+                data.nama ||
+                data.namaTim ||
+                doc.id
+            );
+            const logo = clean(
+                data.logo ||
+                data.url ||
+                data.badge ||
+                data.gambar ||
+                data.gambarTim ||
+                ""
+            );
             if (name && logo) {
                 teamLogosFromDB.set(normalizeExact(name), logo);
             }
         });
         console.log(`✅ Load ${teamLogosFromDB.size} logo tim dari collection team-logos`);
     } catch (err) {
-        console.warn("⚠️ Gagal load team-logos:", err);
+        console.warn("⚠️ Gagal load team-logos dari Firestore:", err);
     }
 }
 
@@ -2604,6 +2929,7 @@ function clean(value) {
     if (value === undefined || value === null) return "";
     return String(value).trim();
 }
+
 function escapeHtml(value) {
     return clean(value)
         .replace(/&/g, "&amp;")
@@ -2612,6 +2938,7 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
 function getTeamInitial(name) {
     name = clean(name);
     if (!name) return "?";
@@ -2619,6 +2946,7 @@ function getTeamInitial(name) {
     if (words.length === 1) return words[0].substring(0, 3).toUpperCase();
     return (words[0][0] + words[1][0]).toUpperCase();
 }
+
 function normalizeExact(name) {
     return clean(name).toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -2632,21 +2960,72 @@ function normalizeExact(name) {
 // ALIAS MAP
 // ============================================================
 const ALIAS_MAP = {
-    "barca": "barcelona", "barcelona fc": "barcelona", "fc barcelona": "barcelona",
+    "barca": "barcelona", "barça": "barcelona", "barcelona fc": "barcelona", "fc barcelona": "barcelona",
     "real": "real madrid", "madrid": "real madrid", "real madrid cf": "real madrid",
-    "atleti": "atletico madrid", "atletico": "atletico madrid",
+    "atleti": "atletico madrid", "atletico": "atletico madrid", "atletico de madrid": "atletico madrid",
+    "betis": "real betis", "sevilla fc": "sevilla", "valencia cf": "valencia", "villarreal cf": "villarreal",
+    "athletic bilbao": "athletic club", "athletic": "athletic club",
+    "celta": "celta vigo", "celta de vigo": "celta vigo",
+    "deportivo": "deportivo la coruna", "la coruna": "deportivo la coruna",
     "man utd": "manchester united", "man united": "manchester united", "mu": "manchester united",
-    "man city": "manchester city", "mancity": "manchester city",
-    "spurs": "tottenham", "wolves": "wolverhampton",
-    "juve": "juventus", "inter milan": "inter", "internazionale": "inter",
-    "ac milan": "milan", "acmilan": "milan", "napoli ssc": "napoli",
-    "as roma": "roma", "ss lazio": "lazio",
-    "bayern": "bayern munich", "bayern munchen": "bayern munich", "bvb": "borussia dortmund",
-    "leverkusen": "bayer leverkusen", "gladbach": "borussia monchengladbach",
-    "psg": "paris saint-germain", "paris": "paris saint-germain",
-    "olympique marseille": "marseille", "olympique lyon": "lyon",
+    "manchester utd": "manchester united", "man city": "manchester city", "mancity": "manchester city",
+    "spurs": "tottenham", "tottenham hotspur": "tottenham",
+    "wolves": "wolverhampton", "wolverhampton wanderers": "wolverhampton",
+    "newcastle": "newcastle united", "newcastle utd": "newcastle united",
+    "west ham": "west ham united", "brighton": "brighton & hove albion",
+    "nottingham": "nottingham forest", "forest": "nottingham forest",
+    "leicester": "leicester city", "leeds": "leeds united", "ipswich": "ipswich town",
+    "hull": "hull city", "coventry": "coventry city",
+    "juve": "juventus", "juventus fc": "juventus", "inter milan": "inter", "internazionale": "inter",
+    "ac milan": "milan", "acmilan": "milan", "napoli ssc": "napoli", "ssc napoli": "napoli",
+    "as roma": "roma", "ss lazio": "lazio", "atalanta bc": "atalanta",
+    "acf fiorentina": "fiorentina", "viola": "fiorentina",
+    "bologna fc": "bologna", "torino fc": "torino", "udinese calcio": "udinese",
+    "genoa cfc": "genoa", "cagliari calcio": "cagliari", "parma calcio": "parma",
+    "como 1907": "como", "venezia fc": "venezia",
+    "bayern": "bayern munich", "bayern munchen": "bayern munich", "fc bayern": "bayern munich",
+    "fc bayern munchen": "bayern munich", "bvb": "borussia dortmund", "dortmund": "borussia dortmund",
+    "leverkusen": "bayer leverkusen", "bayer 04": "bayer leverkusen",
+    "gladbach": "borussia monchengladbach", "monchengladbach": "borussia monchengladbach",
+    "leipzig": "rb leipzig", "eintracht": "eintracht frankfurt", "frankfurt": "eintracht frankfurt",
+    "wolfsburg": "vfl wolfsburg", "vfl wolfsburg": "vfl wolfsburg",
+    "werder": "werder bremen", "bremen": "werder bremen",
+    "stuttgart": "vfb stuttgart", "vfb stuttgart": "vfb stuttgart",
+    "freiburg": "sc freiburg", "hoffenheim": "tsg hoffenheim", "augsburg": "fc augsburg",
+    "mainz": "mainz 05", "hamburg": "hamburger sv", "hamburger": "hamburger sv",
+    "koln": "cologne", "fc koln": "cologne", "schalke": "schalke 04",
+    "psg": "paris saint-germain", "paris": "paris saint-germain", "paris sg": "paris saint-germain",
+    "paris saint germain": "paris saint-germain", "om": "marseille", "olympique marseille": "marseille",
+    "lyon": "lyon", "ol": "lyon", "olympique lyon": "lyon", "as monaco": "monaco",
+    "losc": "lille", "losc lille": "lille", "stade rennais": "rennes", "rc lens": "lens",
+    "ogc nice": "nice", "rc strasbourg": "strasbourg", "toulouse fc": "toulouse",
+    "stade brestois": "brest", "fc lorient": "lorient", "aj auxerre": "auxerre",
+    "stade de reims": "reims", "fc nantes": "nantes", "fc metz": "metz",
     "sl benfica": "benfica", "fc porto": "porto", "sporting": "sporting cp",
-    "afc ajax": "ajax", "psv eindhoven": "psv"
+    "sporting lisbon": "sporting cp", "sc braga": "braga",
+    "afc ajax": "ajax", "psv eindhoven": "psv", "az": "az alkmaar",
+    "fc utrecht": "utrecht", "fc twente": "twente",
+    "gs": "galatasaray", "fb": "fenerbahce", "bjk": "besiktas",
+    "aek": "aek athens",
+    "lafc": "los angeles fc", "los angeles": "los angeles fc",
+    "atlanta": "atlanta united", "atlanta utd": "atlanta united",
+    "seattle": "seattle sounders", "sounders": "seattle sounders",
+    "portland": "portland timbers", "timbers": "portland timbers",
+    "austin": "austin fc", "charlotte": "charlotte fc",
+    "chicago": "chicago fire", "fire": "chicago fire",
+    "colorado": "colorado rapids", "rapids": "colorado rapids",
+    "columbus": "columbus crew", "crew": "columbus crew",
+    "houston": "houston dynamo", "dynamo": "houston dynamo",
+    "minnesota": "minnesota united", "nashville": "nashville sc",
+    "new england": "new england revolution", "revolution": "new england revolution",
+    "nycfc": "new york city fc", "new york city": "new york city fc",
+    "new york red bulls": "new york red bulls", "rb new york": "new york red bulls",
+    "orlando": "orlando city", "orlando city sc": "orlando city",
+    "philadelphia": "philadelphia union", "union": "philadelphia union",
+    "rsl": "real salt lake", "san jose": "san jose earthquakes",
+    "earthquakes": "san jose earthquakes", "st louis": "st louis city",
+    "st. louis": "st louis city", "toronto": "toronto fc",
+    "vancouver": "vancouver whitecaps", "whitecaps": "vancouver whitecaps"
 };
 
 function resolveAlias(name) {
@@ -2680,10 +3059,12 @@ function findLogoFuzzy(teamName) {
     const target = normalizeExact(teamName);
     if (!target) return null;
     if (teamLogosFromDB.has(target)) return teamLogosFromDB.get(target);
+
     const targetSimplified = normalizeTeamName(teamName);
     if (targetSimplified && teamLogosFromDB.has(targetSimplified)) {
         return teamLogosFromDB.get(targetSimplified);
     }
+
     let bestMatch = null;
     let bestScore = 0;
     const MIN_SCORE = 700;
@@ -2694,6 +3075,7 @@ function findLogoFuzzy(teamName) {
             bestMatch = dbLogo;
         }
     }
+
     if (!bestMatch) {
         const targetWords = normalizeTeamName(teamName).split(" ").filter(w => w.length >= 5);
         for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
@@ -2709,13 +3091,16 @@ function findLogoFuzzy(teamName) {
 function getLogoForTeam(name, logoFromDb) {
     const dbLogo = clean(logoFromDb);
     if (dbLogo) return { type: "db", url: dbLogo };
+
     const resolvedName = resolveAlias(name);
     const fuzzyLogo = findLogoFuzzy(resolvedName);
     if (fuzzyLogo) return { type: "fuzzy", url: fuzzyLogo };
+
     if (resolvedName !== name) {
         const fuzzyLogo2 = findLogoFuzzy(name);
         if (fuzzyLogo2) return { type: "fuzzy", url: fuzzyLogo2 };
     }
+
     const key = normalizeExact(name);
     if (teamLogoCache.has(key)) {
         return { type: "cache", url: teamLogoCache.get(key) };
@@ -2752,10 +3137,12 @@ const BULAN_MAP = {
 function normalizeDate(input) {
     if (!input) return "";
     let s = String(input).trim().toLowerCase();
+
     if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
         const [y, m, d] = s.split("-");
         return y + "-" + m.padStart(2, "0") + "-" + d.padStart(2, "0");
     }
+
     const bulanMatch = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
     if (bulanMatch) {
         const d = bulanMatch[1].padStart(2, "0");
@@ -2763,6 +3150,15 @@ function normalizeDate(input) {
         const y = bulanMatch[3];
         return y + "-" + m + "-" + d;
     }
+
+    const bulanMatch2 = s.match(/^([a-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
+    if (bulanMatch2) {
+        const m = BULAN_MAP[bulanMatch2[1]] || "01";
+        const d = bulanMatch2[2].padStart(2, "0");
+        const y = bulanMatch2[3];
+        return y + "-" + m + "-" + d;
+    }
+
     const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
     if (dmy) {
         const d = dmy[1].padStart(2, "0");
@@ -2770,6 +3166,7 @@ function normalizeDate(input) {
         const y = dmy[3];
         return y + "-" + m + "-" + d;
     }
+
     const yyyy = s.match(/(\d{4})/);
     if (yyyy) {
         const m = s.match(/(\d{1,2})/g);
@@ -2777,6 +3174,7 @@ function normalizeDate(input) {
             return yyyy[1] + "-" + m[0].padStart(2, "0") + "-" + m[1].padStart(2, "0");
         }
     }
+
     return "";
 }
 
@@ -2786,13 +3184,18 @@ function normalizeTime(input) {
     s = s.replace(/wib|utc|gmt|wita|wit/gi, "").trim();
     s = s.replace(/\./g, ":");
     const hm = s.match(/^(\d{1,2}):(\d{1,2})/);
-    if (hm) return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
+    if (hm) {
+        return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
+    }
     const four = s.match(/^(\d{2})(\d{2})$/);
-    if (four) return four[1] + ":" + four[2];
+    if (four) {
+        return four[1] + ":" + four[2];
+    }
     return "";
 }
+
 // ============================================================
-// TANGGAL & WAKTU HELPERS
+// TANGGAL & WAKTU
 // ============================================================
 function formatTanggalShort(date) {
     const value = normalizeDate(clean(date));
@@ -2809,19 +3212,24 @@ function getClockText() {
     const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
     return `${HARI_INDO[d.getUTCDay()]}, ${d.getUTCDate()} ${BULAN_INDO[d.getUTCMonth()]} ${d.getUTCFullYear()} ${String(d.getUTCHours()).padStart(2, "0")}.${String(d.getUTCMinutes()).padStart(2, "0")}.${String(d.getUTCSeconds()).padStart(2, "0")}`;
 }
+
 function getNowWIBMs() { return Date.now() + (7 * 60 * 60 * 1000); }
+
 function getTodayString() {
     const wibDate = new Date(getNowWIBMs());
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
+
 function getTomorrowString() {
     const wibDate = new Date(getNowWIBMs() + (24 * 60 * 60 * 1000));
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
+
 function get7DaysString() {
     const wibDate = new Date(getNowWIBMs() + (7 * 24 * 60 * 60 * 1000));
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
+
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 function matchKey(data) { return [normalizeDate(clean(data.date)), normalizeTime(clean(data.time)), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
@@ -2852,6 +3260,7 @@ function getMatchStatus(data) {
     if (!kickoffWIB) return "akan";
     const now = getNowWIBMs();
     const diff = kickoffWIB - now;
+
     if (diff <= 0 && diff > -105 * 60 * 1000) return "live";
     if (diff <= -105 * 60 * 1000) return "selesai";
     return "akan";
@@ -2929,7 +3338,7 @@ function tickNextMatchCountdown() {
 // ============================================================
 // SPECIAL BADGES
 // ============================================================
-const TOP_LEAGUES = ["premier league", "la liga", "serie a", "bundesliga", "ligue 1", "champions league", "europa league"];
+const TOP_LEAGUES = ["premier league", "english premier league", "la liga", "liga spanyol", "serie a", "serie a italia", "bundesliga", "ligue 1", "champions league", "uefa champions league", "afc champions league", "europa league", "copa libertadores", "world cup", "piala dunia"];
 
 function isTopLeague(league) {
     const l = clean(league).toLowerCase();
@@ -2969,7 +3378,7 @@ function updateNewsTicker(data) {
     const ticker = document.getElementById("newsTickerContent");
     if (!ticker) return;
     if (!data.length) {
-        ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D! • ⚽ Pantau pertandingan favoritmu!";
+        ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D! • ⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat! • 🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!";
         return;
     }
     const liveMatches = data.filter(item => getMatchStatus(item) === "live");
@@ -2984,7 +3393,7 @@ function updateNewsTicker(data) {
     liveMatches.forEach(item => newsItems.push(`🔴 LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
     upcoming.forEach(item => {
         const countdown = getCountdownText(item);
-        newsItems.push(`⚡ ${item.home} vs ${item.away} — mulai dalam ${countdown}`);
+        newsItems.push(`⚡ ${item.home} vs ${item.away} — mulai dalam ${countdown} (${clean(item.league) || "LAINNYA"})`);
     });
     if (newsItems.length < 6) {
         todayMatches.forEach(item => {
@@ -2992,6 +3401,11 @@ function updateNewsTicker(data) {
             if (getMatchStatus(item) === "selesai") return;
             newsItems.push(`🎯 ${item.home} vs ${item.away} — ${clean(item.time)} WIB`);
         });
+    }
+    if (!newsItems.length) {
+        newsItems.push("🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!");
+        newsItems.push("⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat!");
+        newsItems.push("🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!");
     }
     newsItems.push("⚡ Data live & real-time, langsung dari sumber terpercaya");
     newsItems.push("🌟 Jangan lewatkan big match malam ini!");
@@ -3059,33 +3473,43 @@ function renderMatchRowSingle(data) {
     `;
 }
 
+// ============================================================
+// RENDER PREDIKSI
+// ============================================================
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
     if (!container) return;
     if (!data.length) {
-        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok</div></div>`;
+        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok dengan filter</div></div>`;
         return;
     }
+
     const groupTanggal = {};
     data.forEach(item => {
         const d = normalizeDate(clean(item.date)) || "0000-00-00";
         if (!groupTanggal[d]) groupTanggal[d] = [];
         groupTanggal[d].push(item);
     });
+
     const tanggalSorted = Object.keys(groupTanggal).sort();
     let html = "";
+
     tanggalSorted.forEach(tanggal => {
         const matches = groupTanggal[tanggal];
+
         const dateObj = new Date(tanggal + "T00:00:00Z");
         const hari = HARI_INDO[dateObj.getUTCDay()];
         const tgl = dateObj.getUTCDate();
         const bulan = BULAN_INDO[dateObj.getUTCMonth()];
         const tahun = dateObj.getUTCFullYear();
         const headerTgl = `${hari}, ${tgl} ${bulan} ${tahun}`;
+
         const aktif = matches.filter(m => getMatchStatus(m) !== "selesai");
         const selesai = matches.filter(m => getMatchStatus(m) === "selesai");
+
         html += `<div class="date-group">`;
         html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
+
         if (aktif.length) {
             const groupLiga = {};
             aktif.forEach(item => {
@@ -3093,12 +3517,16 @@ function renderPrediksi(data) {
                 if (!groupLiga[liga]) groupLiga[liga] = [];
                 groupLiga[liga].push(item);
             });
+
             Object.keys(groupLiga).sort().forEach(liga => {
-                const matchList = groupLiga[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+                const matchList = groupLiga[liga].sort((a, b) => {
+                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
+                });
                 const rows = matchList.map(renderMatchRowSingle).join("");
                 html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
         }
+
         if (selesai.length) {
             const groupLigaSelesai = {};
             selesai.forEach(item => {
@@ -3106,13 +3534,18 @@ function renderPrediksi(data) {
                 if (!groupLigaSelesai[liga]) groupLigaSelesai[liga] = [];
                 groupLigaSelesai[liga].push(item);
             });
+
             let selesaiHtml = "";
             Object.keys(groupLigaSelesai).sort().forEach(liga => {
-                const matchList = groupLigaSelesai[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+                const matchList = groupLigaSelesai[liga].sort((a, b) => {
+                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
+                });
                 const rows = matchList.map(renderMatchRowSingle).join("");
                 selesaiHtml += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
+
             const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
+
             html += `
                 <div class="selesai-section">
                     <button type="button" class="selesai-toggle" onclick="toggleSelesai('${uniqueId}', this)">
@@ -3126,9 +3559,12 @@ function renderPrediksi(data) {
                 </div>
             `;
         }
+
         html += `</div>`;
     });
+
     container.innerHTML = html;
+    setTimeout(() => { if (window.fadeInContent) window.fadeInContent(); }, 50);
 }
 
 window.toggleSelesai = function(id, btn) {
@@ -3177,6 +3613,7 @@ function applyFilter() {
     const searchInput = document.getElementById("searchInput");
     const btnClear = document.getElementById("btnClearSearch");
     if (!selectTanggal || !selectLiga || !selectStatus || !searchInput) return;
+
     const tanggal = selectTanggal.value;
     const selectedLiga = selectLiga.value;
     const selectedStatus = selectStatus.value;
@@ -3185,6 +3622,7 @@ function applyFilter() {
     const tomorrow = getTomorrowString();
     const isRiwayat = (selectedStatus === "riwayat");
     let filtered = [...semuaData];
+
     if (isRiwayat) {
         filtered = filtered.filter(item => normalizeDate(clean(item.date)) < today);
     } else if (tanggal === "today") {
@@ -3204,13 +3642,21 @@ function applyFilter() {
         filtered = filtered.filter(item => getMatchStatus(item) === "live");
     } else if (tanggal === "all") {
         filtered = filtered.filter(item => normalizeDate(clean(item.date)) >= today);
+    } else {
+        filtered = filtered.filter(item => {
+            const d = normalizeDate(clean(item.date));
+            return d === today || d === tomorrow;
+        });
     }
+
     if (selectedLiga !== "all") {
         filtered = filtered.filter(item => (clean(item.league) || "LAINNYA") === selectedLiga);
     }
+
     if (selectedStatus !== "all" && selectedStatus !== "riwayat") {
         filtered = filtered.filter(item => getMatchStatus(item) === selectedStatus);
     }
+
     if (keyword) {
         filtered = filtered.filter(item => {
             const league = clean(item.league).toLowerCase();
@@ -3219,14 +3665,17 @@ function applyFilter() {
             return league.includes(keyword) || home.includes(keyword) || away.includes(keyword);
         });
     }
+
     if (keyword) btnClear.classList.remove("hidden");
     else btnClear.classList.add("hidden");
+
     renderPrediksi(filtered);
 }
 
 function filterLiga() { applyFilter(); }
 function filterStatus() { applyFilter(); }
 function handleSearch() { applyFilter(); }
+
 function clearSearch() {
     const searchInput = document.getElementById("searchInput");
     if (!searchInput) return;
@@ -3300,7 +3749,7 @@ function renderBigMatch(data) {
     candidates.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
     const top8 = candidates.slice(0, 8);
     if (!top8.length) {
-        track.innerHTML = `<div class="big-match-ticker-empty">Belum ada pertandingan pilihan</div>`;
+        track.innerHTML = `<div class="big-match-ticker-empty">Belum ada pertandingan pilihan hari ini</div>`;
         return;
     }
     const cardsHTML = top8.map(bigMatchCard).join("");
@@ -3315,6 +3764,11 @@ function renderBigMatch(data) {
         const fadeRight = document.createElement("div");
         fadeRight.className = "fade-right";
         wrap.appendChild(fadeRight);
+    }
+    const liveNow = candidates.filter(c => getMatchStatus(c) === "live");
+    if (liveNow.length > 0 && !window.confettiTriggered) {
+        window.confettiTriggered = true;
+        setTimeout(() => triggerConfetti(), 2000);
     }
 }
 
@@ -3337,6 +3791,8 @@ function processData(rawDataArray) {
             if (!clean(existing.awayLogo) && clean(data.awayLogo)) existing.awayLogo = data.awayLogo;
             if (!clean(existing.predictionScoreHome) && clean(data.predictionScoreHome)) existing.predictionScoreHome = data.predictionScoreHome;
             if (!clean(existing.predictionScoreAway) && clean(data.predictionScoreAway)) existing.predictionScoreAway = data.predictionScoreAway;
+            if (!clean(existing.actualScoreHome) && clean(data.actualScoreHome)) existing.actualScoreHome = data.actualScoreHome;
+            if (!clean(existing.actualScoreAway) && clean(data.actualScoreAway)) existing.actualScoreAway = data.actualScoreAway;
             merged.set(key, existing);
         }
     });
@@ -3346,11 +3802,13 @@ function processData(rawDataArray) {
         const bTime = getKickoffWIBMs(b) || 0;
         return aTime - bTime;
     });
+
     const selectTanggal = document.getElementById("tanggalFilter");
     if (selectTanggal && !selectTanggal.dataset.initialized) {
         selectTanggal.value = "today";
         selectTanggal.dataset.initialized = "true";
     }
+
     updateLigaFilter(semuaData);
     updateStats(semuaData);
     updateNewsTicker(semuaData);
@@ -3366,9 +3824,10 @@ function processData(rawDataArray) {
 async function loadData() {
     try {
         await loadTeamLogosFromDB();
+
         const cached = loadCache(CACHE_DURATION);
         if (cached && cached.length > 0) {
-            console.log("📦 Pakai cache");
+            console.log("📦 Pakai cache (hemat kuota Firestore)");
             processData(cached);
             return;
         }
@@ -3380,6 +3839,7 @@ async function loadData() {
         });
         saveCache(rawData);
         processData(rawData);
+        console.log(`✅ Load ${rawData.length} data dari Firestore`);
     } catch (error) {
         console.error("Error:", error);
         const fallback = loadCache();
@@ -3387,7 +3847,7 @@ async function loadData() {
             processData(fallback);
         } else {
             const el = document.getElementById("prediksiContainer");
-            if (el) el.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Gagal memuat data</div></div>`;
+            if (el) el.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Gagal memuat data. Coba refresh.</div></div>`;
             updateLoadingProgress(100, 300);
         }
     }
@@ -3473,6 +3933,28 @@ function initLuxMarquee(containerId, intervalMs) {
 }
 
 initLuxMarquee("luxTextTop", 4200);
+
+// ============================================================
+// FITUR #24: INFINITE SCROLL
+// ============================================================
+(function initInfiniteScroll() {
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollTop / docHeight > 0.9) {
+                const btnMore = document.querySelector(".selesai-toggle");
+                if (btnMore && !btnMore.classList.contains("open")) {
+                    btnMore.click();
+                }
+            }
+            ticking = false;
+        });
+    }, { passive: true });
+})();
 
 // ============================================================
 // EVENT LISTENERS
