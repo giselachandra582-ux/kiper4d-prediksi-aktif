@@ -2192,7 +2192,7 @@ function clearCache() {
 }
 
 // ============================================================
-// LOGO TIM — CACHE (dipakai big match ticker)
+// LOGO TIM — CACHE
 // ============================================================
 const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v33";
 const teamLogoCache = new Map();
@@ -2212,8 +2212,22 @@ async function loadTeamLogosFromDB() {
         const snap = await getDocs(collection(db, "team-logos"));
         snap.forEach(doc => {
             const data = doc.data();
-            const name = clean(data.name || data.teamName || data.team || data.nama || doc.id);
-            const logo = clean(data.logo || data.url || data.badge || "");
+            const name = clean(
+                data.name ||
+                data.teamName ||
+                data.team ||
+                data.nama ||
+                data.namaTim ||
+                doc.id
+            );
+            const logo = clean(
+                data.logo ||
+                data.url ||
+                data.badge ||
+                data.gambar ||
+                data.gambarTim ||
+                ""
+            );
             if (name && logo) {
                 teamLogosFromDB.set(normalizeExact(name), logo);
             }
@@ -2256,6 +2270,208 @@ function normalizeExact(name) {
         .replace(/[.'’`]/g, "")
         .replace(/[-_/]/g, " ")
         .replace(/\s+/g, " ").trim();
+}
+
+// ============================================================
+// ALIAS MAP — Singkatan & Nama Alternatif Tim
+// ============================================================
+const ALIAS_MAP = {
+    // Spanyol
+    "barca": "barcelona",
+    "barça": "barcelona",
+    "barcelona fc": "barcelona",
+    "fc barcelona": "barcelona",
+    "real": "real madrid",
+    "madrid": "real madrid",
+    "real madrid cf": "real madrid",
+    "atleti": "atletico madrid",
+    "atletico": "atletico madrid",
+    "atletico de madrid": "atletico madrid",
+    "betis": "real betis",
+    "real betis balompie": "real betis",
+    "sevilla fc": "sevilla",
+    "valencia cf": "valencia",
+    "villarreal cf": "villarreal",
+    "athletic bilbao": "athletic club",
+    "athletic": "athletic club",
+    "celta": "celta vigo",
+    "celta de vigo": "celta vigo",
+    "deportivo": "deportivo la coruna",
+    "la coruna": "deportivo la coruna",
+
+    // Inggris
+    "man utd": "manchester united",
+    "man united": "manchester united",
+    "mu": "manchester united",
+    "manchester utd": "manchester united",
+    "man city": "manchester city",
+    "mancity": "manchester city",
+    "manchester city fc": "manchester city",
+    "spurs": "tottenham",
+    "tottenham hotspur": "tottenham",
+    "wolves": "wolverhampton",
+    "wolverhampton wanderers": "wolverhampton",
+    "newcastle": "newcastle united",
+    "newcastle utd": "newcastle united",
+    "west ham": "west ham united",
+    "brighton": "brighton & hove albion",
+    "brighton hove": "brighton & hove albion",
+    "brighton and hove albion": "brighton & hove albion",
+    "nottingham": "nottingham forest",
+    "forest": "nottingham forest",
+    "leicester": "leicester city",
+    "leeds": "leeds united",
+    "ipswich": "ipswich town",
+    "hull": "hull city",
+    "coventry": "coventry city",
+
+    // Italia
+    "juve": "juventus",
+    "juventus fc": "juventus",
+    "inter milan": "inter",
+    "internazionale": "inter",
+    "ac milan": "milan",
+    "acmilan": "milan",
+    "napoli ssc": "napoli",
+    "ssc napoli": "napoli",
+    "as roma": "roma",
+    "ss lazio": "lazio",
+    "atalanta bc": "atalanta",
+    "acf fiorentina": "fiorentina",
+    "viola": "fiorentina",
+    "bologna fc": "bologna",
+    "torino fc": "torino",
+    "udinese calcio": "udinese",
+    "genoa cfc": "genoa",
+    "cagliari calcio": "cagliari",
+    "parma calcio": "parma",
+    "como 1907": "como",
+    "venezia fc": "venezia",
+
+    // Jerman
+    "bayern": "bayern munich",
+    "bayern munchen": "bayern munich",
+    "fc bayern": "bayern munich",
+    "fc bayern munchen": "bayern munich",
+    "bvb": "borussia dortmund",
+    "dortmund": "borussia dortmund",
+    "bvb 09": "borussia dortmund",
+    "leverkusen": "bayer leverkusen",
+    "bayer 04": "bayer leverkusen",
+    "gladbach": "borussia monchengladbach",
+    "monchengladbach": "borussia monchengladbach",
+    "leipzig": "rb leipzig",
+    "eintracht": "eintracht frankfurt",
+    "frankfurt": "eintracht frankfurt",
+    "wolfsburg": "vfl wolfsburg",
+    "vfl wolfsburg": "vfl wolfsburg",
+    "werder": "werder bremen",
+    "bremen": "werder bremen",
+    "stuttgart": "vfb stuttgart",
+    "vfb stuttgart": "vfb stuttgart",
+    "freiburg": "sc freiburg",
+    "hoffenheim": "tsg hoffenheim",
+    "augsburg": "fc augsburg",
+    "mainz": "mainz 05",
+    "union berlin": "union berlin",
+    "hamburg": "hamburger sv",
+    "hamburger": "hamburger sv",
+    "koln": "cologne",
+    "fc koln": "cologne",
+    "schalke": "schalke 04",
+    "schalke 04": "schalke 04",
+
+    // Prancis
+    "psg": "paris saint-germain",
+    "paris": "paris saint-germain",
+    "paris sg": "paris saint-germain",
+    "paris saint germain": "paris saint-germain",
+    "om": "marseille",
+    "olympique marseille": "marseille",
+    "lyon": "lyon",
+    "ol": "lyon",
+    "olympique lyon": "lyon",
+    "as monaco": "monaco",
+    "losc": "lille",
+    "losc lille": "lille",
+    "stade rennais": "rennes",
+    "rc lens": "lens",
+    "ogc nice": "nice",
+    "rc strasbourg": "strasbourg",
+    "toulouse fc": "toulouse",
+    "stade brestois": "brest",
+    "fc lorient": "lorient",
+    "aj auxerre": "auxerre",
+    "stade de reims": "reims",
+    "fc nantes": "nantes",
+    "fc metz": "metz",
+
+    // Portugal
+    "sl benfica": "benfica",
+    "fc porto": "porto",
+    "sporting": "sporting cp",
+    "sporting lisbon": "sporting cp",
+    "sc braga": "braga",
+
+    // Belanda
+    "afc ajax": "ajax",
+    "psv eindhoven": "psv",
+    "az": "az alkmaar",
+    "fc utrecht": "utrecht",
+    "fc twente": "twente",
+
+    // Turki
+    "gs": "galatasaray",
+    "fb": "fenerbahce",
+    "bjk": "besiktas",
+
+    // Yunani
+    "aek": "aek athens",
+
+    // Amerika
+    "lafc": "los angeles fc",
+    "los angeles": "los angeles fc",
+    "atlanta": "atlanta united",
+    "atlanta utd": "atlanta united",
+    "seattle": "seattle sounders",
+    "sounders": "seattle sounders",
+    "portland": "portland timbers",
+    "timbers": "portland timbers",
+    "austin": "austin fc",
+    "charlotte": "charlotte fc",
+    "chicago": "chicago fire",
+    "fire": "chicago fire",
+    "colorado": "colorado rapids",
+    "rapids": "colorado rapids",
+    "columbus": "columbus crew",
+    "crew": "columbus crew",
+    "houston": "houston dynamo",
+    "dynamo": "houston dynamo",
+    "minnesota": "minnesota united",
+    "nashville": "nashville sc",
+    "new england": "new england revolution",
+    "revolution": "new england revolution",
+    "nycfc": "new york city fc",
+    "new york city": "new york city fc",
+    "new york red bulls": "new york red bulls",
+    "rb new york": "new york red bulls",
+    "orlando": "orlando city",
+    "orlando city sc": "orlando city",
+    "philadelphia": "philadelphia union",
+    "union": "philadelphia union",
+    "rsl": "real salt lake",
+    "san jose": "san jose earthquakes",
+    "earthquakes": "san jose earthquakes",
+    "st louis": "st louis city",
+    "st. louis": "st louis city",
+    "toronto": "toronto fc",
+    "vancouver": "vancouver whitecaps",
+    "whitecaps": "vancouver whitecaps"
+};
+
+function resolveAlias(name) {
+    const key = normalizeExact(name);
+    return ALIAS_MAP[key] || name;
 }
 
 function normalizeTeamName(name) {
@@ -2317,8 +2533,14 @@ function getLogoForTeam(name, logoFromDb) {
     const dbLogo = clean(logoFromDb);
     if (dbLogo) return { type: "db", url: dbLogo };
 
-    const fuzzyLogo = findLogoFuzzy(name);
+    const resolvedName = resolveAlias(name);
+    const fuzzyLogo = findLogoFuzzy(resolvedName);
     if (fuzzyLogo) return { type: "fuzzy", url: fuzzyLogo };
+
+    if (resolvedName !== name) {
+        const fuzzyLogo2 = findLogoFuzzy(name);
+        if (fuzzyLogo2) return { type: "fuzzy", url: fuzzyLogo2 };
+    }
 
     const key = normalizeExact(name);
     if (teamLogoCache.has(key)) {
@@ -2703,7 +2925,6 @@ function renderPrediksi(data) {
         return;
     }
 
-    // 1. Group by tanggal
     const groupTanggal = {};
     data.forEach(item => {
         const d = normalizeDate(clean(item.date)) || "0000-00-00";
@@ -2717,7 +2938,6 @@ function renderPrediksi(data) {
     tanggalSorted.forEach(tanggal => {
         const matches = groupTanggal[tanggal];
 
-        // Header tanggal
         const dateObj = new Date(tanggal + "T00:00:00Z");
         const hari = HARI_INDO[dateObj.getUTCDay()];
         const tgl = dateObj.getUTCDate();
@@ -2725,14 +2945,12 @@ function renderPrediksi(data) {
         const tahun = dateObj.getUTCFullYear();
         const headerTgl = `${hari}, ${tgl} ${bulan} ${tahun}`;
 
-        // 2. Pisahkan aktif & selesai
         const aktif = matches.filter(m => getMatchStatus(m) !== "selesai");
         const selesai = matches.filter(m => getMatchStatus(m) === "selesai");
 
         html += `<div class="date-group">`;
         html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
 
-        // 3. Render yang AKTIF (group by liga)
         if (aktif.length) {
             const groupLiga = {};
             aktif.forEach(item => {
@@ -2750,7 +2968,6 @@ function renderPrediksi(data) {
             });
         }
 
-        // 4. Render yang SELESAI (collapsed by default)
         if (selesai.length) {
             const groupLigaSelesai = {};
             selesai.forEach(item => {
@@ -2790,7 +3007,6 @@ function renderPrediksi(data) {
     container.innerHTML = html;
 }
 
-// Toggle show/hide pertandingan selesai (global scope)
 window.toggleSelesai = function(id, btn) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -3219,7 +3435,6 @@ setInterval(() => {
     if (semuaData.length > 0) {
         updateNewsTicker(semuaData);
         renderBigMatch(semuaData);
-        // Auto-refresh kalau tab LIVE aktif
         const tabAktif = document.querySelector(".tab-filter.active");
         if (tabAktif && tabAktif.dataset.date === "live") {
             applyFilter();
