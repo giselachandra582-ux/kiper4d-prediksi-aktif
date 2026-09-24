@@ -124,21 +124,6 @@ body {
     opacity: 0.7;
 }
 
-/* FITUR #16: CURSOR TRAIL */
-.cursor-trail {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99998;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: trailFade 0.8s ease-out forwards;
-}
-
-@keyframes trailFade {
-    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
-}
-
 /* FITUR #28: READING PROGRESS BAR */
 .reading-progress {
     position: fixed;
@@ -157,18 +142,6 @@ body {
 @keyframes progressShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
-}
-
-/* FITUR #15: CUSTOM SCROLLBAR */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #050813; }
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #5d2de8, #00d4ff, #ffcc33);
-    border-radius: 20px;
-    border: 2px solid #050813;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #ffcc33, #00d4ff, #5d2de8);
 }
 
 #loadingScreen {
@@ -2459,35 +2432,6 @@ let semuaData = [];
 })();
 
 // ============================================================
-// FITUR #16: CURSOR TRAIL EMAS
-// ============================================================
-(function initCursorTrail() {
-    if (window.innerWidth <= 800) return;
-    let lastTime = 0;
-    document.addEventListener("mousemove", (e) => {
-        const now = Date.now();
-        if (now - lastTime < 40) return;
-        lastTime = now;
-        const trail = document.createElement("div");
-        trail.className = "cursor-trail";
-        const colors = ["#ffcc33", "#00d4ff", "#5d2de8"];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = Math.random() * 8 + 4;
-        trail.style.cssText = `
-            left: ${e.clientX}px;
-            top: ${e.clientY}px;
-            width: ${size}px;
-            height: ${size}px;
-            background: radial-gradient(circle, ${color}, transparent 70%);
-            box-shadow: 0 0 10px ${color}, 0 0 20px ${color};
-            animation: trailFade 0.8s ease-out forwards;
-        `;
-        document.body.appendChild(trail);
-        setTimeout(() => trail.remove(), 800);
-    });
-})();
-
-// ============================================================
 // FITUR #21: RIPPLE ON CLICK
 // ============================================================
 (function initRippleOnClick() {
@@ -2538,24 +2482,6 @@ let semuaData = [];
 })();
 
 // ============================================================
-// FITUR #26: BLUR ON SCROLL
-// ============================================================
-(function initBlurOnScroll() {
-    let lastScroll = 0;
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const banner = document.querySelector(".banner");
-        if (banner) {
-            const blur = Math.min(scrollTop / 30, 8);
-            const opacity = Math.max(1 - scrollTop / 800, 0);
-            banner.style.filter = `blur(${blur}px)`;
-            banner.style.opacity = opacity;
-        }
-        lastScroll = scrollTop;
-    }, { passive: true });
-})();
-
-// ============================================================
 // FITUR #27: PARALLAX LAYERS
 // ============================================================
 (function initParallaxLayers() {
@@ -2566,7 +2492,6 @@ let semuaData = [];
             const speed = (i + 1) * 0.15;
             blob.style.transform = `translateY(${scrollY * speed}px)`;
         });
-        const aurora = document.querySelector(".aurora-bg::before");
     }, { passive: true });
 })();
 
