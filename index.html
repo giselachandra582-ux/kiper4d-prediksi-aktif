@@ -4279,27 +4279,6 @@ loadData();
     }
     render();
 })();
-
-// FITUR 3: SMOOTH SCROLL (LENIS)
-(function initLenis() {
-    if (window.IS_LOW_END) return;
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js";
-    script.onload = function() {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true
-        });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-    };
-    document.head.appendChild(script);
-})();
-
 // FITUR 5: TEXT REVEAL PER HURUF
 (function initTextReveal() {
     const titles = document.querySelectorAll(".section-title span");
