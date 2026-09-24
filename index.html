@@ -47,7 +47,7 @@ body {
 .aurora-bg {
     position: fixed;
     inset: 0;
-    z-index: -3;
+    z-index: -4;
     pointer-events: none;
     overflow: hidden;
 }
@@ -71,6 +71,50 @@ body {
     66% { transform: translate(-5%, 5%) rotate(240deg) scale(0.95); }
 }
 
+/* FITUR #18: LIQUID MORPHING BACKGROUND */
+.liquid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.liquid-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: liquidMove 20s ease-in-out infinite;
+}
+
+.liquid-blob:nth-child(1) {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(93,45,232,0.6), transparent 70%);
+    top: -100px; left: -100px;
+    animation-delay: 0s;
+}
+
+.liquid-blob:nth-child(2) {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.4), transparent 70%);
+    bottom: -200px; right: -200px;
+    animation-delay: -7s;
+}
+
+.liquid-blob:nth-child(3) {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,204,51,0.3), transparent 70%);
+    top: 40%; left: 50%;
+    animation-delay: -14s;
+}
+
+@keyframes liquidMove {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(80px, -60px) scale(1.2); }
+    50% { transform: translate(-60px, 80px) scale(0.9); }
+    75% { transform: translate(60px, 60px) scale(1.1); }
+}
+
 /* FITUR #1: PARTICLE BACKGROUND */
 #particleCanvas {
     position: fixed;
@@ -78,6 +122,41 @@ body {
     z-index: -2;
     pointer-events: none;
     opacity: 0.7;
+}
+
+/* FITUR #16: CURSOR TRAIL */
+.cursor-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: trailFade 0.8s ease-out forwards;
+}
+
+@keyframes trailFade {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+}
+
+/* FITUR #28: READING PROGRESS BAR */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #ffcc33, #00d4ff, #5d2de8);
+    background-size: 200% auto;
+    z-index: 99999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 15px rgba(0,212,255,0.8);
+    animation: progressShine 3s linear infinite;
+}
+
+@keyframes progressShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 /* FITUR #15: CUSTOM SCROLLBAR */
@@ -641,6 +720,36 @@ nav a.nav-daftar:hover {
     transition: all 0.4s;
 }
 
+/* FITUR #17: HOLOGRAPHIC CARD */
+.bmt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg,
+        transparent 0%,
+        rgba(255, 100, 255, 0.15) 20%,
+        transparent 40%,
+        rgba(100, 255, 255, 0.15) 60%,
+        transparent 80%,
+        rgba(255, 255, 100, 0.15) 100%);
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bmt-card:hover::before {
+    opacity: 1;
+    animation: holoShift 2s linear infinite;
+}
+
+@keyframes holoShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 200%; }
+}
+
 .bmt-card::after {
     content: "";
     position: absolute;
@@ -650,6 +759,7 @@ nav a.nav-daftar:hover {
     transform: skewX(-20deg);
     pointer-events: none;
     transition: left 0.6s ease;
+    z-index: 2;
 }
 
 .bmt-card:hover::after { left: 140%; }
@@ -675,6 +785,8 @@ nav a.nav-daftar:hover {
     border-radius: 20px;
     text-transform: uppercase;
     margin-bottom: 8px;
+    position: relative;
+    z-index: 3;
 }
 
 .bmt-league {
@@ -689,6 +801,8 @@ nav a.nav-daftar:hover {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    position: relative;
+    z-index: 3;
 }
 
 .bmt-teams {
@@ -697,6 +811,8 @@ nav a.nav-daftar:hover {
     align-items: center;
     gap: 6px;
     margin-bottom: 10px;
+    position: relative;
+    z-index: 3;
 }
 
 .bmt-team { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; min-width: 0; }
@@ -753,6 +869,8 @@ nav a.nav-daftar:hover {
     border-top: 1px solid rgba(93,45,232,0.4);
     border-bottom: 1px solid rgba(93,45,232,0.4);
     border-radius: 8px;
+    position: relative;
+    z-index: 3;
 }
 
 .news-ticker {
@@ -1020,7 +1138,20 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     color: #fff;
     line-height: 1;
+    position: relative;
 }
+.tab-clock-value::after {
+    content: ":";
+    color: #00d4ff;
+    animation: blink 1s infinite;
+    margin: 0 2px;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.2; }
+}
+
 .tab-clock-label {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11px;
@@ -1813,6 +1944,27 @@ nav a.nav-daftar:hover {
 
 .toast.show { transform: translateX(0); }
 
+/* CONFETTI */
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
 @media (max-width: 800px) {
     body { padding-bottom: 85px; }
     .bottom-nav { display: block; }
@@ -1906,6 +2058,7 @@ nav a.nav-daftar:hover {
     .footer-title { font-size: 20px; letter-spacing: 7px; }
     .footer-tagline { font-size: 11px; letter-spacing: 2.5px; }
     .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
+    .liquid-blob { filter: blur(60px); }
 }
 
 @media (max-width: 430px) {
@@ -1969,8 +2122,18 @@ nav a.nav-daftar:hover {
 </head>
 <body id="top">
 
+<!-- READING PROGRESS BAR -->
+<div class="reading-progress" id="readingProgress"></div>
+
 <!-- FITUR #10: AURORA BACKGROUND -->
 <div class="aurora-bg"></div>
+
+<!-- FITUR #18: LIQUID MORPHING BACKGROUND -->
+<div class="liquid-bg">
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+</div>
 
 <!-- FITUR #1: PARTICLE CANVAS -->
 <canvas id="particleCanvas"></canvas>
@@ -2251,10 +2414,7 @@ let semuaData = [];
 
     function draw() {
         ctx.clearRect(0, 0, w, h);
-
-        // Draw particles
         particles.forEach(p => {
-            // Mouse interaction
             const dx = p.x - mouse.x;
             const dy = p.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -2263,15 +2423,12 @@ let semuaData = [];
                 p.x += Math.cos(angle) * 0.5;
                 p.y += Math.sin(angle) * 0.5;
             }
-
             p.x += p.vx;
             p.y += p.vy;
-
             if (p.x < 0) p.x = w;
             if (p.x > w) p.x = 0;
             if (p.y < 0) p.y = h;
             if (p.y > h) p.y = 0;
-
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
@@ -2280,8 +2437,6 @@ let semuaData = [];
             ctx.fill();
             ctx.shadowBlur = 0;
         });
-
-        // Draw connections
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
@@ -2298,14 +2453,386 @@ let semuaData = [];
                 }
             }
         }
-
         requestAnimationFrame(draw);
     }
     draw();
 })();
 
 // ============================================================
-// FITUR: LOADING PARTICLES
+// FITUR #16: CURSOR TRAIL EMAS
+// ============================================================
+(function initCursorTrail() {
+    if (window.innerWidth <= 800) return;
+    let lastTime = 0;
+    document.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastTime < 40) return;
+        lastTime = now;
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+        const colors = ["#ffcc33", "#00d4ff", "#5d2de8"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 8 + 4;
+        trail.style.cssText = `
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, ${color}, transparent 70%);
+            box-shadow: 0 0 10px ${color}, 0 0 20px ${color};
+            animation: trailFade 0.8s ease-out forwards;
+        `;
+        document.body.appendChild(trail);
+        setTimeout(() => trail.remove(), 800);
+    });
+})();
+
+// ============================================================
+// FITUR #21: RIPPLE ON CLICK
+// ============================================================
+(function initRippleOnClick() {
+    document.addEventListener("click", (e) => {
+        const ripple = document.createElement("div");
+        ripple.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.6), rgba(93,45,232,0.3), transparent);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            z-index: 99999;
+            animation: rippleExpand 0.6s ease-out forwards;
+        `;
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+
+    if (!document.getElementById("rippleStyle")) {
+        const style = document.createElement("style");
+        style.id = "rippleStyle";
+        style.textContent = `
+            @keyframes rippleExpand {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+})();
+
+// ============================================================
+// FITUR #28: READING PROGRESS BAR
+// ============================================================
+(function initReadingProgress() {
+    const bar = document.getElementById("readingProgress");
+    if (!bar) return;
+    window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = percent + "%";
+    }, { passive: true });
+})();
+
+// ============================================================
+// FITUR #26: BLUR ON SCROLL
+// ============================================================
+(function initBlurOnScroll() {
+    let lastScroll = 0;
+    window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const banner = document.querySelector(".banner");
+        if (banner) {
+            const blur = Math.min(scrollTop / 30, 8);
+            const opacity = Math.max(1 - scrollTop / 800, 0);
+            banner.style.filter = `blur(${blur}px)`;
+            banner.style.opacity = opacity;
+        }
+        lastScroll = scrollTop;
+    }, { passive: true });
+})();
+
+// ============================================================
+// FITUR #27: PARALLAX LAYERS
+// ============================================================
+(function initParallaxLayers() {
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const liquidBlobs = document.querySelectorAll(".liquid-blob");
+        liquidBlobs.forEach((blob, i) => {
+            const speed = (i + 1) * 0.15;
+            blob.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+        const aurora = document.querySelector(".aurora-bg::before");
+    }, { passive: true });
+})();
+
+// ============================================================
+// FITUR #13: SKELETON LOADING PREMIUM
+// ============================================================
+(function injectSkeletonStyle() {
+    if (document.getElementById("skeletonStyle")) return;
+    const style = document.createElement("style");
+    style.id = "skeletonStyle";
+    style.textContent = `
+        .skeleton {
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0.05) 25%,
+                rgba(255,255,255,0.15) 50%,
+                rgba(255,255,255,0.05) 75%) !important;
+            background-size: 200% 100% !important;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+            color: transparent !important;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
+// ============================================================
+// FITUR #19: TEXT SCRAMBLE EFFECT
+// ============================================================
+window.scrambleText = function(el, finalText, duration = 800) {
+    if (!el) return;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+    const length = finalText.length;
+    const iterations = Math.floor(duration / 30);
+    let currentIteration = 0;
+    const interval = setInterval(() => {
+        let scrambled = "";
+        for (let i = 0; i < length; i++) {
+            if (currentIteration / iterations * length > i) {
+                scrambled += finalText[i];
+            } else {
+                scrambled += chars[Math.floor(Math.random() * chars.length)];
+            }
+        }
+        el.textContent = scrambled;
+        currentIteration++;
+        if (currentIteration >= iterations) {
+            clearInterval(interval);
+            el.textContent = finalText;
+        }
+    }, 30);
+};
+
+// ============================================================
+// FITUR #34: AUTO-DETECT LOW-END DEVICE
+// ============================================================
+window.IS_LOW_END = (function detectLowEnd() {
+    if (window.innerWidth <= 480) return true;
+    const memory = navigator.deviceMemory || 4;
+    if (memory <= 2) return true;
+    const cores = navigator.hardwareConcurrency || 4;
+    if (cores <= 2) return true;
+    return false;
+})();
+
+// ============================================================
+// FITUR #17: HOLOGRAPHIC CARD
+// ============================================================
+(function initHolographic() {
+    if (window.IS_LOW_END) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const percentX = (x / rect.width) * 100;
+        const percentY = (y / rect.height) * 100;
+        card.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%,
+            rgba(255, 100, 255, 0.15) 0%,
+            rgba(100, 255, 255, 0.1) 30%,
+            rgba(255, 255, 100, 0.08) 60%,
+            rgba(30,20,60,0.75) 100%)`;
+    });
+})();
+
+// ============================================================
+// FITUR #20: MAGNETIC CARDS
+// ============================================================
+(function initMagneticCards() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".match-row-single");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+        const distX = e.clientX - cardCenterX;
+        const distY = e.clientY - cardCenterY;
+        const dist = Math.sqrt(distX * distX + distY * distY);
+        if (dist < 200) {
+            const strength = (1 - dist / 200) * 8;
+            const angle = Math.atan2(distY, distX);
+            const moveX = Math.cos(angle) * strength;
+            const moveY = Math.sin(angle) * strength;
+            card.style.transform = `translate(${moveX}px, ${moveY}px) translateX(5px) translateY(-4px)`;
+        }
+    });
+})();
+
+// ============================================================
+// FITUR #8: 3D CARD TILT
+// ============================================================
+(function initCardTilt() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rotX = ((y - cy) / cy) * -5;
+        const rotY = ((x - cx) / cx) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
+})();
+
+// ============================================================
+// FITUR #12: MAGNETIC BUTTON
+// ============================================================
+(function initMagneticButton() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.querySelectorAll(".tab-filter, nav a").forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "";
+        });
+    });
+})();
+
+// ============================================================
+// FITUR #32: PAGE TRANSITION
+// ============================================================
+(function initPageTransition() {
+    window.fadeInContent = function() {
+        const container = document.getElementById("prediksiContainer");
+        if (!container) return;
+        container.style.opacity = "0";
+        container.style.transform = "translateY(20px)";
+        container.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        requestAnimationFrame(() => {
+            container.style.opacity = "1";
+            container.style.transform = "translateY(0)";
+        });
+    };
+})();
+
+// ============================================================
+// FITUR #23: CONFETTI SAAT LIVE
+// ============================================================
+window.triggerConfetti = function() {
+    if (window.IS_LOW_END) return;
+    if (document.querySelector(".confetti-container")) return;
+    const container = document.createElement("div");
+    container.className = "confetti-container";
+    document.body.appendChild(container);
+    const colors = ["#ffcc33", "#00d4ff", "#5d2de8", "#dc2626", "#10b981"];
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + "s";
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(confetti);
+    }
+    setTimeout(() => container.remove(), 5000);
+};
+
+// ============================================================
+// FITUR #35: EASTER EGG (KONAMI CODE)
+// ============================================================
+(function initEasterEgg() {
+    const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    let index = 0;
+    document.addEventListener("keydown", (e) => {
+        if (e.key === konamiCode[index] || e.key.toLowerCase() === konamiCode[index]) {
+            index++;
+            if (index === konamiCode.length) {
+                index = 0;
+                triggerEasterEgg();
+            }
+        } else {
+            index = 0;
+        }
+    });
+})();
+
+function triggerEasterEgg() {
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255,204,51,0.3), rgba(93,45,232,0.5), rgba(0,0,0,0.95));
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        animation: fadeInEaster 0.5s ease;
+        font-family: 'Orbitron', sans-serif;
+    `;
+    overlay.innerHTML = `
+        <div style="font-size: 80px; animation: bounceEaster 1s infinite;">🎉</div>
+        <div style="font-size: 32px; font-weight: 900; background: linear-gradient(90deg, #ffcc33, #00d4ff, #ffcc33); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: logoShine 2s linear infinite; letter-spacing: 8px;">KIPER4D</div>
+        <div style="color: #fff; font-size: 14px; letter-spacing: 3px;">🎊 EASTER EGG DITEMUKAN! 🎊</div>
+        <div style="color: #00d4ff; font-size: 12px; letter-spacing: 2px; margin-top: 20px;">Klik di mana saja untuk menutup</div>
+    `;
+    overlay.addEventListener("click", () => overlay.remove());
+    document.body.appendChild(overlay);
+    triggerConfetti();
+
+    if (!document.getElementById("easterStyle")) {
+        const style = document.createElement("style");
+        style.id = "easterStyle";
+        style.textContent = `
+            @keyframes fadeInEaster { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes bounceEaster { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// ============================================================
+// FITUR #9: TYPING TEXT ANIMATION
+// ============================================================
+(function initTypingText() {
+    const el = document.querySelector(".section-title span");
+    if (!el) return;
+    const fullText = el.textContent;
+    el.textContent = "";
+    let i = 0;
+    function type() {
+        if (i <= fullText.length) {
+            el.textContent = fullText.slice(0, i);
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+    setTimeout(type, 1500);
+})();
+
+// ============================================================
+// LOADING PARTICLES
 // ============================================================
 (function initLoadingParticles() {
     const container = document.getElementById("loadingParticles");
@@ -2324,51 +2851,9 @@ let semuaData = [];
 })();
 
 // ============================================================
-// FITUR #8: 3D CARD TILT (Hover Lift)
-// ============================================================
-(function initCardTilt() {
-    if (window.innerWidth <= 800) return;
-    document.addEventListener("mousemove", (e) => {
-        const card = e.target.closest(".match-row-single");
-        if (!card) {
-            document.querySelectorAll(".match-row-single").forEach(c => {
-                c.style.transform = "";
-            });
-            return;
-        }
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-        const rotX = ((y - cy) / cy) * -3;
-        const rotY = ((x - cx) / cx) * 3;
-        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
-    });
-})();
-
-// ============================================================
-// FITUR #12: MAGNETIC BUTTON
-// ============================================================
-(function initMagneticButton() {
-    if (window.innerWidth <= 800) return;
-    document.querySelectorAll(".tab-filter, nav a, .search-clear").forEach(btn => {
-        btn.addEventListener("mousemove", (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-        });
-        btn.addEventListener("mouseleave", () => {
-            btn.style.transform = "";
-        });
-    });
-})();
-
-// ============================================================
 // CACHE
 // ============================================================
-const CACHE_KEY = "kiper4d_data_cache_v21";
+const CACHE_KEY = "kiper4d_data_cache_v22";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) {
@@ -2393,7 +2878,7 @@ function clearCache() {
 // ============================================================
 // LOGO TIM — CACHE
 // ============================================================
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v34";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v35";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2806,25 +3291,6 @@ function updateTabClock() {
 }
 
 // ============================================================
-// FITUR #9: TYPING TEXT ANIMATION (Judul Section)
-// ============================================================
-(function initTypingText() {
-    const el = document.querySelector(".section-title span");
-    if (!el) return;
-    const fullText = el.textContent;
-    el.textContent = "";
-    let i = 0;
-    function type() {
-        if (i <= fullText.length) {
-            el.textContent = fullText.slice(0, i);
-            i++;
-            setTimeout(type, 100);
-        }
-    }
-    setTimeout(type, 1500);
-})();
-
-// ============================================================
 // NEXT MATCH
 // ============================================================
 let nextMatchData = null;
@@ -3008,7 +3474,7 @@ function renderMatchRowSingle(data) {
 }
 
 // ============================================================
-// RENDER PREDIKSI — GROUP BY TANGGAL → LIGA
+// RENDER PREDIKSI
 // ============================================================
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
@@ -3098,6 +3564,7 @@ function renderPrediksi(data) {
     });
 
     container.innerHTML = html;
+    setTimeout(() => { if (window.fadeInContent) window.fadeInContent(); }, 50);
 }
 
 window.toggleSelesai = function(id, btn) {
@@ -3298,6 +3765,11 @@ function renderBigMatch(data) {
         fadeRight.className = "fade-right";
         wrap.appendChild(fadeRight);
     }
+    const liveNow = candidates.filter(c => getMatchStatus(c) === "live");
+    if (liveNow.length > 0 && !window.confettiTriggered) {
+        window.confettiTriggered = true;
+        setTimeout(() => triggerConfetti(), 2000);
+    }
 }
 
 // ============================================================
@@ -3461,6 +3933,28 @@ function initLuxMarquee(containerId, intervalMs) {
 }
 
 initLuxMarquee("luxTextTop", 4200);
+
+// ============================================================
+// FITUR #24: INFINITE SCROLL
+// ============================================================
+(function initInfiniteScroll() {
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollTop / docHeight > 0.9) {
+                const btnMore = document.querySelector(".selesai-toggle");
+                if (btnMore && !btnMore.classList.contains("open")) {
+                    btnMore.click();
+                }
+            }
+            ticking = false;
+        });
+    }, { passive: true });
+})();
 
 // ============================================================
 // EVENT LISTENERS
