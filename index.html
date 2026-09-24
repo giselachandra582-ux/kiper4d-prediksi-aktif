@@ -1393,7 +1393,6 @@ nav a.nav-daftar:hover {
     letter-spacing: 1.2px;
 }
 
-/* ====== TEAMS BLOCK — TANPA LOGO ====== */
 .match-teams-block {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -2238,15 +2237,97 @@ function bmtLogo(name, logoFromDb) {
     if (resolved) {
         return `<div class="bmt-logo logo-loaded" data-fallback="${escapeHtml(getTeamInitial(name))}"><img src="${escapeHtml(resolved.url)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent=this.parentElement.dataset.fallback||'?';"></div>`;
     }
-    // Fallback: pakai inisial tim (tanpa ui-avatars, jadi lebih cepat & tidak bergantung internet)
     return `<div class="bmt-logo" data-fallback="${escapeHtml(getTeamInitial(name))}">${escapeHtml(getTeamInitial(name))}</div>`;
+}
+
+// ============================================================
+// NORMALISASI TANGGAL & WAKTU
+// ============================================================
+const BULAN_MAP = {
+    "januari": "01", "jan": "01", "january": "01",
+    "februari": "02", "feb": "02", "february": "02",
+    "maret": "03", "mar": "03", "march": "03",
+    "april": "04", "apr": "04",
+    "mei": "05", "may": "05",
+    "juni": "06", "jun": "06", "june": "06",
+    "juli": "07", "jul": "07", "july": "07",
+    "agustus": "08", "agu": "08", "aug": "08", "august": "08",
+    "september": "09", "sep": "09", "sept": "09",
+    "oktober": "10", "okt": "10", "oct": "10", "october": "10",
+    "november": "11", "nov": "11",
+    "desember": "12", "des": "12", "dec": "12", "december": "12"
+};
+
+function normalizeDate(input) {
+    if (!input) return "";
+    let s = String(input).trim().toLowerCase();
+
+    // Format YYYY-MM-DD
+    if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
+        const [y, m, d] = s.split("-");
+        return y + "-" + m.padStart(2, "0") + "-" + d.padStart(2, "0");
+    }
+
+    // Format "24 September 2026" atau "24 Sep 2026"
+    const bulanMatch = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
+    if (bulanMatch) {
+        const d = bulanMatch[1].padStart(2, "0");
+        const m = BULAN_MAP[bulanMatch[2]] || "01";
+        const y = bulanMatch[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    // Format "September 24, 2026"
+    const bulanMatch2 = s.match(/^([a-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
+    if (bulanMatch2) {
+        const m = BULAN_MAP[bulanMatch2[1]] || "01";
+        const d = bulanMatch2[2].padStart(2, "0");
+        const y = bulanMatch2[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    // Format DD/MM/YYYY atau DD-MM-YYYY
+    const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    if (dmy) {
+        const d = dmy[1].padStart(2, "0");
+        const m = dmy[2].padStart(2, "0");
+        const y = dmy[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    // Fallback: cari YYYY
+    const yyyy = s.match(/(\d{4})/);
+    if (yyyy) {
+        const m = s.match(/(\d{1,2})/g);
+        if (m && m.length >= 2) {
+            return yyyy[1] + "-" + m[0].padStart(2, "0") + "-" + m[1].padStart(2, "0");
+        }
+    }
+
+    return "";
+}
+
+function normalizeTime(input) {
+    if (!input) return "";
+    let s = String(input).trim().toLowerCase();
+    s = s.replace(/wib|utc|gmt|wita|wit/gi, "").trim();
+    s = s.replace(/\./g, ":");
+    const hm = s.match(/^(\d{1,2}):(\d{1,2})/);
+    if (hm) {
+        return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
+    }
+    const four = s.match(/^(\d{2})(\d{2})$/);
+    if (four) {
+        return four[1] + ":" + four[2];
+    }
+    return "";
 }
 
 // ============================================================
 // TANGGAL & WAKTU
 // ============================================================
 function formatTanggalShort(date) {
-    const value = clean(date);
+    const value = normalizeDate(clean(date));
     if (!value) return "-";
     const parts = value.split("-");
     if (parts.length !== 3) return value;
@@ -2280,7 +2361,7 @@ function get7DaysString() {
 
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
-function matchKey(data) { return [clean(data.date), clean(data.time), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
+function matchKey(data) { return [normalizeDate(clean(data.date)), normalizeTime(clean(data.time)), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
 
 function groupLiga(data) {
     const groups = {};
@@ -2293,14 +2374,21 @@ function groupLiga(data) {
 }
 
 function getKickoffWIBMs(data) {
-    const date = clean(data.date);
-    const time = clean(data.time);
+    const date = normalizeDate(clean(data.date));
+    const time = normalizeTime(clean(data.time));
     if (!date || !time) return null;
     const partsDate = date.split("-");
     if (partsDate.length !== 3) return null;
     const partsTime = time.split(":");
     if (partsTime.length !== 2) return null;
-    return Date.UTC(parseInt(partsDate[0], 10), parseInt(partsDate[1], 10) - 1, parseInt(partsDate[2], 10), parseInt(partsTime[0], 10), parseInt(partsTime[1], 10), 0);
+    return Date.UTC(
+        parseInt(partsDate[0], 10),
+        parseInt(partsDate[1], 10) - 1,
+        parseInt(partsDate[2], 10),
+        parseInt(partsTime[0], 10),
+        parseInt(partsTime[1], 10),
+        0
+    );
 }
 
 function getMatchStatus(data) {
@@ -2349,7 +2437,8 @@ function updateNextMatchBar(data) {
     if (!bar) return;
     const today = getTodayString();
     const candidates = data.filter(item => {
-        if (clean(item.date) < today) return false;
+        const d = normalizeDate(clean(item.date));
+        if (d < today) return false;
         return getMatchStatus(item) === "akan";
     });
     if (!candidates.length) {
@@ -2432,10 +2521,11 @@ function updateNewsTicker(data) {
     const liveMatches = data.filter(item => getMatchStatus(item) === "live");
     const today = getTodayString();
     const upcoming = data.filter(item => {
-        if (clean(item.date) < today) return false;
+        const d = normalizeDate(clean(item.date));
+        if (d < today) return false;
         return getMatchStatus(item) === "akan";
     }).sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0)).slice(0, 5);
-    const todayMatches = data.filter(item => clean(item.date) === today).slice(0, 8);
+    const todayMatches = data.filter(item => normalizeDate(clean(item.date)) === today).slice(0, 8);
     let newsItems = [];
     liveMatches.forEach(item => newsItems.push(`🔴 LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
     upcoming.forEach(item => {
@@ -2465,8 +2555,8 @@ function updateNewsTicker(data) {
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
     const away = clean(data.away);
-    const time = clean(data.time);
-    const date = clean(data.date);
+    const time = normalizeTime(clean(data.time));
+    const date = normalizeDate(clean(data.date));
     const handicap = clean(data.handicap);
     const scoreHome = clean(data.predictionScoreHome);
     const scoreAway = clean(data.predictionScoreAway);
@@ -2583,27 +2673,27 @@ function applyFilter() {
     let filtered = [...semuaData];
 
     if (isRiwayat) {
-        filtered = filtered.filter(item => clean(item.date) < today);
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) < today);
     } else if (tanggal === "today") {
         filtered = filtered.filter(item => {
-            const d = clean(item.date);
+            const d = normalizeDate(clean(item.date));
             return d === today || d === tomorrow;
         });
     } else if (tanggal === "tomorrow") {
-        filtered = filtered.filter(item => clean(item.date) === tomorrow);
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === tomorrow);
     } else if (tanggal === "7days") {
         const limit = get7DaysString();
         filtered = filtered.filter(item => {
-            const d = clean(item.date);
+            const d = normalizeDate(clean(item.date));
             return d >= today && d <= limit;
         });
     } else if (tanggal === "live") {
         filtered = filtered.filter(item => getMatchStatus(item) === "live");
     } else if (tanggal === "all") {
-        filtered = filtered.filter(item => clean(item.date) >= today);
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) >= today);
     } else {
         filtered = filtered.filter(item => {
-            const d = clean(item.date);
+            const d = normalizeDate(clean(item.date));
             return d === today || d === tomorrow;
         });
     }
@@ -2660,7 +2750,7 @@ function animateNumber(el, target, duration) {
 
 function updateStats(data) {
     const today = getTodayString();
-    const dataAktif = data.filter(item => clean(item.date) >= today);
+    const dataAktif = data.filter(item => normalizeDate(clean(item.date)) >= today);
     const totalPrediksi = dataAktif.filter(item => clean(item.predictionScoreHome) !== "" && clean(item.predictionScoreAway) !== "").length;
     const totalLiga = new Set(dataAktif.map(item => clean(item.league) || "LAINNYA")).size;
     const totalPertandingan = dataAktif.length;
@@ -2678,7 +2768,7 @@ function updateStats(data) {
 function bigMatchCard(data) {
     const home = clean(data.home);
     const away = clean(data.away);
-    const time = clean(data.time);
+    const time = normalizeTime(clean(data.time));
     const league = clean(data.league) || "LAINNYA";
     return `
         <div class="bmt-card">
@@ -2700,7 +2790,7 @@ function renderBigMatch(data) {
     const today = getTodayString();
     const tomorrow = getTomorrowString();
     const candidates = data.filter(item => {
-        const d = clean(item.date);
+        const d = normalizeDate(clean(item.date));
         if (d < today || d > tomorrow) return false;
         const status = getMatchStatus(item);
         return status === "akan" || status === "live";
