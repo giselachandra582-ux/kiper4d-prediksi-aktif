@@ -1393,47 +1393,40 @@ nav a.nav-daftar:hover {
     letter-spacing: 1.2px;
 }
 
+/* ====== TEAMS BLOCK — TANPA LOGO ====== */
 .match-teams-block {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     min-width: 0;
     z-index: 2;
     position: relative;
 }
 
-.match-team-mini { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.match-team-mini.right { flex-direction: row-reverse; text-align: right; }
-
-.match-team-mini .mini-badge {
-    width: 42px; height: 42px;
-    border-radius: 50%;
+.match-team-mini {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    font-weight: 900;
-    color: #ffcc33;
-    background: radial-gradient(circle, #1e1444, #050813);
-    border: 2px solid rgba(93,45,232,0.9);
-    overflow: hidden;
-    flex-shrink: 0;
+    min-width: 0;
 }
 
-.match-team-mini .mini-badge img { width: 32px; height: 32px; object-fit: contain; display: block; }
-.match-team-mini .mini-badge.logo-loaded { background: radial-gradient(circle, #fff, #eee); border: 2px solid rgba(255,204,51,0.9); }
+.match-team-mini.right {
+    justify-content: center;
+}
 
 .match-team-mini .mini-name {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #fff;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 160px;
+    max-width: 100%;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .match-vs-mini {
@@ -1751,9 +1744,7 @@ nav a.nav-daftar:hover {
     }
     .match-countdown-badge { bottom: 6px; padding: 2px 10px; font-size: 10px; }
 
-    .match-team-mini .mini-name { max-width: 100px; font-size: 12px; }
-    .match-team-mini .mini-badge { width: 34px; height: 34px; }
-    .match-team-mini .mini-badge img { width: 26px; height: 26px; }
+    .match-team-mini .mini-name { max-width: 120px; font-size: 13px; }
     .match-value-box .val-number { font-size: 18px; }
     .match-value-box .val-label { font-size: 8.5px; }
 
@@ -1816,9 +1807,7 @@ nav a.nav-daftar:hover {
     .match-time-badge { min-width: 62px; padding: 5px 9px; }
     .match-time-badge .time-value { font-size: 15px; }
     .match-time-badge .time-date { font-size: 9px; }
-    .match-team-mini .mini-name { font-size: 11px; max-width: 85px; }
-    .match-team-mini .mini-badge { width: 30px; height: 30px; }
-    .match-team-mini .mini-badge img { width: 22px; height: 22px; }
+    .match-team-mini .mini-name { font-size: 12px; max-width: 95px; }
     .match-value-box .val-number { font-size: 16px; }
 
     .bmt-card { width: 115px !important; padding: 8px !important; }
@@ -2108,7 +2097,7 @@ function clearCache() {
 }
 
 // ============================================================
-// LOGO TIM — CACHE
+// LOGO TIM — CACHE (dipakai big match ticker)
 // ============================================================
 const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v33";
 const teamLogoCache = new Map();
@@ -2196,29 +2185,19 @@ function scoreTeamMatch(requested, resultName) {
     return Math.round((overlap / total) * 500);
 }
 
-// ============================================================
-// 🔥 FUZZY MATCHING — Cari logo walau nama beda dikit
-// ============================================================
 function findLogoFuzzy(teamName) {
     const target = normalizeExact(teamName);
     if (!target) return null;
+    if (teamLogosFromDB.has(target)) return teamLogosFromDB.get(target);
 
-    // 1. Exact match
-    if (teamLogosFromDB.has(target)) {
-        return teamLogosFromDB.get(target);
-    }
-
-    // 2. Cek tanpa suffix (fc, sc, cf, dll)
     const targetSimplified = normalizeTeamName(teamName);
     if (targetSimplified && teamLogosFromDB.has(targetSimplified)) {
         return teamLogosFromDB.get(targetSimplified);
     }
 
-    // 3. Fuzzy score matching
     let bestMatch = null;
     let bestScore = 0;
     const MIN_SCORE = 700;
-
     for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
         const score = scoreTeamMatch(teamName, dbKey);
         if (score > bestScore && score >= MIN_SCORE) {
@@ -2227,59 +2206,40 @@ function findLogoFuzzy(teamName) {
         }
     }
 
-    // 4. Partial word matching (untuk "Inter Milan" ↔ "Inter")
     if (!bestMatch) {
         const targetWords = normalizeTeamName(teamName).split(" ").filter(w => w.length >= 5);
         for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
             const dbSimplified = normalizeTeamName(dbKey);
             for (const word of targetWords) {
-                if (dbSimplified.includes(word)) {
-                    return dbLogo;
-                }
+                if (dbSimplified.includes(word)) return dbLogo;
             }
         }
     }
-
     return bestMatch;
 }
 
-// ============================================================
-// RENDER BADGE
-// ============================================================
 function getLogoForTeam(name, logoFromDb) {
-    // 1. Prioritas: logo dari data match
     const dbLogo = clean(logoFromDb);
     if (dbLogo) return { type: "db", url: dbLogo };
 
-    // 2. Fuzzy match dari team-logos
     const fuzzyLogo = findLogoFuzzy(name);
     if (fuzzyLogo) return { type: "fuzzy", url: fuzzyLogo };
 
-    // 3. Cek cache lokal
     const key = normalizeExact(name);
     if (teamLogoCache.has(key)) {
         return { type: "cache", url: teamLogoCache.get(key) };
     }
-
     return null;
 }
 
-function miniBadge(name, logoFromDb) {
-    const resolved = getLogoForTeam(name, logoFromDb);
-    if (resolved) {
-        return `<div class="mini-badge logo-loaded" data-fallback="${escapeHtml(getTeamInitial(name))}"><img src="${escapeHtml(resolved.url)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent=this.parentElement.dataset.fallback||'?';"></div>`;
-    }
-    const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1e1444&color=ffcc33&size=64&bold=true&length=2`;
-    return `<div class="mini-badge logo-loaded"><img src="${fallbackUrl}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent='${escapeHtml(getTeamInitial(name))}';"></div>`;
-}
-
+// ====== LOGO UNTUK BIG MATCH TICKER (dengan fallback inisial) ======
 function bmtLogo(name, logoFromDb) {
     const resolved = getLogoForTeam(name, logoFromDb);
     if (resolved) {
         return `<div class="bmt-logo logo-loaded" data-fallback="${escapeHtml(getTeamInitial(name))}"><img src="${escapeHtml(resolved.url)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent=this.parentElement.dataset.fallback||'?';"></div>`;
     }
-    const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1e1444&color=ffcc33&size=64&bold=true&length=2`;
-    return `<div class="bmt-logo logo-loaded"><img src="${fallbackUrl}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent='${escapeHtml(getTeamInitial(name))}';"></div>`;
+    // Fallback: pakai inisial tim (tanpa ui-avatars, jadi lebih cepat & tidak bergantung internet)
+    return `<div class="bmt-logo" data-fallback="${escapeHtml(getTeamInitial(name))}">${escapeHtml(getTeamInitial(name))}</div>`;
 }
 
 // ============================================================
@@ -2500,7 +2460,7 @@ function updateNewsTicker(data) {
 }
 
 // ============================================================
-// RENDER MATCH
+// RENDER MATCH — TANPA LOGO, HANYA NAMA TIM
 // ============================================================
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
@@ -2541,12 +2501,10 @@ function renderMatchRowSingle(data) {
             </div>
             <div class="match-teams-block">
                 <div class="match-team-mini">
-                    ${miniBadge(home, data.homeLogo)}
                     <div class="mini-name">${escapeHtml(home)}</div>
                 </div>
                 <div class="match-vs-mini">VS</div>
                 <div class="match-team-mini right">
-                    ${miniBadge(away, data.awayLogo)}
                     <div class="mini-name">${escapeHtml(away)}</div>
                 </div>
             </div>
@@ -2715,7 +2673,7 @@ function updateStats(data) {
 }
 
 // ============================================================
-// BIG MATCH TICKER
+// BIG MATCH TICKER — TAMPILKAN SEMUA (logo atau inisial)
 // ============================================================
 function bigMatchCard(data) {
     const home = clean(data.home);
