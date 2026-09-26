@@ -1290,6 +1290,86 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
 
+/* === DATE PICKER SPESIFIK === */
+.date-picker-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-picker-filter label {
+    color: #b0a8d8;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+#tanggalSpesifik {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1.5px solid rgba(255,204,51,0.6);
+    background-color: #0a0e27;
+    color: #ffcc33;
+    padding: 11px 14px;
+    border-radius: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    color-scheme: dark;
+    transition: all 0.3s;
+    min-width: 160px;
+}
+
+#tanggalSpesifik:focus {
+    border-color: #ffcc33;
+    box-shadow: 0 0 28px rgba(255,204,51,0.7);
+}
+
+#tanggalSpesifik::-webkit-calendar-picker-indicator {
+    filter: invert(0.8) sepia(1) saturate(5) hue-rotate(10deg);
+    cursor: pointer;
+}
+
+.date-active-badge {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,204,51,0.2), rgba(0,212,255,0.15));
+    border: 1.5px solid rgba(255,204,51,0.7);
+    color: #ffcc33;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.date-active-badge.show { display: inline-flex; }
+.date-active-badge:hover {
+    background: linear-gradient(135deg, rgba(255,204,51,0.35), rgba(0,212,255,0.25));
+    box-shadow: 0 0 25px rgba(255,204,51,0.5);
+}
+.date-active-badge .close-x {
+    font-size: 14px;
+    color: #fff;
+    background: rgba(220,60,20,0.8);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
 .date-group { margin-bottom: 30px; }
 
 .date-group-header {
@@ -1999,6 +2079,8 @@ nav a.nav-daftar:hover {
     .date-filter { width: 100%; }
     .date-filter label { font-size: 11px; letter-spacing: 1px; min-width: 55px; }
     #ligaFilter, #statusFilter { flex: 1; width: 100%; max-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
+    .date-picker-filter { width: 100%; }
+    #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 12px; }
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
     .date-group { margin-bottom: 22px; }
@@ -2089,6 +2171,7 @@ nav a.nav-daftar:hover {
     .tab-clock-value { font-size: 19px; }
     .date-filter label { font-size: 10.5px; min-width: 50px; }
     #ligaFilter, #statusFilter { font-size: 12px; padding: 10px 30px 10px 12px; }
+    #tanggalSpesifik { font-size: 12px; padding: 10px 10px; }
     .section-title { font-size: 16px; }
 }
 </style>
@@ -2269,6 +2352,18 @@ nav a.nav-daftar:hover {
             </select>
         </div>
 
+        <!-- === FILTER TANGGAL SPESIFIK (DATE PICKER) === -->
+        <div class="date-picker-filter">
+            <label for="tanggalSpesifik">📅 Tanggal</label>
+            <input type="date" id="tanggalSpesifik">
+        </div>
+
+        <!-- Badge tanggal aktif -->
+        <div class="date-active-badge" id="dateActiveBadge">
+            <span id="dateActiveText">📅 Tanggal</span>
+            <span class="close-x" onclick="clearDateFilter()">✕</span>
+        </div>
+
     </div>
 
     <select id="tanggalFilter" style="display:none;">
@@ -2318,7 +2413,9 @@ nav a.nav-daftar:hover {
             <span>Daftar</span>
         </a>
     </div>
-</nav><script type="module">
+</nav>
+
+<script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
@@ -2337,6 +2434,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let semuaData = [];
+let selectedDateSpecific = ""; // menyimpan tanggal yang dipilih dari date picker
 
 // ============================================================
 // FITUR #1: PARTICLE BACKGROUND
@@ -3531,6 +3629,7 @@ function updateLigaFilter(data) {
     if (ligaList.includes(currentValue)) select.value = currentValue;
 }
 
+// === FILTER DENGAN DUKUNGAN TANGGAL SPESIFIK ===
 function applyFilter() {
     const selectTanggal = document.getElementById("tanggalFilter");
     const selectLiga = document.getElementById("ligaFilter");
@@ -3548,7 +3647,10 @@ function applyFilter() {
     const isRiwayat = (selectedStatus === "riwayat");
     let filtered = [...semuaData];
 
-    if (isRiwayat) {
+    // Prioritas: jika tanggal spesifik dipilih, filter hanya tanggal itu
+    if (selectedDateSpecific) {
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === selectedDateSpecific);
+    } else if (isRiwayat) {
         filtered = filtered.filter(item => normalizeDate(clean(item.date)) < today);
     } else if (tanggal === "today") {
         filtered = filtered.filter(item => {
@@ -3607,6 +3709,47 @@ function clearSearch() {
     searchInput.value = "";
     searchInput.focus();
     applyFilter();
+}
+
+// === FUNGSI UNTUK DATE PICKER ===
+window.clearDateFilter = function() {
+    selectedDateSpecific = "";
+    const input = document.getElementById("tanggalSpesifik");
+    if (input) input.value = "";
+    const badge = document.getElementById("dateActiveBadge");
+    if (badge) badge.classList.remove("show");
+    applyFilter();
+    // Kembalikan tab ke today
+    document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
+    const todayTab = document.querySelector('.tab-filter[data-date="today"]');
+    if (todayTab) todayTab.classList.add("active");
+    const selectTanggal = document.getElementById("tanggalFilter");
+    if (selectTanggal) selectTanggal.value = "today";
+};
+
+function handleDatePickerChange() {
+    const input = document.getElementById("tanggalSpesifik");
+    if (!input) return;
+    const value = input.value;
+    if (value) {
+        selectedDateSpecific = value;
+        // Tampilkan badge
+        const badge = document.getElementById("dateActiveBadge");
+        const text = document.getElementById("dateActiveText");
+        if (badge && text) {
+            const parts = value.split("-");
+            const dateObj = new Date(value + "T00:00:00Z");
+            const hari = HARI_INDO[dateObj.getUTCDay()];
+            const bulan = BULAN_INDO[dateObj.getUTCMonth()];
+            text.textContent = `📅 ${hari}, ${parts[2]} ${bulan} ${parts[0]}`;
+            badge.classList.add("show");
+        }
+        // Hapus active tab
+        document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
+        applyFilter();
+    } else {
+        clearDateFilter();
+    }
 }
 
 // ============================================================
@@ -3889,14 +4032,23 @@ const elStatus = document.getElementById("statusFilter");
 const elSearch = document.getElementById("searchInput");
 const elClear = document.getElementById("btnClearSearch");
 const elTanggal = document.getElementById("tanggalFilter");
+const elDatePicker = document.getElementById("tanggalSpesifik");
 
 if (elLiga) elLiga.addEventListener("change", filterLiga);
 if (elStatus) elStatus.addEventListener("change", filterStatus);
 if (elSearch) elSearch.addEventListener("input", handleSearch);
 if (elClear) elClear.addEventListener("click", clearSearch);
+if (elDatePicker) elDatePicker.addEventListener("change", handleDatePickerChange);
 
 document.querySelectorAll(".tab-filter").forEach(tab => {
     tab.addEventListener("click", () => {
+        // Reset date picker spesifik
+        selectedDateSpecific = "";
+        const dateInput = document.getElementById("tanggalSpesifik");
+        if (dateInput) dateInput.value = "";
+        const badge = document.getElementById("dateActiveBadge");
+        if (badge) badge.classList.remove("show");
+
         document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         const dateValue = tab.dataset.date;
@@ -3905,6 +4057,16 @@ document.querySelectorAll(".tab-filter").forEach(tab => {
             if (dateValue === "live" && elStatus) elStatus.value = "all";
         }
         applyFilter();
+
+        // === JIKA TAB LIVE DIKLIK: SCROLL KE SECTION PERTANDINGAN ===
+        if (dateValue === "live") {
+            const section = document.getElementById("pertandingan");
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 300);
+            }
+        }
     });
 });
 
