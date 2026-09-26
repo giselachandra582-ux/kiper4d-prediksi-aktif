@@ -3904,18 +3904,16 @@ if (elCustomDate) {
             if (elTanggal) elTanggal.value = "all";
         }
         applyFilter();
-    });
-}
+    }
+
 document.querySelectorAll(".tab-filter").forEach(tab => {
     tab.addEventListener("click", () => {
         // Reset date picker saat klik tab
         const customDate = document.getElementById("customDateFilter");
         if (customDate) customDate.value = "";
-        }
         applyFilter();
     });
 });
-
 setInterval(updateTabClock, 1000);
 updateTabClock();
 
