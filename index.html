@@ -1290,7 +1290,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
 
-/* === DATE PICKER SPESIFIK === */
+/* === DROPDOWN TANGGAL SPESIFIK (01 - 31) === */
 .date-picker-filter {
     display: flex;
     align-items: center;
@@ -1312,26 +1312,33 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(255,204,51,0.6);
     background-color: #0a0e27;
     color: #ffcc33;
-    padding: 11px 14px;
+    padding: 11px 38px 11px 16px;
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
     font-size: 13px;
     outline: none;
     cursor: pointer;
-    color-scheme: dark;
     transition: all 0.3s;
-    min-width: 160px;
+    min-width: 130px;
+    background-image:
+        linear-gradient(145deg, rgba(20,14,45,1), rgba(10,14,39,1)),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffcc33' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, right 14px center;
+    background-size: 100% 100%, 12px 12px;
+    color-scheme: dark;
+}
+
+#tanggalSpesifik option {
+    background-color: #0a0e27;
+    color: #ffcc33;
+    font-weight: 700;
 }
 
 #tanggalSpesifik:focus {
     border-color: #ffcc33;
     box-shadow: 0 0 28px rgba(255,204,51,0.7);
-}
-
-#tanggalSpesifik::-webkit-calendar-picker-indicator {
-    filter: invert(0.8) sepia(1) saturate(5) hue-rotate(10deg);
-    cursor: pointer;
 }
 
 .date-active-badge {
@@ -2080,7 +2087,7 @@ nav a.nav-daftar:hover {
     .date-filter label { font-size: 11px; letter-spacing: 1px; min-width: 55px; }
     #ligaFilter, #statusFilter { flex: 1; width: 100%; max-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     .date-picker-filter { width: 100%; }
-    #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 12px; }
+    #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
     .date-group { margin-bottom: 22px; }
@@ -2171,7 +2178,7 @@ nav a.nav-daftar:hover {
     .tab-clock-value { font-size: 19px; }
     .date-filter label { font-size: 10.5px; min-width: 50px; }
     #ligaFilter, #statusFilter { font-size: 12px; padding: 10px 30px 10px 12px; }
-    #tanggalSpesifik { font-size: 12px; padding: 10px 10px; }
+    #tanggalSpesifik { font-size: 12px; padding: 10px 30px 10px 12px; }
     .section-title { font-size: 16px; }
 }
 </style>
@@ -2352,10 +2359,12 @@ nav a.nav-daftar:hover {
             </select>
         </div>
 
-        <!-- === FILTER TANGGAL SPESIFIK (DATE PICKER) === -->
+        <!-- === DROPDOWN TANGGAL SPESIFIK (01 - 31) === -->
         <div class="date-picker-filter">
             <label for="tanggalSpesifik">📅 Tanggal</label>
-            <input type="date" id="tanggalSpesifik">
+            <select id="tanggalSpesifik">
+                <option value="">Pilih Tanggal</option>
+            </select>
         </div>
 
         <!-- Badge tanggal aktif -->
@@ -2434,7 +2443,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let semuaData = [];
-let selectedDateSpecific = ""; // menyimpan tanggal yang dipilih dari date picker
+let selectedDateSpecific = ""; // menyimpan tanggal yang dipilih (format: YYYY-MM-DD)
 
 // ============================================================
 // FITUR #1: PARTICLE BACKGROUND
@@ -3647,9 +3656,11 @@ function applyFilter() {
     const isRiwayat = (selectedStatus === "riwayat");
     let filtered = [...semuaData];
 
-    // Prioritas: jika tanggal spesifik dipilih, filter hanya tanggal itu
+    // Prioritas: jika tanggal spesifik dipilih, filter hanya tanggal itu (berdasarkan hari, bulan, tahun saat ini)
     if (selectedDateSpecific) {
-        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === selectedDateSpecific);
+        const todayParts = today.split("-");
+        const targetDate = todayParts[0] + "-" + todayParts[1] + "-" + selectedDateSpecific;
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === targetDate);
     } else if (isRiwayat) {
         filtered = filtered.filter(item => normalizeDate(clean(item.date)) < today);
     } else if (tanggal === "today") {
@@ -3711,11 +3722,11 @@ function clearSearch() {
     applyFilter();
 }
 
-// === FUNGSI UNTUK DATE PICKER ===
+// === FUNGSI UNTUK DROPDOWN TANGGAL SPESIFIK ===
 window.clearDateFilter = function() {
     selectedDateSpecific = "";
-    const input = document.getElementById("tanggalSpesifik");
-    if (input) input.value = "";
+    const select = document.getElementById("tanggalSpesifik");
+    if (select) select.value = "";
     const badge = document.getElementById("dateActiveBadge");
     if (badge) badge.classList.remove("show");
     applyFilter();
@@ -3728,20 +3739,22 @@ window.clearDateFilter = function() {
 };
 
 function handleDatePickerChange() {
-    const input = document.getElementById("tanggalSpesifik");
-    if (!input) return;
-    const value = input.value;
+    const select = document.getElementById("tanggalSpesifik");
+    if (!select) return;
+    const value = select.value;
     if (value) {
         selectedDateSpecific = value;
         // Tampilkan badge
         const badge = document.getElementById("dateActiveBadge");
         const text = document.getElementById("dateActiveText");
         if (badge && text) {
-            const parts = value.split("-");
-            const dateObj = new Date(value + "T00:00:00Z");
+            const today = getTodayString();
+            const todayParts = today.split("-");
+            const targetDate = todayParts[0] + "-" + todayParts[1] + "-" + value;
+            const dateObj = new Date(targetDate + "T00:00:00Z");
             const hari = HARI_INDO[dateObj.getUTCDay()];
             const bulan = BULAN_INDO[dateObj.getUTCMonth()];
-            text.textContent = `📅 ${hari}, ${parts[2]} ${bulan} ${parts[0]}`;
+            text.textContent = `📅 ${hari}, ${value} ${bulan} ${todayParts[0]}`;
             badge.classList.add("show");
         }
         // Hapus active tab
@@ -3749,6 +3762,21 @@ function handleDatePickerChange() {
         applyFilter();
     } else {
         clearDateFilter();
+    }
+}
+
+// === ISI DROPDOWN TANGGAL 01 - 31 ===
+function populateDateDropdown() {
+    const select = document.getElementById("tanggalSpesifik");
+    if (!select) return;
+    // Kosongkan dulu, sisakan opsi pertama
+    select.innerHTML = '<option value="">Pilih Tanggal</option>';
+    for (let i = 1; i <= 31; i++) {
+        const value = String(i).padStart(2, "0");
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
     }
 }
 
@@ -4032,20 +4060,20 @@ const elStatus = document.getElementById("statusFilter");
 const elSearch = document.getElementById("searchInput");
 const elClear = document.getElementById("btnClearSearch");
 const elTanggal = document.getElementById("tanggalFilter");
-const elDatePicker = document.getElementById("tanggalSpesifik");
+const elDateSelect = document.getElementById("tanggalSpesifik");
 
 if (elLiga) elLiga.addEventListener("change", filterLiga);
 if (elStatus) elStatus.addEventListener("change", filterStatus);
 if (elSearch) elSearch.addEventListener("input", handleSearch);
 if (elClear) elClear.addEventListener("click", clearSearch);
-if (elDatePicker) elDatePicker.addEventListener("change", handleDatePickerChange);
+if (elDateSelect) elDateSelect.addEventListener("change", handleDatePickerChange);
 
 document.querySelectorAll(".tab-filter").forEach(tab => {
     tab.addEventListener("click", () => {
-        // Reset date picker spesifik
+        // Reset date dropdown spesifik
         selectedDateSpecific = "";
-        const dateInput = document.getElementById("tanggalSpesifik");
-        if (dateInput) dateInput.value = "";
+        const dateSelect = document.getElementById("tanggalSpesifik");
+        if (dateSelect) dateSelect.value = "";
         const badge = document.getElementById("dateActiveBadge");
         if (badge) badge.classList.remove("show");
 
@@ -4094,6 +4122,7 @@ setInterval(() => {
 // ============================================================
 // INIT
 // ============================================================
+populateDateDropdown();
 loadSavedTeamLogos();
 loadData();
 
