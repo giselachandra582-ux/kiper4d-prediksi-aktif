@@ -328,333 +328,1779 @@ nav a.nav-daftar:hover { transform: translateY(-2px); box-shadow: 0 5px 30px rgb
 .bmt-time { color: #e0f7ff !important; background: rgba(34,211,238,0.15) !important; border-top: 1px solid rgba(34,211,238,0.3) !important; border-bottom: 1px solid rgba(34,211,238,0.3) !important; }
 
 </style>
-<style>
+<body id="top">
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Inter', Arial, sans-serif;
-    background: #000000;
-    color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+<div class="aurora-bg"></div>
+
+<div class="liquid-bg">
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+</div>
+
+<canvas id="particleCanvas"></canvas>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div id="loadingScreen">
+    <div class="loading-particles" id="loadingParticles"></div>
+    <div class="loading-logo-wrap">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <img src="logo-kiper4d.png" alt="KIPER4D" width="145" height="145">
+    </div>
+    <div class="loading-text-wrap">
+        <div class="loading-text active">Menghubungkan Server</div>
+        <div class="loading-text">Memuat Pertandingan</div>
+        <div class="loading-text">Menyiapkan Data</div>
+        <div class="loading-text">Hampir Selesai</div>
+    </div>
+    <div class="loading-bar">
+        <div class="loading-bar-fill" id="loadingBarFill"></div>
+    </div>
+    <div class="loading-percent" id="loadingPercent">0</div>
+    <div class="loading-brand">KIPER4D PREMIUM</div>
+</div>
+
+<header>
+<div class="header-inner">
+    <a href="https://rotasy.link/Kiper4D" class="logo" target="_blank" rel="noopener noreferrer">
+        <img src="logo-kiper4d.png" alt="KIPER4D" width="150" height="55" loading="eager" decoding="async">
+        <div class="logo-subtitle">JADWAL DAN PASARAN BOLA UPDATE</div>
+    </a>
+    <nav>
+        <a href="#top" class="nav-link">Beranda</a>
+        <a href="#pertandingan" class="nav-link">Jadwal</a>
+        <a href="https://rotasy.link/Kiper4D" class="nav-login" target="_blank" rel="noopener noreferrer">Login</a>
+        <a href="https://rotasy.link/Kiper4D" class="nav-daftar" target="_blank" rel="noopener noreferrer">Daftar</a>
+    </nav>
+</div>
+</header>
+
+<div class="container">
+
+<div class="lux-text-wrap">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+    <div class="icon-side left">◆</div>
+    <div class="icon-side right">◆</div>
+    <div class="lux-text-slide" id="luxTextTop">
+        <div class="lux-text-item active">⚽ SELAMAT DATANG DI KIPER4D — PUSAT PREDIKSI BOLA TERKINI! 🔥</div>
+        <div class="lux-text-item">🏆 JADWAL PERTANDINGAN, PREDIKSI SKOR & HANDICAP TERBARU SETIAP HARI</div>
+        <div class="lux-text-item">⚡ UPDATE PERTANDINGAN HADIR LEBIH CEPAT & PRAKTIS HANYA DI KIPER4D</div>
+        <div class="lux-text-item">🌟 KIPER4D — JAGONYA PREDIKSI, JAGONYA BIKIN CUAN!</div>
+    </div>
+</div>
+
+<div class="banner">
+    <img src="banner-kiper4d-baru.png" alt="KIPER4D Prediksi Bola" loading="eager" decoding="async">
+</div>
+
+<section class="big-match-ticker-wrap">
+    <div class="big-match-ticker">
+        <div class="big-match-ticker-track" id="bigMatchTrack">
+            <div class="big-match-ticker-empty">Memuat pertandingan pilihan...</div>
+        </div>
+    </div>
+</section>
+
+<div class="news-ticker">
+    <div class="news-ticker-label">BREAKING</div>
+    <div class="news-ticker-wrap">
+        <div class="news-ticker-content" id="newsTickerContent">
+            🔥 Memuat berita pertandingan highlight...
+        </div>
+    </div>
+</div>
+
+<div class="stats">
+    <div class="stat-box">
+        <span class="stat-number" id="totalPrediksi">0</span>
+        <span class="stat-label">Total Prediksi</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number" id="totalLiga">0</span>
+        <span class="stat-label">Total Liga</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number" id="totalPertandingan">0</span>
+        <span class="stat-label">Total Pertandingan</span>
+    </div>
+</div>
+
+<section id="pertandingan">
+
+    <div class="section-head">
+        <div class="section-title">
+            ⚽ <span>PERTANDINGAN</span>
+        </div>
+    </div>
+
+    <div class="filter-row">
+
+        <div class="next-match-bar-inline" id="nextMatchBar">
+            <div class="next-match-inner">
+                <span class="next-match-label">⏱ MATCH BERIKUTNYA</span>
+                <span class="next-match-teams" id="nextMatchTeams">Memuat...</span>
+                <span class="next-match-countdown" id="nextMatchCountdown">--:--:--</span>
+            </div>
+        </div>
+
+        <div class="tab-filter-row">
+            <div class="tab-clock">
+                <span class="tab-clock-icon">🕐</span>
+                <span class="tab-clock-value" id="tabClockValue">--:--</span>
+                <span class="tab-clock-label">WIB</span>
+            </div>
+            <div class="tab-filter-wrap">
+                <button type="button" class="tab-filter active" data-date="today">
+                    <span class="tab-icon">⚽</span>
+                    <span class="tab-text">Hari Ini</span>
+                </button>
+                <button type="button" class="tab-filter" data-date="tomorrow">
+                    <span class="tab-icon">📅</span>
+                    <span class="tab-text">Besok</span>
+                </button>
+                <button type="button" class="tab-filter" data-date="live">
+                    <span class="tab-icon">🔥</span>
+                    <span class="tab-text">LIVE</span>
+                </button>
+                <button type="button" class="tab-filter" data-date="7days">
+                    <span class="tab-icon">⏰</span>
+                    <span class="tab-text">7 Hari</span>
+                </button>
+                <button type="button" class="tab-filter" data-date="all">
+                    <span class="tab-icon">📋</span>
+                    <span class="tab-text">Semua</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Cari tim atau liga..." autocomplete="off">
+            <button type="button" id="btnClearSearch" class="search-clear hidden" title="Hapus pencarian">✕</button>
+        </div>
+
+        <div class="date-filter">
+            <label for="ligaFilter">🏆 Liga</label>
+            <select id="ligaFilter">
+                <option value="all">Semua Liga</option>
+            </select>
+        </div>
+
+        <div class="date-filter">
+            <label for="statusFilter">🎯 Status</label>
+            <select id="statusFilter">
+                <option value="all">Semua</option>
+                <option value="akan">Belum Mulai</option>
+                <option value="live">Sedang Berlangsung</option>
+                <option value="selesai">Selesai</option>
+                <option value="riwayat">📜 Riwayat</option>
+            </select>
+        </div>
+
+        <div class="date-picker-filter">
+            <label for="tanggalSpesifik">📅 Tanggal</label>
+            <select id="tanggalSpesifik">
+                <option value="">Pilih Tanggal</option>
+            </select>
+        </div>
+
+        <div class="date-active-badge" id="dateActiveBadge">
+            <span id="dateActiveText">📅 Tanggal</span>
+            <span class="close-x" onclick="clearDateFilter()">✕</span>
+        </div>
+
+    </div>
+
+    <select id="tanggalFilter" style="display:none;">
+        <option value="all">Semua</option>
+        <option value="today">Hari Ini</option>
+        <option value="tomorrow">Besok</option>
+        <option value="7days">7 Hari ke Depan</option>
+    </select>
+
+    <div id="prediksiContainer">
+        <div class="single-column-wrap">
+            <div class="single-col-empty">Memuat data...</div>
+        </div>
+    </div>
+
+</section>
+
+</div>
+
+<footer class="site-footer">
+    <div class="footer-logo-wrap">
+        <img src="logo-kiper4d.png" alt="KIPER4D" width="140" height="60" loading="lazy" decoding="async">
+    </div>
+    <div class="footer-title">KIPER4D</div>
+    <div class="footer-tagline">⚽ Jagonya Prediksi • Jagonya Bikin Cuan ⚽</div>
+    <div class="footer-copy">
+        © 2026 <span>KIPER4D</span> • All Rights Reserved
+    </div>
+</footer>
+
+<nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+        <a href="#top" class="bottom-nav-item">
+            <span class="bn-icon">🏠</span>
+            <span>Beranda</span>
+        </a>
+        <a href="#pertandingan" class="bottom-nav-item">
+            <span class="bn-icon">⚽</span>
+            <span>Jadwal</span>
+        </a>
+        <a href="https://rotasy.link/Kiper4D" class="bottom-nav-item" target="_blank" rel="noopener noreferrer">
+            <span class="bn-icon">🔑</span>
+            <span>Login</span>
+        </a>
+        <a href="https://rotasy.link/Kiper4D" class="bottom-nav-item" target="_blank" rel="noopener noreferrer">
+            <span class="bn-icon">✨</span>
+            <span>Daftar</span>
+        </a>
+    </div>
+</nav>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB1i3mpTNKNlk54qQqk8xONAsaw66SOVs4",
+    authDomain: "prediksipanel.firebaseapp.com",
+    projectId: "prediksipanel",
+    storageBucket: "prediksipanel.firebasestorage.app",
+    messagingSenderId: "487032542947",
+    appId: "1:487032542947:web:46a3d64e3abdece53e17d6",
+    measurementId: "G-TQTEN9LEDW"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let semuaData = [];
+let selectedDateSpecific = "";
+
+/* PARTICLE BACKGROUND */
+(function initParticles() {
+    const canvas = document.getElementById("particleCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let w, h;
+    const PARTICLE_COUNT = 60;
+    const MAX_DISTANCE = 120;
+    let mouse = { x: -9999, y: -9999 };
+
+    function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    document.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    document.addEventListener("mouseleave", () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+    });
+
+    function createParticle() {
+        const colors = ["34,211,238", "103,232,249", "6,182,212"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        return {
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            size: Math.random() * 2 + 1,
+            color: color,
+            alpha: Math.random() * 0.5 + 0.3
+        };
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(createParticle());
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+                const angle = Math.atan2(dy, dx);
+                p.x += Math.cos(angle) * 0.5;
+                p.y += Math.sin(angle) * 0.5;
+            }
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h;
+            if (p.y > h) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = `rgba(${p.color}, 0.8)`;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DISTANCE) {
+                    const opacity = (1 - dist / MAX_DISTANCE) * 0.15;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(34, 211, 238, ${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+/* RIPPLE ON CLICK */
+(function initRippleOnClick() {
+    document.addEventListener("click", (e) => {
+        const ripple = document.createElement("div");
+        ripple.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34,211,238,0.6), rgba(6,182,212,0.3), transparent);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            z-index: 99999;
+            animation: rippleExpand 0.6s ease-out forwards;
+        `;
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+
+    if (!document.getElementById("rippleStyle")) {
+        const style = document.createElement("style");
+        style.id = "rippleStyle";
+        style.textContent = `
+            @keyframes rippleExpand {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+})();
+
+/* READING PROGRESS */
+(function initReadingProgress() {
+    const bar = document.getElementById("readingProgress");
+    if (!bar) return;
+    window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = percent + "%";
+    }, { passive: true });
+})();
+
+/* PARALLAX */
+(function initParallaxLayers() {
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const liquidBlobs = document.querySelectorAll(".liquid-blob");
+        liquidBlobs.forEach((blob, i) => {
+            const speed = (i + 1) * 0.15;
+            blob.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+    }, { passive: true });
+})();
+
+/* SKELETON */
+(function injectSkeletonStyle() {
+    if (document.getElementById("skeletonStyle")) return;
+    const style = document.createElement("style");
+    style.id = "skeletonStyle";
+    style.textContent = `
+        .skeleton {
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0.05) 25%,
+                rgba(255,255,255,0.15) 50%,
+                rgba(255,255,255,0.05) 75%) !important;
+            background-size: 200% 100% !important;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+            color: transparent !important;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
+window.scrambleText = function(el, finalText, duration = 800) {
+    if (!el) return;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+    const length = finalText.length;
+    const iterations = Math.floor(duration / 30);
+    let currentIteration = 0;
+    const interval = setInterval(() => {
+        let scrambled = "";
+        for (let i = 0; i < length; i++) {
+            if (currentIteration / iterations * length > i) {
+                scrambled += finalText[i];
+            } else {
+                scrambled += chars[Math.floor(Math.random() * chars.length)];
+            }
+        }
+        el.textContent = scrambled;
+        currentIteration++;
+        if (currentIteration >= iterations) {
+            clearInterval(interval);
+            el.textContent = finalText;
+        }
+    }, 30);
+};
+
+window.IS_LOW_END = (function detectLowEnd() {
+    if (window.innerWidth <= 480) return true;
+    const memory = navigator.deviceMemory || 4;
+    if (memory <= 2) return true;
+    const cores = navigator.hardwareConcurrency || 4;
+    if (cores <= 2) return true;
+    return false;
+})();
+
+/* HOLOGRAPHIC */
+(function initHolographic() {
+    if (window.IS_LOW_END) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const percentX = (x / rect.width) * 100;
+        const percentY = (y / rect.height) * 100;
+        card.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%,
+            rgba(103, 232, 249, 0.15) 0%,
+            rgba(34, 211, 238, 0.1) 30%,
+            rgba(224, 247, 255, 0.08) 60%,
+            rgba(10,10,15,0.75) 100%)`;
+    });
+})();
+
+/* MAGNETIC CARDS */
+(function initMagneticCards() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".match-row-single");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+        const distX = e.clientX - cardCenterX;
+        const distY = e.clientY - cardCenterY;
+        const dist = Math.sqrt(distX * distX + distY * distY);
+        if (dist < 200) {
+            const strength = (1 - dist / 200) * 8;
+            const angle = Math.atan2(distY, distX);
+            const moveX = Math.cos(angle) * strength;
+            const moveY = Math.sin(angle) * strength;
+            card.style.transform = `translate(${moveX}px, ${moveY}px) translateX(5px) translateY(-4px)`;
+        }
+    });
+})();
+
+/* 3D TILT */
+(function initCardTilt() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".bmt-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rotX = ((y - cy) / cy) * -5;
+        const rotY = ((x - cx) / cx) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
+})();
+
+/* MAGNETIC BUTTON */
+(function initMagneticButton() {
+    if (window.IS_LOW_END || window.innerWidth <= 800) return;
+    document.querySelectorAll(".tab-filter, nav a").forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "";
+        });
+    });
+})();
+
+window.fadeInContent = function() {
+    const container = document.getElementById("prediksiContainer");
+    if (!container) return;
+    container.style.opacity = "0";
+    container.style.transform = "translateY(20px)";
+    container.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    requestAnimationFrame(() => {
+        container.style.opacity = "1";
+        container.style.transform = "translateY(0)";
+    });
+};
+
+window.triggerConfetti = function() {
+    if (window.IS_LOW_END) return;
+    if (document.querySelector(".confetti-container")) return;
+    const container = document.createElement("div");
+    container.className = "confetti-container";
+    document.body.appendChild(container);
+    const colors = ["#67e8f9", "#22d3ee", "#0891b2", "#dc2626", "#10b981"];
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + "s";
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(confetti);
+    }
+    setTimeout(() => container.remove(), 5000);
+};
+
+/* EASTER EGG */
+(function initEasterEgg() {
+    const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    let index = 0;
+    document.addEventListener("keydown", (e) => {
+        if (e.key === konamiCode[index] || e.key.toLowerCase() === konamiCode[index]) {
+            index++;
+            if (index === konamiCode.length) {
+                index = 0;
+                triggerEasterEgg();
+            }
+        } else {
+            index = 0;
+        }
+    });
+})();
+
+function triggerEasterEgg() {
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle, rgba(103,232,249,0.3), rgba(8,145,178,0.5), rgba(0,0,0,0.95));
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        animation: fadeInEaster 0.5s ease;
+        font-family: 'Orbitron', sans-serif;
+    `;
+    overlay.innerHTML = `
+        <div style="font-size: 80px; animation: bounceEaster 1s infinite;">🎉</div>
+        <div style="font-size: 32px; font-weight: 900; background: linear-gradient(90deg, #67e8f9, #22d3ee, #67e8f9); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: logoShine 2s linear infinite; letter-spacing: 8px;">KIPER4D</div>
+        <div style="color: #fff; font-size: 14px; letter-spacing: 3px;">🎊 EASTER EGG DITEMUKAN! 🎊</div>
+        <div style="color: #22d3ee; font-size: 12px; letter-spacing: 2px; margin-top: 20px;">Klik di mana saja untuk menutup</div>
+    `;
+    overlay.addEventListener("click", () => overlay.remove());
+    document.body.appendChild(overlay);
+    triggerConfetti();
+
+    if (!document.getElementById("easterStyle")) {
+        const style = document.createElement("style");
+        style.id = "easterStyle";
+        style.textContent = `
+            @keyframes fadeInEaster { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes bounceEaster { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        `;
+        document.head.appendChild(style);
+    }
 }
-.aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; background: #000000; }
 
-#loadingScreen {
-    position: fixed; inset: 0; z-index: 99999;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: radial-gradient(circle at center, #041a30 0%, #02060f 60%, #000 100%);
-    transition: opacity 0.6s, visibility 0.6s;
-}
-#loadingScreen.hide { opacity: 0; visibility: hidden; }
-.loading-logo-wrap { position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
-.loading-ring {
-    position: absolute; width: 160px; height: 160px; border-radius: 50%;
-    border: 1.5px solid rgba(6,182,212,0.20); border-top-color: rgba(6,182,212,1);
-    animation: spin 1.5s linear infinite;
-}
-.loading-ring:nth-child(2) {
-    width: 200px; height: 200px;
-    border: 1.5px solid rgba(59,130,246,0.15); border-bottom-color: rgba(59,130,246,1);
-    animation-duration: 2.2s; animation-direction: reverse;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-logo-wrap img {
-    width: 120px; height: 120px; object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(6,182,212,1));
-    animation: float 2.5s ease-in-out infinite;
-}
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.loading-text { color: #22d3ee; font-family: 'Rajdhani'; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
-.loading-bar { width: 280px; height: 4px; border-radius: 20px; background: rgba(6,182,212,0.20); overflow: hidden; }
-.loading-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #0891b2, #22d3ee, #67e8f9); transition: width 0.3s; box-shadow: 0 0 15px rgba(34,211,238,0.8); }
+/* TYPING TEXT */
+(function initTypingText() {
+    const el = document.querySelector(".section-title span");
+    if (!el) return;
+    const fullText = el.textContent;
+    el.textContent = "";
+    let i = 0;
+    function type() {
+        if (i <= fullText.length) {
+            el.textContent = fullText.slice(0, i);
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+    setTimeout(type, 1500);
+})();
 
-header {
-    position: sticky; top: 0; z-index: 999;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1.5px solid rgba(34,211,238,0.45);
-}
-.header-inner {
-    max-width: 1400px; margin: auto;
-    padding: 12px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-.logo { display: flex; flex-direction: column; text-decoration: none; }
-.logo-wrap { position: relative; }
-.logo img {
-    width: 120px; height: 42px; object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(6,182,212,0.9));
-    animation: logoMove 3s ease-in-out infinite;
-}
-@keyframes logoMove {
-    0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 15px rgba(6,182,212,0.9)); }
-    50% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 30px rgba(34,211,238,1)) drop-shadow(0 0 50px rgba(59,130,246,0.6)); }
-}
-.logo-subtitle {
-    margin-top: 2px; font-family: 'Rajdhani'; font-size: 8.5px;
-    font-weight: 700; letter-spacing: 1.5px;
-    background: linear-gradient(90deg, #67e8f9, #22d3ee, #0891b2, #22d3ee, #67e8f9);
-    background-size: 200% auto;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 5s linear infinite;
-}
-@keyframes shine { to { background-position: 200% center; } }
-nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-nav a { text-decoration: none; }
-nav a.nav-link { color: #c8d4e0; padding: 7px 12px; border-radius: 20px; font-family: 'Rajdhani'; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s; }
-nav a.nav-link:hover { color: #22d3ee; background: rgba(34,211,238,0.1); }
-nav a.nav-login { color: #22d3ee; padding: 7px 16px; border-radius: 22px; font-family: 'Rajdhani'; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; border: 1.5px solid rgba(34,211,238,0.8); transition: all 0.3s; }
-nav a.nav-login:hover { background: linear-gradient(135deg, #22d3ee, #0891b2); color: #000; box-shadow: 0 0 25px rgba(34,211,238,0.8); transform: translateY(-2px); }
-nav a.nav-daftar { color: #000; padding: 8px 18px; border-radius: 22px; font-family: 'Rajdhani'; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(135deg, #67e8f9, #22d3ee, #67e8f9); background-size: 200% auto; animation: shine 3s ease-in-out infinite; box-shadow: 0 0 20px rgba(34,211,238,0.5); }
-nav a.nav-daftar:hover { transform: translateY(-2px); box-shadow: 0 5px 30px rgba(34,211,238,0.9); }
+/* LOADING PARTICLES */
+(function initLoadingParticles() {
+    const container = document.getElementById("loadingParticles");
+    if (!container) return;
+    for (let i = 0; i < 20; i++) {
+        const p = document.createElement("div");
+        p.className = "loading-particle";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.setProperty("--tx", (Math.random() - 0.5) * 200 + "px");
+        p.style.setProperty("--ty", (Math.random() - 0.5) * 200 + "px");
+        p.style.animationDelay = Math.random() * 3 + "s";
+        p.style.animationDuration = (4 + Math.random() * 4) + "s";
+        container.appendChild(p);
+    }
+})();
 
-.container { max-width: 1400px; margin: auto; padding: 16px 12px 60px; }
+/* CACHE */
+const CACHE_KEY = "kiper4d_data_cache_v22";
+const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
-.banner { position: relative; width: 100%; border-radius: 18px; overflow: hidden; margin-bottom: 16px; border: 2px solid rgba(34,211,238,0.8); background: #000; line-height: 0; box-shadow: 0 0 60px rgba(34,211,238,0.4), 0 0 120px rgba(59,130,246,0.3); }
-.banner img { display: block; width: 100%; height: auto; }
-.banner::after { content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); animation: bannerShine 6s infinite; pointer-events: none; }
-@keyframes bannerShine { 0% { left: -120%; } 40% { left: 140%; } 100% { left: 140%; } }
-
-.big-match-section { margin-bottom: 16px; border-radius: 18px; overflow: hidden; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.3); position: relative; }
-.big-match-section::before { display: none !important; }
-.big-match-header { padding: 10px 14px; font-family: 'Rajdhani'; font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; text-align: center; background: #0f1a2e; border-bottom: 1.5px solid rgba(34,211,238,0.3); color: #67e8f9; text-shadow: 0 0 10px rgba(103,232,249,0.5); }
-.big-match-header .icon { display: inline-block; animation: dotPulse 1.5s infinite; }
-@keyframes dotPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.5); } }
-.big-match-scroll-wrap { position: relative; overflow: hidden; padding: 12px 0; background: #050505; }
-.big-match-scroll-wrap::before, .big-match-scroll-wrap::after { content: ""; position: absolute; top: 0; width: 30px; height: 100%; z-index: 3; pointer-events: none; }
-.big-match-scroll-wrap::before { left: 0; background: linear-gradient(90deg, rgba(5,5,5,1), transparent); }
-.big-match-scroll-wrap::after { right: 0; background: linear-gradient(-90deg, rgba(5,5,5,1), transparent); }
-.big-match-track { display: flex; gap: 10px; padding: 0 12px; width: max-content; animation: bigMatchScroll 60s linear infinite; }
-.big-match-track:hover { animation-play-state: paused; }
-@keyframes bigMatchScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.big-match-card { flex-shrink: 0; width: 200px; padding: 12px; border-radius: 14px; background: linear-gradient(145deg, rgba(10,10,15,0.95), rgba(20,10,30,0.9)); position: relative; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); border: 1.5px solid rgba(34,211,238,0.3); }
-.big-match-card::before { display: none !important; }
-.big-match-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 12px 40px rgba(34,211,238,0.4); border-color: rgba(34,211,238,0.7); }
-.big-match-card.is-live { border-color: rgba(220,38,38,0.7); animation: livePulse 1.5s infinite; }
-@keyframes livePulse { 0%, 100% { box-shadow: 0 0 20px rgba(220,38,38,0.5); } 50% { box-shadow: 0 0 30px rgba(220,38,38,0.8); } }
-.big-match-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-family: 'Rajdhani'; font-size: 9px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; background: linear-gradient(90deg, #dc2626, #ff2a3d, #dc2626); color: #fff; border: 1px solid rgba(255,180,180,0.9); margin-bottom: 8px; box-shadow: 0 0 15px rgba(220,38,38,0.5); position: relative; z-index: 2; }
-.big-match-league { font-family: 'Rajdhani'; font-size: 9.5px; font-weight: 700; color: #67e8f9; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 0 8px rgba(103,232,249,0.4); position: relative; z-index: 2; }
-.big-match-teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-bottom: 8px; position: relative; z-index: 2; }
-.big-match-team { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
-.big-match-team img { width: 36px; height: 36px; object-fit: contain; animation: logoFloat 3s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(34,211,238,0.4)); }
-@keyframes logoFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.05); } }
-.big-match-card:hover .big-match-team img { animation: logoSpin 0.8s ease-in-out; filter: drop-shadow(0 0 15px rgba(103,232,249,0.9)); }
-@keyframes logoSpin { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
-.big-match-team .team-initial { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #0e4a6e, #06243c); border: 2px solid rgba(34,211,238,0.7); font-size: 11px; font-weight: 900; color: #67e8f9; text-shadow: 0 0 10px rgba(103,232,249,0.6); animation: logoFloat 3s ease-in-out infinite; }
-.big-match-team .team-name { font-family: 'Rajdhani'; font-size: 9px; font-weight: 700; color: #fff; text-align: center; max-width: 60px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
-.big-match-vs { font-family: 'Orbitron'; font-size: 9.5px; font-weight: 800; color: #67e8f9; letter-spacing: 1.2px; text-shadow: 0 0 10px rgba(103,232,249,0.6); }
-.big-match-time { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 5px 0; font-family: 'Teko'; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #e0f7ff; background: rgba(34,211,238,0.15); border-radius: 8px; border: 1px solid rgba(34,211,238,0.3); position: relative; z-index: 2; }
-.big-match-empty { padding: 24px; text-align: center; color: #a0b8d0; font-family: 'Rajdhani'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
-
-.news-ticker { display: flex; align-items: center; margin-bottom: 16px; border-radius: 12px; overflow: hidden; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.4); height: 40px; }
-.news-ticker-label { flex-shrink: 0; padding: 0 16px; height: 100%; display: flex; align-items: center; background: linear-gradient(90deg, #dc2626, #ef4444); color: #fff; font-family: 'Rajdhani'; font-size: 11px; font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
-.news-ticker-content { flex: 1; white-space: nowrap; overflow: hidden; position: relative; height: 100%; }
-.news-ticker-text { position: absolute; top: 50%; transform: translateY(-50%); padding-left: 100%; font-family: 'Rajdhani'; font-size: 12px; font-weight: 600; color: #67e8f9; letter-spacing: 0.5px; animation: newsScroll 40s linear infinite; }
-@keyframes newsScroll { 0% { transform: translate(0, -50%); } 100% { transform: translate(-100%, -50%); } }
-
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-.stat-box { position: relative; padding: 16px 12px; text-align: center; border-radius: 16px; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.35); overflow: hidden; transition: all 0.4s; }
-.stat-box::before { display: none !important; }
-.stat-box.live-box { border-color: rgba(220,38,38,0.5); cursor: pointer; }
-.stat-number { display: block; font-family: 'Teko'; font-size: 38px; font-weight: 700; background: linear-gradient(180deg, #e0f7ff, #67e8f9, #0891b2); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; position: relative; z-index: 2; }
-.live-box .stat-number { background: linear-gradient(180deg, #ff6b6b, #dc2626, #7f1d1d); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.stat-label { color: #a0b8d0; font-family: 'Rajdhani'; font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 5px; position: relative; z-index: 2; }
-.live-box .stat-label { color: #fca5a5; font-weight: 800; }
-
-#pertandingan { scroll-margin-top: 20px; }
-.section-head { margin: 18px 0 14px; }
-.section-title { font-family: 'Rajdhani'; font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-.section-title span { background: linear-gradient(90deg, #67e8f9, #22d3ee, #67e8f9); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
-.next-match-bar { padding: 10px 16px; border-radius: 14px; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.4); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-.next-match-label { font-family: 'Rajdhani'; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #a0b8d0; }
-.next-match-teams { font-family: 'Rajdhani'; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
-.next-match-countdown { font-family: 'Teko'; font-size: 20px; font-weight: 700; padding: 3px 14px; background: linear-gradient(135deg, #67e8f9, #22d3ee, #67e8f9); background-size: 200% auto; color: #000; border-radius: 20px; letter-spacing: 2px; box-shadow: 0 0 15px rgba(34,211,238,0.4); animation: shine 3s linear infinite; }
-.filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px; border-radius: 16px; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.4); margin-bottom: 14px; }
-.tab-filter-wrap { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; flex: 1; }
-.tab-filter { display: flex; align-items: center; gap: 4px; padding: 7px 12px; border-radius: 12px; font-family: 'Rajdhani'; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #c8d4e0; background: #111; border: 1.5px solid rgba(34,211,238,0.4); cursor: pointer; transition: all 0.3s; }
-.tab-filter:hover { color: #67e8f9; border-color: rgba(103,232,249,0.7); background: rgba(34,211,238,0.08); }
-.tab-filter.active { color: #000; background: linear-gradient(135deg, #67e8f9, #22d3ee, #67e8f9); border-color: #67e8f9; box-shadow: 0 3px 15px rgba(34,211,238,0.5); }
-.tab-filter.live-tab { background: linear-gradient(135deg, #7f1d1d, #dc2626); color: #fff; border-color: #ef4444; }
-.tab-filter.live-tab.active { background: linear-gradient(135deg, #dc2626, #ff2a3d); box-shadow: 0 0 20px rgba(220,38,38,0.7); }
-.tab-filter.live-tab .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: dotPulse 1s infinite; }
-.tab-icon { font-size: 12px; }
-.search-box { position: relative; display: flex; align-items: center; min-width: 180px; flex: 1; background: #111; border: 1.5px solid rgba(34,211,238,0.4); border-radius: 12px; }
-.search-icon { padding: 0 10px; color: #22d3ee; font-size: 13px; }
-#searchInput { flex: 1; border: none; outline: none; background: transparent; color: #fff; padding: 9px 4px; font-family: 'Rajdhani'; font-weight: 600; font-size: 12px; }
-#searchInput::placeholder { color: #6b7b9d; }
-.search-clear { background: transparent; border: none; color: #999; cursor: pointer; padding: 0 12px; font-size: 13px; }
-.search-clear.hidden { display: none; }
-.date-filter { display: flex; align-items: center; gap: 6px; }
-.date-filter label { color: #7dd3fc; font-family: 'Rajdhani'; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-#ligaFilter { appearance: none; border: 1.5px solid rgba(34,211,238,0.4); background-color: #000; color: #fff; padding: 9px 28px 9px 12px; border-radius: 12px; font-family: 'Rajdhani'; font-weight: 700; font-size: 11.5px; outline: none; cursor: pointer; max-width: 200px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='3'><polyline points='6 9 12 15 18 9'></polyline></svg>"); background-repeat: no-repeat; background-position: right 10px center; }
-#ligaFilter option { background: #000; }
-
-.date-group { margin-bottom: 20px; }
-.date-group-header { font-family: 'Rajdhani'; font-size: 14px; font-weight: 800; letter-spacing: 2px; color: #67e8f9; text-transform: uppercase; padding: 10px 16px; margin-bottom: 12px; border-radius: 12px; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.4); position: relative; text-align: center; text-shadow: 0 0 10px rgba(103,232,249,0.5); }
-.date-group-header::before { display: none !important; }
-
-.league { margin-bottom: 16px; border-radius: 16px; overflow: hidden; background: #0a0a0a; border: 1.5px solid rgba(34,211,238,0.3); position: relative; }
-.league::before { display: none !important; }
-.league-header { padding: 12px 18px; text-align: center; font-family: 'Rajdhani'; font-weight: 700; font-size: 13.5px; letter-spacing: 2.5px; color: #67e8f9; text-transform: uppercase; background: #0f1a2e; border-bottom: 1.5px solid rgba(34,211,238,0.3); text-shadow: 0 0 10px rgba(103,232,249,0.5); position: relative; z-index: 3; word-break: break-word; overflow-wrap: break-word; }
-.single-column-wrap { display: flex; flex-direction: column; gap: 10px; padding: 14px 10px; position: relative; z-index: 3; }
-
-.match-row-single { display: grid; grid-template-columns: auto 1fr auto auto; grid-template-areas: "time teams hdp pred"; align-items: center; gap: 10px; padding: 16px 12px; border-radius: 14px; background: linear-gradient(145deg, rgba(15,15,20,0.95), rgba(10,10,15,0.9)); position: relative; transition: all 0.4s; min-height: 70px; }
-.match-row-single::before {
-    content: ""; position: absolute; inset: -2px; border-radius: 14px; padding: 2px;
-    background: linear-gradient(135deg, #0891b2, #22d3ee, #0891b2);
-    background-size: 200% 200%;
-    animation: cardBorderFlow 15s linear infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    z-index: 1;
-}
-@keyframes cardBorderFlow { 0% { background-position: 0% 0%; } 100% { background-position: 200% 200%; } }
-.match-row-single:hover { transform: translateX(4px) translateY(-3px); box-shadow: 0 0 30px rgba(34,211,238,0.4); }
-.match-row-single.is-live::before { background: linear-gradient(135deg, #dc2626, #fbbf24, #dc2626); background-size: 200% 200%; animation: cardBorderFlow 6s linear infinite; }
-.match-row-single.is-live { box-shadow: 0 0 20px rgba(220,38,38,0.5); }
-.match-row-single.is-finished { opacity: 0.8; }
-.match-row-single.is-finished::before { background: linear-gradient(135deg, #064e3b, #10b981, #064e3b); background-size: 200% 200%; animation: cardBorderFlow 15s linear infinite; }
-.match-live-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #7f1d1d, #dc2626); color: #fff; padding: 3px 14px; border-radius: 20px; font-family: 'Rajdhani'; font-size: 9.5px; font-weight: 800; letter-spacing: 1.8px; border: 2px solid rgba(255,220,220,0.9); display: flex; align-items: center; gap: 4px; z-index: 5; box-shadow: 0 0 15px rgba(220,38,38,0.9); white-space: nowrap; }
-.match-live-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: dotPulse 1s infinite; }
-.match-finished-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #064e3b, #10b981); color: #fff; padding: 3px 14px; border-radius: 20px; font-family: 'Rajdhani'; font-size: 9.5px; font-weight: 800; letter-spacing: 1.8px; border: 2px solid rgba(190,250,220,0.9); z-index: 5; white-space: nowrap; }
-.match-time-badge { grid-area: time; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 7px 10px; min-width: 64px; border-radius: 12px; background: rgba(0,0,0,0.5); border: 1.5px solid rgba(34,211,238,0.5); position: relative; z-index: 3; flex-shrink: 0; }
-.match-time-badge .time-value { font-family: 'Teko'; font-size: 16px; font-weight: 600; color: #fff; line-height: 1; text-shadow: 0 0 8px rgba(103,232,249,0.5); }
-.match-time-badge .time-date { font-family: 'Rajdhani'; font-size: 9.5px; font-weight: 700; color: #7dd3fc; letter-spacing: 0.5px; }
-.match-teams-block { grid-area: teams; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; min-width: 0; position: relative; z-index: 3; overflow: visible !important; }
-.match-team-mini { display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; }
-.match-team-mini img { width: 34px; height: 34px; object-fit: contain; animation: logoFloat2 2.5s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(34,211,238,0.4)); transition: all 0.4s; }
-@keyframes logoFloat2 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(2deg); } }
-.match-row-single:hover .match-team-mini img { animation: logoBounce 0.6s ease-in-out; filter: drop-shadow(0 0 15px rgba(103,232,249,0.9)); transform: scale(1.15); }
-@keyframes logoBounce { 0% { transform: scale(1) translateY(0); } 30% { transform: scale(1.25) translateY(-8px); } 60% { transform: scale(1.15) translateY(-4px); } 100% { transform: scale(1.15) translateY(0); } }
-.match-team-mini .mini-name { font-family: 'Rajdhani'; font-size: 12px; font-weight: 700; color: #fff; text-align: center; text-transform: uppercase; letter-spacing: 0.3px; text-shadow: 0 0 6px rgba(255,255,255,0.3); word-break: break-word; line-height: 1.2; overflow: visible !important; text-overflow: clip !important; white-space: normal !important; max-width: 100%; }
-.match-vs-mini { font-family: 'Orbitron'; font-size: 11px; font-weight: 800; color: #67e8f9; letter-spacing: 1.2px; text-shadow: 0 0 10px rgba(103,232,249,0.7); }
-.match-value-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 7px 10px; min-width: 74px; border-radius: 12px; position: relative; z-index: 3; flex-shrink: 0; white-space: nowrap; }
-.match-value-box.hdp { grid-area: hdp; background: linear-gradient(135deg, rgba(34,211,238,0.25), rgba(6,182,212,0.35)); border: 1.5px solid rgba(103,232,249,0.7); box-shadow: 0 0 15px rgba(34,211,238,0.3), inset 0 0 12px rgba(103,232,249,0.15); }
-.match-value-box.pred { grid-area: pred; background: linear-gradient(135deg, rgba(34,211,238,0.25), rgba(6,182,212,0.35)); border: 1.5px solid rgba(103,232,249,0.7); box-shadow: 0 0 15px rgba(34,211,238,0.3), inset 0 0 12px rgba(103,232,249,0.15); }
-.match-value-box .val-label { font-family: 'Rajdhani'; font-size: 8.5px; font-weight: 800; letter-spacing: 1.5px; color: #e0f7ff; text-transform: uppercase; text-shadow: 0 0 6px rgba(255,255,255,0.4); }
-.match-value-box .val-number { font-family: 'Teko'; font-size: 17px; font-weight: 700; line-height: 1.1; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); white-space: nowrap; }
-.match-value-box.empty { opacity: 0.5; }
-.match-value-box.empty .val-number { color: #6b7b9d; }
-.single-col-empty { padding: 30px 16px; text-align: center; font-family: 'Rajdhani'; font-size: 12px; font-weight: 700; letter-spacing: 3px; color: #6b7b9d; text-transform: uppercase; }
-
-.site-footer { margin-top: 40px; padding: 32px 16px 24px; text-align: center; background: #0a0a0a; border-top: 1.5px solid rgba(34,211,238,0.4); }
-.footer-logo-wrap img { width: 110px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(34,211,238,0.8)); animation: logoMove 3s ease-in-out infinite; }
-.footer-title { font-family: 'Rajdhani'; font-size: 20px; font-weight: 700; letter-spacing: 7px; margin: 10px 0 8px; background: linear-gradient(90deg, #67e8f9, #22d3ee, #0891b2, #22d3ee, #67e8f9); background-size: 250% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; animation: shine 6s linear infinite; }
-.footer-tagline { font-family: 'Rajdhani'; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: #7dd3fc; text-transform: uppercase; margin-bottom: 16px; }
-.footer-copy { font-family: 'Rajdhani'; font-size: 10.5px; font-weight: 600; letter-spacing: 2px; color: #6b7b9d; }
-.footer-copy span { color: #67e8f9; font-weight: 800; }
-
-@media (max-width: 800px) {
-    .header-inner { padding: 10px 12px; gap: 8px; flex-wrap: nowrap; align-items: center; justify-content: space-between; }
-    .logo { flex-shrink: 0; max-width: 42%; }
-    .logo img { width: 95px; height: 34px; }
-    .logo-subtitle { font-size: 6.5px; letter-spacing: 1px; }
-    nav { display: grid !important; grid-template-columns: 1fr 1fr; gap: 4px; margin-left: auto; flex-shrink: 0; max-width: 56%; width: auto; }
-    nav a.nav-link:nth-of-type(1) { order: 1; }
-    nav a.nav-login { order: 2; }
-    nav a.nav-link:nth-of-type(2) { order: 3; }
-    nav a.nav-daftar { order: 4; }
-    nav a.nav-link { padding: 6px 4px; font-size: 9px; text-align: center; border: 1.5px solid rgba(34,211,238,0.4); background: rgba(34,211,238,0.05); border-radius: 9px; white-space: nowrap; letter-spacing: 0.5px; }
-    nav a.nav-login { padding: 6px 4px; font-size: 9px; text-align: center; border: 1.5px solid rgba(34,211,238,0.8); border-radius: 9px; white-space: nowrap; letter-spacing: 0.5px; }
-    nav a.nav-daftar { padding: 6px 4px; font-size: 9px; text-align: center; border-radius: 9px; white-space: nowrap; letter-spacing: 0.5px; }
-    .container { padding: 14px 10px 50px; }
-    .stats { gap: 6px; margin-bottom: 16px; }
-    .stat-box { padding: 12px 6px; }
-    .stat-number { font-size: 28px; }
-    .stat-label { font-size: 8px; letter-spacing: 1px; }
-    .filter-row { padding: 10px; gap: 8px; }
-    .tab-filter-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 100%; }
-    .tab-filter { padding: 8px 6px; font-size: 10px; justify-content: center; }
-    .search-box { width: 100%; min-width: unset; }
-    .date-filter { width: 100%; }
-    #ligaFilter { flex: 1; width: 100%; max-width: unset; font-size: 11px; }
-    .section-title { font-size: 17px; letter-spacing: 2px; }
-    .date-group-header { font-size: 12px; padding: 9px 12px; }
-    .league-header { padding: 10px 14px; font-size: 12px; letter-spacing: 2px; }
-    .single-column-wrap { padding: 12px 8px; gap: 10px; }
-    .match-row-single { grid-template-columns: auto 1fr; grid-template-areas: "time teams" "hdp pred"; padding: 14px 10px; gap: 10px; min-height: 80px; }
-    .match-time-badge { min-width: 60px; padding: 6px 8px; }
-    .match-time-badge .time-value { font-size: 15px; }
-    .match-time-badge .time-date { font-size: 9px; }
-    .match-team-mini img { width: 30px; height: 30px; }
-    .match-team-mini .mini-name { font-size: 11px; max-width: 100px; }
-    .match-vs-mini { font-size: 10px; }
-    .match-value-box { min-width: unset; padding: 6px 8px; }
-    .match-value-box .val-number { font-size: 16px; }
-    .match-value-box .val-label { font-size: 8px; }
-    .next-match-bar { padding: 10px 12px; gap: 8px; }
-    .next-match-teams { font-size: 12px; }
-    .next-match-countdown { font-size: 18px; padding: 2px 12px; }
-    .big-match-card { width: 160px !important; padding: 8px !important; border-radius: 12px !important; }
-    .big-match-team img { width: 28px !important; height: 28px !important; }
-    .big-match-team .team-initial { width: 28px !important; height: 28px !important; font-size: 9px !important; }
-    .big-match-team .team-name { font-size: 7.5px !important; max-width: 50px !important; }
-    .big-match-vs { font-size: 8px !important; }
-    .big-match-time { font-size: 10px !important; padding: 4px 0 !important; }
-    .big-match-badge { font-size: 7.5px !important; padding: 2px 8px !important; }
-    .big-match-league { font-size: 8px !important; letter-spacing: 0.8px !important; margin-bottom: 6px !important; }
-    .big-match-track { gap: 8px !important; padding: 0 10px !important; }
-    .big-match-scroll-wrap { padding: 10px 0 !important; }
+function saveCache(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {}
 }
 
-@media (max-width: 430px) {
-    .header-inner { padding: 8px 10px; gap: 6px; }
-    .logo img { width: 85px; height: 30px; }
-    .logo-subtitle { font-size: 6px; letter-spacing: 0.8px; }
-    nav { gap: 3px; max-width: 58%; }
-    nav a.nav-link { padding: 5px 3px; font-size: 8.5px; letter-spacing: 0.3px; }
-    nav a.nav-login { padding: 5px 3px; font-size: 8.5px; letter-spacing: 0.3px; }
-    nav a.nav-daftar { padding: 5px 3px; font-size: 8.5px; letter-spacing: 0.3px; }
-    .stat-number { font-size: 24px; }
-    .stat-label { font-size: 7.5px; }
-    .match-team-mini .mini-name { font-size: 10px; max-width: 70px; }
-    .match-time-badge { min-width: 55px; padding: 5px 7px; }
-    .match-time-badge .time-value { font-size: 14px; }
-    .match-value-box .val-number { font-size: 15px; }
-    .match-value-box { padding: 5px 7px; }
-    .match-live-badge, .match-finished-badge { font-size: 8.5px; padding: 2px 10px; letter-spacing: 1.2px; }
+function loadCache(maxAge) {
+    try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.timestamp || !parsed.data) return null;
+        if (maxAge && Date.now() - parsed.timestamp > maxAge) return null;
+        return parsed.data;
+    } catch (error) { return null; }
 }
 
-/* HIDE ELEMEN YANG TIDAK ADA DI TARGET */
-#particleCanvas,
-.reading-progress,
-.liquid-bg,
-.loading-particles,
-.loading-percent,
-.loading-brand,
-.lux-text-wrap,
-.tab-clock,
-.date-picker-filter,
-.date-active-badge,
-#tanggalSpesifik,
-#statusFilter,
-.bottom-nav,
-.lux-text-slide,
-.match-clock-line,
-.big-match-ticker-wrap .fade-left,
-.big-match-ticker-wrap .fade-right,
-.match-countdown-badge,
-.match-special-badges,
-.selesai-section { display: none !important; }
+function clearCache() {
+    try { localStorage.removeItem(CACHE_KEY); } catch (error) {}
+}
 
-.big-match-ticker-wrap { background: #0a0a0a !important; border: 1.5px solid rgba(34,211,238,0.3) !important; }
-.big-match-ticker-wrap::before,
-.big-match-ticker-wrap::after { display: none !important; }
-.big-match-ticker-track { gap: 10px !important; }
-.bmt-card { background: linear-gradient(145deg, rgba(10,10,15,0.95), rgba(20,10,30,0.9)) !important; border: 1.5px solid rgba(34,211,238,0.3) !important; }
-.bmt-card::before { display: none !important; }
-.bmt-league { color: #67e8f9 !important; }
-.bmt-vs { color: #67e8f9 !important; }
-.bmt-logo { background: radial-gradient(circle, #0e4a6e, #06243c) !important; border: 2px solid rgba(34,211,238,0.7) !important; color: #67e8f9 !important; }
-.bmt-time { color: #e0f7ff !important; background: rgba(34,211,238,0.15) !important; border-top: 1px solid rgba(34,211,238,0.3) !important; border-bottom: 1px solid rgba(34,211,238,0.3) !important; }
+/* LOGO CACHE */
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v35";
+const teamLogoCache = new Map();
+const teamLogosFromDB = new Map();
 
-</style>
+function loadSavedTeamLogos() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(TEAM_LOGO_CACHE_KEY) || "{}");
+        Object.entries(saved).forEach(([key, value]) => {
+            if (value) teamLogoCache.set(key, value);
+        });
+    } catch (error) {}
+}
+
+async function loadTeamLogosFromDB() {
+    try {
+        const snap = await getDocs(collection(db, "team-logos"));
+        snap.forEach(doc => {
+            const data = doc.data();
+            const name = clean(
+                data.name ||
+                data.teamName ||
+                data.team ||
+                data.nama ||
+                data.namaTim ||
+                doc.id
+            );
+            const logo = clean(
+                data.logo ||
+                data.url ||
+                data.badge ||
+                data.gambar ||
+                data.gambarTim ||
+                ""
+            );
+            if (name && logo) {
+                teamLogosFromDB.set(normalizeExact(name), logo);
+            }
+        });
+    } catch (err) {}
+}
+
+/* UTILITY */
+function clean(value) {
+    if (value === undefined || value === null) return "";
+    return String(value).trim();
+}
+
+function escapeHtml(value) {
+    return clean(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function getTeamInitial(name) {
+    name = clean(name);
+    if (!name) return "?";
+    const words = name.split(/\s+/).filter(Boolean);
+    if (words.length === 1) return words[0].substring(0, 3).toUpperCase();
+    return (words[0][0] + words[1][0]).toUpperCase();
+}
+
+function normalizeExact(name) {
+    return clean(name).toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/&/g, " and ")
+        .replace(/[.'’`]/g, "")
+        .replace(/[-_/]/g, " ")
+        .replace(/\s+/g, " ").trim();
+}
+
+const ALIAS_MAP = {
+    "barca": "barcelona", "barça": "barcelona", "barcelona fc": "barcelona", "fc barcelona": "barcelona",
+    "real": "real madrid", "madrid": "real madrid", "real madrid cf": "real madrid",
+    "atleti": "atletico madrid", "atletico": "atletico madrid", "atletico de madrid": "atletico madrid",
+    "betis": "real betis", "sevilla fc": "sevilla", "valencia cf": "valencia", "villarreal cf": "villarreal",
+    "athletic bilbao": "athletic club", "athletic": "athletic club",
+    "celta": "celta vigo", "celta de vigo": "celta vigo",
+    "deportivo": "deportivo la coruna", "la coruna": "deportivo la coruna",
+    "man utd": "manchester united", "man united": "manchester united", "mu": "manchester united",
+    "manchester utd": "manchester united", "man city": "manchester city", "mancity": "manchester city",
+    "spurs": "tottenham", "tottenham hotspur": "tottenham",
+    "wolves": "wolverhampton", "wolverhampton wanderers": "wolverhampton",
+    "newcastle": "newcastle united", "newcastle utd": "newcastle united",
+    "west ham": "west ham united", "brighton": "brighton & hove albion",
+    "nottingham": "nottingham forest", "forest": "nottingham forest",
+    "leicester": "leicester city", "leeds": "leeds united", "ipswich": "ipswich town",
+    "hull": "hull city", "coventry": "coventry city",
+    "juve": "juventus", "juventus fc": "juventus", "inter milan": "inter", "internazionale": "inter",
+    "ac milan": "milan", "acmilan": "milan", "napoli ssc": "napoli", "ssc napoli": "napoli",
+    "as roma": "roma", "ss lazio": "lazio", "atalanta bc": "atalanta",
+    "acf fiorentina": "fiorentina", "viola": "fiorentina",
+    "bologna fc": "bologna", "torino fc": "torino", "udinese calcio": "udinese",
+    "genoa cfc": "genoa", "cagliari calcio": "cagliari", "parma calcio": "parma",
+    "como 1907": "como", "venezia fc": "venezia",
+    "bayern": "bayern munich", "bayern munchen": "bayern munich", "fc bayern": "bayern munich",
+    "fc bayern munchen": "bayern munich", "bvb": "borussia dortmund", "dortmund": "borussia dortmund",
+    "leverkusen": "bayer leverkusen", "bayer 04": "bayer leverkusen",
+    "gladbach": "borussia monchengladbach", "monchengladbach": "borussia monchengladbach",
+    "leipzig": "rb leipzig", "eintracht": "eintracht frankfurt", "frankfurt": "eintracht frankfurt",
+    "wolfsburg": "vfl wolfsburg", "vfl wolfsburg": "vfl wolfsburg",
+    "werder": "werder bremen", "bremen": "werder bremen",
+    "stuttgart": "vfb stuttgart", "vfb stuttgart": "vfb stuttgart",
+    "freiburg": "sc freiburg", "hoffenheim": "tsg hoffenheim", "augsburg": "fc augsburg",
+    "mainz": "mainz 05", "hamburg": "hamburger sv", "hamburger": "hamburger sv",
+    "koln": "cologne", "fc koln": "cologne", "schalke": "schalke 04",
+    "psg": "paris saint-germain", "paris": "paris saint-germain", "paris sg": "paris saint-germain",
+    "paris saint germain": "paris saint-germain", "om": "marseille", "olympique marseille": "marseille",
+    "lyon": "lyon", "ol": "lyon", "olympique lyon": "lyon", "as monaco": "monaco",
+    "losc": "lille", "losc lille": "lille", "stade rennais": "rennes", "rc lens": "lens",
+    "ogc nice": "nice", "rc strasbourg": "strasbourg", "toulouse fc": "toulouse",
+    "stade brestois": "brest", "fc lorient": "lorient", "aj auxerre": "auxerre",
+    "stade de reims": "reims", "fc nantes": "nantes", "fc metz": "metz",
+    "sl benfica": "benfica", "fc porto": "porto", "sporting": "sporting cp",
+    "sporting lisbon": "sporting cp", "sc braga": "braga",
+    "afc ajax": "ajax", "psv eindhoven": "psv", "az": "az alkmaar",
+    "fc utrecht": "utrecht", "fc twente": "twente",
+    "gs": "galatasaray", "fb": "fenerbahce", "bjk": "besiktas",
+    "aek": "aek athens",
+    "lafc": "los angeles fc", "los angeles": "los angeles fc",
+    "atlanta": "atlanta united", "atlanta utd": "atlanta united",
+    "seattle": "seattle sounders", "sounders": "seattle sounders",
+    "portland": "portland timbers", "timbers": "portland timbers",
+    "austin": "austin fc", "charlotte": "charlotte fc",
+    "chicago": "chicago fire", "fire": "chicago fire",
+    "colorado": "colorado rapids", "rapids": "colorado rapids",
+    "columbus": "columbus crew", "crew": "columbus crew",
+    "houston": "houston dynamo", "dynamo": "houston dynamo",
+    "minnesota": "minnesota united", "nashville": "nashville sc",
+    "new england": "new england revolution", "revolution": "new england revolution",
+    "nycfc": "new york city fc", "new york city": "new york city fc",
+    "new york red bulls": "new york red bulls", "rb new york": "new york red bulls",
+    "orlando": "orlando city", "orlando city sc": "orlando city",
+    "philadelphia": "philadelphia union", "union": "philadelphia union",
+    "rsl": "real salt lake", "san jose": "san jose earthquakes",
+    "earthquakes": "san jose earthquakes", "st louis": "st louis city",
+    "st. louis": "st louis city", "toronto": "toronto fc",
+    "vancouver": "vancouver whitecaps", "whitecaps": "vancouver whitecaps"
+};
+
+function resolveAlias(name) {
+    const key = normalizeExact(name);
+    return ALIAS_MAP[key] || name;
+}
+
+function normalizeTeamName(name) {
+    return normalizeExact(name)
+        .replace(/\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk)\b/g, " ")
+        .replace(/\s+/g, " ").trim();
+}
+
+function scoreTeamMatch(requested, resultName) {
+    const a = normalizeExact(requested);
+    const b = normalizeExact(resultName);
+    const as = normalizeTeamName(requested);
+    const bs = normalizeTeamName(resultName);
+    if (!a || !b) return 0;
+    if (a === b) return 1000;
+    if (as === bs) return 950;
+    if (b.includes(a) || a.includes(b)) return 700;
+    const at = new Set(as.split(" ").filter(Boolean));
+    const bt = new Set(bs.split(" ").filter(Boolean));
+    const overlap = [...at].filter(t => bt.has(t)).length;
+    const total = new Set([...at, ...bt]).size || 1;
+    return Math.round((overlap / total) * 500);
+}
+
+function findLogoFuzzy(teamName) {
+    const target = normalizeExact(teamName);
+    if (!target) return null;
+    if (teamLogosFromDB.has(target)) return teamLogosFromDB.get(target);
+
+    const targetSimplified = normalizeTeamName(teamName);
+    if (targetSimplified && teamLogosFromDB.has(targetSimplified)) {
+        return teamLogosFromDB.get(targetSimplified);
+    }
+
+    let bestMatch = null;
+    let bestScore = 0;
+    const MIN_SCORE = 700;
+    for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
+        const score = scoreTeamMatch(teamName, dbKey);
+        if (score > bestScore && score >= MIN_SCORE) {
+            bestScore = score;
+            bestMatch = dbLogo;
+        }
+    }
+
+    if (!bestMatch) {
+        const targetWords = normalizeTeamName(teamName).split(" ").filter(w => w.length >= 5);
+        for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
+            const dbSimplified = normalizeTeamName(dbKey);
+            for (const word of targetWords) {
+                if (dbSimplified.includes(word)) return dbLogo;
+            }
+        }
+    }
+    return bestMatch;
+}
+
+function getLogoForTeam(name, logoFromDb) {
+    const dbLogo = clean(logoFromDb);
+    if (dbLogo) return { type: "db", url: dbLogo };
+
+    const resolvedName = resolveAlias(name);
+    const fuzzyLogo = findLogoFuzzy(resolvedName);
+    if (fuzzyLogo) return { type: "fuzzy", url: fuzzyLogo };
+
+    if (resolvedName !== name) {
+        const fuzzyLogo2 = findLogoFuzzy(name);
+        if (fuzzyLogo2) return { type: "fuzzy", url: fuzzyLogo2 };
+    }
+
+    const key = normalizeExact(name);
+    if (teamLogoCache.has(key)) {
+        return { type: "cache", url: teamLogoCache.get(key) };
+    }
+    return null;
+}
+
+function bmtLogo(name, logoFromDb) {
+    const resolved = getLogoForTeam(name, logoFromDb);
+    if (resolved) {
+        return `<div class="bmt-logo logo-loaded" data-fallback="${escapeHtml(getTeamInitial(name))}"><img src="${escapeHtml(resolved.url)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.remove('logo-loaded');this.parentElement.textContent=this.parentElement.dataset.fallback||'?';"></div>`;
+    }
+    return `<div class="bmt-logo" data-fallback="${escapeHtml(getTeamInitial(name))}">${escapeHtml(getTeamInitial(name))}</div>`;
+}
+
+/* TANGGAL & WAKTU */
+const BULAN_MAP = {
+    "januari": "01", "jan": "01", "january": "01",
+    "februari": "02", "feb": "02", "february": "02",
+    "maret": "03", "mar": "03", "march": "03",
+    "april": "04", "apr": "04",
+    "mei": "05", "may": "05",
+    "juni": "06", "jun": "06", "june": "06",
+    "juli": "07", "jul": "07", "july": "07",
+    "agustus": "08", "agu": "08", "aug": "08", "august": "08",
+    "september": "09", "sep": "09", "sept": "09",
+    "oktober": "10", "okt": "10", "oct": "10", "october": "10",
+    "november": "11", "nov": "11",
+    "desember": "12", "des": "12", "dec": "12", "december": "12"
+};
+
+function normalizeDate(input) {
+    if (!input) return "";
+    let s = String(input).trim().toLowerCase();
+
+    if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
+        const [y, m, d] = s.split("-");
+        return y + "-" + m.padStart(2, "0") + "-" + d.padStart(2, "0");
+    }
+
+    const bulanMatch = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
+    if (bulanMatch) {
+        const d = bulanMatch[1].padStart(2, "0");
+        const m = BULAN_MAP[bulanMatch[2]] || "01";
+        const y = bulanMatch[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    const bulanMatch2 = s.match(/^([a-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
+    if (bulanMatch2) {
+        const m = BULAN_MAP[bulanMatch2[1]] || "01";
+        const d = bulanMatch2[2].padStart(2, "0");
+        const y = bulanMatch2[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    if (dmy) {
+        const d = dmy[1].padStart(2, "0");
+        const m = dmy[2].padStart(2, "0");
+        const y = dmy[3];
+        return y + "-" + m + "-" + d;
+    }
+
+    const yyyy = s.match(/(\d{4})/);
+    if (yyyy) {
+        const m = s.match(/(\d{1,2})/g);
+        if (m && m.length >= 2) {
+            return yyyy[1] + "-" + m[0].padStart(2, "0") + "-" + m[1].padStart(2, "0");
+        }
+    }
+
+    return "";
+}
+
+function normalizeTime(input) {
+    if (!input) return "";
+    let s = String(input).trim().toLowerCase();
+    s = s.replace(/wib|utc|gmt|wita|wit/gi, "").trim();
+    s = s.replace(/\./g, ":");
+    const hm = s.match(/^(\d{1,2}):(\d{1,2})/);
+    if (hm) {
+        return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
+    }
+    const four = s.match(/^(\d{2})(\d{2})$/);
+    if (four) {
+        return four[1] + ":" + four[2];
+    }
+    return "";
+}
+
+function formatTanggalShort(date) {
+    const value = normalizeDate(clean(date));
+    if (!value) return "-";
+    const parts = value.split("-");
+    if (parts.length !== 3) return value;
+    return parts[2] + "/" + parts[1];
+}
+
+const HARI_INDO = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_INDO = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+function getClockText() {
+    const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
+    return `${HARI_INDO[d.getUTCDay()]}, ${d.getUTCDate()} ${BULAN_INDO[d.getUTCMonth()]} ${d.getUTCFullYear()} ${String(d.getUTCHours()).padStart(2, "0")}.${String(d.getUTCMinutes()).padStart(2, "0")}.${String(d.getUTCSeconds()).padStart(2, "0")}`;
+}
+
+function getNowWIBMs() { return Date.now() + (7 * 60 * 60 * 1000); }
+
+function getTodayString() {
+    const wibDate = new Date(getNowWIBMs());
+    return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
+}
+
+function getTomorrowString() {
+    const wibDate = new Date(getNowWIBMs() + (24 * 60 * 60 * 1000));
+    return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
+}
+
+function get7DaysString() {
+    const wibDate = new Date(getNowWIBMs() + (7 * 24 * 60 * 60 * 1000));
+    return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
+}
+
+function dataMasihAktif(data) { return data.active !== false; }
+function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
+function matchKey(data) { return [normalizeDate(clean(data.date)), normalizeTime(clean(data.time)), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
+
+function getKickoffWIBMs(data) {
+    const date = normalizeDate(clean(data.date));
+    const time = normalizeTime(clean(data.time));
+    if (!date || !time) return null;
+    const partsDate = date.split("-");
+    if (partsDate.length !== 3) return null;
+    const partsTime = time.split(":");
+    if (partsTime.length !== 2) return null;
+    return Date.UTC(
+        parseInt(partsDate[0], 10),
+        parseInt(partsDate[1], 10) - 1,
+        parseInt(partsDate[2], 10),
+        parseInt(partsTime[0], 10),
+        parseInt(partsTime[1], 10),
+        0
+    );
+}
+
+function getMatchStatus(data) {
+    const aH = clean(data.actualScoreHome);
+    const aA = clean(data.actualScoreAway);
+    if (aH !== "" && aA !== "") return "selesai";
+    const kickoffWIB = getKickoffWIBMs(data);
+    if (!kickoffWIB) return "akan";
+    const now = getNowWIBMs();
+    const diff = kickoffWIB - now;
+
+    if (diff <= 0 && diff > -105 * 60 * 1000) return "live";
+    if (diff <= -105 * 60 * 1000) return "selesai";
+    return "akan";
+}
+
+function getCountdownText(data) {
+    const kickoffWIB = getKickoffWIBMs(data);
+    if (!kickoffWIB) return "";
+    const status = getMatchStatus(data);
+    if (status === "selesai" || status === "live") return "";
+    const diff = kickoffWIB - getNowWIBMs();
+    if (diff <= 0) return "";
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    if (days > 0) return `${days}h ${hours}j`;
+    if (hours > 0) return `${hours}j ${minutes}m ${seconds}s`;
+    return `${minutes}m ${seconds}s`;
+}
+
+function updateTabClock() {
+    const el = document.getElementById("tabClockValue");
+    if (!el) return;
+    const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
+    el.textContent = String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
+}
+
+let nextMatchData = null;
+
+function updateNextMatchBar(data) {
+    const bar = document.getElementById("nextMatchBar");
+    if (!bar) return;
+    const today = getTodayString();
+    const candidates = data.filter(item => {
+        const d = normalizeDate(clean(item.date));
+        if (d < today) return false;
+        return getMatchStatus(item) === "akan";
+    });
+    if (!candidates.length) {
+        bar.classList.remove("show");
+        nextMatchData = null;
+        return;
+    }
+    candidates.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+    nextMatchData = candidates[0];
+    const teamsEl = document.getElementById("nextMatchTeams");
+    if (teamsEl) {
+        teamsEl.textContent = clean(nextMatchData.home) + "  vs  " + clean(nextMatchData.away);
+    }
+    bar.classList.add("show");
+}
+
+function tickNextMatchCountdown() {
+    if (!nextMatchData) return;
+    const countdownEl = document.getElementById("nextMatchCountdown");
+    if (!countdownEl) return;
+    const kickoffWIB = getKickoffWIBMs(nextMatchData);
+    if (!kickoffWIB) { countdownEl.textContent = "--:--:--"; return; }
+    const diff = kickoffWIB - getNowWIBMs();
+    if (diff <= 0) { countdownEl.textContent = "SEGERA"; return; }
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    if (days > 0) countdownEl.textContent = `${days}h ${hours}j ${minutes}m`;
+    else countdownEl.textContent = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+}
+
+/* SPECIAL BADGES */
+const TOP_LEAGUES = ["premier league", "english premier league", "la liga", "liga spanyol", "serie a", "serie a italia", "bundesliga", "ligue 1", "champions league", "uefa champions league", "afc champions league", "europa league", "copa libertadores", "world cup", "piala dunia"];
+
+function isTopLeague(league) {
+    const l = clean(league).toLowerCase();
+    return TOP_LEAGUES.some(top => l.includes(top));
+}
+
+function generateSpecialBadges(data, status) {
+    const badges = [];
+    const league = clean(data.league);
+    const home = clean(data.home);
+    const away = clean(data.away);
+    if (status === "akan") {
+        const kickoffWIB = getKickoffWIBMs(data);
+        if (kickoffWIB) {
+            const diff = kickoffWIB - getNowWIBMs();
+            if (diff > 0 && diff < 2 * 60 * 60 * 1000) {
+                badges.push(`<span class="special-badge hot"><span class="icon-mini">🔥</span>HOT</span>`);
+            }
+        }
+    } else if (status === "live") {
+        badges.push(`<span class="special-badge hot"><span class="icon-mini">🔥</span>HOT</span>`);
+    }
+    if (isTopLeague(league)) badges.push(`<span class="special-badge vip"><span class="icon-mini">⭐</span>VIP</span>`);
+    const premiumKeywords = ["madrid", "barcelona", "liverpool", "arsenal", "manchester", "chelsea", "juventus", "inter", "milan", "bayern", "psg", "dortmund"];
+    const combined = (home + " " + away).toLowerCase();
+    if (premiumKeywords.some(kw => combined.includes(kw))) {
+        badges.push(`<span class="special-badge premium"><span class="icon-mini">💎</span>PREMIUM</span>`);
+    }
+    if (!badges.length) return "";
+    return `<div class="match-special-badges">${badges.join("")}</div>`;
+}
+
+/* NEWS TICKER */
+function updateNewsTicker(data) {
+    const ticker = document.getElementById("newsTickerContent");
+    if (!ticker) return;
+    if (!data.length) {
+        ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D! • ⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat! • 🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!";
+        return;
+    }
+    const liveMatches = data.filter(item => getMatchStatus(item) === "live");
+    const today = getTodayString();
+    const upcoming = data.filter(item => {
+        const d = normalizeDate(clean(item.date));
+        if (d < today) return false;
+        return getMatchStatus(item) === "akan";
+    }).sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0)).slice(0, 5);
+    const todayMatches = data.filter(item => normalizeDate(clean(item.date)) === today).slice(0, 8);
+    let newsItems = [];
+    liveMatches.forEach(item => newsItems.push(`🔴 LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
+    upcoming.forEach(item => {
+        const countdown = getCountdownText(item);
+        newsItems.push(`⚡ ${item.home} vs ${item.away} — mulai dalam ${countdown} (${clean(item.league) || "LAINNYA"})`);
+    });
+    if (newsItems.length < 6) {
+        todayMatches.forEach(item => {
+            if (newsItems.length >= 8) return;
+            if (getMatchStatus(item) === "selesai") return;
+            newsItems.push(`🎯 ${item.home} vs ${item.away} — ${clean(item.time)} WIB`);
+        });
+    }
+    if (!newsItems.length) {
+        newsItems.push("🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!");
+        newsItems.push("⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat!");
+        newsItems.push("🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!");
+    }
+    newsItems.push("⚡ Data live & real-time, langsung dari sumber terpercaya");
+    newsItems.push("🌟 Jangan lewatkan big match malam ini!");
+    ticker.textContent = newsItems.join("  •  ");
+}
+
+/* RENDER MATCH ROW */
+function renderMatchRowSingle(data) {
+    const home = clean(data.home);
+    const away = clean(data.away);
+    const time = normalizeTime(clean(data.time));
+    const date = normalizeDate(clean(data.date));
+    const handicap = clean(data.handicap);
+    const scoreHome = clean(data.predictionScoreHome);
+    const scoreAway = clean(data.predictionScoreAway);
+    const status = getMatchStatus(data);
+    const hasHdp = handicap !== "";
+    const hdpClass = hasHdp ? "" : "empty";
+    const hdpText = hasHdp ? handicap : "-";
+    const hasPred = scoreHome !== "" && scoreAway !== "";
+    const predClass = hasPred ? "" : "empty";
+    const predText = hasPred ? escapeHtml(scoreHome) + " - " + escapeHtml(scoreAway) : "-";
+    let badgeHtml = "";
+    if (status === "live") badgeHtml = `<div class="match-live-badge">LIVE</div>`;
+    else if (status === "selesai") badgeHtml = `<div class="match-finished-badge">SELESAI</div>`;
+    return `
+        <div class="match-row-single">
+            ${badgeHtml}
+            <div class="match-time-badge">
+                <span class="time-value">${escapeHtml(time)}</span>
+                <span class="time-date">${escapeHtml(formatTanggalShort(date))}</span>
+            </div>
+            <div class="match-teams-block">
+                <div class="match-team-mini">
+                    <div class="mini-name">${escapeHtml(home)}</div>
+                </div>
+                <div class="match-vs-mini">VS</div>
+                <div class="match-team-mini right">
+                    <div class="mini-name">${escapeHtml(away)}</div>
+                </div>
+            </div>
+            <div class="match-value-box hdp ${hdpClass}">
+                <span class="val-label">HDP</span>
+                <span class="val-number">${escapeHtml(hdpText)}</span>
+            </div>
+            <div class="match-value-box pred ${predClass}">
+                <span class="val-label">Prediksi</span>
+                <span class="val-number">${predText}</span>
+            </div>
+        </div>
+    `;
+}
+
+/* RENDER PREDIKSI */
+function renderPrediksi(data) {
+    const container = document.getElementById("prediksiContainer");
+    if (!container) return;
+    if (!data.length) {
+        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok dengan filter</div></div>`;
+        return;
+    }
+
+    const groupTanggal = {};
+    data.forEach(item => {
+        const d = normalizeDate(clean(item.date)) || "0000-00-00";
+        if (!groupTanggal[d]) groupTanggal[d] = [];
+        groupTanggal[d].push(item);
+    });
+
+    const tanggalSorted = Object.keys(groupTanggal).sort();
+    let html = "";
+
+    tanggalSorted.forEach(tanggal => {
+        const matches = groupTanggal[tanggal];
+
+        const dateObj = new Date(tanggal + "T00:00:00Z");
+        const hari = HARI_INDO[dateObj.getUTCDay()];
+        const tgl = dateObj.getUTCDate();
+        const bulan = BULAN_INDO[dateObj.getUTCMonth()];
+        const tahun = dateObj.getUTCFullYear();
+        const headerTgl = `${hari}, ${tgl} ${bulan} ${tahun}`;
+
+        html += `<div class="date-group">`;
+        html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
+
+        const groupLiga = {};
+        matches.forEach(item => {
+            const liga = clean(item.league) || "LAINNYA";
+            if (!groupLiga[liga]) groupLiga[liga] = [];
+            groupLiga[liga].push(item);
+        });
+
+        Object.keys(groupLiga).sort().forEach(liga => {
+            const matchList = groupLiga[liga].sort((a, b) => {
+                return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
+            });
+            const rows = matchList.map(renderMatchRowSingle).join("");
+            html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+        });
+
+        html += `</div>`;
+    });
+
+    container.innerHTML = html;
+    setTimeout(() => { if (window.fadeInContent) window.fadeInContent(); }, 50);
+}
+
+/* FILTER */
+function updateLigaFilter(data) {
+    const select = document.getElementById("ligaFilter");
+    if (!select) return;
+    const currentValue = select.value;
+    const ligaCount = {};
+    data.forEach(item => {
+        const liga = clean(item.league) || "LAINNYA";
+        if (!ligaCount[liga]) ligaCount[liga] = 0;
+        ligaCount[liga]++;
+    });
+    const ligaList = Object.keys(ligaCount).sort();
+    select.innerHTML = `<option value="all">Semua Liga (${data.length})</option>`;
+    ligaList.forEach(liga => {
+        const option = document.createElement("option");
+        option.value = liga;
+        option.textContent = liga + " (" + ligaCount[liga] + ")";
+        select.appendChild(option);
+    });
+    if (ligaList.includes(currentValue)) select.value = currentValue;
+}
+
+function applyFilter() {
+    const selectTanggal = document.getElementById("tanggalFilter");
+    const selectLiga = document.getElementById("ligaFilter");
+    const selectStatus = document.getElementById("statusFilter");
+    const searchInput = document.getElementById("searchInput");
+    const btnClear = document.getElementById("btnClearSearch");
+    if (!selectTanggal || !selectLiga || !selectStatus || !searchInput) return;
+
+    const tanggal = selectTanggal.value;
+    const selectedLiga = selectLiga.value;
+    const selectedStatus = selectStatus.value;
+    const keyword = clean(searchInput.value).toLowerCase();
+    const today = getTodayString();
+    const tomorrow = getTomorrowString();
+    const isRiwayat = (selectedStatus === "riwayat");
+    let filtered = [...semuaData];
+
+    if (selectedDateSpecific) {
+        const todayParts = today.split("-");
+        const targetDate = todayParts[0] + "-" + todayParts[1] + "-" + selectedDateSpecific;
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === targetDate);
+    } else if (isRiwayat) {
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) < today);
+    } else if (tanggal === "today") {
+        filtered = filtered.filter(item => {
+            const d = normalizeDate(clean(item.date));
+            return d === today || d === tomorrow;
+        });
+    } else if (tanggal === "tomorrow") {
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) === tomorrow);
+    } else if (tanggal === "7days") {
+        const limit = get7DaysString();
+        filtered = filtered.filter(item => {
+            const d = normalizeDate(clean(item.date));
+            return d >= today && d <= limit;
+        });
+    } else if (tanggal === "live") {
+        filtered = filtered.filter(item => getMatchStatus(item) === "live");
+    } else if (tanggal === "all") {
+        filtered = filtered.filter(item => normalizeDate(clean(item.date)) >= today);
+    } else {
+        filtered = filtered.filter(item => {
+            const d = normalizeDate(clean(item.date));
+            return d === today || d === tomorrow;
+        });
+    }
+
+    if (selectedLiga !== "all") {
+        filtered = filtered.filter(item => (clean(item.league) || "LAINNYA") === selectedLiga);
+    }
+
+    if (selectedStatus !== "all" && selectedStatus !== "riwayat") {
+        filtered = filtered.filter(item => getMatchStatus(item) === selectedStatus);
+    }
+
+    if (keyword) {
+        filtered = filtered.filter(item => {
+            const league = clean(item.league).toLowerCase();
+            const home = clean(item.home).toLowerCase();
+            const away = clean(item.away).toLowerCase();
+            return league.includes(keyword) || home.includes(keyword) || away.includes(keyword);
+        });
+    }
+
+    if (keyword) btnClear.classList.remove("hidden");
+    else btnClear.classList.add("hidden");
+
+    renderPrediksi(filtered);
+}
+
+function filterLiga() { applyFilter(); }
+function filterStatus() { applyFilter(); }
+function handleSearch() { applyFilter(); }
+
+function clearSearch() {
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) return;
+    searchInput.value = "";
+    searchInput.focus();
+    applyFilter();
+}
+
+window.clearDateFilter = function() {
+    selectedDateSpecific = "";
+    const select = document.getElementById("tanggalSpesifik");
+    if (select) select.value = "";
+    const badge = document.getElementById("dateActiveBadge");
+    if (badge) badge.classList.remove("show");
+    applyFilter();
+    document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
+    const todayTab = document.querySelector('.tab-filter[data-date="today"]');
+    if (todayTab) todayTab.classList.add("active");
+    const selectTanggal = document.getElementById("tanggalFilter");
+    if (selectTanggal) selectTanggal.value = "today";
+};
+
+function handleDatePickerChange() {
+    const select = document.getElementById("tanggalSpesifik");
+    if (!select) return;
+    const value = select.value;
+    if (value) {
+        selectedDateSpecific = value;
+        const badge = document.getElementById("dateActiveBadge");
+        const text = document.getElementById("dateActiveText");
+        if (badge && text) {
+            const today = getTodayString();
+            const todayParts = today.split("-");
+            const targetDate = todayParts[0] + "-" + todayParts[1] + "-" + value;
+            const dateObj = new Date(targetDate + "T00:00:00Z");
+            const hari = HARI_INDO[dateObj.getUTCDay()];
+            const bulan = BULAN_INDO[dateObj.getUTCMonth()];
+            text.textContent = `📅 ${hari}, ${value} ${bulan} ${todayParts[0]}`;
+            badge.classList.add("show");
+        }
+        document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
+        applyFilter();
+    } else {
+        clearDateFilter();
+    }
+}
+
+function populateDateDropdown() {
+    const select = document.getElementById("tanggalSpesifik");
+    if (!select) return;
+    select.innerHTML = '<option value="">Pilih Tanggal</option>';
+    for (let i = 1; i <= 31; i++) {
+        const value = String(i).padStart(2, "0");
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+    }
+}
+
+/* STATS */
+function animateNumber(el, target, duration) {
+    if (!el) return;
+    const startTime = performance.now();
+    function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.floor(target * progress);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(update);
+}
+
+function updateStats(data) {
+    const today = getTodayString();
+    const dataAktif = data.filter(item => normalizeDate(clean(item.date)) >= today);
+    const totalPrediksi = dataAktif.filter(item => clean(item.predictionScoreHome) !== "" && clean(item.predictionScoreAway) !== "").length;
+    const totalLiga = new Set(dataAktif.map(item => clean(item.league) || "LAINNYA")).size;
+    const totalPertandingan = dataAktif.length;
+    const el1 = document.getElementById("totalPrediksi");
+    const el2 = document.getElementById("totalLiga");
+    const el3 = document.getElementById("totalPertandingan");
+    if (el1) animateNumber(el1, totalPrediksi, 1200);
+    if (el2) animateNumber(el2, totalLiga, 1000);
+    if (el3) animateNumber(el3, totalPertandingan, 1400);
+}
+
+/* BIG MATCH TICKER */
+function bigMatchCard(data) {
+    const home = clean(data.home);
+    const away = clean(data.away);
+    const time = normalizeTime(clean(data.time));
+    const league = clean(data.league) || "LAINNYA";
+    return `
+        <div class="bmt-card">
+            <div class="bmt-badge"><span class="icon-fire-sm">🔥</span><span>BIG MATCH</span></div>
+            <div class="bmt-league">${escapeHtml(league)}</div>
+            <div class="bmt-teams">
+                <div class="bmt-team">${bmtLogo(home, data.homeLogo)}<div class="bmt-team-name">${escapeHtml(home)}</div></div>
+                <div class="bmt-vs">VS</div>
+                <div class="bmt-team">${bmtLogo(away, data.awayLogo)}<div class="bmt-team-name">${escapeHtml(away)}</div></div>
+            </div>
+            <div class="bmt-time"><span class="time-icon">🕐</span><span>${escapeHtml(time)} WIB</span></div>
+        </div>
+    `;
+}
+
+function renderBigMatch(data) {
+    const track = document.getElementById("bigMatchTrack");
+    if (!track) return;
+    const today = getTodayString();
+    const tomorrow = getTomorrowString();
+    const candidates = data.filter(item => {
+        const d = normalizeDate(clean(item.date));
+        if (d < today || d > tomorrow) return false;
+        const status = getMatchStatus(item);
+        return status === "akan" || status === "live";
+    });
+    candidates.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+    const top8 = candidates.slice(0, 8);
+    if (!top8.length) {
+        track.innerHTML = `<div class="big-match-ticker-empty">Belum ada pertandingan pilihan hari ini</div>`;
+        return;
+    }
+    const cardsHTML = top8.map(bigMatchCard).join("");
+    track.innerHTML = cardsHTML + cardsHTML;
+    const duration = (215 * top8.length) / 60;
+    track.style.animationDuration = duration + "s";
+    const wrap = document.querySelector(".big-match-ticker-wrap");
+    if (wrap && !wrap.querySelector(".fade-left")) {
+        const fadeLeft = document.createElement("div");
+        fadeLeft.className = "fade-left";
+        wrap.appendChild(fadeLeft);
+        const fadeRight = document.createElement("div");
+        fadeRight.className = "fade-right";
+        wrap.appendChild(fadeRight);
+    }
+    const liveNow = candidates.filter(c => getMatchStatus(c) === "live");
+    if (liveNow.length > 0 && !window.confettiTriggered) {
+        window.confettiTriggered = true;
+        setTimeout(() => triggerConfetti(), 2000);
+    }
+}
+
+/* PROCESS DATA */
+function processData(rawDataArray) {
+    const merged = new Map();
+    rawDataArray.forEach(data => {
+        if (!dataLengkap(data)) return;
+        if (!dataMasihAktif(data)) return;
+        const key = matchKey(data);
+        if (!merged.has(key)) {
+            merged.set(key, { ...data });
+        } else {
+            const existing = merged.get(key);
+            if (!clean(existing.league) && clean(data.league)) existing.league = data.league;
+            if (!clean(existing.handicap) && clean(data.handicap)) existing.handicap = data.handicap;
+            if (!clean(existing.homeLogo) && clean(data.homeLogo)) existing.homeLogo = data.homeLogo;
+            if (!clean(existing.awayLogo) && clean(data.awayLogo)) existing.awayLogo = data.awayLogo;
+            if (!clean(existing.predictionScoreHome) && clean(data.predictionScoreHome)) existing.predictionScoreHome = data.predictionScoreHome;
+            if (!clean(existing.predictionScoreAway) && clean(data.predictionScoreAway)) existing.predictionScoreAway = data.predictionScoreAway;
+            if (!clean(existing.actualScoreHome) && clean(data.actualScoreHome)) existing.actualScoreHome = data.actualScoreHome;
+            if (!clean(existing.actualScoreAway) && clean(data.actualScoreAway)) existing.actualScoreAway = data.actualScoreAway;
+            merged.set(key, existing);
+        }
+    });
+    semuaData = Array.from(merged.values());
+    semuaData.sort((a, b) => {
+        const aTime = getKickoffWIBMs(a) || 0;
+        const bTime = getKickoffWIBMs(b) || 0;
+        return aTime - bTime;
+    });
+
+    const selectTanggal = document.getElementById("tanggalFilter");
+    if (selectTanggal && !selectTanggal.dataset.initialized) {
+        selectTanggal.value = "today";
+        selectTanggal.dataset.initialized = "true";
+    }
+
+    updateLigaFilter(semuaData);
+    updateStats(semuaData);
+    updateNewsTicker(semuaData);
+    updateNextMatchBar(semuaData);
+    applyFilter();
+    renderBigMatch(semuaData);
+    updateLoadingProgress(100, 400);
+}
+
+/* LOAD DATA */
+async function loadData() {
+    try {
+        await loadTeamLogosFromDB();
+
+        const cached = loadCache(CACHE_DURATION);
+        if (cached && cached.length > 0) {
+            processData(cached);
+            return;
+        }
+        const querySnapshot = await getDocs(collection(db, "predictions"));
+        const rawData = [];
+        querySnapshot.forEach(docSnapshot => {
+            rawData.push({ id: docSnapshot.id, ...docSnapshot.data() });
+        });
+        saveCache(rawData);
+        processData(rawData);
+    } catch (error) {
+        const fallback = loadCache();
+        if (fallback) {
+            processData(fallback);
+        } else {
+            const el = document.getElementById("prediksiContainer");
+            if (el) el.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Gagal memuat data. Coba refresh.</div></div>`;
+            updateLoadingProgress(100, 300);
+        }
+    }
+}
+
+/* LOADING */
+let loadingProgress = 0;
+let loadingFinished = false;
+const loadingTexts = document.querySelectorAll(".loading-text");
+let currentTextIndex = 0;
+
+function updateLoadingProgress(target, duration) {
+    const start = loadingProgress;
+    const startTime = performance.now();
+    function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        loadingProgress = Math.floor(start + (target - start) * progress);
+        const barFill = document.getElementById("loadingBarFill");
+        const percentEl = document.getElementById("loadingPercent");
+        if (barFill) barFill.style.width = loadingProgress + "%";
+        if (percentEl) percentEl.textContent = loadingProgress;
+        if (progress < 1) requestAnimationFrame(update);
+        else if (loadingProgress >= 100) finishLoading();
+    }
+    requestAnimationFrame(update);
+}
+
+function cycleLoadingText() {
+    if (loadingFinished) return;
+    if (!loadingTexts.length) return;
+    loadingTexts[currentTextIndex].classList.remove("active");
+    loadingTexts[currentTextIndex].classList.add("exit");
+    const oldIndex = currentTextIndex;
+    setTimeout(() => loadingTexts[oldIndex].classList.remove("exit"), 500);
+    currentTextIndex = (currentTextIndex + 1) % loadingTexts.length;
+    loadingTexts[currentTextIndex].classList.add("active");
+    if (currentTextIndex < loadingTexts.length - 1) {
+        setTimeout(cycleLoadingText, 800);
+    }
+}
+
+function finishLoading() {
+    if (loadingFinished) return;
+    loadingFinished = true;
+    setTimeout(() => {
+        const loader = document.getElementById("loadingScreen");
+        if (loader) loader.classList.add("hide");
+    }, 400);
+}
+
+updateLoadingProgress(30, 400);
+setTimeout(() => updateLoadingProgress(60, 500), 500);
+setTimeout(cycleLoadingText, 700);
+setTimeout(() => updateLoadingProgress(85, 600), 1200);
+setTimeout(() => updateLoadingProgress(100, 500), 1900);
+setTimeout(finishLoading, 4000);
+
+/* LUX MARQUEE */
+function initLuxMarquee(containerId, intervalMs) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const items = Array.from(container.querySelectorAll(".lux-text-item"));
+    if (items.length === 0) return;
+    let currentIndex = 0;
+    function showItem(newIndex) {
+        const currentItem = items[currentIndex];
+        const nextItem = items[newIndex];
+        if (currentItem === nextItem) return;
+        currentItem.classList.remove("active");
+        currentItem.classList.add("exit-up");
+        setTimeout(() => currentItem.classList.remove("exit-up"), 1000);
+        nextItem.classList.add("active");
+        currentIndex = newIndex;
+    }
+    setInterval(() => {
+        const newIndex = (currentIndex + 1) % items.length;
+        showItem(newIndex);
+    }, intervalMs);
+}
+
+initLuxMarquee("luxTextTop", 4200);
+
+/* INFINITE SCROLL */
+(function initInfiniteScroll() {
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollTop / docHeight > 0.9) {
+                const btnMore = document.querySelector(".selesai-toggle");
+                if (btnMore && !btnMore.classList.contains("open")) {
+                    btnMore.click();
+                }
+            }
+            ticking = false;
+        });
+    }, { passive: true });
+})();
+
+/* EVENT LISTENERS */
+const elLiga = document.getElementById("ligaFilter");
+const elStatus = document.getElementById("statusFilter");
+const elSearch = document.getElementById("searchInput");
+const elClear = document.getElementById("btnClearSearch");
+const elTanggal = document.getElementById("tanggalFilter");
+const elDateSelect = document.getElementById("tanggalSpesifik");
+
+if (elLiga) elLiga.addEventListener("change", filterLiga);
+if (elStatus) elStatus.addEventListener("change", filterStatus);
+if (elSearch) elSearch.addEventListener("input", handleSearch);
+if (elClear) elClear.addEventListener("click", clearSearch);
+if (elDateSelect) elDateSelect.addEventListener("change", handleDatePickerChange);
+
+document.querySelectorAll(".tab-filter").forEach(tab => {
+    tab.addEventListener("click", () => {
+        selectedDateSpecific = "";
+        const dateSelect = document.getElementById("tanggalSpesifik");
+        if (dateSelect) dateSelect.value = "";
+        const badge = document.getElementById("dateActiveBadge");
+        if (badge) badge.classList.remove("show");
+
+        document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const dateValue = tab.dataset.date;
+        if (elTanggal) {
+            elTanggal.value = dateValue;
+            if (dateValue === "live" && elStatus) elStatus.value = "all";
+        }
+        applyFilter();
+
+        if (dateValue === "live") {
+            const section = document.getElementById("pertandingan");
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 300);
+            }
+        }
+    });
+});
+
+setInterval(updateTabClock, 1000);
+updateTabClock();
+
+setInterval(tickNextMatchCountdown, 1000);
+
+setInterval(() => {
+    clearCache();
+    loadData();
+}, 3 * 60 * 60 * 1000);
+
+setInterval(() => {
+    if (semuaData.length > 0) {
+        updateNewsTicker(semuaData);
+        renderBigMatch(semuaData);
+        const tabAktif = document.querySelector(".tab-filter.active");
+        if (tabAktif && tabAktif.dataset.date === "live") {
+            applyFilter();
+        }
+    }
+}, 60000);
+
+/* INIT */
+populateDateDropdown();
+loadSavedTeamLogos();
+loadData();
+
+</script>
+</body>
+</html>
