@@ -24,6 +24,7 @@
 <link rel="preload" as="image" href="banner-kiper4d-baru.png">
 <link rel="preconnect" href="https://www.gstatic.com">
 <link rel="preconnect" href="https://firestore.googleapis.com">
+<link rel="preconnect" href="https://www.thesportsdb.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -42,7 +43,6 @@ body {
     letter-spacing: 0.2px;
 }
 
-/* Aurora & Liquid dimatikan */
 .aurora-bg { display: none; }
 .liquid-bg { display: none; }
 
@@ -51,7 +51,7 @@ body {
     inset: 0;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 .reading-progress {
@@ -60,12 +60,12 @@ body {
     left: 0;
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, #ffcc33, #00d4ff, #5d2de8);
+    background: linear-gradient(90deg, #5ec8e5, #e5d17a, #d67bc7);
     background-size: 200% auto;
     z-index: 99999;
     transition: width 0.1s ease-out;
-    box-shadow: 0 0 15px rgba(0,212,255,0.8);
-    animation: progressShine 3s linear infinite;
+    box-shadow: 0 0 15px rgba(94,200,229,0.7);
+    animation: progressShine 4s linear infinite;
 }
 
 @keyframes progressShine {
@@ -99,8 +99,8 @@ body {
     position: absolute;
     width: 3px; height: 3px;
     border-radius: 50%;
-    background: #00d4ff;
-    box-shadow: 0 0 10px #00d4ff, 0 0 20px #5d2de8;
+    background: #5ec8e5;
+    box-shadow: 0 0 10px #5ec8e5, 0 0 20px #d67bc7;
     animation: floatParticle 6s ease-in-out infinite;
 }
 
@@ -128,8 +128,8 @@ body {
 
 .loading-ring:nth-child(2) {
     width: 245px; height: 245px;
-    border: 1.5px solid rgba(0,212,255,0.15);
-    border-bottom-color: rgba(0,212,255,1);
+    border: 1.5px solid rgba(94,200,229,0.15);
+    border-bottom-color: rgba(94,200,229,1);
     animation-duration: 3.2s;
     animation-direction: reverse;
 }
@@ -145,7 +145,7 @@ body {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(0,212,255,0.6));
+    filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(94,200,229,0.6));
     animation: floatLogo 2.5s ease-in-out infinite;
 }
 
@@ -174,7 +174,7 @@ body {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 4px;
-    color: #00d4ff;
+    color: #5ec8e5;
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(12px);
@@ -194,17 +194,17 @@ body {
 
 .loading-bar-fill {
     height: 100%; width: 0%;
-    background: linear-gradient(90deg, #5d2de8, #00d4ff, #ffcc33);
+    background: linear-gradient(90deg, #5d2de8, #5ec8e5, #e5d17a);
     border-radius: 20px;
     transition: width 0.3s ease-out;
-    box-shadow: 0 0 15px rgba(0,212,255,0.8);
+    box-shadow: 0 0 15px rgba(94,200,229,0.8);
 }
 
 .loading-percent {
     font-family: 'Teko', sans-serif;
     font-size: 42px;
     font-weight: 700;
-    background: linear-gradient(180deg, #fff5d0, #ffcc33, #b8860b);
+    background: linear-gradient(180deg, #fff5d0, #e5d17a, #b8860b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -216,8 +216,8 @@ body {
 .loading-percent::after {
     content: "%";
     font-size: 22px;
-    color: #00d4ff;
-    -webkit-text-fill-color: #00d4ff;
+    color: #5ec8e5;
+    -webkit-text-fill-color: #5ec8e5;
 }
 
 .loading-brand {
@@ -226,7 +226,7 @@ body {
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 10px;
-    color: #ffcc33;
+    color: #e5d17a;
     opacity: 0.85;
 }
 
@@ -246,7 +246,7 @@ header::before {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #ffcc33, #00d4ff, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #e5d17a, #5ec8e5, #5d2de8, transparent);
     background-size: 200% 100%;
     animation: headerBorder 8s linear infinite;
 }
@@ -289,7 +289,7 @@ header::before {
 }
 
 .logo:hover img {
-    filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(0,212,255,0.6));
+    filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(94,200,229,0.6));
 }
 
 .logo-subtitle {
@@ -298,7 +298,7 @@ header::before {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 3px;
-    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
+    background: linear-gradient(90deg, #e5d17a, #fff5d0, #5ec8e5, #fff5d0, #e5d17a);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -328,15 +328,15 @@ nav a.nav-link {
 }
 
 nav a.nav-link:hover {
-    color: #00d4ff;
-    background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15));
-    border-color: rgba(0,212,255,0.6);
-    box-shadow: 0 0 25px rgba(0,212,255,0.45);
+    color: #5ec8e5;
+    background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(94,200,229,0.15));
+    border-color: rgba(94,200,229,0.6);
+    box-shadow: 0 0 25px rgba(94,200,229,0.45);
     transform: translateY(-2px);
 }
 
 nav a.nav-login {
-    color: #00d4ff;
+    color: #5ec8e5;
     text-decoration: none;
     padding: 9px 24px;
     border-radius: 24px;
@@ -345,15 +345,15 @@ nav a.nav-login {
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1.5px solid rgba(0,212,255,0.8);
-    box-shadow: 0 0 15px rgba(0,212,255,0.3);
+    border: 1.5px solid rgba(94,200,229,0.8);
+    box-shadow: 0 0 15px rgba(94,200,229,0.3);
     transition: all 0.3s;
 }
 
 nav a.nav-login:hover {
     color: #0a0e27;
-    background: linear-gradient(135deg, #00d4ff, #5d2de8);
-    box-shadow: 0 0 30px rgba(0,212,255,0.8);
+    background: linear-gradient(135deg, #5ec8e5, #5d2de8);
+    box-shadow: 0 0 30px rgba(94,200,229,0.8);
     transform: translateY(-2px);
 }
 
@@ -367,9 +367,9 @@ nav a.nav-daftar {
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #ffcc33 0%, #fff5d0 50%, #ffcc33 100%);
+    background: linear-gradient(135deg, #e5d17a 0%, #fff5d0 50%, #e5d17a 100%);
     background-size: 200% auto;
-    box-shadow: 0 6px 25px rgba(255,204,51,0.6);
+    box-shadow: 0 6px 25px rgba(229,209,122,0.6);
     animation: btnShine 3.5s ease-in-out infinite;
     transition: all 0.3s;
 }
@@ -381,7 +381,7 @@ nav a.nav-daftar {
 
 nav a.nav-daftar:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 45px rgba(255,204,51,0.9);
+    box-shadow: 0 10px 45px rgba(229,209,122,0.9);
 }
 
 .container {
@@ -414,7 +414,7 @@ nav a.nav-daftar:hover {
     content: "";
     position: absolute;
     width: 22px; height: 22px;
-    border: 2px solid #ffcc33;
+    border: 2px solid #e5d17a;
     pointer-events: none;
     z-index: 5;
 }
@@ -426,7 +426,7 @@ nav a.nav-daftar:hover {
 .lux-text-wrap .corner-br {
     position: absolute;
     width: 22px; height: 22px;
-    border: 2px solid #ffcc33;
+    border: 2px solid #e5d17a;
     pointer-events: none;
     z-index: 5;
 }
@@ -439,7 +439,7 @@ nav a.nav-daftar:hover {
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: #ffcc33;
+    color: #e5d17a;
     animation: iconSpin 6s linear infinite;
     pointer-events: none;
     z-index: 3;
@@ -481,7 +481,7 @@ nav a.nav-daftar:hover {
     filter: blur(8px);
     transition: opacity 0.8s, transform 0.8s, filter 0.8s;
     pointer-events: none;
-    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
+    background: linear-gradient(90deg, #e5d17a, #fff5d0, #5ec8e5, #fff5d0, #e5d17a);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -506,7 +506,7 @@ nav a.nav-daftar:hover {
     border: 2px solid rgba(93,45,232,0.7);
     background: #000;
     line-height: 0;
-    box-shadow: 0 0 40px rgba(93,45,232,0.35), 0 0 80px rgba(0,212,255,0.15);
+    box-shadow: 0 0 40px rgba(93,45,232,0.35), 0 0 80px rgba(94,200,229,0.15);
 }
 
 .banner img {
@@ -522,7 +522,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -120%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
     transform: skewX(-20deg);
     animation: bannerShine 7s infinite;
     pointer-events: none;
@@ -552,7 +552,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     left: 0;
     width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #ffcc33, #00d4ff, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #e5d17a, #5ec8e5, #5d2de8, transparent);
     background-size: 200% 100%;
     animation: tickerBorderTop 8s linear infinite;
     z-index: 3;
@@ -629,11 +629,11 @@ nav a.nav-daftar:hover {
     border-radius: 16px;
     background: linear-gradient(135deg,
         transparent 0%,
-        rgba(255, 100, 255, 0.15) 20%,
+        rgba(214,123,199,0.12) 20%,
         transparent 40%,
-        rgba(100, 255, 255, 0.15) 60%,
+        rgba(94,200,229,0.12) 60%,
         transparent 80%,
-        rgba(255, 255, 100, 0.15) 100%);
+        rgba(229,209,122,0.12) 100%);
     background-size: 200% 200%;
     opacity: 0;
     transition: opacity 0.4s;
@@ -656,7 +656,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -120%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,215,100,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229,209,122,0.25), transparent);
     transform: skewX(-20deg);
     pointer-events: none;
     transition: left 0.6s ease;
@@ -666,8 +666,8 @@ nav a.nav-daftar:hover {
 .bmt-card:hover::after { left: 140%; }
 
 .bmt-card:hover {
-    border-color: rgba(0,212,255,0.9);
-    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(0,212,255,0.55);
+    border-color: rgba(94,200,229,0.9);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(94,200,229,0.45);
     transform: translateY(-4px);
 }
 
@@ -696,7 +696,7 @@ nav a.nav-daftar:hover {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2px;
-    color: #00d4ff;
+    color: #5ec8e5;
     text-transform: uppercase;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -726,7 +726,7 @@ nav a.nav-daftar:hover {
     justify-content: center;
     font-size: 11px;
     font-weight: 900;
-    color: #ffcc33;
+    color: #e5d17a;
     background: radial-gradient(circle, #1e1444, #050813);
     border: 1.5px solid rgba(93,45,232,0.9);
     overflow: hidden;
@@ -734,7 +734,7 @@ nav a.nav-daftar:hover {
 }
 
 .bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
-.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(255,204,51,0.9); }
+.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(229,209,122,0.9); }
 
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
@@ -751,7 +751,7 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px;
     font-weight: 800;
-    color: #ffcc33;
+    color: #e5d17a;
     letter-spacing: 1.5px;
 }
 
@@ -766,7 +766,7 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     letter-spacing: 1.5px;
     color: #fff5d0;
-    background: linear-gradient(90deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15), rgba(93,45,232,0.20));
+    background: linear-gradient(90deg, rgba(93,45,232,0.20), rgba(94,200,229,0.15), rgba(93,45,232,0.20));
     border-top: 1px solid rgba(93,45,232,0.4);
     border-bottom: 1px solid rgba(93,45,232,0.4);
     border-radius: 8px;
@@ -825,7 +825,7 @@ nav a.nav-daftar:hover {
     font-family: 'Rajdhani', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #00d4ff;
+    color: #5ec8e5;
     animation: newsScroll 150s linear infinite;
     padding-left: 100%;
 }
@@ -856,8 +856,8 @@ nav a.nav-daftar:hover {
 }
 
 .stat-box:hover {
-    border-color: rgba(0,212,255,0.9);
-    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(0,212,255,0.45);
+    border-color: rgba(94,200,229,0.9);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(94,200,229,0.4);
     transform: translateY(-4px);
 }
 
@@ -868,7 +868,7 @@ nav a.nav-daftar:hover {
     left: 50%;
     transform: translateX(-50%);
     font-size: 10px;
-    color: #ffcc33;
+    color: #e5d17a;
     opacity: 0.7;
 }
 
@@ -877,7 +877,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 22px; left: 15%;
     width: 70%; height: 1px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #5d2de8, transparent);
 }
 
 .stat-number {
@@ -885,13 +885,13 @@ nav a.nav-daftar:hover {
     font-family: 'Teko', sans-serif;
     font-size: 38px;
     font-weight: 700;
-    background: linear-gradient(180deg, #fff5d0, #ffcc33, #b8860b);
+    background: linear-gradient(180deg, #fff5d0, #e5d17a, #b8860b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 2px;
     line-height: 1;
-    text-shadow: 0 0 30px rgba(255,204,51,0.5);
+    text-shadow: 0 0 30px rgba(229,209,122,0.5);
 }
 
 .stat-label {
@@ -924,7 +924,7 @@ nav a.nav-daftar:hover {
 }
 
 .section-title span {
-    background: linear-gradient(90deg, #ffcc33, #00d4ff, #ffcc33);
+    background: linear-gradient(90deg, #e5d17a, #5ec8e5, #e5d17a);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -980,7 +980,7 @@ nav a.nav-daftar:hover {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #00d4ff;
+    color: #5ec8e5;
     text-transform: uppercase;
 }
 
@@ -999,7 +999,7 @@ nav a.nav-daftar:hover {
     letter-spacing: 2px;
     padding: 3px 16px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33);
+    background: linear-gradient(135deg, #e5d17a, #fff5d0, #e5d17a);
     background-size: 200% auto;
     color: #0a0e27;
     animation: nextMatchShine 3s linear infinite;
@@ -1028,7 +1028,7 @@ nav a.nav-daftar:hover {
     background: rgba(20,20,20,0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(255,204,51,0.6);
+    border: 1.5px solid rgba(229,209,122,0.6);
     flex-shrink: 0;
 }
 
@@ -1043,7 +1043,7 @@ nav a.nav-daftar:hover {
 }
 .tab-clock-value::after {
     content: ":";
-    color: #00d4ff;
+    color: #5ec8e5;
     animation: blink 1s infinite;
     margin: 0 2px;
 }
@@ -1058,7 +1058,7 @@ nav a.nav-daftar:hover {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #ffcc33;
+    color: #e5d17a;
     text-transform: uppercase;
 }
 
@@ -1091,15 +1091,15 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -100%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(94,200,229,0.2), transparent);
     transform: skewX(-20deg);
     transition: left 0.5s ease;
 }
 
 .tab-filter:hover {
-    color: #00d4ff;
-    border-color: rgba(0,212,255,0.7);
-    box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    color: #5ec8e5;
+    border-color: rgba(94,200,229,0.7);
+    box-shadow: 0 0 20px rgba(94,200,229,0.4);
     transform: translateY(-2px);
 }
 
@@ -1107,10 +1107,10 @@ nav a.nav-daftar:hover {
 
 .tab-filter.active {
     color: #0a0e27;
-    background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33);
+    background: linear-gradient(135deg, #e5d17a, #fff5d0, #e5d17a);
     background-size: 200% auto;
-    border-color: #ffcc33;
-    box-shadow: 0 4px 25px rgba(255,204,51,0.6);
+    border-color: #e5d17a;
+    box-shadow: 0 4px 25px rgba(229,209,122,0.6);
     animation: tabActiveShine 3s linear infinite;
 }
 
@@ -1136,11 +1136,11 @@ nav a.nav-daftar:hover {
 }
 
 .search-box:focus-within {
-    border-color: rgba(0,212,255,0.9);
-    box-shadow: 0 0 30px rgba(0,212,255,0.5);
+    border-color: rgba(94,200,229,0.9);
+    box-shadow: 0 0 30px rgba(94,200,229,0.5);
 }
 
-.search-icon { padding: 0 14px; color: #00d4ff; font-size: 14px; pointer-events: none; }
+.search-icon { padding: 0 14px; color: #5ec8e5; font-size: 14px; pointer-events: none; }
 
 #searchInput {
     flex: 1;
@@ -1166,7 +1166,7 @@ nav a.nav-daftar:hover {
     font-weight: bold;
 }
 
-.search-clear:hover { color: #00d4ff; }
+.search-clear:hover { color: #5ec8e5; }
 .search-clear.hidden { display: none; }
 
 .date-filter { display: flex; align-items: center; gap: 10px; }
@@ -1196,7 +1196,7 @@ nav a.nav-daftar:hover {
     max-width: 220px;
     background-image:
         linear-gradient(145deg, rgba(20,20,20,1), rgba(0,0,0,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235ec8e5' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, right 14px center;
     background-size: 100% 100%, 12px 12px;
@@ -1214,8 +1214,8 @@ nav a.nav-daftar:hover {
 #tanggalFilter:focus,
 #ligaFilter:focus,
 #statusFilter:focus {
-    border-color: #00d4ff;
-    box-shadow: 0 0 28px rgba(0,212,255,0.7);
+    border-color: #5ec8e5;
+    box-shadow: 0 0 28px rgba(94,200,229,0.7);
 }
 
 .date-picker-filter {
@@ -1236,9 +1236,9 @@ nav a.nav-daftar:hover {
 #tanggalSpesifik {
     appearance: none;
     -webkit-appearance: none;
-    border: 1.5px solid rgba(255,204,51,0.6);
+    border: 1.5px solid rgba(229,209,122,0.6);
     background-color: #000;
-    color: #ffcc33;
+    color: #e5d17a;
     padding: 11px 38px 11px 16px;
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
@@ -1250,7 +1250,7 @@ nav a.nav-daftar:hover {
     min-width: 130px;
     background-image:
         linear-gradient(145deg, rgba(20,20,20,1), rgba(0,0,0,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffcc33' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e5d17a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, right 14px center;
     background-size: 100% 100%, 12px 12px;
@@ -1259,13 +1259,13 @@ nav a.nav-daftar:hover {
 
 #tanggalSpesifik option {
     background-color: #000;
-    color: #ffcc33;
+    color: #e5d17a;
     font-weight: 700;
 }
 
 #tanggalSpesifik:focus {
-    border-color: #ffcc33;
-    box-shadow: 0 0 28px rgba(255,204,51,0.7);
+    border-color: #e5d17a;
+    box-shadow: 0 0 28px rgba(229,209,122,0.7);
 }
 
 .date-active-badge {
@@ -1274,9 +1274,9 @@ nav a.nav-daftar:hover {
     gap: 8px;
     padding: 8px 16px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(255,204,51,0.2), rgba(0,212,255,0.15));
-    border: 1.5px solid rgba(255,204,51,0.7);
-    color: #ffcc33;
+    background: linear-gradient(135deg, rgba(229,209,122,0.2), rgba(94,200,229,0.15));
+    border: 1.5px solid rgba(229,209,122,0.7);
+    color: #e5d17a;
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px;
     font-weight: 800;
@@ -1288,8 +1288,8 @@ nav a.nav-daftar:hover {
 
 .date-active-badge.show { display: inline-flex; }
 .date-active-badge:hover {
-    background: linear-gradient(135deg, rgba(255,204,51,0.35), rgba(0,212,255,0.25));
-    box-shadow: 0 0 25px rgba(255,204,51,0.5);
+    background: linear-gradient(135deg, rgba(229,209,122,0.35), rgba(94,200,229,0.25));
+    box-shadow: 0 0 25px rgba(229,209,122,0.5);
 }
 .date-active-badge .close-x {
     font-size: 14px;
@@ -1311,7 +1311,7 @@ nav a.nav-daftar:hover {
     font-size: 18px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #ffcc33;
+    color: #e5d17a;
     text-transform: uppercase;
     padding: 14px 20px;
     margin-bottom: 18px;
@@ -1319,10 +1319,10 @@ nav a.nav-daftar:hover {
     background: rgba(93,45,232,0.25);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(255,204,51,0.5);
+    border: 1.5px solid rgba(229,209,122,0.5);
     text-align: center;
-    box-shadow: 0 0 25px rgba(255,204,51,0.25);
-    text-shadow: 0 0 15px rgba(255,204,51,0.8);
+    box-shadow: 0 0 25px rgba(229,209,122,0.25);
+    text-shadow: 0 0 15px rgba(229,209,122,0.8);
     position: relative;
     overflow: hidden;
 }
@@ -1332,7 +1332,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -120%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,215,100,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229,209,122,0.3), transparent);
     transform: skewX(-20deg);
     animation: shineSweep 5s ease-in-out infinite;
     pointer-events: none;
@@ -1413,7 +1413,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 50px rgba(93,45,232,0.25);
 }
 
-/* ==== LEAGUE HEADER HITAM POLOS ==== */
+/* ==== LEAGUE HEADER HITAM POLOS + TULISAN EMAS ==== */
 .league-header {
     position: relative;
     padding: 20px 25px;
@@ -1422,16 +1422,11 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 5px;
-    color: #ffcc33;
+    color: #e5d17a;
     text-transform: uppercase;
     background: #000000;
-    border-bottom: 1.5px solid rgba(255,204,51,0.5);
-    text-shadow: 0 0 10px rgba(255,204,51,0.6);
-}
-
-@keyframes leagueAurora {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    border-bottom: 1.5px solid rgba(229,209,122,0.5);
+    text-shadow: 0 0 10px rgba(229,209,122,0.6);
 }
 
 .single-column-wrap {
@@ -1442,7 +1437,7 @@ nav a.nav-daftar:hover {
 }
 
 /* ================================================
-   KOTAK PERTANDINGAN — BORDER 5 WARNA BERJALAN
+   KOTAK PERTANDINGAN — BORDER 3 WARNA SOFT BERJALAN
    ================================================ */
 .match-row-single {
     display: grid;
@@ -1462,8 +1457,8 @@ nav a.nav-daftar:hover {
     background: #050505;
     background-clip: padding-box;
     box-shadow:
-        0 0 15px rgba(0, 212, 255, 0.35),
-        0 0 30px rgba(93, 45, 232, 0.25),
+        0 0 15px rgba(94, 200, 229, 0.25),
+        0 0 30px rgba(214, 123, 199, 0.15),
         0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
@@ -1472,14 +1467,16 @@ nav a.nav-daftar:hover {
     position: absolute;
     inset: 0;
     border-radius: 14px;
-    padding: 2px;
+    padding: 1.5px;
     background: linear-gradient(
         90deg,
-        #00d4ff 0%,
-        #ffcc33 25%,
-        #ff00ff 50%,
-        #00ff88 75%,
-        #00d4ff 100%
+        #5ec8e5 0%,
+        #7ed3e8 16.6%,
+        #e5d17a 33.3%,
+        #ecd98e 50%,
+        #d67bc7 66.6%,
+        #e094d4 83.3%,
+        #5ec8e5 100%
     );
     background-size: 300% 100%;
     -webkit-mask:
@@ -1500,9 +1497,9 @@ nav a.nav-daftar:hover {
 .match-row-single:hover {
     transform: translateX(5px) translateY(-4px);
     box-shadow:
-        0 0 25px rgba(255, 204, 51, 0.6),
-        0 0 50px rgba(0, 212, 255, 0.5),
-        0 0 80px rgba(255, 0, 255, 0.3),
+        0 0 25px rgba(229, 209, 122, 0.4),
+        0 0 50px rgba(94, 200, 229, 0.4),
+        0 0 80px rgba(214, 123, 199, 0.25),
         0 12px 35px rgba(0, 0, 0, 0.85);
 }
 
@@ -1566,7 +1563,7 @@ nav a.nav-daftar:hover {
     z-index: 10;
     padding: 4px 20px;
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(0,212,255,0.98), rgba(93,45,232,0.98));
+    background: linear-gradient(135deg, rgba(94,200,229,0.98), rgba(93,45,232,0.98));
     border: 2px solid rgba(180,240,255,0.9);
     color: #fff;
     font-family: 'Teko', monospace;
@@ -1574,11 +1571,11 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     letter-spacing: 1.5px;
     white-space: nowrap;
-    box-shadow: 0 0 20px rgba(0,212,255,0.9);
+    box-shadow: 0 0 20px rgba(94,200,229,0.9);
 }
 
 .match-countdown-badge.soon {
-    background: linear-gradient(135deg, rgba(255,204,51,0.98), rgba(255,140,0,0.98));
+    background: linear-gradient(135deg, rgba(229,209,122,0.98), rgba(255,140,0,0.98));
     border-color: rgba(255,240,160,1);
     color: #0a0e27;
 }
@@ -1607,8 +1604,8 @@ nav a.nav-daftar:hover {
 }
 
 .special-badge.hot { color: #fff5e0; background: linear-gradient(135deg, #dc2626, #ff6b35, #dc2626); border: 1px solid rgba(255,180,100,0.8); }
-.special-badge.vip { color: #0a0e27; background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33); border: 1px solid #fff5d0; }
-.special-badge.premium { color: #fff; background: linear-gradient(135deg, #5d2de8, #00d4ff, #5d2de8); border: 1px solid rgba(180,240,255,0.8); }
+.special-badge.vip { color: #0a0e27; background: linear-gradient(135deg, #e5d17a, #fff5d0, #e5d17a); border: 1px solid #fff5d0; }
+.special-badge.premium { color: #fff; background: linear-gradient(135deg, #5d2de8, #5ec8e5, #5d2de8); border: 1px solid rgba(180,240,255,0.8); }
 .special-badge .icon-mini { font-size: 9px; }
 
 .match-clock-line {
@@ -1622,7 +1619,7 @@ nav a.nav-daftar:hover {
     background: rgba(93,45,232,0.20);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(0,212,255,0.55);
+    border: 1.5px solid rgba(94,200,229,0.55);
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -1634,7 +1631,7 @@ nav a.nav-daftar:hover {
 .match-clock-icon { font-size: 14px; flex-shrink: 0; }
 .match-clock-label { color: #b0a8d8; font-size: 11px; font-weight: 700; }
 .match-clock-value {
-    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
+    background: linear-gradient(90deg, #e5d17a, #fff5d0, #5ec8e5, #fff5d0, #e5d17a);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1702,11 +1699,29 @@ nav a.nav-daftar:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     min-width: 0;
 }
 
 .match-team-mini.right {
-    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.match-team-mini .mini-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 50%;
+    padding: 2px;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(94,200,229,0.5);
+    transition: transform 0.3s;
+}
+
+.match-team-mini .mini-logo:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 18px rgba(94,200,229,1);
 }
 
 .match-team-mini .mini-name {
@@ -1727,7 +1742,7 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-size: 12px;
     font-weight: 800;
-    color: #ffcc33;
+    color: #e5d17a;
     letter-spacing: 2px;
 }
 
@@ -1752,10 +1767,10 @@ nav a.nav-daftar:hover {
 }
 
 .match-value-box.pred {
-    background: rgba(0,212,255,0.22);
+    background: rgba(94,200,229,0.22);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(0,212,255,0.85);
+    border: 1.5px solid rgba(94,200,229,0.85);
 }
 
 .match-value-box .val-label {
@@ -1777,7 +1792,7 @@ nav a.nav-daftar:hover {
 }
 
 .match-value-box.hdp .val-number { text-shadow: 0 0 18px rgba(93,45,232,1); }
-.match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(0,212,255,1); }
+.match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(94,200,229,1); }
 .match-value-box.empty { opacity: 0.5; }
 .match-value-box.empty .val-number { color: #555568; text-shadow: none; }
 
@@ -1826,7 +1841,7 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     letter-spacing: 10px;
     margin: 15px 0 12px;
-    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
+    background: linear-gradient(90deg, #e5d17a, #fff5d0, #5ec8e5, #fff5d0, #e5d17a);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1854,7 +1869,7 @@ nav a.nav-daftar:hover {
     margin-top: 15px;
 }
 
-.footer-copy span { color: #ffcc33; font-weight: 800; }
+.footer-copy span { color: #e5d17a; font-weight: 800; }
 
 .bottom-nav {
     display: none;
@@ -1898,9 +1913,9 @@ nav a.nav-daftar:hover {
 }
 
 .bottom-nav-item:hover {
-    color: #00d4ff;
-    background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(0,212,255,0.18));
-    border-color: rgba(0,212,255,0.7);
+    color: #5ec8e5;
+    background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(94,200,229,0.18));
+    border-color: rgba(94,200,229,0.7);
 }
 
 .bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
@@ -2033,6 +2048,7 @@ nav a.nav-daftar:hover {
     .match-live-badge, .match-finished-badge { top: 6px; padding: 3px 14px; font-size: 10px; letter-spacing: 2px; }
     .match-countdown-badge { bottom: 6px; padding: 2px 10px; font-size: 10px; }
     .match-team-mini .mini-name { max-width: 120px; font-size: 13px; }
+    .match-team-mini .mini-logo { width: 22px; height: 22px; }
     .match-value-box .val-number { font-size: 18px; }
     .match-value-box .val-label { font-size: 8.5px; }
     .match-special-badges { top: 5px; left: 6px; }
@@ -2079,6 +2095,7 @@ nav a.nav-daftar:hover {
     .match-time-badge .time-value { font-size: 15px; }
     .match-time-badge .time-date { font-size: 9px; }
     .match-team-mini .mini-name { font-size: 12px; max-width: 95px; }
+    .match-team-mini .mini-logo { width: 20px; height: 20px; }
     .match-value-box .val-number { font-size: 16px; }
     .bmt-card { width: 115px !important; padding: 8px !important; }
     .bmt-logo { width: 24px !important; height: 24px !important; }
@@ -2106,10 +2123,8 @@ nav a.nav-daftar:hover {
 </head>
 <body id="top">
 
-<!-- READING PROGRESS BAR -->
 <div class="reading-progress" id="readingProgress"></div>
 
-<!-- PARTICLE CANVAS -->
 <canvas id="particleCanvas"></canvas>
 
 <div id="loadingScreen">
@@ -2354,7 +2369,9 @@ const db = getFirestore(app);
 let semuaData = [];
 let selectedDateSpecific = "";
 
-/* PARTICLE BACKGROUND */
+/* ============================
+   PARTICLE BACKGROUND
+   ============================ */
 (function initParticles() {
     const canvas = document.getElementById("particleCanvas");
     if (!canvas) return;
@@ -2382,7 +2399,7 @@ let selectedDateSpecific = "";
     });
 
     function createParticle() {
-        const colors = ["93,45,232", "0,212,255", "255,204,51"];
+        const colors = ["93,45,232", "94,200,229", "229,209,122"];
         const color = colors[Math.floor(Math.random() * colors.length)];
         return {
             x: Math.random() * w,
@@ -2434,7 +2451,7 @@ let selectedDateSpecific = "";
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+                    ctx.strokeStyle = `rgba(94, 200, 229, ${opacity})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -2445,7 +2462,9 @@ let selectedDateSpecific = "";
     draw();
 })();
 
-/* RIPPLE ON CLICK */
+/* ============================
+   RIPPLE ON CLICK
+   ============================ */
 (function initRippleOnClick() {
     document.addEventListener("click", (e) => {
         const ripple = document.createElement("div");
@@ -2456,7 +2475,7 @@ let selectedDateSpecific = "";
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,212,255,0.6), rgba(93,45,232,0.3), transparent);
+            background: radial-gradient(circle, rgba(94,200,229,0.6), rgba(93,45,232,0.3), transparent);
             transform: translate(-50%, -50%) scale(0);
             pointer-events: none;
             z-index: 99999;
@@ -2479,7 +2498,9 @@ let selectedDateSpecific = "";
     }
 })();
 
-/* READING PROGRESS */
+/* ============================
+   READING PROGRESS
+   ============================ */
 (function initReadingProgress() {
     const bar = document.getElementById("readingProgress");
     if (!bar) return;
@@ -2491,7 +2512,9 @@ let selectedDateSpecific = "";
     }, { passive: true });
 })();
 
-/* SKELETON */
+/* ============================
+   SKELETON STYLE
+   ============================ */
 (function injectSkeletonStyle() {
     if (document.getElementById("skeletonStyle")) return;
     const style = document.createElement("style");
@@ -2532,7 +2555,7 @@ window.triggerConfetti = function() {
     const container = document.createElement("div");
     container.className = "confetti-container";
     document.body.appendChild(container);
-    const colors = ["#ffcc33", "#00d4ff", "#5d2de8", "#dc2626", "#10b981"];
+    const colors = ["#e5d17a", "#5ec8e5", "#5d2de8", "#dc2626", "#10b981"];
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement("div");
         confetti.className = "confetti";
@@ -2546,7 +2569,9 @@ window.triggerConfetti = function() {
     setTimeout(() => container.remove(), 5000);
 };
 
-/* TYPING TEXT */
+/* ============================
+   TYPING TEXT
+   ============================ */
 (function initTypingText() {
     const el = document.querySelector(".section-title span");
     if (!el) return;
@@ -2563,7 +2588,9 @@ window.triggerConfetti = function() {
     setTimeout(type, 1500);
 })();
 
-/* LOADING PARTICLES */
+/* ============================
+   LOADING PARTICLES
+   ============================ */
 (function initLoadingParticles() {
     const container = document.getElementById("loadingParticles");
     if (!container) return;
@@ -2580,8 +2607,10 @@ window.triggerConfetti = function() {
     }
 })();
 
-/* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v22";
+/* ============================
+   CACHE DATA PERTANDINGAN
+   ============================ */
+const CACHE_KEY = "kiper4d_data_cache_v23";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) {
@@ -2603,8 +2632,10 @@ function clearCache() {
     try { localStorage.removeItem(CACHE_KEY); } catch (error) {}
 }
 
-/* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v35";
+/* ============================
+   LOGO CACHE FIRESTORE
+   ============================ */
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v36";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2642,13 +2673,96 @@ async function loadTeamLogosFromDB() {
                 teamLogosFromDB.set(normalizeExact(name), logo);
             }
         });
-        console.log(`✅ Load ${teamLogosFromDB.size} logo tim dari collection team-logos`);
+        console.log(`✅ Load ${teamLogosFromDB.size} logo tim dari Firestore`);
     } catch (err) {
         console.warn("⚠️ Gagal load team-logos dari Firestore:", err);
     }
 }
 
-/* UTILITY */
+/* ============================
+   THE SPORTS DB FALLBACK (API key 123)
+   ============================ */
+const THESPORTSDB_API_KEY = "123";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v1";
+const theSportsDbCache = new Map();
+
+(function loadTheSportsDbCache() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(THESPORTSDB_CACHE_KEY) || "{}");
+        Object.entries(saved).forEach(([k, v]) => {
+            if (v) theSportsDbCache.set(k, v);
+        });
+        console.log("📦 TheSportsDB cache loaded: " + theSportsDbCache.size);
+    } catch (e) {}
+})();
+
+function saveTheSportsDbCache() {
+    try {
+        const obj = {};
+        theSportsDbCache.forEach((v, k) => obj[k] = v);
+        localStorage.setItem(THESPORTSDB_CACHE_KEY, JSON.stringify(obj));
+    } catch (e) {}
+}
+
+async function fetchLogoFromTheSportsDB(teamName) {
+    const key = String(teamName || "").trim().toLowerCase();
+    if (!key) return "";
+    if (theSportsDbCache.has(key)) return theSportsDbCache.get(key);
+
+    try {
+        const url = `https://www.thesportsdb.com/api/v1/json/${THESPORTSDB_API_KEY}/searchteams.php?t=${encodeURIComponent(teamName)}`;
+        const res = await fetch(url);
+        if (!res.ok) return "";
+
+        const data = await res.json();
+        if (!data.teams || data.teams.length === 0) {
+            theSportsDbCache.set(key, "");
+            saveTheSportsDbCache();
+            return "";
+        }
+
+        let bestTeam = null;
+        for (const t of data.teams) {
+            if ((t.strSport || "").toLowerCase() === "soccer") {
+                bestTeam = t;
+                break;
+            }
+        }
+        if (!bestTeam) bestTeam = data.teams[0];
+
+        const logo = bestTeam.strTeamBadge || bestTeam.strTeamLogo || bestTeam.strBadge || "";
+        theSportsDbCache.set(key, logo);
+        saveTheSportsDbCache();
+        return logo;
+    } catch (e) {
+        console.warn("Gagal fetch logo TheSportsDB:", teamName);
+        return "";
+    }
+}
+
+async function prefetchAllLogosFromTheSportsDB(teamNames) {
+    const unique = [...new Set(teamNames.map(n => String(n).trim()).filter(Boolean))];
+    const needFetch = unique.filter(name => !theSportsDbCache.has(name.toLowerCase()));
+    if (needFetch.length === 0) {
+        console.log("✅ Semua logo TheSportsDB sudah di-cache");
+        return;
+    }
+
+    console.log("🎨 Fetch " + needFetch.length + " logo dari TheSportsDB...");
+    const batchSize = 5;
+    for (let i = 0; i < needFetch.length; i += batchSize) {
+        const batch = needFetch.slice(i, i + batchSize);
+        await Promise.all(batch.map(name => fetchLogoFromTheSportsDB(name)));
+        if (i + batchSize < needFetch.length) {
+            await new Promise(r => setTimeout(r, 250));
+        }
+    }
+    console.log("✅ Selesai fetch. Total cache: " + theSportsDbCache.size);
+}
+
+/* ============================
+   UTILITY
+   ============================ */
 function clean(value) {
     if (value === undefined || value === null) return "";
     return String(value).trim();
@@ -2826,6 +2940,13 @@ function getLogoForTeam(name, logoFromDb) {
     if (teamLogoCache.has(key)) {
         return { type: "cache", url: teamLogoCache.get(key) };
     }
+
+    const theSportsDbKey = String(name || "").trim().toLowerCase();
+    if (theSportsDbCache.has(theSportsDbKey)) {
+        const url = theSportsDbCache.get(theSportsDbKey);
+        if (url) return { type: "thesportsdb", url: url };
+    }
+
     return null;
 }
 
@@ -2837,7 +2958,9 @@ function bmtLogo(name, logoFromDb) {
     return `<div class="bmt-logo" data-fallback="${escapeHtml(getTeamInitial(name))}">${escapeHtml(getTeamInitial(name))}</div>`;
 }
 
-/* TANGGAL & WAKTU */
+/* ============================
+   TANGGAL & WAKTU
+   ============================ */
 const BULAN_MAP = {
     "januari": "01", "jan": "01", "january": "01",
     "februari": "02", "feb": "02", "february": "02",
@@ -3048,7 +3171,9 @@ function tickNextMatchCountdown() {
     else countdownEl.textContent = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
-/* SPECIAL BADGES */
+/* ============================
+   SPECIAL BADGES
+   ============================ */
 const TOP_LEAGUES = ["premier league", "english premier league", "la liga", "liga spanyol", "serie a", "serie a italia", "bundesliga", "ligue 1", "champions league", "uefa champions league", "afc champions league", "europa league", "copa libertadores", "world cup", "piala dunia"];
 
 function isTopLeague(league) {
@@ -3082,7 +3207,9 @@ function generateSpecialBadges(data, status) {
     return `<div class="match-special-badges">${badges.join("")}</div>`;
 }
 
-/* NEWS TICKER */
+/* ============================
+   NEWS TICKER
+   ============================ */
 function updateNewsTicker(data) {
     const ticker = document.getElementById("newsTickerContent");
     if (!ticker) return;
@@ -3121,7 +3248,9 @@ function updateNewsTicker(data) {
     ticker.textContent = newsItems.join("  •  ");
 }
 
-/* RENDER MATCH ROW */
+/* ============================
+   RENDER MATCH ROW — DENGAN LOGO
+   ============================ */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -3145,6 +3274,17 @@ function renderMatchRowSingle(data) {
     const countdownBadge = (countdownText && status === "akan") ? `<div class="match-countdown-badge${countdownSoon ? ' soon' : ''}">⏱ ${countdownText}</div>` : "";
     const clockNow = getClockText();
     const specialBadges = generateSpecialBadges(data, status);
+
+    const homeLogo = getLogoForTeam(home, data.homeLogo);
+    const awayLogo = getLogoForTeam(away, data.awayLogo);
+
+    const homeLogoHtml = homeLogo
+        ? `<img class="mini-logo" src="${escapeHtml(homeLogo.url)}" alt="${escapeHtml(home)}" loading="lazy" onerror="this.style.display='none'">`
+        : "";
+    const awayLogoHtml = awayLogo
+        ? `<img class="mini-logo" src="${escapeHtml(awayLogo.url)}" alt="${escapeHtml(away)}" loading="lazy" onerror="this.style.display='none'">`
+        : "";
+
     return `
         <div class="match-row-single">
             ${badgeHtml}
@@ -3161,11 +3301,13 @@ function renderMatchRowSingle(data) {
             </div>
             <div class="match-teams-block">
                 <div class="match-team-mini">
+                    ${homeLogoHtml}
                     <div class="mini-name">${escapeHtml(home)}</div>
                 </div>
                 <div class="match-vs-mini">VS</div>
                 <div class="match-team-mini right">
                     <div class="mini-name">${escapeHtml(away)}</div>
+                    ${awayLogoHtml}
                 </div>
             </div>
             <div class="match-value-box hdp ${hdpClass}">
@@ -3180,7 +3322,9 @@ function renderMatchRowSingle(data) {
     `;
 }
 
-/* RENDER PREDIKSI */
+/* ============================
+   RENDER PREDIKSI
+   ============================ */
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
     if (!container) return;
@@ -3287,7 +3431,9 @@ window.toggleSelesai = function(id, btn) {
     }
 };
 
-/* FILTER */
+/* ============================
+   FILTER
+   ============================ */
 function updateLigaFilter(data) {
     const select = document.getElementById("ligaFilter");
     if (!select) return;
@@ -3443,7 +3589,9 @@ function populateDateDropdown() {
     }
 }
 
-/* STATS */
+/* ============================
+   STATS
+   ============================ */
 function animateNumber(el, target, duration) {
     if (!el) return;
     const startTime = performance.now();
@@ -3470,7 +3618,9 @@ function updateStats(data) {
     if (el3) animateNumber(el3, totalPertandingan, 1400);
 }
 
-/* BIG MATCH TICKER */
+/* ============================
+   BIG MATCH TICKER
+   ============================ */
 function bigMatchCard(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -3522,7 +3672,9 @@ function renderBigMatch(data) {
     }
 }
 
-/* PROCESS DATA */
+/* ============================
+   PROCESS DATA
+   ============================ */
 function processData(rawDataArray) {
     const merged = new Map();
     rawDataArray.forEach(data => {
@@ -3566,26 +3718,53 @@ function processData(rawDataArray) {
     updateLoadingProgress(100, 400);
 }
 
-/* LOAD DATA */
+/* ============================
+   LOAD DATA — FIREBASE + THESPORTSDB FALLBACK
+   ============================ */
 async function loadData() {
     try {
+        // 1. Load logo dari Firestore
         await loadTeamLogosFromDB();
 
+        // 2. Ambil data pertandingan
         const cached = loadCache(CACHE_DURATION);
+        let rawData;
         if (cached && cached.length > 0) {
-            console.log("📦 Pakai cache (hemat kuota Firestore)");
-            processData(cached);
-            return;
+            console.log("📦 Pakai cache pertandingan");
+            rawData = cached;
+        } else {
+            console.log("🔥 Ambil data dari Firestore...");
+            const querySnapshot = await getDocs(collection(db, "predictions"));
+            rawData = [];
+            querySnapshot.forEach(docSnapshot => {
+                rawData.push({ id: docSnapshot.id, ...docSnapshot.data() });
+            });
+            saveCache(rawData);
         }
-        console.log("🔥 Ambil data dari Firestore...");
-        const querySnapshot = await getDocs(collection(db, "predictions"));
-        const rawData = [];
-        querySnapshot.forEach(docSnapshot => {
-            rawData.push({ id: docSnapshot.id, ...docSnapshot.data() });
+
+        // 3. Kumpulkan nama tim yang belum punya logo di Firestore
+        const teamNeedLogo = [];
+        rawData.forEach(d => {
+            const home = clean(d.home);
+            const away = clean(d.away);
+            if (home && !clean(d.homeLogo)) {
+                if (!findLogoFuzzy(home)) teamNeedLogo.push(home);
+            }
+            if (away && !clean(d.awayLogo)) {
+                if (!findLogoFuzzy(away)) teamNeedLogo.push(away);
+            }
         });
-        saveCache(rawData);
+
+        // 4. Prefetch dari TheSportsDB (async)
+        prefetchAllLogosFromTheSportsDB(teamNeedLogo).then(() => {
+            console.log("🔄 Re-render setelah prefetch TheSportsDB");
+            applyFilter();
+            renderBigMatch(semuaData);
+        });
+
+        // 5. Render awal
         processData(rawData);
-        console.log(`✅ Load ${rawData.length} data dari Firestore`);
+        console.log(`✅ Load ${rawData.length} data`);
     } catch (error) {
         console.error("Error:", error);
         const fallback = loadCache();
@@ -3599,7 +3778,9 @@ async function loadData() {
     }
 }
 
-/* LOADING */
+/* ============================
+   LOADING SCREEN
+   ============================ */
 let loadingProgress = 0;
 let loadingFinished = false;
 const loadingTexts = document.querySelectorAll(".loading-text");
@@ -3651,7 +3832,9 @@ setTimeout(() => updateLoadingProgress(85, 600), 1200);
 setTimeout(() => updateLoadingProgress(100, 500), 1900);
 setTimeout(finishLoading, 4000);
 
-/* LUX MARQUEE */
+/* ============================
+   LUX MARQUEE
+   ============================ */
 function initLuxMarquee(containerId, intervalMs) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -3676,7 +3859,9 @@ function initLuxMarquee(containerId, intervalMs) {
 
 initLuxMarquee("luxTextTop", 4200);
 
-/* EVENT LISTENERS */
+/* ============================
+   EVENT LISTENERS
+   ============================ */
 const elLiga = document.getElementById("ligaFilter");
 const elStatus = document.getElementById("statusFilter");
 const elSearch = document.getElementById("searchInput");
@@ -3723,23 +3908,11 @@ updateTabClock();
 
 setInterval(tickNextMatchCountdown, 1000);
 
-setInterval(() => {
-    clearCache();
-    loadData();
-}, 3 * 60 * 60 * 1000);
+/* Auto-refresh dimatikan — data hanya update saat user refresh halaman */
 
-setInterval(() => {
-    if (semuaData.length > 0) {
-        updateNewsTicker(semuaData);
-        renderBigMatch(semuaData);
-        const tabAktif = document.querySelector(".tab-filter.active");
-        if (tabAktif && tabAktif.dataset.date === "live") {
-            applyFilter();
-        }
-    }
-}, 60000);
-
-/* INIT */
+/* ============================
+   INIT
+   ============================ */
 populateDateDropdown();
 loadSavedTeamLogos();
 loadData();
