@@ -94,7 +94,6 @@ body {
     100% { background-position: 200% center; }
 }
 
-/* LOADING */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -245,7 +244,6 @@ body {
     opacity: 0.85;
 }
 
-/* HEADER */
 header {
     position: sticky;
     top: 0;
@@ -400,7 +398,6 @@ nav a.nav-daftar:hover {
     box-shadow: 0 10px 45px rgba(0,212,255,0.9);
 }
 
-/* CONTAINER */
 .container {
     max-width: 1250px;
     margin: auto;
@@ -549,7 +546,6 @@ nav a.nav-daftar:hover {
     100% { left: 140%; }
 }
 
-/* BIG MATCH TICKER */
 .big-match-ticker-wrap {
     position: relative;
     width: 100%;
@@ -757,7 +753,6 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
-/* NEWS TICKER */
 .news-ticker {
     position: relative;
     width: 100%;
@@ -819,7 +814,6 @@ nav a.nav-daftar:hover {
     100% { transform: translate(-100%, -50%); }
 }
 
-/* STATS */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -888,7 +882,6 @@ nav a.nav-daftar:hover {
     margin-top: 4px;
 }
 
-/* FILTER ROW */
 #pertandingan { scroll-margin-top: 30px; }
 
 .section-head {
@@ -1277,7 +1270,6 @@ nav a.nav-daftar:hover {
     line-height: 1;
 }
 
-/* DATE GROUP */
 .date-group { margin-bottom: 30px; }
 
 .date-group-header {
@@ -1371,7 +1363,6 @@ nav a.nav-daftar:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* LEAGUE */
 .league {
     margin-bottom: 30px;
     border-radius: 22px;
@@ -1410,7 +1401,6 @@ nav a.nav-daftar:hover {
     padding: 24px 16px 18px;
 }
 
-/* KOTAK PERTANDINGAN */
 .match-row-single {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
@@ -1472,7 +1462,6 @@ nav a.nav-daftar:hover {
         0 12px 35px rgba(0, 0, 0, 0.9);
 }
 
-/* BARIS JAM SEKARANG + HARI INI */
 .match-now-line {
     grid-area: now;
     display: flex;
@@ -1720,7 +1709,6 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 
-/* FOOTER */
 .site-footer {
     position: relative;
     margin-top: 60px;
@@ -2352,7 +2340,7 @@ window.fadeInContent = function() {
 })();
 
 /* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v27";
+const CACHE_KEY = "kiper4d_data_cache_v28";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {} }
@@ -2369,7 +2357,7 @@ function loadCache(maxAge) {
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
 /* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v40";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v41";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2395,7 +2383,7 @@ async function loadTeamLogosFromDB() {
 
 /* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v5";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v6";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2465,6 +2453,59 @@ const ALIAS_MAP = {
 
 function resolveAlias(name) { const key = normalizeExact(name); return ALIAS_MAP[key] || name; }
 function normalizeTeamName(name) { return normalizeExact(name).replace(/\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk)\b/g, " ").replace(/\s+/g, " ").trim(); }
+
+/* ⭐ NORMALISASI LIGA — biar tidak dobel */
+function normalizeLeague(liga) {
+    if (!liga) return "lainnya";
+    let s = clean(liga).toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    
+    const ALIAS_LIGA = {
+        "brazil serie b": "brasileirao serie b",
+        "brasileirao serie b": "brasileirao serie b",
+        "brazil serie a": "brasileirao serie a",
+        "brasileirao serie a": "brasileirao serie a",
+        "spain la liga 2": "la liga 2",
+        "la liga 2": "la liga 2",
+        "uefa nations league": "uefa nations league",
+        "uefa nations league a": "uefa nations league a",
+        "uefa nations league b": "uefa nations league b",
+        "uefa nations league c": "uefa nations league c",
+        "uruguay primera division": "uruguay primera division",
+        "paraguay primera division": "paraguay primera division",
+        "international friendly": "international friendly",
+        "fifa asean cup division 1 2026 in indonesia": "fifa asean cup",
+        "fifa asean cup": "fifa asean cup",
+        "kirin challenge cup in japan": "kirin challenge cup",
+        "kirin challenge cup": "kirin challenge cup"
+    };
+    
+    if (ALIAS_LIGA[s]) return ALIAS_LIGA[s];
+    return s;
+}
+
+function displayLeagueName(rawLiga) {
+    const normalized = normalizeLeague(rawLiga);
+    const display = {
+        "brasileirao serie b": "Brasileirão Série B",
+        "brasileirao serie a": "Brasileirão Série A",
+        "la liga 2": "La Liga 2",
+        "uefa nations league": "UEFA Nations League",
+        "uefa nations league a": "UEFA Nations League A",
+        "uefa nations league b": "UEFA Nations League B",
+        "uefa nations league c": "UEFA Nations League C",
+        "uruguay primera division": "Uruguay Primera División",
+        "paraguay primera division": "Paraguay Primera División",
+        "international friendly": "International Friendly",
+        "fifa asean cup": "FIFA ASEAN Cup",
+        "kirin challenge cup": "Kirin Challenge Cup"
+    };
+    if (display[normalized]) return display[normalized];
+    return clean(rawLiga) || "LAINNYA";
+}
 
 function scoreTeamMatch(requested, resultName) {
     const a = normalizeExact(requested), b = normalizeExact(resultName);
@@ -2587,7 +2628,6 @@ function get7DaysString() {
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
 
-/* JAM LIVE + HARI INI UNTUK KOTAK PERTANDINGAN */
 function getLiveClockText() {
     const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
     return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
@@ -2599,7 +2639,16 @@ function getTodayIndoText() {
 
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
-function matchKey(data) { return [normalizeDate(clean(data.date)), normalizeTime(clean(data.time)), clean(data.home).toLowerCase(), clean(data.away).toLowerCase()].join("|"); }
+
+/* ⭐ matchKey fuzzy — tim dengan ejaan beda dianggap sama */
+function matchKey(data) {
+    return [
+        normalizeDate(clean(data.date)),
+        normalizeTime(clean(data.time)),
+        normalizeTeamName(data.home),
+        normalizeTeamName(data.away)
+    ].join("|");
+}
 
 function getKickoffWIBMs(data) {
     const date = normalizeDate(clean(data.date));
@@ -2667,7 +2716,6 @@ function tickNextMatchCountdown() {
     else countdownEl.textContent = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
-/* NEWS TICKER */
 function updateNewsTicker(data) {
     const ticker = document.getElementById("newsTickerContent");
     if (!ticker) return;
@@ -2687,7 +2735,6 @@ function updateNewsTicker(data) {
     ticker.textContent = newsItems.join("  •  ");
 }
 
-/* RENDER MATCH ROW — dengan baris jam sekarang + hari ini */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -2751,7 +2798,6 @@ function renderMatchRowSingle(data) {
     `;
 }
 
-/* RENDER PREDIKSI */
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
     if (!container) return;
@@ -2783,32 +2829,37 @@ function renderPrediksi(data) {
         html += `<div class="date-group">`;
         html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
 
+        /* ⭐ Group by normalizeLeague — biar tidak dobel */
         if (aktif.length) {
             const groupLiga = {};
             aktif.forEach(item => {
-                const liga = clean(item.league) || "LAINNYA";
-                if (!groupLiga[liga]) groupLiga[liga] = [];
-                groupLiga[liga].push(item);
+                const key = normalizeLeague(item.league);
+                const display = displayLeagueName(item.league);
+                if (!groupLiga[key]) groupLiga[key] = { display: display, items: [] };
+                groupLiga[key].items.push(item);
             });
-            Object.keys(groupLiga).sort().forEach(liga => {
-                const matchList = groupLiga[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+            Object.keys(groupLiga).sort().forEach(key => {
+                const grup = groupLiga[key];
+                const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+                html += `<div class="league"><div class="league-header">${escapeHtml(grup.display)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
         }
 
         if (selesai.length) {
             const groupLigaSelesai = {};
             selesai.forEach(item => {
-                const liga = clean(item.league) || "LAINNYA";
-                if (!groupLigaSelesai[liga]) groupLigaSelesai[liga] = [];
-                groupLigaSelesai[liga].push(item);
+                const key = normalizeLeague(item.league);
+                const display = displayLeagueName(item.league);
+                if (!groupLigaSelesai[key]) groupLigaSelesai[key] = { display: display, items: [] };
+                groupLigaSelesai[key].items.push(item);
             });
             let selesaiHtml = "";
-            Object.keys(groupLigaSelesai).sort().forEach(liga => {
-                const matchList = groupLigaSelesai[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
+            Object.keys(groupLigaSelesai).sort().forEach(key => {
+                const grup = groupLigaSelesai[key];
+                const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                selesaiHtml += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
+                selesaiHtml += `<div class="league"><div class="league-header">${escapeHtml(grup.display)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
             const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
             html += `
@@ -2845,23 +2896,23 @@ window.toggleSelesai = function(id, btn) {
     }
 };
 
-/* FILTER */
 function updateLigaFilter(data) {
     const select = document.getElementById("ligaFilter");
     if (!select) return;
     const currentValue = select.value;
     const ligaCount = {};
+    const ligaDisplay = {};
     data.forEach(item => {
-        const liga = clean(item.league) || "LAINNYA";
-        if (!ligaCount[liga]) ligaCount[liga] = 0;
-        ligaCount[liga]++;
+        const key = normalizeLeague(item.league);
+        if (!ligaCount[key]) { ligaCount[key] = 0; ligaDisplay[key] = displayLeagueName(item.league); }
+        ligaCount[key]++;
     });
     const ligaList = Object.keys(ligaCount).sort();
     select.innerHTML = `<option value="all">Semua Liga (${data.length})</option>`;
-    ligaList.forEach(liga => {
+    ligaList.forEach(key => {
         const option = document.createElement("option");
-        option.value = liga;
-        option.textContent = liga + " (" + ligaCount[liga] + ")";
+        option.value = key;
+        option.textContent = ligaDisplay[key] + " (" + ligaCount[key] + ")";
         select.appendChild(option);
     });
     if (ligaList.includes(currentValue)) select.value = currentValue;
@@ -2905,7 +2956,7 @@ function applyFilter() {
         filtered = filtered.filter(item => { const d = normalizeDate(clean(item.date)); return d === today || d === tomorrow; });
     }
 
-    if (selectedLiga !== "all") filtered = filtered.filter(item => (clean(item.league) || "LAINNYA") === selectedLiga);
+    if (selectedLiga !== "all") filtered = filtered.filter(item => normalizeLeague(item.league) === selectedLiga);
     if (selectedStatus !== "all" && selectedStatus !== "riwayat") filtered = filtered.filter(item => getMatchStatus(item) === selectedStatus);
     if (keyword) filtered = filtered.filter(item => {
         const league = clean(item.league).toLowerCase();
@@ -2983,7 +3034,6 @@ function populateDateDropdown() {
     }
 }
 
-/* STATS */
 function animateNumber(el, target, duration) {
     if (!el) return;
     const startTime = performance.now();
@@ -3000,7 +3050,7 @@ function updateStats(data) {
     const today = getTodayString();
     const dataAktif = data.filter(item => normalizeDate(clean(item.date)) >= today);
     const totalPrediksi = dataAktif.filter(item => clean(item.predictionScoreHome) !== "" && clean(item.predictionScoreAway) !== "").length;
-    const totalLiga = new Set(dataAktif.map(item => clean(item.league) || "LAINNYA")).size;
+    const totalLiga = new Set(dataAktif.map(item => normalizeLeague(item.league))).size;
     const totalPertandingan = dataAktif.length;
     const el1 = document.getElementById("totalPrediksi");
     const el2 = document.getElementById("totalLiga");
@@ -3010,12 +3060,11 @@ function updateStats(data) {
     if (el3) animateNumber(el3, totalPertandingan, 1400);
 }
 
-/* BIG MATCH TICKER */
 function bigMatchCard(data) {
     const home = clean(data.home);
     const away = clean(data.away);
     const time = normalizeTime(clean(data.time));
-    const league = clean(data.league) || "LAINNYA";
+    const league = displayLeagueName(data.league);
     const homeLogo = getLogoForTeam(home, data.homeLogo);
     const awayLogo = getLogoForTeam(away, data.awayLogo);
 
@@ -3065,7 +3114,6 @@ function renderBigMatch(data) {
     }
 }
 
-/* PROCESS DATA */
 function processData(rawDataArray) {
     const merged = new Map();
     rawDataArray.forEach(data => {
@@ -3101,7 +3149,6 @@ function processData(rawDataArray) {
     updateLoadingProgress(100, 400);
 }
 
-/* LOAD DATA */
 async function loadData() {
     try {
         await loadTeamLogosFromDB();
@@ -3137,7 +3184,6 @@ async function loadData() {
     }
 }
 
-/* LOADING */
 let loadingProgress = 0;
 let loadingFinished = false;
 const loadingTexts = document.querySelectorAll(".loading-text");
@@ -3184,7 +3230,6 @@ setTimeout(() => updateLoadingProgress(85, 600), 1200);
 setTimeout(() => updateLoadingProgress(100, 500), 1900);
 setTimeout(finishLoading, 4000);
 
-/* LUX MARQUEE */
 function initLuxMarquee(containerId, intervalMs) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -3206,7 +3251,6 @@ function initLuxMarquee(containerId, intervalMs) {
 
 initLuxMarquee("luxTextTop", 4200);
 
-/* EVENTS */
 const elLiga = document.getElementById("ligaFilter");
 const elStatus = document.getElementById("statusFilter");
 const elSearch = document.getElementById("searchInput");
@@ -3248,7 +3292,6 @@ setInterval(updateTabClock, 1000);
 updateTabClock();
 setInterval(tickNextMatchCountdown, 1000);
 
-/* Refresh jam di kotak pertandingan tiap 30 detik */
 setInterval(() => {
     const nowLines = document.querySelectorAll(".match-now-line");
     if (nowLines.length > 0) {
