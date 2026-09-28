@@ -43,14 +43,7 @@ body {
     letter-spacing: 0.2px;
 }
 
-.aurora-bg {
-    position: fixed;
-    inset: 0;
-    z-index: -4;
-    pointer-events: none;
-    overflow: hidden;
-}
-
+.aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
 .aurora-bg::before {
     content: "";
     position: absolute;
@@ -62,20 +55,13 @@ body {
     animation: auroraMove 25s ease-in-out infinite;
     filter: blur(60px);
 }
-
 @keyframes auroraMove {
     0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
     33% { transform: translate(5%, -5%) rotate(120deg) scale(1.1); }
     66% { transform: translate(-5%, 5%) rotate(240deg) scale(0.95); }
 }
 
-#particleCanvas {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    opacity: 0.4;
-}
+#particleCanvas { position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.4; }
 
 .reading-progress {
     position: fixed;
@@ -88,29 +74,21 @@ body {
     box-shadow: 0 0 15px rgba(0,212,255,0.8);
     animation: progressShine 3s linear infinite;
 }
-
 @keyframes progressShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
 
 #loadingScreen {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     background: radial-gradient(circle at center, #080818 0%, #02040a 60%, #000 100%);
     transition: opacity 0.8s, visibility 0.8s;
     overflow: hidden;
 }
-
 #loadingScreen.hide { opacity: 0; visibility: hidden; }
-
 .loading-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-
 .loading-particle {
     position: absolute;
     width: 3px; height: 3px;
@@ -119,20 +97,15 @@ body {
     box-shadow: 0 0 10px #00d4ff, 0 0 20px #5d2de8;
     animation: floatParticle 6s ease-in-out infinite;
 }
-
 @keyframes floatParticle {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
     50% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 1; }
 }
-
 .loading-logo-wrap {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin-bottom: 45px;
 }
-
 .loading-ring {
     position: absolute;
     width: 200px; height: 200px;
@@ -141,7 +114,6 @@ body {
     border-top-color: rgba(93,45,232,1);
     animation: loadingRingSpin 2.2s linear infinite;
 }
-
 .loading-ring:nth-child(2) {
     width: 245px; height: 245px;
     border: 1.5px solid rgba(0,212,255,0.15);
@@ -149,12 +121,10 @@ body {
     animation-duration: 3.2s;
     animation-direction: reverse;
 }
-
 @keyframes loadingRingSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 .loading-logo-wrap img {
     width: 145px; height: 145px;
     object-fit: contain;
@@ -163,30 +133,21 @@ body {
     filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(0,212,255,0.6));
     animation: floatLogo 2.5s ease-in-out infinite;
 }
-
 @keyframes floatLogo {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
-
 .loading-text-wrap {
     position: relative;
     width: 100%; height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin-bottom: 24px;
 }
-
 .loading-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 14px; font-weight: 700;
     letter-spacing: 4px;
     color: #00d4ff;
     text-transform: uppercase;
@@ -194,10 +155,8 @@ body {
     transform: translateY(12px);
     transition: opacity 0.5s, transform 0.5s;
 }
-
 .loading-text.active { opacity: 1; transform: translateY(0); }
 .loading-text.exit { opacity: 0; transform: translateY(-12px); }
-
 .loading-bar {
     width: 280px; height: 4px;
     border-radius: 20px;
@@ -205,7 +164,6 @@ body {
     overflow: hidden;
     margin-bottom: 18px;
 }
-
 .loading-bar-fill {
     height: 100%; width: 0%;
     background: linear-gradient(90deg, #5d2de8, #00d4ff, #33ddff);
@@ -213,32 +171,25 @@ body {
     transition: width 0.3s ease-out;
     box-shadow: 0 0 15px rgba(0,212,255,0.8);
 }
-
 .loading-percent {
     font-family: 'Teko', sans-serif;
-    font-size: 42px;
-    font-weight: 700;
+    font-size: 42px; font-weight: 700;
     background: linear-gradient(180deg, #e0f7ff, #00d4ff, #0288d1);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
+    display: flex; align-items: baseline; gap: 4px;
 }
-
 .loading-percent::after {
     content: "%";
     font-size: 22px;
     color: #00d4ff;
     -webkit-text-fill-color: #00d4ff;
 }
-
 .loading-brand {
     margin-top: 20px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 900;
+    font-size: 11px; font-weight: 900;
     letter-spacing: 10px;
     color: #00d4ff;
     opacity: 0.85;
@@ -254,7 +205,6 @@ header {
     border-bottom: 1.5px solid rgba(0,212,255,0.45);
     overflow: hidden;
 }
-
 header::before {
     content: "";
     position: absolute;
@@ -264,53 +214,40 @@ header::before {
     background-size: 200% 100%;
     animation: headerBorder 8s linear infinite;
 }
-
 @keyframes headerBorder {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
 }
-
 .header-inner {
     position: relative;
     z-index: 2;
     max-width: 1250px;
     margin: auto;
     padding: 14px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     gap: 22px;
 }
-
 .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex; flex-direction: column; align-items: flex-start;
     text-decoration: none;
     transition: transform 0.3s;
 }
-
 .logo:hover { transform: scale(1.04); }
-
 .logo img {
     display: block;
-    width: 150px;
-    height: 55px;
+    width: 150px; height: 55px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(93,45,232,0.8));
     transition: filter 0.3s;
     animation: floatLogo 3.5s ease-in-out infinite;
 }
-
 .logo:hover img {
     filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(0,212,255,0.6));
 }
-
 .logo-subtitle {
     margin-top: 4px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 10px; font-weight: 700;
     letter-spacing: 3px;
     background: linear-gradient(90deg, #00d4ff, #e0f7ff, #00d4ff, #e0f7ff, #00d4ff);
     background-size: 250% auto;
@@ -319,28 +256,23 @@ header::before {
     -webkit-text-fill-color: transparent;
     animation: logoShine 7s linear infinite;
 }
-
 @keyframes logoShine {
     0% { background-position: 0% center; }
     100% { background-position: 250% center; }
 }
-
 nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
 nav a.nav-link {
     color: #c8c8d4;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 22px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 13px; font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     border: 1px solid transparent;
     transition: all 0.3s;
 }
-
 nav a.nav-link:hover {
     color: #00d4ff;
     background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15));
@@ -348,37 +280,32 @@ nav a.nav-link:hover {
     box-shadow: 0 0 25px rgba(0,212,255,0.45);
     transform: translateY(-2px);
 }
-
 nav a.nav-login {
     color: #00d4ff;
     text-decoration: none;
     padding: 9px 24px;
     border-radius: 24px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 13px; font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
     border: 1.5px solid rgba(0,212,255,0.8);
     box-shadow: 0 0 15px rgba(0,212,255,0.3);
     transition: all 0.3s;
 }
-
 nav a.nav-login:hover {
     color: #02040a;
     background: linear-gradient(135deg, #00d4ff, #5d2de8);
     box-shadow: 0 0 30px rgba(0,212,255,0.8);
     transform: translateY(-2px);
 }
-
 nav a.nav-daftar {
     color: #02040a;
     text-decoration: none;
     padding: 10px 28px;
     border-radius: 24px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 900;
+    font-size: 13px; font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
     background: linear-gradient(135deg, #00d4ff 0%, #e0f7ff 50%, #00d4ff 100%);
@@ -387,24 +314,16 @@ nav a.nav-daftar {
     animation: btnShine 3.5s ease-in-out infinite;
     transition: all 0.3s;
 }
-
 @keyframes btnShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 nav a.nav-daftar:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 45px rgba(0,212,255,0.9);
 }
 
-.container {
-    max-width: 1250px;
-    margin: auto;
-    padding: 28px 20px 70px;
-    position: relative;
-    z-index: 1;
-}
+.container { max-width: 1250px; margin: auto; padding: 28px 20px 70px; position: relative; z-index: 1; }
 
 .lux-text-wrap {
     position: relative;
@@ -418,11 +337,8 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1.5px solid rgba(0,212,255,0.6);
     min-height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
 }
-
 .lux-text-wrap::before,
 .lux-text-wrap::after {
     content: "";
@@ -432,10 +348,8 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 5;
 }
-
 .lux-text-wrap::before { top: 6px; left: 6px; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
 .lux-text-wrap::after { top: 6px; right: 6px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
-
 .lux-text-wrap .corner-bl,
 .lux-text-wrap .corner-br {
     position: absolute;
@@ -444,10 +358,8 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 5;
 }
-
 .lux-text-wrap .corner-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
 .lux-text-wrap .corner-br { bottom: 6px; right: 6px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
-
 .lux-text-wrap .icon-side {
     position: absolute;
     top: 50%;
@@ -458,35 +370,25 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 3;
 }
-
 .lux-text-wrap .icon-side.left { left: 28px; }
 .lux-text-wrap .icon-side.right { right: 28px; animation-direction: reverse; }
-
 @keyframes iconSpin {
     0% { transform: translateY(-50%) rotate(0deg) scale(1); }
     50% { transform: translateY(-50%) rotate(180deg) scale(1.2); }
     100% { transform: translateY(-50%) rotate(360deg) scale(1); }
 }
-
 .lux-text-slide {
     position: relative;
     width: 100%; height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     z-index: 2;
 }
-
 .lux-text-item {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
     text-align: center;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 16px; font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     opacity: 0;
@@ -501,12 +403,10 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: luxTextShine 6s linear infinite;
 }
-
 @keyframes luxTextShine {
     0% { background-position: 0% center; }
     100% { background-position: 250% center; }
 }
-
 .lux-text-item.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .lux-text-item.exit-up { opacity: 0; transform: translateY(-22px) scale(0.94); filter: blur(8px); }
 
@@ -521,14 +421,7 @@ nav a.nav-daftar:hover {
     line-height: 0;
     box-shadow: 0 0 40px rgba(0,212,255,0.35), 0 0 80px rgba(0,212,255,0.15);
 }
-
-.banner img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
+.banner img { display: block; width: 100%; height: auto; object-fit: contain; }
 .banner::after {
     content: "";
     position: absolute;
@@ -539,7 +432,6 @@ nav a.nav-daftar:hover {
     animation: bannerShine 7s infinite;
     pointer-events: none;
 }
-
 @keyframes bannerShine {
     0% { left: -120%; }
     35% { left: 140%; }
@@ -557,7 +449,6 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(0,212,255,0.5);
 }
-
 .big-match-ticker-wrap::before,
 .big-match-ticker-wrap::after {
     content: "";
@@ -569,15 +460,12 @@ nav a.nav-daftar:hover {
     animation: tickerBorderTop 8s linear infinite;
     z-index: 3;
 }
-
 .big-match-ticker-wrap::before { top: 0; }
 .big-match-ticker-wrap::after { bottom: 0; animation-direction: reverse; }
-
 @keyframes tickerBorderTop {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
 }
-
 .big-match-ticker-wrap .fade-left,
 .big-match-ticker-wrap .fade-right {
     position: absolute;
@@ -586,50 +474,33 @@ nav a.nav-daftar:hover {
     z-index: 4;
     pointer-events: none;
 }
-
 .big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(2,4,10,1), transparent); }
 .big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(2,4,10,1), transparent); }
-
-.big-match-ticker {
-    position: relative;
-    width: 100%;
-    padding: 16px 0;
-    overflow: hidden;
-}
-
+.big-match-ticker { position: relative; width: 100%; padding: 16px 0; overflow: hidden; }
 .big-match-ticker-track {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     gap: 16px;
     width: max-content;
     animation: tickerRun 40s linear infinite;
 }
-
-.big-match-ticker-wrap:hover .big-match-ticker-track {
-    animation-play-state: paused;
-}
-
+.big-match-ticker-wrap:hover .big-match-ticker-track { animation-play-state: paused; }
 .big-match-ticker-wrap:hover .bmt-card {
     border-color: rgba(0,212,255,0.95);
     box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(0,212,255,0.55);
     transform: translateY(-4px);
 }
-
 @keyframes tickerRun {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-
 .big-match-ticker-empty {
     padding: 25px 30px;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 11px; font-weight: 700;
     letter-spacing: 4px;
     color: #777788;
     text-align: center;
     text-transform: uppercase;
 }
-
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
@@ -643,15 +514,12 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.4s;
 }
-
 .bmt-badge {
-    display: inline-flex;
-    align-items: center;
+    display: inline-flex; align-items: center;
     gap: 4px;
     padding: 4px 12px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
+    font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
     color: #fff5e0;
     background: linear-gradient(90deg, rgba(220,60,20,0.85), rgba(255,100,40,0.95), rgba(220,60,20,0.85));
@@ -662,23 +530,18 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 3;
 }
-
 .bmt-league {
     display: block;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
+    font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
     color: #00d4ff;
     text-transform: uppercase;
     margin-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     position: relative;
     z-index: 3;
 }
-
 .bmt-teams {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -688,17 +551,12 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 3;
 }
-
 .bmt-team { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; min-width: 0; }
-
 .bmt-logo {
     width: 40px; height: 40px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 900;
     color: #00d4ff;
     background: radial-gradient(circle, #1e1444, #050813);
     border: 1.5px solid rgba(0,212,255,0.9);
@@ -706,43 +564,31 @@ nav a.nav-daftar:hover {
     flex-shrink: 0;
     animation: logoFloat 2.5s ease-in-out infinite;
 }
-
 .bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
 .bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(0,212,255,0.9); }
-
 @keyframes logoFloat {
     0%, 100% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-3px) scale(1.05); }
 }
-
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10.5px;
-    font-weight: 700;
+    font-size: 10.5px; font-weight: 700;
     color: #f2f2f5;
     max-width: 72px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-
 .bmt-vs {
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     color: #00d4ff;
     letter-spacing: 1.5px;
 }
-
 .bmt-time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 5px;
     padding: 7px 0;
     font-family: 'Teko', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 13px; font-weight: 600;
     letter-spacing: 1.5px;
     color: #e0f7ff;
     background: linear-gradient(90deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15), rgba(93,45,232,0.20));
@@ -763,64 +609,49 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px);
     border: 1.5px solid rgba(0,212,255,0.6);
     margin-bottom: 26px;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     min-height: 46px;
     box-shadow: 0 0 30px rgba(0,212,255,0.25);
 }
-
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 20px;
     background: linear-gradient(135deg, #c1121f, #ff2a3d);
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 12px; font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
     z-index: 2;
 }
-
 .news-ticker-label::before {
     content: "●";
     display: inline-block;
     margin-right: 10px;
     animation: newsBlink 1.3s ease-in-out infinite;
 }
-
 @keyframes newsBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
 }
-
 .news-ticker-wrap { flex: 1; overflow: hidden; position: relative; height: 46px; }
-
 .news-ticker-content {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     white-space: nowrap;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 14px; font-weight: 600;
     color: #00d4ff;
     animation: newsScroll 60s linear infinite;
     padding-left: 100%;
 }
-
 @keyframes newsScroll {
     0% { transform: translate(0, -50%); }
     100% { transform: translate(-100%, -50%); }
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 32px;
-}
-
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 32px; }
 .stat-box {
     position: relative;
     padding: 20px 14px 18px;
@@ -833,13 +664,11 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.4s;
 }
-
 .stat-box:hover {
     border-color: rgba(0,212,255,0.9);
     box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(0,212,255,0.45);
     transform: translateY(-4px);
 }
-
 .stat-box::before {
     content: "★";
     position: absolute;
@@ -849,7 +678,6 @@ nav a.nav-daftar:hover {
     color: #00d4ff;
     opacity: 0.7;
 }
-
 .stat-box::after {
     content: "";
     position: absolute;
@@ -857,12 +685,10 @@ nav a.nav-daftar:hover {
     width: 70%; height: 1px;
     background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #5d2de8, transparent);
 }
-
 .stat-number {
     display: block;
     font-family: 'Teko', sans-serif;
-    font-size: 38px;
-    font-weight: 700;
+    font-size: 38px; font-weight: 700;
     background: linear-gradient(180deg, #e0f7ff, #00d4ff, #0288d1);
     -webkit-background-clip: text;
     background-clip: text;
@@ -871,36 +697,28 @@ nav a.nav-daftar:hover {
     line-height: 1;
     text-shadow: 0 0 30px rgba(0,212,255,0.5);
 }
-
 .stat-label {
     color: #a0b8d0;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10.5px;
-    font-weight: 700;
+    font-size: 10.5px; font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-top: 4px;
 }
 
 #pertandingan { scroll-margin-top: 30px; }
-
 .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     gap: 18px;
     margin: 28px 0 22px;
 }
-
 .section-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 26px; font-weight: 700;
     letter-spacing: 3px;
     margin: 0;
     text-transform: uppercase;
 }
-
 .section-title span {
     background: linear-gradient(90deg, #00d4ff, #e0f7ff, #00d4ff);
     background-size: 200% auto;
@@ -909,15 +727,12 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: titleGradient 6s linear infinite;
 }
-
 @keyframes titleGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 .filter-row {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     gap: 12px;
     flex-wrap: wrap;
     padding: 14px;
@@ -928,7 +743,6 @@ nav a.nav-daftar:hover {
     border: 1px solid rgba(0,212,255,0.5);
     box-shadow: 0 0 30px rgba(0,212,255,0.15);
 }
-
 .next-match-bar-inline {
     position: relative;
     width: 100%;
@@ -941,39 +755,29 @@ nav a.nav-daftar:hover {
     display: none;
     margin-bottom: 10px;
 }
-
 .next-match-bar-inline.show { display: block; }
-
 .next-match-inner {
     padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 18px;
     flex-wrap: wrap;
 }
-
 .next-match-label {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 3px;
     color: #00d4ff;
     text-transform: uppercase;
 }
-
 .next-match-teams {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 15px; font-weight: 700;
     color: #fff;
     text-transform: uppercase;
 }
-
 .next-match-countdown {
     font-family: 'Teko', monospace;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 22px; font-weight: 700;
     letter-spacing: 2px;
     padding: 3px 16px;
     border-radius: 20px;
@@ -982,24 +786,13 @@ nav a.nav-daftar:hover {
     color: #02040a;
     animation: nextMatchShine 3s linear infinite;
 }
-
 @keyframes nextMatchShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
-.tab-filter-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-    width: 100%;
-}
-
+.tab-filter-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; width: 100%; }
 .tab-clock {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     gap: 6px;
     padding: 9px 16px;
     border-radius: 14px;
@@ -1009,12 +802,10 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(0,212,255,0.6);
     flex-shrink: 0;
 }
-
 .tab-clock-icon { font-size: 14px; }
 .tab-clock-value {
     font-family: 'Teko', monospace;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 20px; font-weight: 700;
     color: #fff;
     line-height: 1;
     position: relative;
@@ -1025,32 +816,25 @@ nav a.nav-daftar:hover {
     animation: blink 1s infinite;
     margin: 0 2px;
 }
-
 @keyframes blink {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0.2; }
 }
-
 .tab-clock-label {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 1.5px;
     color: #00d4ff;
     text-transform: uppercase;
 }
-
 .tab-filter-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; }
-
 .tab-filter {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     gap: 6px;
     padding: 9px 18px;
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 12.5px;
-    font-weight: 700;
+    font-size: 12.5px; font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #c8c8d4;
@@ -1063,14 +847,12 @@ nav a.nav-daftar:hover {
     position: relative;
     overflow: hidden;
 }
-
 .tab-filter:hover {
     color: #00d4ff;
     border-color: rgba(0,212,255,0.7);
     box-shadow: 0 0 20px rgba(0,212,255,0.4);
     transform: translateY(-2px);
 }
-
 .tab-filter.active {
     color: #02040a;
     background: linear-gradient(135deg, #00d4ff, #e0f7ff, #00d4ff);
@@ -1079,19 +861,15 @@ nav a.nav-daftar:hover {
     box-shadow: 0 4px 25px rgba(0,212,255,0.6);
     animation: tabActiveShine 3s linear infinite;
 }
-
 @keyframes tabActiveShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 .tab-icon { font-size: 14px; }
 .tab-text { font-size: 12.5px; }
-
 .search-box {
     position: relative;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     min-width: 230px;
     background: rgba(15,20,45,0.8);
     backdrop-filter: blur(20px);
@@ -1100,14 +878,11 @@ nav a.nav-daftar:hover {
     border-radius: 14px;
     transition: all 0.4s;
 }
-
 .search-box:focus-within {
     border-color: rgba(0,212,255,0.9);
     box-shadow: 0 0 30px rgba(0,212,255,0.5);
 }
-
 .search-icon { padding: 0 14px; color: #00d4ff; font-size: 14px; pointer-events: none; }
-
 #searchInput {
     flex: 1;
     border: none;
@@ -1119,9 +894,7 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     font-size: 14px;
 }
-
 #searchInput::placeholder { color: #6b7b9d; }
-
 .search-clear {
     background: transparent;
     border: none;
@@ -1131,7 +904,6 @@ nav a.nav-daftar:hover {
     font-size: 15px;
     font-weight: bold;
 }
-
 .search-clear:hover { color: #00d4ff; }
 .search-clear.hidden { display: none; }
 
@@ -1139,12 +911,10 @@ nav a.nav-daftar:hover {
 .date-filter label {
     color: #b0a8d8;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11.5px;
-    font-weight: 700;
+    font-size: 11.5px; font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
-
 #tanggalFilter,
 #ligaFilter,
 #statusFilter {
@@ -1168,7 +938,6 @@ nav a.nav-daftar:hover {
     background-size: 100% 100%, 12px 12px;
     color-scheme: dark;
 }
-
 #tanggalFilter option,
 #ligaFilter option,
 #statusFilter option {
@@ -1176,29 +945,20 @@ nav a.nav-daftar:hover {
     color: #fff;
     font-weight: 700;
 }
-
 #tanggalFilter:focus,
 #ligaFilter:focus,
 #statusFilter:focus {
     border-color: #00d4ff;
     box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
-
-.date-picker-filter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
+.date-picker-filter { display: flex; align-items: center; gap: 10px; }
 .date-picker-filter label {
     color: #b0a8d8;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11.5px;
-    font-weight: 700;
+    font-size: 11.5px; font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
-
 #tanggalSpesifik {
     appearance: none;
     -webkit-appearance: none;
@@ -1222,18 +982,8 @@ nav a.nav-daftar:hover {
     background-size: 100% 100%, 12px 12px;
     color-scheme: dark;
 }
-
-#tanggalSpesifik option {
-    background-color: #02040a;
-    color: #00d4ff;
-    font-weight: 700;
-}
-
-#tanggalSpesifik:focus {
-    border-color: #00d4ff;
-    box-shadow: 0 0 28px rgba(0,212,255,0.7);
-}
-
+#tanggalSpesifik option { background-color: #02040a; color: #00d4ff; font-weight: 700; }
+#tanggalSpesifik:focus { border-color: #00d4ff; box-shadow: 0 0 28px rgba(0,212,255,0.7); }
 .date-active-badge {
     display: none;
     align-items: center;
@@ -1244,14 +994,12 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(0,212,255,0.7);
     color: #00d4ff;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 12px; font-weight: 800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s;
 }
-
 .date-active-badge.show { display: inline-flex; }
 .date-active-badge:hover {
     background: linear-gradient(135deg, rgba(0,212,255,0.35), rgba(93,45,232,0.25));
@@ -1261,21 +1009,16 @@ nav a.nav-daftar:hover {
     font-size: 14px;
     color: #fff;
     background: rgba(220,60,20,0.8);
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     line-height: 1;
 }
 
 .date-group { margin-bottom: 30px; }
-
 .date-group-header {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 18px; font-weight: 800;
     letter-spacing: 3px;
     color: #00d4ff;
     text-transform: uppercase;
@@ -1292,7 +1035,6 @@ nav a.nav-daftar:hover {
     position: relative;
     overflow: hidden;
 }
-
 .date-group-header::after {
     content: "";
     position: absolute;
@@ -1303,19 +1045,14 @@ nav a.nav-daftar:hover {
     animation: shineSweep 5s ease-in-out infinite;
     pointer-events: none;
 }
-
 @keyframes shineSweep {
     0% { left: -120%; }
     40% { left: 140%; }
     100% { left: 140%; }
 }
-
 .selesai-section { margin-top: 18px; margin-bottom: 10px; }
-
 .selesai-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 12px;
     width: 100%;
     padding: 14px 20px;
@@ -1326,38 +1063,32 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(16,185,129,0.5);
     color: #10b981;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 13px; font-weight: 800;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.35s;
     box-shadow: 0 0 20px rgba(16,185,129,0.15);
 }
-
 .selesai-toggle:hover {
     background: rgba(16,185,129,0.25);
     border-color: rgba(16,185,129,0.9);
     box-shadow: 0 0 30px rgba(16,185,129,0.4);
     transform: translateY(-2px);
 }
-
 .selesai-toggle.open {
     border-color: rgba(16,185,129,0.9);
     background: rgba(16,185,129,0.25);
 }
-
 .selesai-icon { font-size: 16px; }
 .selesai-text { flex: 1; text-align: center; }
 .selesai-arrow { font-size: 12px; transition: transform 0.3s; }
-
 .selesai-content {
     margin-top: 18px;
     padding-top: 18px;
     border-top: 1.5px dashed rgba(16,185,129,0.3);
     animation: fadeInSelesai 0.4s ease;
 }
-
 @keyframes fadeInSelesai {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1374,11 +1105,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 25px 70px rgba(0,0,0,0.5);
     transition: transform 0.4s, box-shadow 0.4s;
 }
-
-.league:hover {
-    box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 50px rgba(0,212,255,0.25);
-}
-
+.league:hover { box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 50px rgba(0,212,255,0.25); }
 .league-header {
     position: relative;
     padding: 20px 25px;
@@ -1395,8 +1122,7 @@ nav a.nav-daftar:hover {
 }
 
 .single-column-wrap {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     gap: 18px;
     padding: 24px 16px 18px;
 }
@@ -1423,7 +1149,6 @@ nav a.nav-daftar:hover {
         0 0 20px rgba(93, 45, 232, 0.12),
         0 8px 25px rgba(0, 0, 0, 0.9);
 }
-
 .match-row-single::before {
     content: "";
     position: absolute;
@@ -1448,12 +1173,10 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     z-index: 2;
 }
-
 @keyframes borderRainbow {
     0% { background-position: 0% 50%; }
     100% { background-position: 300% 50%; }
 }
-
 .match-row-single:hover {
     transform: translateX(5px) translateY(-4px);
     box-shadow:
@@ -1464,42 +1187,34 @@ nav a.nav-daftar:hover {
 
 .match-now-line {
     grid-area: now;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 8px;
     padding: 6px 12px;
     border-radius: 10px;
     background: rgba(93,45,232,0.15);
     border: 1px solid rgba(0,212,255,0.35);
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 11px; font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #a0b8d0;
     width: 100%;
 }
-
 .match-now-line .now-time {
     font-family: 'Teko', monospace;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 14px; font-weight: 600;
     color: #00d4ff;
     letter-spacing: 1.5px;
     text-shadow: 0 0 10px rgba(0,212,255,0.6);
 }
-
 .match-now-line .now-date {
     color: #b0a8d8;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 11px; font-weight: 700;
 }
 
 .match-live-badge {
     position: absolute;
-    top: 8px;
-    left: 50%;
+    top: 8px; left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     padding: 4px 18px;
@@ -1508,24 +1223,20 @@ nav a.nav-daftar:hover {
     background-size: 200% auto;
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
     border: 2px solid rgba(255,220,220,0.95);
     box-shadow: 0 0 20px rgba(255,42,61,0.9);
     animation: liveGradient 4s linear infinite;
 }
-
 @keyframes liveGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 .match-finished-badge {
     position: absolute;
-    top: 8px;
-    left: 50%;
+    top: 8px; left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     padding: 4px 18px;
@@ -1534,26 +1245,20 @@ nav a.nav-daftar:hover {
     background-size: 200% auto;
     color: #ecfdf5;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
     border: 2px solid rgba(190,250,220,0.95);
     box-shadow: 0 0 20px rgba(16,185,129,0.9);
     animation: finishedGradient 5s linear infinite;
 }
-
 @keyframes finishedGradient {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 .match-time-badge {
     grid-area: time;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 3px;
     padding: 8px 12px;
     min-width: 72px;
@@ -1565,23 +1270,18 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
-
 .match-time-badge .time-value {
     font-family: 'Teko', monospace;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 18px; font-weight: 600;
     color: #fff;
     line-height: 1;
 }
-
 .match-time-badge .time-date {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 10px; font-weight: 700;
     color: #a0b8d0;
     letter-spacing: 1.2px;
 }
-
 .match-teams-block {
     grid-area: teams;
     display: grid;
@@ -1592,22 +1292,14 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
-
 .match-team-mini {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 8px;
     min-width: 0;
 }
-
-.match-team-mini.right {
-    flex-direction: row-reverse;
-}
-
+.match-team-mini.right { flex-direction: row-reverse; }
 .match-team-mini .mini-logo {
-    width: 28px;
-    height: 28px;
+    width: 28px; height: 28px;
     object-fit: contain;
     background: #fff;
     border-radius: 50%;
@@ -1617,40 +1309,29 @@ nav a.nav-daftar:hover {
     transition: transform 0.3s;
     animation: logoFloat 2.5s ease-in-out infinite;
 }
-
 .match-team-mini .mini-logo:hover {
     transform: scale(1.2) translateY(-2px);
     box-shadow: 0 0 20px rgba(0,212,255,1);
     animation-play-state: paused;
 }
-
 .match-team-mini .mini-name {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 15px; font-weight: 700;
     color: #fff;
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     max-width: 100%;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-
 .match-vs-mini {
     font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 12px; font-weight: 800;
     color: #00d4ff;
     letter-spacing: 2px;
 }
-
 .match-value-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 4px;
     padding: 8px 16px;
     min-width: 90px;
@@ -1658,7 +1339,6 @@ nav a.nav-daftar:hover {
     z-index: 2;
     position: relative;
 }
-
 .match-value-box.hdp {
     grid-area: hdp;
     background: rgba(93,45,232,0.30);
@@ -1666,7 +1346,6 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(93,45,232,0.75);
 }
-
 .match-value-box.pred {
     grid-area: pred;
     background: rgba(0,212,255,0.22);
@@ -1674,25 +1353,20 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(0,212,255,0.85);
 }
-
 .match-value-box .val-label {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
+    font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
     color: #b0a8d8;
     text-transform: uppercase;
 }
-
 .match-value-box .val-number {
     font-family: 'Teko', monospace;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 22px; font-weight: 700;
     letter-spacing: 1px;
     line-height: 1;
     color: #fff;
 }
-
 .match-value-box.hdp .val-number { text-shadow: 0 0 18px rgba(93,45,232,1); }
 .match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(0,212,255,1); }
 .match-value-box.empty { opacity: 0.5; }
@@ -1702,8 +1376,7 @@ nav a.nav-daftar:hover {
     padding: 50px 20px;
     text-align: center;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 14px; font-weight: 700;
     letter-spacing: 4px;
     color: #555568;
     text-transform: uppercase;
@@ -1719,28 +1392,21 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px);
     border-top: 1.5px solid rgba(0,212,255,0.5);
 }
-
 .footer-logo-wrap {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-flex; align-items: center; justify-content: center;
     margin-bottom: 22px;
     min-height: 90px;
 }
-
 .footer-logo-wrap img {
-    width: 140px;
-    height: 60px;
+    width: 140px; height: 60px;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(0,212,255,0.9));
     animation: floatLogo 3.5s ease-in-out infinite;
 }
-
 .footer-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 26px; font-weight: 700;
     letter-spacing: 10px;
     margin: 15px 0 12px;
     background: linear-gradient(90deg, #00d4ff, #e0f7ff, #00d4ff, #e0f7ff, #00d4ff);
@@ -1751,34 +1417,27 @@ nav a.nav-daftar:hover {
     animation: logoShine 7s linear infinite;
     text-transform: uppercase;
 }
-
 .footer-tagline {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 13px; font-weight: 700;
     letter-spacing: 4px;
     color: #a0b8d0;
     text-transform: uppercase;
     margin-bottom: 25px;
 }
-
 .footer-copy {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 12px; font-weight: 600;
     letter-spacing: 2px;
     color: #6b7b9d;
     margin-top: 15px;
 }
-
 .footer-copy span { color: #00d4ff; font-weight: 800; }
 
 .bottom-nav {
     display: none;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     z-index: 1000;
     padding: 10px 12px 12px;
     background: rgba(8,10,25,0.9);
@@ -1786,7 +1445,6 @@ nav a.nav-daftar:hover {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-top: 1.5px solid rgba(0,212,255,0.55);
 }
-
 .bottom-nav-inner {
     max-width: 500px;
     margin: auto;
@@ -1794,38 +1452,30 @@ nav a.nav-daftar:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
 }
-
 .bottom-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 4px;
     padding: 8px 5px;
     border-radius: 14px;
     text-decoration: none;
     color: #8a98b8;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10.5px;
-    font-weight: 700;
+    font-size: 10.5px; font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     border: 1.5px solid transparent;
     transition: all 0.4s;
 }
-
 .bottom-nav-item:hover {
     color: #00d4ff;
     background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(0,212,255,0.18));
     border-color: rgba(0,212,255,0.7);
 }
-
 .bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
 
 .toast {
     position: fixed;
-    top: 30px;
-    right: 30px;
+    top: 30px; right: 30px;
     padding: 16px 24px;
     border-radius: 14px;
     background: rgba(15, 20, 45, 0.95);
@@ -1834,31 +1484,25 @@ nav a.nav-daftar:hover {
     border: 1px solid rgba(0,212,255,0.45);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0,212,255,0.3);
     color: #00d4ff;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 14px; font-weight: 700;
     z-index: 99999;
     transform: translateX(500px);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     max-width: 400px;
 }
-
 .toast.show { transform: translateX(0); }
 
 .confetti-container {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     pointer-events: none;
     z-index: 9999;
     overflow: hidden;
 }
-
 .confetti {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     animation: confettiFall 3s linear forwards;
 }
-
 @keyframes confettiFall {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
@@ -2340,7 +1984,7 @@ window.fadeInContent = function() {
 })();
 
 /* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v28";
+const CACHE_KEY = "kiper4d_data_cache_v29";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {} }
@@ -2357,7 +2001,7 @@ function loadCache(maxAge) {
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
 /* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v41";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v42";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2383,7 +2027,7 @@ async function loadTeamLogosFromDB() {
 
 /* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v6";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v7";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2452,9 +2096,27 @@ const ALIAS_MAP = {
 };
 
 function resolveAlias(name) { const key = normalizeExact(name); return ALIAS_MAP[key] || name; }
-function normalizeTeamName(name) { return normalizeExact(name).replace(/\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk)\b/g, " ").replace(/\s+/g, " ").trim(); }
+function normalizeTeamName(name) {
+    return normalizeExact(name)
+        .replace(/\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk|rs|ms|mt|pa|mg|ba|pr|go|df|ce|pe|am|ro|rr|to|ap|se|al|pb|rn|pi|ma|es|rj|sp|club|football|soccer|team|the|of|and)\b/g, " ")
+        .replace(/\s+/g, " ").trim();
+}
 
-/* ⭐ NORMALISASI LIGA — biar tidak dobel */
+/* ⭐ ULTRA-FUZZY NORMALIZE TEAM — ini kunci biar data dobel auto-merge */
+function ultraNormalizeTeam(name) {
+    if (!name) return "";
+    let s = String(name).toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    s = s.replace(/\b(fc|afc|sc|cf|fk|if|bk|sk|kv|sv|ac|as|ss|cd|ca|rc|ud|sd|nk|club|football|soccer|team|the|of|and)\b/g, " ");
+    s = s.replace(/\b(rs|sp|rj|mg|ba|pr|go|df|ce|pe|am|ro|rr|to|ap|se|al|pb|rn|pi|ma|es|mt|ms|pa)\b/g, " ");
+    s = s.replace(/\s+\d+$/g, "");
+    return s.replace(/\s+/g, " ").trim();
+}
+
+/* ⭐ NORMALISASI LIGA */
 function normalizeLeague(liga) {
     if (!liga) return "lainnya";
     let s = clean(liga).toLowerCase()
@@ -2462,11 +2124,12 @@ function normalizeLeague(liga) {
         .replace(/[^a-z0-9\s]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
-    
     const ALIAS_LIGA = {
         "brazil serie b": "brasileirao serie b",
+        "brasilian serie b": "brasileirao serie b",
         "brasileirao serie b": "brasileirao serie b",
         "brazil serie a": "brasileirao serie a",
+        "brasilian serie a": "brasileirao serie a",
         "brasileirao serie a": "brasileirao serie a",
         "spain la liga 2": "la liga 2",
         "la liga 2": "la liga 2",
@@ -2482,7 +2145,6 @@ function normalizeLeague(liga) {
         "kirin challenge cup in japan": "kirin challenge cup",
         "kirin challenge cup": "kirin challenge cup"
     };
-    
     if (ALIAS_LIGA[s]) return ALIAS_LIGA[s];
     return s;
 }
@@ -2640,13 +2302,13 @@ function getTodayIndoText() {
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 
-/* ⭐ matchKey fuzzy — tim dengan ejaan beda dianggap sama */
+/* ⭐ ULTRA-FUZZY MATCHKEY — MERGE DATA DOBEL OTOMATIS */
 function matchKey(data) {
     return [
         normalizeDate(clean(data.date)),
         normalizeTime(clean(data.time)),
-        normalizeTeamName(data.home),
-        normalizeTeamName(data.away)
+        ultraNormalizeTeam(data.home),
+        ultraNormalizeTeam(data.away)
     ].join("|");
 }
 
@@ -2829,7 +2491,6 @@ function renderPrediksi(data) {
         html += `<div class="date-group">`;
         html += `<div class="date-group-header">📅 ${escapeHtml(headerTgl)}</div>`;
 
-        /* ⭐ Group by normalizeLeague — biar tidak dobel */
         if (aktif.length) {
             const groupLiga = {};
             aktif.forEach(item => {
