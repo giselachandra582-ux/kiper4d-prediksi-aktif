@@ -496,16 +496,25 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
             <div class="section-label">📅 JADWAL PERTANDINGAN</div>
             <h2>Update Jadwal</h2>
             <p class="small">
-                Format: <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] HANDICAP</b>
+                <b>🧠 Parser Super Pintar — Support Semua Format!</b>
+                <br><br>
+                <b>📅 Format Tanggal:</b> <code>28/09</code>, <code>28/09/2026</code>, <code>28-09-26</code>, <code>28.09</code>, <code>28 Sep</code>, <code>28 September 2026</code>, <code>2026-09-28</code>
                 <br>
-                ✅ Handicap support: <code>0 : 1/4</code>, <code>1/2 : 0</code>, <code>1 1/2 : 0</code>
+                <b>🕐 Format Jam:</b> <code>17:25</code>, <code>17.25</code>, <code>01:45 WIB</code>
+                <br>
+                <b>🎯 Handicap:</b> <code>0:1/2</code>, <code>0 : 1/2</code>, <code>1 1/2:0</code>, <code>0.5:0</code>, <code>1-0</code>, <code>0,5 : 0</code>
+                <br>
+                <b>🔗 Pemisah:</b> <code>|</code>, spasi, atau tab
                 <br>
                 🎨 <b>Logo otomatis dari Firestore (fuzzy match pintar)</b>
             </p>
-            <div class="contoh">ITALY SERIE A
+            <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+28/09 17:25 Japan VS Venezuela 0:1/2
 
+ITALY SERIE A
 11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0
-11/09/2026 02:00 WIB Venezia VS Fiorentina 0 : 1/2</div>
+28 Sep 21:00 England VS Portugal 1-0
+28 September 2026 22:00 Netherlands VS Belgium 0:0.5</div>
             <textarea id="inputJadwal" placeholder="Paste data JADWAL di sini..."></textarea>
             <div class="buttons">
                 <button id="btnProsesJadwal" class="btn-blue">⚙️ Proses Jadwal</button>
@@ -525,14 +534,18 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
             <div class="section-label">🎯 PREDIKSI SKOR</div>
             <h2>Update Prediksi</h2>
             <p class="small">
-                Format: <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
+                <b>Format:</b> <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
                 <br>
                 <b>Nama tim harus PERSIS SAMA dengan jadwal.</b>
+                <br>
+                Support semua format tanggal & jam seperti di Jadwal.
             </p>
-            <div class="contoh">ITALY SERIE A
+            <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+28/09 17:25 Japan VS Venezuela 1 : 2
 
+ITALY SERIE A
 11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1 : 2
-11/09/2026 02:00 WIB Venezia VS Fiorentina 2 : 2</div>
+28 Sep 21:00 England VS Portugal 2-1</div>
             <textarea id="inputPrediksi" placeholder="Paste data PREDIKSI di sini..."></textarea>
             <div class="buttons">
                 <button id="btnProsesPrediksi" class="btn-blue">⚙️ Proses Prediksi</button>
@@ -712,7 +725,8 @@ function normalizeClean(name) {
 
 function normalizeTime(t) {
     const s = clean(t);
-    const m = s.match(/^(\d{1,2}):(\d{2})$/);
+    // Support : dan .
+    const m = s.match(/^(\d{1,2})[:.](\d{2})$/);
     if (!m) return s;
     return m[1].padStart(2, "0") + ":" + m[2];
 }
@@ -735,12 +749,98 @@ function matchKey(data) {
     ].join("|");
 }
 
+
+/* ============================
+   CONVERT DATE — SUPER PINTAR
+   Support: DD/MM, DD/MM/YYYY, DD-MM-YY, DD.MM, "28 Sep", "28 September 2026", YYYY-MM-DD
+   ============================ */
+
+const BULAN_MAP = {
+    jan: "01", januari: "01", january: "01",
+    feb: "02", februari: "02", february: "02", peb: "02",
+    mar: "03", maret: "03", march: "03",
+    apr: "04", april: "04",
+    mei: "05", may: "05",
+    jun: "06", juni: "06", june: "06",
+    jul: "07", juli: "07", july: "07",
+    agu: "08", agustus: "08", aug: "08", august: "08", ags: "08",
+    sep: "09", september: "09", sept: "09",
+    okt: "10", oktober: "10", oct: "10", october: "10",
+    nov: "11", november: "11",
+    des: "12", desember: "12", dec: "12", december: "12"
+};
+
+function normalizeYear(y) {
+    const s = String(y);
+    if (s.length === 2) {
+        const n = parseInt(s, 10);
+        // 00-49 -> 2000-2049, 50-99 -> 1950-1999
+        return (n < 50 ? "20" : "19") + s;
+    }
+    if (s.length === 4) return s;
+    return s;
+}
+
+function getSmartYear(bulanInput) {
+    const now = new Date();
+    const tahunSekarang = now.getFullYear();
+    const bulanSekarang = now.getMonth() + 1;
+
+    // Kalau bulan input lebih kecil 6 bulan dari sekarang -> kemungkinan tahun depan
+    if (bulanInput < bulanSekarang - 6) {
+        return String(tahunSekarang + 1);
+    }
+    // Kalau bulan input lebih besar 6 bulan dari sekarang -> kemungkinan tahun lalu
+    if (bulanInput > bulanSekarang + 6) {
+        return String(tahunSekarang - 1);
+    }
+    return String(tahunSekarang);
+}
+
 function convertDate(tanggal) {
     const t = clean(tanggal);
+    if (!t) return t;
+
+    // === Format ISO: YYYY-MM-DD ===
     if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
-    const bagian = t.split("/");
-    if (bagian.length !== 3) return t;
-    return bagian[2] + "-" + bagian[1].padStart(2, "0") + "-" + bagian[0].padStart(2, "0");
+
+    // === Format YYYY/MM/DD ===
+    if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(t)) {
+        const p = t.split("/");
+        return p[0] + "-" + p[1].padStart(2, "0") + "-" + p[2].padStart(2, "0");
+    }
+
+    // === Format dengan nama bulan: "11 September 2026" / "11 Sep" ===
+    const bulanMatch = t.match(/^(\d{1,2})\s+([a-zA-Z]+)\s*(\d{2,4})?$/);
+    if (bulanMatch) {
+        const hari = bulanMatch[1].padStart(2, "0");
+        const namaBulan = bulanMatch[2].toLowerCase();
+        const bulan = BULAN_MAP[namaBulan] || BULAN_MAP[namaBulan.substring(0, 3)];
+        if (bulan) {
+            const tahun = bulanMatch[3]
+                ? normalizeYear(bulanMatch[3])
+                : getSmartYear(parseInt(bulan, 10));
+            return tahun + "-" + bulan + "-" + hari;
+        }
+    }
+
+    // === Format numerik dengan separator: / - . ===
+    const numMatch = t.match(/^(\d{1,2})[\/\-.](\d{1,2})(?:[\/\-.](\d{2,4}))?$/);
+    if (numMatch) {
+        let hari = numMatch[1].padStart(2, "0");
+        let bulan = numMatch[2].padStart(2, "0");
+        let tahun;
+
+        if (numMatch[3]) {
+            tahun = normalizeYear(numMatch[3]);
+        } else {
+            tahun = getSmartYear(parseInt(bulan, 10));
+        }
+
+        return tahun + "-" + bulan + "-" + hari;
+    }
+
+    return t;
 }
 
 
@@ -866,7 +966,24 @@ function bersihkanBaris(line) {
 
 
 /* ============================
-   PARSER JADWAL
+   REGEX SUPER PINTAR
+   ============================ */
+
+// Regex tanggal: support DD/MM, DD/MM/YYYY, DD-MM-YY, DD.MM, "28 Sep", "28 September 2026"
+const REGEX_DATE = "(\\d{1,4}[\\/\\-.]\\d{1,2}(?:[\\/\\-.]\\d{2,4})?|\\d{1,2}\\s+[a-zA-Z]+\\s*\\d{0,4})";
+
+// Regex jam: support ":" dan ".", dengan WIB/WIT/WITA opsional
+const REGEX_TIME = "(\\d{1,2}[:.]\\d{2})";
+
+// Regex tanggal + jam + sisa
+const REGEX_DATETIME = new RegExp(
+    "^" + REGEX_DATE + "\\s+" + REGEX_TIME + "\\s*(?:WIB|WIT|WITA)?\\s*\\|?\\s*(.+)$",
+    "i"
+);
+
+
+/* ============================
+   PARSER JADWAL — SUPER PINTAR
    ============================ */
 
 function parseJadwal(text) {
@@ -882,9 +999,7 @@ function parseJadwal(text) {
         if (!line) continue;
         if (/^id\s*=/i.test(line)) continue;
 
-        const dateTimeMatch = line.match(
-            /^(\d{1,2}\/\d{1,2}\/\d{4})\s+(\d{1,2}:\d{2})\s*(?:WIB)?\s*\|?\s*(.+)$/i
-        );
+        const dateTimeMatch = line.match(REGEX_DATETIME);
 
         if (!dateTimeMatch) {
             liga = line;
@@ -915,17 +1030,24 @@ function parseJadwal(text) {
         let awayPart = afterVS;
         let handicapPart = "";
 
-        const handicapColon = afterVS.match(
-            /\s+((?:\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:[.,]\d+)?)\s*:\s*(?:\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:[.,]\d+)?))\s*$/i
+        // Pattern handicap super lengkap
+        // Support: "0:1/2", "0 : 1/2", "1 1/2:0", "1 1/2 : 0", "1/4:0", "0.5:0", "0,5:0", "1-0", "0-1/2"
+        const HCP_VALUE = "(?:\\d+(?:\\s+\\d+\\/\\d+)?(?:\\s*\\/\\s*\\d+)?(?:[.,]\\d+)?)";
+        const handicapColonRegex = new RegExp(
+            "\\s+(" + HCP_VALUE + "\\s*[:\\-]\\s*" + HCP_VALUE + ")\\s*$",
+            "i"
         );
+
+        const handicapColon = afterVS.match(handicapColonRegex);
 
         if (handicapColon) {
             const start = afterVS.length - handicapColon[0].length;
             awayPart = afterVS.substring(0, start).trim();
             handicapPart = handicapColon[1].trim();
         } else {
+            // Fallback: handicap tanpa colon (angka tunggal, misal "1" atau "1.5")
             const handicapNoColon = afterVS.match(
-                /\s+(\d+\s+\d+\/\d+|\d+\/\d+|\d+[.,]\d+|\d+-\d+|\d+)\s*$/i
+                /\s+(\d+\s+\d+\/\d+|\d+\/\d+|\d+[.,]\d+|\d+)\s*$/i
             );
             if (handicapNoColon) {
                 const start = afterVS.length - handicapNoColon[0].length;
@@ -947,16 +1069,20 @@ function parseJadwal(text) {
             continue;
         }
 
-        let handicap = handicapPart.replace(/\s+/g, " ");
+        // Normalisasi handicap: ":" atau "-" jadi " : "
+        let handicap = handicapPart.replace(/\s+/g, " ").trim();
+
         handicap = handicap.replace(
-            /(\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:[.,]\d+)?)\s*:\s*(\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:[.,]\d+)?)/g,
-            "$1 : $2"
+            /^(.+?)\s*[:\-]\s*(.+)$/,
+            (match, kiri, kanan) => kiri.trim() + " : " + kanan.trim()
         );
+
+        handicap = handicap.replace(/\s+/g, " ").trim();
 
         hasil.push({
             league: liga || "Lainnya",
             date: convertDate(tanggal),
-            time: jam,
+            time: normalizeTime(jam),
             home: homeClean,
             away: awayPart,
             handicap: handicap
@@ -968,7 +1094,7 @@ function parseJadwal(text) {
 
 
 /* ============================
-   PARSER PREDIKSI
+   PARSER PREDIKSI — SUPER PINTAR
    ============================ */
 
 function parsePrediksi(text) {
@@ -984,9 +1110,7 @@ function parsePrediksi(text) {
         if (!line) continue;
         if (/^id\s*=/i.test(line)) continue;
 
-        const dateTimeMatch = line.match(
-            /^(\d{1,2}\/\d{1,2}\/\d{4})\s+(\d{1,2}:\d{2})\s*(?:WIB)?\s*\|?\s*(.+)$/i
-        );
+        const dateTimeMatch = line.match(REGEX_DATETIME);
 
         if (!dateTimeMatch) {
             liga = line;
@@ -999,6 +1123,7 @@ function parsePrediksi(text) {
 
         sisa = sisa.replace(/[\s|]+$/g, "").trim();
 
+        // Skor prediksi di akhir: "1 : 2" atau "1-2" atau "1:2"
         const scoreMatch = sisa.match(/(\d+)\s*[-:]\s*(\d+)\s*$/);
 
         if (!scoreMatch) {
@@ -1035,7 +1160,7 @@ function parsePrediksi(text) {
         hasil.push({
             league: liga || "Lainnya",
             date: convertDate(tanggal),
-            time: jam,
+            time: normalizeTime(jam),
             home: homeClean,
             away: awayClean,
             predictionScoreHome: scoreMatch[1],
@@ -1067,7 +1192,7 @@ function prosesJadwal() {
             '<div class="status error">' +
             '❌ Tidak ada jadwal yang berhasil dibaca.' +
             '<br><br>' +
-            'Format: <code>11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0</code>' +
+            'Format: <code>28/09 17:25 Japan VS Venezuela 0:1/2</code>' +
             '</div>';
         return;
     }
@@ -1147,7 +1272,7 @@ function prosesPrediksi() {
             '<div class="status error">' +
             '❌ Tidak ada prediksi yang berhasil dibaca.' +
             '<br><br>' +
-            'Format: <code>11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1 : 2</code>' +
+            'Format: <code>28/09 17:25 Japan VS Venezuela 1 : 2</code>' +
             '</div>';
         return;
     }
