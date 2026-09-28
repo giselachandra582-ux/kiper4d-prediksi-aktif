@@ -8,7 +8,7 @@
 <meta name="keywords" content="prediksi bola, jadwal bola, prediksi skor, handicap bola, prediksi hari ini, KIPER4D, bola online">
 <meta name="author" content="KIPER4D">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#050813">
 <meta property="og:type" content="website">
 <meta property="og:title" content="KIPER4D — Prediksi Bola Hari Ini">
 <meta property="og:description" content="Prediksi bola hari ini terlengkap! Jadwal pertandingan, prediksi skor, handicap.">
@@ -35,23 +35,49 @@ html { scroll-behavior: smooth; }
 body {
     margin: 0;
     font-family: 'Inter', Arial, sans-serif;
-    background: #000000;
+    background: #050813;
     color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     letter-spacing: 0.2px;
+    position: relative;
 }
 
-.aurora-bg { display: none; }
-.liquid-bg { display: none; }
+/* AURORA BG HALUS */
+.aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -4;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.aurora-bg::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background:
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(93,45,232,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(0,212,255,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(255,204,51,0.15) 0%, transparent 60%),
+        linear-gradient(180deg, #050813 0%, #02030a 100%);
+    animation: auroraMove 25s ease-in-out infinite;
+    filter: blur(60px);
+}
+
+@keyframes auroraMove {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(5%, -5%) rotate(120deg) scale(1.1); }
+    66% { transform: translate(-5%, 5%) rotate(240deg) scale(0.95); }
+}
 
 #particleCanvas {
     position: fixed;
     inset: 0;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .reading-progress {
@@ -60,12 +86,12 @@ body {
     left: 0;
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, #5ec8e5, #8b7ec8, #d67bc7);
+    background: linear-gradient(90deg, #ffcc33, #00d4ff, #5d2de8);
     background-size: 200% auto;
     z-index: 99999;
     transition: width 0.1s ease-out;
-    box-shadow: 0 0 15px rgba(94,200,229,0.7);
-    animation: progressShine 4s linear infinite;
+    box-shadow: 0 0 15px rgba(0,212,255,0.8);
+    animation: progressShine 3s linear infinite;
 }
 
 @keyframes progressShine {
@@ -73,6 +99,7 @@ body {
     100% { background-position: 200% center; }
 }
 
+/* LOADING */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -81,7 +108,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+    background: radial-gradient(circle at center, #0d0d2b 0%, #050813 60%, #000 100%);
     transition: opacity 0.8s, visibility 0.8s;
     overflow: hidden;
 }
@@ -99,8 +126,8 @@ body {
     position: absolute;
     width: 3px; height: 3px;
     border-radius: 50%;
-    background: #5ec8e5;
-    box-shadow: 0 0 10px #5ec8e5, 0 0 20px #d67bc7;
+    background: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff, 0 0 20px #5d2de8;
     animation: floatParticle 6s ease-in-out infinite;
 }
 
@@ -128,8 +155,8 @@ body {
 
 .loading-ring:nth-child(2) {
     width: 245px; height: 245px;
-    border: 1.5px solid rgba(94,200,229,0.15);
-    border-bottom-color: rgba(94,200,229,1);
+    border: 1.5px solid rgba(0,212,255,0.15);
+    border-bottom-color: rgba(0,212,255,1);
     animation-duration: 3.2s;
     animation-direction: reverse;
 }
@@ -145,7 +172,7 @@ body {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(94,200,229,0.6));
+    filter: drop-shadow(0 0 30px rgba(93,45,232,1)) drop-shadow(0 0 60px rgba(0,212,255,0.6));
     animation: floatLogo 2.5s ease-in-out infinite;
 }
 
@@ -174,7 +201,7 @@ body {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 4px;
-    color: #5ec8e5;
+    color: #00d4ff;
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(12px);
@@ -194,17 +221,17 @@ body {
 
 .loading-bar-fill {
     height: 100%; width: 0%;
-    background: linear-gradient(90deg, #5d2de8, #5ec8e5, #d67bc7);
+    background: linear-gradient(90deg, #5d2de8, #00d4ff, #ffcc33);
     border-radius: 20px;
     transition: width 0.3s ease-out;
-    box-shadow: 0 0 15px rgba(94,200,229,0.8);
+    box-shadow: 0 0 15px rgba(0,212,255,0.8);
 }
 
 .loading-percent {
     font-family: 'Teko', sans-serif;
     font-size: 42px;
     font-weight: 700;
-    background: linear-gradient(180deg, #e8e4d5, #b8b0d8, #6a5acd);
+    background: linear-gradient(180deg, #fff5d0, #ffcc33, #b8860b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -216,8 +243,8 @@ body {
 .loading-percent::after {
     content: "%";
     font-size: 22px;
-    color: #5ec8e5;
-    -webkit-text-fill-color: #5ec8e5;
+    color: #00d4ff;
+    -webkit-text-fill-color: #00d4ff;
 }
 
 .loading-brand {
@@ -226,15 +253,16 @@ body {
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 10px;
-    color: #b8b0d8;
+    color: #ffcc33;
     opacity: 0.85;
 }
 
+/* HEADER */
 header {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(5, 8, 19, 0.85);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-bottom: 1.5px solid rgba(93,45,232,0.45);
@@ -246,7 +274,7 @@ header::before {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #8b7ec8, #5ec8e5, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #ffcc33, #00d4ff, #5d2de8, transparent);
     background-size: 200% 100%;
     animation: headerBorder 8s linear infinite;
 }
@@ -289,7 +317,7 @@ header::before {
 }
 
 .logo:hover img {
-    filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(94,200,229,0.6));
+    filter: drop-shadow(0 0 20px rgba(93,45,232,1)) drop-shadow(0 0 35px rgba(0,212,255,0.6));
 }
 
 .logo-subtitle {
@@ -298,7 +326,7 @@ header::before {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 3px;
-    background: linear-gradient(90deg, #b8b0d8, #e8e4d5, #5ec8e5, #e8e4d5, #b8b0d8);
+    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -328,15 +356,15 @@ nav a.nav-link {
 }
 
 nav a.nav-link:hover {
-    color: #5ec8e5;
-    background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(94,200,229,0.15));
-    border-color: rgba(94,200,229,0.6);
-    box-shadow: 0 0 25px rgba(94,200,229,0.45);
+    color: #00d4ff;
+    background: linear-gradient(135deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15));
+    border-color: rgba(0,212,255,0.6);
+    box-shadow: 0 0 25px rgba(0,212,255,0.45);
     transform: translateY(-2px);
 }
 
 nav a.nav-login {
-    color: #5ec8e5;
+    color: #00d4ff;
     text-decoration: none;
     padding: 9px 24px;
     border-radius: 24px;
@@ -345,20 +373,20 @@ nav a.nav-login {
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1.5px solid rgba(94,200,229,0.8);
-    box-shadow: 0 0 15px rgba(94,200,229,0.3);
+    border: 1.5px solid rgba(0,212,255,0.8);
+    box-shadow: 0 0 15px rgba(0,212,255,0.3);
     transition: all 0.3s;
 }
 
 nav a.nav-login:hover {
-    color: #0a0e27;
-    background: linear-gradient(135deg, #5ec8e5, #5d2de8);
-    box-shadow: 0 0 30px rgba(94,200,229,0.8);
+    color: #050813;
+    background: linear-gradient(135deg, #00d4ff, #5d2de8);
+    box-shadow: 0 0 30px rgba(0,212,255,0.8);
     transform: translateY(-2px);
 }
 
 nav a.nav-daftar {
-    color: #0a0e27;
+    color: #050813;
     text-decoration: none;
     padding: 10px 28px;
     border-radius: 24px;
@@ -367,9 +395,9 @@ nav a.nav-daftar {
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #b8b0d8 0%, #e8e4d5 50%, #b8b0d8 100%);
+    background: linear-gradient(135deg, #ffcc33 0%, #fff5d0 50%, #ffcc33 100%);
     background-size: 200% auto;
-    box-shadow: 0 6px 25px rgba(184,176,216,0.6);
+    box-shadow: 0 6px 25px rgba(255,204,51,0.6);
     animation: btnShine 3.5s ease-in-out infinite;
     transition: all 0.3s;
 }
@@ -381,9 +409,10 @@ nav a.nav-daftar {
 
 nav a.nav-daftar:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 45px rgba(184,176,216,0.9);
+    box-shadow: 0 10px 45px rgba(255,204,51,0.9);
 }
 
+/* CONTAINER */
 .container {
     max-width: 1250px;
     margin: auto;
@@ -399,7 +428,7 @@ nav a.nav-daftar:hover {
     padding: 20px 65px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(10,10,10,0.9);
+    background: rgba(10,14,39,0.75);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1.5px solid rgba(93,45,232,0.6);
@@ -414,7 +443,7 @@ nav a.nav-daftar:hover {
     content: "";
     position: absolute;
     width: 22px; height: 22px;
-    border: 2px solid #b8b0d8;
+    border: 2px solid #ffcc33;
     pointer-events: none;
     z-index: 5;
 }
@@ -426,7 +455,7 @@ nav a.nav-daftar:hover {
 .lux-text-wrap .corner-br {
     position: absolute;
     width: 22px; height: 22px;
-    border: 2px solid #b8b0d8;
+    border: 2px solid #ffcc33;
     pointer-events: none;
     z-index: 5;
 }
@@ -439,7 +468,7 @@ nav a.nav-daftar:hover {
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: #b8b0d8;
+    color: #ffcc33;
     animation: iconSpin 6s linear infinite;
     pointer-events: none;
     z-index: 3;
@@ -481,7 +510,7 @@ nav a.nav-daftar:hover {
     filter: blur(8px);
     transition: opacity 0.8s, transform 0.8s, filter 0.8s;
     pointer-events: none;
-    background: linear-gradient(90deg, #b8b0d8, #e8e4d5, #5ec8e5, #e8e4d5, #b8b0d8);
+    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -504,9 +533,9 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     margin-bottom: 26px;
     border: 2px solid rgba(93,45,232,0.7);
-    background: #000;
+    background: #050813;
     line-height: 0;
-    box-shadow: 0 0 40px rgba(93,45,232,0.35), 0 0 80px rgba(94,200,229,0.15);
+    box-shadow: 0 0 40px rgba(93,45,232,0.35), 0 0 80px rgba(0,212,255,0.15);
 }
 
 .banner img {
@@ -514,7 +543,6 @@ nav a.nav-daftar:hover {
     width: 100%;
     height: auto;
     object-fit: contain;
-    content-visibility: auto;
 }
 
 .banner::after {
@@ -534,13 +562,14 @@ nav a.nav-daftar:hover {
     100% { left: 140%; }
 }
 
+/* BIG MATCH TICKER */
 .big-match-ticker-wrap {
     position: relative;
     width: 100%;
     margin-bottom: 18px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(10,10,10,0.9);
+    background: rgba(10,14,39,0.75);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(93,45,232,0.5);
@@ -552,7 +581,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     left: 0;
     width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #8b7ec8, #5ec8e5, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #ffcc33, #00d4ff, #5d2de8, transparent);
     background-size: 200% 100%;
     animation: tickerBorderTop 8s linear infinite;
     z-index: 3;
@@ -575,8 +604,8 @@ nav a.nav-daftar:hover {
     pointer-events: none;
 }
 
-.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(0,0,0,1), transparent); }
-.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(0,0,0,1), transparent); }
+.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(5,8,19,1), transparent); }
+.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(5,8,19,1), transparent); }
 
 .big-match-ticker {
     position: relative;
@@ -614,7 +643,7 @@ nav a.nav-daftar:hover {
     width: 200px;
     padding: 14px;
     border-radius: 16px;
-    background: rgba(20,20,20,0.9);
+    background: rgba(30,20,60,0.75);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1.5px solid rgba(93,45,232,0.5);
@@ -622,52 +651,9 @@ nav a.nav-daftar:hover {
     transition: all 0.4s;
 }
 
-.bmt-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    background: linear-gradient(135deg,
-        transparent 0%,
-        rgba(214,123,199,0.12) 20%,
-        transparent 40%,
-        rgba(94,200,229,0.12) 60%,
-        transparent 80%,
-        rgba(139,126,200,0.12) 100%);
-    background-size: 200% 200%;
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.bmt-card:hover::before {
-    opacity: 1;
-    animation: holoShift 2s linear infinite;
-}
-
-@keyframes holoShift {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 200% 200%; }
-}
-
-.bmt-card::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -120%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(184,176,216,0.25), transparent);
-    transform: skewX(-20deg);
-    pointer-events: none;
-    transition: left 0.6s ease;
-    z-index: 2;
-}
-
-.bmt-card:hover::after { left: 140%; }
-
 .bmt-card:hover {
-    border-color: rgba(94,200,229,0.9);
-    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(94,200,229,0.45);
+    border-color: rgba(0,212,255,0.9);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(0,212,255,0.55);
     transform: translateY(-4px);
 }
 
@@ -696,7 +682,7 @@ nav a.nav-daftar:hover {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2px;
-    color: #5ec8e5;
+    color: #00d4ff;
     text-transform: uppercase;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -726,7 +712,7 @@ nav a.nav-daftar:hover {
     justify-content: center;
     font-size: 11px;
     font-weight: 900;
-    color: #b8b0d8;
+    color: #ffcc33;
     background: radial-gradient(circle, #1e1444, #050813);
     border: 1.5px solid rgba(93,45,232,0.9);
     overflow: hidden;
@@ -734,7 +720,7 @@ nav a.nav-daftar:hover {
 }
 
 .bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
-.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(184,176,216,0.9); }
+.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(255,204,51,0.9); }
 
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
@@ -751,7 +737,7 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px;
     font-weight: 800;
-    color: #b8b0d8;
+    color: #ffcc33;
     letter-spacing: 1.5px;
 }
 
@@ -765,8 +751,8 @@ nav a.nav-daftar:hover {
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 1.5px;
-    color: #e8e4d5;
-    background: linear-gradient(90deg, rgba(93,45,232,0.20), rgba(94,200,229,0.15), rgba(93,45,232,0.20));
+    color: #fff5d0;
+    background: linear-gradient(90deg, rgba(93,45,232,0.20), rgba(0,212,255,0.15), rgba(93,45,232,0.20));
     border-top: 1px solid rgba(93,45,232,0.4);
     border-bottom: 1px solid rgba(93,45,232,0.4);
     border-radius: 8px;
@@ -774,12 +760,13 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
+/* NEWS TICKER */
 .news-ticker {
     position: relative;
     width: 100%;
     overflow: hidden;
     border-radius: 14px;
-    background: rgba(15,5,15,0.9);
+    background: rgba(26,10,32,0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1.5px solid rgba(93,45,232,0.6);
@@ -825,7 +812,7 @@ nav a.nav-daftar:hover {
     font-family: 'Rajdhani', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #5ec8e5;
+    color: #00d4ff;
     animation: newsScroll 150s linear infinite;
     padding-left: 100%;
 }
@@ -835,6 +822,7 @@ nav a.nav-daftar:hover {
     100% { transform: translate(-100%, -50%); }
 }
 
+/* STATS */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -847,7 +835,7 @@ nav a.nav-daftar:hover {
     padding: 20px 14px 18px;
     text-align: center;
     border-radius: 18px;
-    background: rgba(20,20,20,0.85);
+    background: rgba(30,20,60,0.65);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1.5px solid rgba(93,45,232,0.45);
@@ -856,8 +844,8 @@ nav a.nav-daftar:hover {
 }
 
 .stat-box:hover {
-    border-color: rgba(94,200,229,0.9);
-    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(94,200,229,0.4);
+    border-color: rgba(0,212,255,0.9);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(0,212,255,0.45);
     transform: translateY(-4px);
 }
 
@@ -868,7 +856,7 @@ nav a.nav-daftar:hover {
     left: 50%;
     transform: translateX(-50%);
     font-size: 10px;
-    color: #b8b0d8;
+    color: #ffcc33;
     opacity: 0.7;
 }
 
@@ -877,7 +865,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 22px; left: 15%;
     width: 70%; height: 1px;
-    background: linear-gradient(90deg, transparent, #5d2de8, #5ec8e5, #5d2de8, transparent);
+    background: linear-gradient(90deg, transparent, #5d2de8, #00d4ff, #5d2de8, transparent);
 }
 
 .stat-number {
@@ -885,13 +873,13 @@ nav a.nav-daftar:hover {
     font-family: 'Teko', sans-serif;
     font-size: 38px;
     font-weight: 700;
-    background: linear-gradient(180deg, #e8e4d5, #b8b0d8, #6a5acd);
+    background: linear-gradient(180deg, #fff5d0, #ffcc33, #b8860b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 2px;
     line-height: 1;
-    text-shadow: 0 0 30px rgba(184,176,216,0.5);
+    text-shadow: 0 0 30px rgba(255,204,51,0.5);
 }
 
 .stat-label {
@@ -904,6 +892,7 @@ nav a.nav-daftar:hover {
     margin-top: 4px;
 }
 
+/* FILTER ROW */
 #pertandingan { scroll-margin-top: 30px; }
 
 .section-head {
@@ -924,7 +913,7 @@ nav a.nav-daftar:hover {
 }
 
 .section-title span {
-    background: linear-gradient(90deg, #b8b0d8, #5ec8e5, #b8b0d8);
+    background: linear-gradient(90deg, #ffcc33, #00d4ff, #ffcc33);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -944,7 +933,7 @@ nav a.nav-daftar:hover {
     flex-wrap: wrap;
     padding: 14px;
     border-radius: 18px;
-    background: rgba(10,10,10,0.9);
+    background: rgba(20,14,45,0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(93,45,232,0.5);
@@ -956,7 +945,7 @@ nav a.nav-daftar:hover {
     width: 100%;
     border-radius: 14px;
     overflow: hidden;
-    background: rgba(20,20,20,0.9);
+    background: rgba(30,20,60,0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1.5px solid rgba(93,45,232,0.6);
@@ -980,7 +969,7 @@ nav a.nav-daftar:hover {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #5ec8e5;
+    color: #00d4ff;
     text-transform: uppercase;
 }
 
@@ -999,9 +988,9 @@ nav a.nav-daftar:hover {
     letter-spacing: 2px;
     padding: 3px 16px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #8b7ec8, #5ec8e5, #8b7ec8);
+    background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33);
     background-size: 200% auto;
-    color: #0a0e27;
+    color: #050813;
     animation: nextMatchShine 3s linear infinite;
 }
 
@@ -1025,10 +1014,10 @@ nav a.nav-daftar:hover {
     gap: 6px;
     padding: 9px 16px;
     border-radius: 14px;
-    background: rgba(20,20,20,0.9);
+    background: rgba(30,20,60,0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(139,126,200,0.6);
+    border: 1.5px solid rgba(255,204,51,0.6);
     flex-shrink: 0;
 }
 
@@ -1043,7 +1032,7 @@ nav a.nav-daftar:hover {
 }
 .tab-clock-value::after {
     content: ":";
-    color: #5ec8e5;
+    color: #00d4ff;
     animation: blink 1s infinite;
     margin: 0 2px;
 }
@@ -1058,7 +1047,7 @@ nav a.nav-daftar:hover {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #b8b0d8;
+    color: #ffcc33;
     text-transform: uppercase;
 }
 
@@ -1076,7 +1065,7 @@ nav a.nav-daftar:hover {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #c8c8d4;
-    background: rgba(20,20,20,0.85);
+    background: rgba(30,20,60,0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(93,45,232,0.4);
@@ -1086,31 +1075,19 @@ nav a.nav-daftar:hover {
     overflow: hidden;
 }
 
-.tab-filter::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(94,200,229,0.2), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.5s ease;
-}
-
 .tab-filter:hover {
-    color: #5ec8e5;
-    border-color: rgba(94,200,229,0.7);
-    box-shadow: 0 0 20px rgba(94,200,229,0.4);
+    color: #00d4ff;
+    border-color: rgba(0,212,255,0.7);
+    box-shadow: 0 0 20px rgba(0,212,255,0.4);
     transform: translateY(-2px);
 }
 
-.tab-filter:hover::before { left: 140%; }
-
 .tab-filter.active {
-    color: #0a0e27;
-    background: linear-gradient(135deg, #8b7ec8, #5ec8e5, #8b7ec8);
+    color: #050813;
+    background: linear-gradient(135deg, #ffcc33, #fff5d0, #ffcc33);
     background-size: 200% auto;
-    border-color: #8b7ec8;
-    box-shadow: 0 4px 25px rgba(139,126,200,0.6);
+    border-color: #ffcc33;
+    box-shadow: 0 4px 25px rgba(255,204,51,0.6);
     animation: tabActiveShine 3s linear infinite;
 }
 
@@ -1127,7 +1104,7 @@ nav a.nav-daftar:hover {
     display: flex;
     align-items: center;
     min-width: 230px;
-    background: rgba(20,20,20,0.9);
+    background: rgba(30,20,60,0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1.5px solid rgba(93,45,232,0.5);
@@ -1136,11 +1113,11 @@ nav a.nav-daftar:hover {
 }
 
 .search-box:focus-within {
-    border-color: rgba(94,200,229,0.9);
-    box-shadow: 0 0 30px rgba(94,200,229,0.5);
+    border-color: rgba(0,212,255,0.9);
+    box-shadow: 0 0 30px rgba(0,212,255,0.5);
 }
 
-.search-icon { padding: 0 14px; color: #5ec8e5; font-size: 14px; pointer-events: none; }
+.search-icon { padding: 0 14px; color: #00d4ff; font-size: 14px; pointer-events: none; }
 
 #searchInput {
     flex: 1;
@@ -1166,7 +1143,7 @@ nav a.nav-daftar:hover {
     font-weight: bold;
 }
 
-.search-clear:hover { color: #5ec8e5; }
+.search-clear:hover { color: #00d4ff; }
 .search-clear.hidden { display: none; }
 
 .date-filter { display: flex; align-items: center; gap: 10px; }
@@ -1184,7 +1161,7 @@ nav a.nav-daftar:hover {
 #statusFilter {
     appearance: none;
     border: 1.5px solid rgba(93,45,232,0.6);
-    background-color: #000;
+    background-color: #050813;
     color: #fff;
     padding: 11px 38px 11px 16px;
     border-radius: 14px;
@@ -1195,8 +1172,8 @@ nav a.nav-daftar:hover {
     cursor: pointer;
     max-width: 220px;
     background-image:
-        linear-gradient(145deg, rgba(20,20,20,1), rgba(0,0,0,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235ec8e5' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        linear-gradient(145deg, rgba(20,14,45,1), rgba(5,8,19,1)),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, right 14px center;
     background-size: 100% 100%, 12px 12px;
@@ -1206,7 +1183,7 @@ nav a.nav-daftar:hover {
 #tanggalFilter option,
 #ligaFilter option,
 #statusFilter option {
-    background-color: #000;
+    background-color: #050813;
     color: #fff;
     font-weight: 700;
 }
@@ -1214,8 +1191,8 @@ nav a.nav-daftar:hover {
 #tanggalFilter:focus,
 #ligaFilter:focus,
 #statusFilter:focus {
-    border-color: #5ec8e5;
-    box-shadow: 0 0 28px rgba(94,200,229,0.7);
+    border-color: #00d4ff;
+    box-shadow: 0 0 28px rgba(0,212,255,0.7);
 }
 
 .date-picker-filter {
@@ -1236,9 +1213,9 @@ nav a.nav-daftar:hover {
 #tanggalSpesifik {
     appearance: none;
     -webkit-appearance: none;
-    border: 1.5px solid rgba(139,126,200,0.6);
-    background-color: #000;
-    color: #b8b0d8;
+    border: 1.5px solid rgba(255,204,51,0.6);
+    background-color: #050813;
+    color: #ffcc33;
     padding: 11px 38px 11px 16px;
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
@@ -1249,8 +1226,8 @@ nav a.nav-daftar:hover {
     transition: all 0.3s;
     min-width: 130px;
     background-image:
-        linear-gradient(145deg, rgba(20,20,20,1), rgba(0,0,0,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8b0d8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        linear-gradient(145deg, rgba(20,14,45,1), rgba(5,8,19,1)),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffcc33' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, right 14px center;
     background-size: 100% 100%, 12px 12px;
@@ -1258,14 +1235,14 @@ nav a.nav-daftar:hover {
 }
 
 #tanggalSpesifik option {
-    background-color: #000;
-    color: #b8b0d8;
+    background-color: #050813;
+    color: #ffcc33;
     font-weight: 700;
 }
 
 #tanggalSpesifik:focus {
-    border-color: #b8b0d8;
-    box-shadow: 0 0 28px rgba(184,176,216,0.7);
+    border-color: #ffcc33;
+    box-shadow: 0 0 28px rgba(255,204,51,0.7);
 }
 
 .date-active-badge {
@@ -1274,9 +1251,9 @@ nav a.nav-daftar:hover {
     gap: 8px;
     padding: 8px 16px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(139,126,200,0.2), rgba(94,200,229,0.15));
-    border: 1.5px solid rgba(139,126,200,0.7);
-    color: #b8b0d8;
+    background: linear-gradient(135deg, rgba(255,204,51,0.2), rgba(0,212,255,0.15));
+    border: 1.5px solid rgba(255,204,51,0.7);
+    color: #ffcc33;
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px;
     font-weight: 800;
@@ -1288,8 +1265,8 @@ nav a.nav-daftar:hover {
 
 .date-active-badge.show { display: inline-flex; }
 .date-active-badge:hover {
-    background: linear-gradient(135deg, rgba(139,126,200,0.35), rgba(94,200,229,0.25));
-    box-shadow: 0 0 25px rgba(139,126,200,0.5);
+    background: linear-gradient(135deg, rgba(255,204,51,0.35), rgba(0,212,255,0.25));
+    box-shadow: 0 0 25px rgba(255,204,51,0.5);
 }
 .date-active-badge .close-x {
     font-size: 14px;
@@ -1304,6 +1281,7 @@ nav a.nav-daftar:hover {
     line-height: 1;
 }
 
+/* DATE GROUP */
 .date-group { margin-bottom: 30px; }
 
 .date-group-header {
@@ -1311,7 +1289,7 @@ nav a.nav-daftar:hover {
     font-size: 18px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #b8b0d8;
+    color: #ffcc33;
     text-transform: uppercase;
     padding: 14px 20px;
     margin-bottom: 18px;
@@ -1319,10 +1297,10 @@ nav a.nav-daftar:hover {
     background: rgba(93,45,232,0.25);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(139,126,200,0.5);
+    border: 1.5px solid rgba(255,204,51,0.5);
     text-align: center;
-    box-shadow: 0 0 25px rgba(139,126,200,0.25);
-    text-shadow: 0 0 15px rgba(184,176,216,0.8);
+    box-shadow: 0 0 25px rgba(255,204,51,0.25);
+    text-shadow: 0 0 15px rgba(255,204,51,0.8);
     position: relative;
     overflow: hidden;
 }
@@ -1332,7 +1310,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -120%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(184,176,216,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,215,100,0.3), transparent);
     transform: skewX(-20deg);
     animation: shineSweep 5s ease-in-out infinite;
     pointer-events: none;
@@ -1397,11 +1375,12 @@ nav a.nav-daftar:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* LEAGUE */
 .league {
     margin-bottom: 30px;
     border-radius: 22px;
     overflow: hidden;
-    background: rgba(5,5,5,0.9);
+    background: rgba(15,10,40,0.75);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1.5px solid rgba(93,45,232,0.5);
@@ -1413,7 +1392,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 50px rgba(93,45,232,0.25);
 }
 
-/* ==== LEAGUE HEADER HITAM POLOS + TULISAN ABU-UNGU ELEGAN ==== */
+/* LEAGUE HEADER HITAM POLOS */
 .league-header {
     position: relative;
     padding: 20px 25px;
@@ -1422,11 +1401,11 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 5px;
-    color: #b8b0d8;
+    color: #ffcc33;
     text-transform: uppercase;
-    background: #000000;
-    border-bottom: 1.5px solid rgba(139,126,200,0.5);
-    text-shadow: 0 0 10px rgba(184,176,216,0.5);
+    background: #050813;
+    border-bottom: 1.5px solid rgba(255,204,51,0.5);
+    text-shadow: 0 0 10px rgba(255,204,51,0.6);
 }
 
 .single-column-wrap {
@@ -1437,28 +1416,26 @@ nav a.nav-daftar:hover {
 }
 
 /* ================================================
-   KOTAK PERTANDINGAN — BORDER 3 WARNA SOFT BERJALAN
+   KOTAK PERTANDINGAN — BORDER 3 WARNA BERJALAN
    ================================================ */
 .match-row-single {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     grid-template-areas:
-        "clock clock clock clock"
         "time teams hdp pred";
     align-items: center;
     gap: 14px;
-    row-gap: 12px;
     padding: 24px 16px 24px;
     border-radius: 14px;
     position: relative;
     overflow: hidden;
     transition: all 0.4s;
     border: 2px solid transparent;
-    background: #050505;
+    background: rgba(15,10,40,0.75);
     background-clip: padding-box;
     box-shadow:
-        0 0 15px rgba(94, 200, 229, 0.25),
-        0 0 30px rgba(214, 123, 199, 0.15),
+        0 0 15px rgba(0, 212, 255, 0.25),
+        0 0 30px rgba(93, 45, 232, 0.25),
         0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
@@ -1470,13 +1447,11 @@ nav a.nav-daftar:hover {
     padding: 1.5px;
     background: linear-gradient(
         90deg,
-        #5ec8e5 0%,
-        #7ed3e8 16.6%,
-        #8b7ec8 33.3%,
-        #a89cd8 50%,
-        #d67bc7 66.6%,
-        #e094d4 83.3%,
-        #5ec8e5 100%
+        #5d2de8 0%,
+        #00d4ff 25%,
+        #ffcc33 50%,
+        #00d4ff 75%,
+        #5d2de8 100%
     );
     background-size: 300% 100%;
     -webkit-mask:
@@ -1497,9 +1472,9 @@ nav a.nav-daftar:hover {
 .match-row-single:hover {
     transform: translateX(5px) translateY(-4px);
     box-shadow:
-        0 0 25px rgba(139, 126, 200, 0.4),
-        0 0 50px rgba(94, 200, 229, 0.4),
-        0 0 80px rgba(214, 123, 199, 0.25),
+        0 0 25px rgba(255, 204, 51, 0.6),
+        0 0 50px rgba(0, 212, 255, 0.5),
+        0 0 80px rgba(93, 45, 232, 0.3),
         0 12px 35px rgba(0, 0, 0, 0.85);
 }
 
@@ -1563,7 +1538,7 @@ nav a.nav-daftar:hover {
     z-index: 10;
     padding: 4px 20px;
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(139,126,200,0.98), rgba(94,200,229,0.98));
+    background: linear-gradient(135deg, rgba(0,212,255,0.98), rgba(93,45,232,0.98));
     border: 2px solid rgba(180,240,255,0.9);
     color: #fff;
     font-family: 'Teko', monospace;
@@ -1571,59 +1546,17 @@ nav a.nav-daftar:hover {
     font-weight: 600;
     letter-spacing: 1.5px;
     white-space: nowrap;
-    box-shadow: 0 0 20px rgba(94,200,229,0.7);
+    box-shadow: 0 0 20px rgba(0,212,255,0.9);
 }
 
 .match-countdown-badge.soon {
-    background: linear-gradient(135deg, rgba(139,126,200,0.98), rgba(214,123,199,0.98));
-    border-color: rgba(220,200,240,1);
-    color: #fff;
+    background: linear-gradient(135deg, rgba(255,204,51,0.98), rgba(255,140,0,0.98));
+    border-color: rgba(255,240,160,1);
+    color: #050813;
 }
-
-.match-clock-line {
-    grid-area: clock;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 8px 16px;
-    border-radius: 12px;
-    background: rgba(93,45,232,0.20);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(94,200,229,0.55);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    width: 100%;
-}
-
-.match-clock-label { color: #b0a8d8; font-size: 11px; font-weight: 700; }
-.match-clock-value {
-    background: linear-gradient(90deg, #b8b0d8, #e8e4d5, #5ec8e5, #e8e4d5, #b8b0d8);
-    background-size: 250% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: clockShine 7s linear infinite;
-    font-family: 'Teko', monospace;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-@keyframes clockShine {
-    0% { background-position: 0% center; }
-    100% { background-position: 250% center; }
-}
-
-.match-row-single .match-time-badge { grid-area: time; }
-.match-row-single .match-teams-block { grid-area: teams; }
-.match-row-single .match-value-box.hdp { grid-area: hdp; }
-.match-row-single .match-value-box.pred { grid-area: pred; }
 
 .match-time-badge {
+    grid-area: time;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1632,7 +1565,7 @@ nav a.nav-daftar:hover {
     padding: 8px 12px;
     min-width: 72px;
     border-radius: 12px;
-    background: rgba(20,20,20,0.85);
+    background: rgba(30,20,60,0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(93,45,232,0.7);
@@ -1657,6 +1590,7 @@ nav a.nav-daftar:hover {
 }
 
 .match-teams-block {
+    grid-area: teams;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -1686,13 +1620,13 @@ nav a.nav-daftar:hover {
     border-radius: 50%;
     padding: 2px;
     flex-shrink: 0;
-    box-shadow: 0 0 10px rgba(94,200,229,0.5);
+    box-shadow: 0 0 10px rgba(0,212,255,0.5);
     transition: transform 0.3s;
 }
 
 .match-team-mini .mini-logo:hover {
     transform: scale(1.15);
-    box-shadow: 0 0 18px rgba(94,200,229,1);
+    box-shadow: 0 0 18px rgba(0,212,255,1);
 }
 
 .match-team-mini .mini-name {
@@ -1713,7 +1647,7 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-size: 12px;
     font-weight: 800;
-    color: #b8b0d8;
+    color: #ffcc33;
     letter-spacing: 2px;
 }
 
@@ -1731,17 +1665,19 @@ nav a.nav-daftar:hover {
 }
 
 .match-value-box.hdp {
-    background: rgba(60, 55, 110, 0.35);
+    grid-area: hdp;
+    background: rgba(93,45,232,0.30);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(139,126,200,0.6);
+    border: 1.5px solid rgba(93,45,232,0.75);
 }
 
 .match-value-box.pred {
-    background: rgba(60, 90, 130, 0.30);
+    grid-area: pred;
+    background: rgba(0,212,255,0.22);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(94,200,229,0.6);
+    border: 1.5px solid rgba(0,212,255,0.85);
 }
 
 .match-value-box .val-label {
@@ -1759,11 +1695,11 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     letter-spacing: 1px;
     line-height: 1;
-    color: #e8e4d5;
+    color: #fff;
 }
 
-.match-value-box.hdp .val-number { text-shadow: 0 0 18px rgba(139,126,200,0.9); }
-.match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(94,200,229,0.9); }
+.match-value-box.hdp .val-number { text-shadow: 0 0 18px rgba(93,45,232,1); }
+.match-value-box.pred .val-number { text-shadow: 0 0 18px rgba(0,212,255,1); }
 .match-value-box.empty { opacity: 0.5; }
 .match-value-box.empty .val-number { color: #555568; text-shadow: none; }
 
@@ -1778,12 +1714,13 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 
+/* FOOTER */
 .site-footer {
     position: relative;
     margin-top: 60px;
     padding: 50px 15px 35px;
     text-align: center;
-    background: rgba(5,5,5,0.9);
+    background: rgba(15,10,40,0.6);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1.5px solid rgba(93,45,232,0.5);
@@ -1812,7 +1749,7 @@ nav a.nav-daftar:hover {
     font-weight: 700;
     letter-spacing: 10px;
     margin: 15px 0 12px;
-    background: linear-gradient(90deg, #b8b0d8, #e8e4d5, #5ec8e5, #e8e4d5, #b8b0d8);
+    background: linear-gradient(90deg, #ffcc33, #fff5d0, #00d4ff, #fff5d0, #ffcc33);
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1840,7 +1777,7 @@ nav a.nav-daftar:hover {
     margin-top: 15px;
 }
 
-.footer-copy span { color: #b8b0d8; font-weight: 800; }
+.footer-copy span { color: #ffcc33; font-weight: 800; }
 
 .bottom-nav {
     display: none;
@@ -1850,7 +1787,7 @@ nav a.nav-daftar:hover {
     right: 0;
     z-index: 1000;
     padding: 10px 12px 12px;
-    background: rgba(5,5,5,0.9);
+    background: rgba(15,10,40,0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-top: 1.5px solid rgba(93,45,232,0.55);
@@ -1884,9 +1821,9 @@ nav a.nav-daftar:hover {
 }
 
 .bottom-nav-item:hover {
-    color: #5ec8e5;
-    background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(94,200,229,0.18));
-    border-color: rgba(94,200,229,0.7);
+    color: #00d4ff;
+    background: linear-gradient(135deg, rgba(93,45,232,0.25), rgba(0,212,255,0.18));
+    border-color: rgba(0,212,255,0.7);
 }
 
 .bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
@@ -1897,7 +1834,7 @@ nav a.nav-daftar:hover {
     right: 30px;
     padding: 16px 24px;
     border-radius: 14px;
-    background: rgba(20, 20, 30, 0.95);
+    background: rgba(28, 17, 48, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(34, 197, 94, 0.45);
@@ -2006,21 +1943,16 @@ nav a.nav-daftar:hover {
     .league { border-radius: 16px; }
     .league-header { padding: 14px 30px; font-size: 12.5px; letter-spacing: 2.5px; }
     .single-column-wrap { gap: 16px; padding: 20px 10px 14px; }
-    .match-row-single { padding: 22px 12px 22px; gap: 8px; row-gap: 10px; border-width: 1.5px; }
-    .match-clock-line { font-size: 10.5px; padding: 7px 14px; gap: 7px; }
-    .match-clock-label { font-size: 10px; }
-    .match-clock-value { font-size: 12px; }
-    .match-row-single { grid-template-columns: auto 1fr auto; grid-template-areas: "clock clock clock" "time teams hdp" "time teams pred"; }
-    .match-row-single .match-time-badge { grid-area: time; align-self: center; }
-    .match-row-single .match-teams-block { grid-area: teams; }
-    .match-row-single .match-value-box.hdp { grid-area: hdp; min-width: 72px; padding: 6px 10px; }
-    .match-row-single .match-value-box.pred { grid-area: pred; min-width: 72px; padding: 6px 10px; }
-    .match-live-badge, .match-finished-badge { top: 6px; padding: 3px 14px; font-size: 10px; letter-spacing: 2px; }
-    .match-countdown-badge { bottom: 6px; padding: 2px 10px; font-size: 10px; }
+    .match-row-single { padding: 22px 12px 22px; gap: 8px; border-width: 1.5px; }
+    .match-time-badge { min-width: 62px; padding: 6px 9px; }
+    .match-time-badge .time-value { font-size: 15px; }
+    .match-time-badge .time-date { font-size: 9px; }
     .match-team-mini .mini-name { max-width: 120px; font-size: 13px; }
     .match-team-mini .mini-logo { width: 22px; height: 22px; }
     .match-value-box .val-number { font-size: 18px; }
     .match-value-box .val-label { font-size: 8.5px; }
+    .match-live-badge, .match-finished-badge { top: 6px; padding: 3px 14px; font-size: 10px; letter-spacing: 2px; }
+    .match-countdown-badge { bottom: 6px; padding: 2px 10px; font-size: 10px; }
     .footer-logo-wrap { min-height: 70px; }
     .footer-logo-wrap img { width: 110px; height: 48px; }
     .footer-title { font-size: 20px; letter-spacing: 7px; }
@@ -2048,19 +1980,13 @@ nav a.nav-daftar:hover {
     .lux-text-item { font-size: 10.5px; letter-spacing: 0.8px; line-height: 1.45; }
     .banner { border-radius: 14px; margin-bottom: 14px; }
     .single-column-wrap { gap: 14px; padding: 18px 8px 12px; }
-    .match-clock-line { font-size: 9.5px; padding: 6px 11px; gap: 5px; }
-    .match-clock-label { font-size: 9px; }
-    .match-clock-value { font-size: 11px; }
-    .match-row-single { grid-template-columns: auto 1fr; grid-template-areas: "clock clock" "time teams" "hdp pred"; gap: 8px; padding: 20px 10px 20px; }
-    .match-row-single .match-time-badge { grid-area: time; }
-    .match-row-single .match-teams-block { grid-area: teams; }
-    .match-row-single .match-value-box.hdp { grid-area: hdp; min-width: unset; padding: 6px 9px; }
-    .match-row-single .match-value-box.pred { grid-area: pred; min-width: unset; padding: 6px 9px; }
+    .match-row-single { grid-template-columns: auto 1fr; grid-template-areas: "time teams" "hdp pred"; gap: 8px; padding: 20px 10px 20px; }
+    .match-time-badge { grid-area: time; }
+    .match-teams-block { grid-area: teams; }
+    .match-value-box.hdp { grid-area: hdp; min-width: unset; padding: 6px 9px; }
+    .match-value-box.pred { grid-area: pred; min-width: unset; padding: 6px 9px; }
     .match-live-badge, .match-finished-badge { font-size: 9px; padding: 3px 12px; letter-spacing: 1.5px; }
     .match-countdown-badge { font-size: 9px; padding: 2px 8px; }
-    .match-time-badge { min-width: 62px; padding: 5px 9px; }
-    .match-time-badge .time-value { font-size: 15px; }
-    .match-time-badge .time-date { font-size: 9px; }
     .match-team-mini .mini-name { font-size: 12px; max-width: 95px; }
     .match-team-mini .mini-logo { width: 20px; height: 20px; }
     .match-value-box .val-number { font-size: 16px; }
@@ -2091,6 +2017,8 @@ nav a.nav-daftar:hover {
 <body id="top">
 
 <div class="reading-progress" id="readingProgress"></div>
+
+<div class="aurora-bg"></div>
 
 <canvas id="particleCanvas"></canvas>
 
@@ -2336,16 +2264,14 @@ const db = getFirestore(app);
 let semuaData = [];
 let selectedDateSpecific = "";
 
-/* ============================
-   PARTICLE BACKGROUND
-   ============================ */
+/* PARTICLE BACKGROUND */
 (function initParticles() {
     const canvas = document.getElementById("particleCanvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let particles = [];
     let w, h;
-    const PARTICLE_COUNT = 40;
+    const PARTICLE_COUNT = 60;
     const MAX_DISTANCE = 120;
     let mouse = { x: -9999, y: -9999 };
 
@@ -2366,7 +2292,7 @@ let selectedDateSpecific = "";
     });
 
     function createParticle() {
-        const colors = ["93,45,232", "94,200,229", "184,176,216"];
+        const colors = ["93,45,232", "0,212,255", "255,204,51"];
         const color = colors[Math.floor(Math.random() * colors.length)];
         return {
             x: Math.random() * w,
@@ -2418,7 +2344,7 @@ let selectedDateSpecific = "";
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(94, 200, 229, ${opacity})`;
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -2429,9 +2355,7 @@ let selectedDateSpecific = "";
     draw();
 })();
 
-/* ============================
-   RIPPLE ON CLICK
-   ============================ */
+/* RIPPLE */
 (function initRippleOnClick() {
     document.addEventListener("click", (e) => {
         const ripple = document.createElement("div");
@@ -2442,7 +2366,7 @@ let selectedDateSpecific = "";
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(94,200,229,0.6), rgba(93,45,232,0.3), transparent);
+            background: radial-gradient(circle, rgba(0,212,255,0.6), rgba(93,45,232,0.3), transparent);
             transform: translate(-50%, -50%) scale(0);
             pointer-events: none;
             z-index: 99999;
@@ -2465,9 +2389,7 @@ let selectedDateSpecific = "";
     }
 })();
 
-/* ============================
-   READING PROGRESS
-   ============================ */
+/* READING PROGRESS */
 (function initReadingProgress() {
     const bar = document.getElementById("readingProgress");
     if (!bar) return;
@@ -2477,32 +2399,6 @@ let selectedDateSpecific = "";
         const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
         bar.style.width = percent + "%";
     }, { passive: true });
-})();
-
-/* ============================
-   SKELETON STYLE
-   ============================ */
-(function injectSkeletonStyle() {
-    if (document.getElementById("skeletonStyle")) return;
-    const style = document.createElement("style");
-    style.id = "skeletonStyle";
-    style.textContent = `
-        .skeleton {
-            background: linear-gradient(90deg,
-                rgba(255,255,255,0.05) 25%,
-                rgba(255,255,255,0.15) 50%,
-                rgba(255,255,255,0.05) 75%) !important;
-            background-size: 200% 100% !important;
-            animation: shimmer 1.5s infinite;
-            border-radius: 8px;
-            color: transparent !important;
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-    `;
-    document.head.appendChild(style);
 })();
 
 window.fadeInContent = function() {
@@ -2522,7 +2418,7 @@ window.triggerConfetti = function() {
     const container = document.createElement("div");
     container.className = "confetti-container";
     document.body.appendChild(container);
-    const colors = ["#b8b0d8", "#5ec8e5", "#5d2de8", "#dc2626", "#10b981"];
+    const colors = ["#ffcc33", "#00d4ff", "#5d2de8", "#dc2626", "#10b981"];
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement("div");
         confetti.className = "confetti";
@@ -2536,9 +2432,6 @@ window.triggerConfetti = function() {
     setTimeout(() => container.remove(), 5000);
 };
 
-/* ============================
-   TYPING TEXT
-   ============================ */
 (function initTypingText() {
     const el = document.querySelector(".section-title span");
     if (!el) return;
@@ -2555,9 +2448,6 @@ window.triggerConfetti = function() {
     setTimeout(type, 1500);
 })();
 
-/* ============================
-   LOADING PARTICLES
-   ============================ */
 (function initLoadingParticles() {
     const container = document.getElementById("loadingParticles");
     if (!container) return;
@@ -2574,16 +2464,13 @@ window.triggerConfetti = function() {
     }
 })();
 
-/* ============================
-   CACHE DATA PERTANDINGAN
-   ============================ */
-const CACHE_KEY = "kiper4d_data_cache_v24";
+/* CACHE */
+const CACHE_KEY = "kiper4d_data_cache_v25";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) {
     try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {}
 }
-
 function loadCache(maxAge) {
     try {
         const raw = localStorage.getItem(CACHE_KEY);
@@ -2594,15 +2481,12 @@ function loadCache(maxAge) {
         return parsed.data;
     } catch (error) { return null; }
 }
-
 function clearCache() {
     try { localStorage.removeItem(CACHE_KEY); } catch (error) {}
 }
 
-/* ============================
-   LOGO CACHE FIRESTORE
-   ============================ */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v37";
+/* LOGO CACHE */
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v38";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2620,22 +2504,8 @@ async function loadTeamLogosFromDB() {
         const snap = await getDocs(collection(db, "team-logos"));
         snap.forEach(doc => {
             const data = doc.data();
-            const name = clean(
-                data.name ||
-                data.teamName ||
-                data.team ||
-                data.nama ||
-                data.namaTim ||
-                doc.id
-            );
-            const logo = clean(
-                data.logo ||
-                data.url ||
-                data.badge ||
-                data.gambar ||
-                data.gambarTim ||
-                ""
-            );
+            const name = clean(data.name || data.teamName || data.team || data.nama || data.namaTim || doc.id);
+            const logo = clean(data.logo || data.url || data.badge || data.gambar || data.gambarTim || "");
             if (name && logo) {
                 teamLogosFromDB.set(normalizeExact(name), logo);
             }
@@ -2646,11 +2516,9 @@ async function loadTeamLogosFromDB() {
     }
 }
 
-/* ============================
-   THE SPORTS DB FALLBACK
-   ============================ */
+/* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v2";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v3";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2675,19 +2543,16 @@ async function fetchLogoFromTheSportsDB(teamName) {
     const key = String(teamName || "").trim().toLowerCase();
     if (!key) return "";
     if (theSportsDbCache.has(key)) return theSportsDbCache.get(key);
-
     try {
         const url = `https://www.thesportsdb.com/api/v1/json/${THESPORTSDB_API_KEY}/searchteams.php?t=${encodeURIComponent(teamName)}`;
         const res = await fetch(url);
         if (!res.ok) return "";
-
         const data = await res.json();
         if (!data.teams || data.teams.length === 0) {
             theSportsDbCache.set(key, "");
             saveTheSportsDbCache();
             return "";
         }
-
         let bestTeam = null;
         for (const t of data.teams) {
             if ((t.strSport || "").toLowerCase() === "soccer") {
@@ -2696,13 +2561,12 @@ async function fetchLogoFromTheSportsDB(teamName) {
             }
         }
         if (!bestTeam) bestTeam = data.teams[0];
-
         const logo = bestTeam.strTeamBadge || bestTeam.strTeamLogo || bestTeam.strBadge || "";
         theSportsDbCache.set(key, logo);
         saveTheSportsDbCache();
         return logo;
     } catch (e) {
-        console.warn("Gagal fetch logo TheSportsDB:", teamName);
+        console.warn("Gagal fetch logo:", teamName);
         return "";
     }
 }
@@ -2710,12 +2574,8 @@ async function fetchLogoFromTheSportsDB(teamName) {
 async function prefetchAllLogosFromTheSportsDB(teamNames) {
     const unique = [...new Set(teamNames.map(n => String(n).trim()).filter(Boolean))];
     const needFetch = unique.filter(name => !theSportsDbCache.has(name.toLowerCase()));
-    if (needFetch.length === 0) {
-        console.log("✅ Semua logo TheSportsDB sudah di-cache");
-        return;
-    }
-
-    console.log("🎨 Fetch " + needFetch.length + " logo dari TheSportsDB...");
+    if (needFetch.length === 0) return;
+    console.log("🎨 Fetch " + needFetch.length + " logo...");
     const batchSize = 5;
     for (let i = 0; i < needFetch.length; i += batchSize) {
         const batch = needFetch.slice(i, i + batchSize);
@@ -2724,17 +2584,13 @@ async function prefetchAllLogosFromTheSportsDB(teamNames) {
             await new Promise(r => setTimeout(r, 250));
         }
     }
-    console.log("✅ Selesai fetch. Total cache: " + theSportsDbCache.size);
 }
 
-/* ============================
-   UTILITY
-   ============================ */
+/* UTILITY */
 function clean(value) {
     if (value === undefined || value === null) return "";
     return String(value).trim();
 }
-
 function escapeHtml(value) {
     return clean(value)
         .replace(/&/g, "&amp;")
@@ -2743,7 +2599,13 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
-
+function getTeamInitial(name) {
+    name = clean(name);
+    if (!name) return "?";
+    const words = name.split(/\s+/).filter(Boolean);
+    if (words.length === 1) return words[0].substring(0, 3).toUpperCase();
+    return (words[0][0] + words[1][0]).toUpperCase();
+}
 function normalizeExact(name) {
     return clean(name).toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -2754,72 +2616,14 @@ function normalizeExact(name) {
 }
 
 const ALIAS_MAP = {
-    "barca": "barcelona", "barça": "barcelona", "barcelona fc": "barcelona", "fc barcelona": "barcelona",
-    "real": "real madrid", "madrid": "real madrid", "real madrid cf": "real madrid",
-    "atleti": "atletico madrid", "atletico": "atletico madrid", "atletico de madrid": "atletico madrid",
-    "betis": "real betis", "sevilla fc": "sevilla", "valencia cf": "valencia", "villarreal cf": "villarreal",
-    "athletic bilbao": "athletic club", "athletic": "athletic club",
-    "celta": "celta vigo", "celta de vigo": "celta vigo",
-    "deportivo": "deportivo la coruna", "la coruna": "deportivo la coruna",
-    "man utd": "manchester united", "man united": "manchester united", "mu": "manchester united",
-    "manchester utd": "manchester united", "man city": "manchester city", "mancity": "manchester city",
-    "spurs": "tottenham", "tottenham hotspur": "tottenham",
-    "wolves": "wolverhampton", "wolverhampton wanderers": "wolverhampton",
-    "newcastle": "newcastle united", "newcastle utd": "newcastle united",
-    "west ham": "west ham united", "brighton": "brighton & hove albion",
-    "nottingham": "nottingham forest", "forest": "nottingham forest",
-    "leicester": "leicester city", "leeds": "leeds united", "ipswich": "ipswich town",
-    "hull": "hull city", "coventry": "coventry city",
-    "juve": "juventus", "juventus fc": "juventus", "inter milan": "inter", "internazionale": "inter",
-    "ac milan": "milan", "acmilan": "milan", "napoli ssc": "napoli", "ssc napoli": "napoli",
-    "as roma": "roma", "ss lazio": "lazio", "atalanta bc": "atalanta",
-    "acf fiorentina": "fiorentina", "viola": "fiorentina",
-    "bologna fc": "bologna", "torino fc": "torino", "udinese calcio": "udinese",
-    "genoa cfc": "genoa", "cagliari calcio": "cagliari", "parma calcio": "parma",
-    "como 1907": "como", "venezia fc": "venezia",
-    "bayern": "bayern munich", "bayern munchen": "bayern munich", "fc bayern": "bayern munich",
-    "fc bayern munchen": "bayern munich", "bvb": "borussia dortmund", "dortmund": "borussia dortmund",
-    "leverkusen": "bayer leverkusen", "bayer 04": "bayer leverkusen",
-    "gladbach": "borussia monchengladbach", "monchengladbach": "borussia monchengladbach",
-    "leipzig": "rb leipzig", "eintracht": "eintracht frankfurt", "frankfurt": "eintracht frankfurt",
-    "wolfsburg": "vfl wolfsburg", "vfl wolfsburg": "vfl wolfsburg",
-    "werder": "werder bremen", "bremen": "werder bremen",
-    "stuttgart": "vfb stuttgart", "vfb stuttgart": "vfb stuttgart",
-    "freiburg": "sc freiburg", "hoffenheim": "tsg hoffenheim", "augsburg": "fc augsburg",
-    "mainz": "mainz 05", "hamburg": "hamburger sv", "hamburger": "hamburger sv",
-    "koln": "cologne", "fc koln": "cologne", "schalke": "schalke 04",
-    "psg": "paris saint-germain", "paris": "paris saint-germain", "paris sg": "paris saint-germain",
-    "paris saint germain": "paris saint-germain", "om": "marseille", "olympique marseille": "marseille",
-    "lyon": "lyon", "ol": "lyon", "olympique lyon": "lyon", "as monaco": "monaco",
-    "losc": "lille", "losc lille": "lille", "stade rennais": "rennes", "rc lens": "lens",
-    "ogc nice": "nice", "rc strasbourg": "strasbourg", "toulouse fc": "toulouse",
-    "stade brestois": "brest", "fc lorient": "lorient", "aj auxerre": "auxerre",
-    "stade de reims": "reims", "fc nantes": "nantes", "fc metz": "metz",
-    "sl benfica": "benfica", "fc porto": "porto", "sporting": "sporting cp",
-    "sporting lisbon": "sporting cp", "sc braga": "braga",
-    "afc ajax": "ajax", "psv eindhoven": "psv", "az": "az alkmaar",
-    "fc utrecht": "utrecht", "fc twente": "twente",
-    "gs": "galatasaray", "fb": "fenerbahce", "bjk": "besiktas",
-    "aek": "aek athens",
-    "lafc": "los angeles fc", "los angeles": "los angeles fc",
-    "atlanta": "atlanta united", "atlanta utd": "atlanta united",
-    "seattle": "seattle sounders", "sounders": "seattle sounders",
-    "portland": "portland timbers", "timbers": "portland timbers",
-    "austin": "austin fc", "charlotte": "charlotte fc",
-    "chicago": "chicago fire", "fire": "chicago fire",
-    "colorado": "colorado rapids", "rapids": "colorado rapids",
-    "columbus": "columbus crew", "crew": "columbus crew",
-    "houston": "houston dynamo", "dynamo": "houston dynamo",
-    "minnesota": "minnesota united", "nashville": "nashville sc",
-    "new england": "new england revolution", "revolution": "new england revolution",
-    "nycfc": "new york city fc", "new york city": "new york city fc",
-    "new york red bulls": "new york red bulls", "rb new york": "new york red bulls",
-    "orlando": "orlando city", "orlando city sc": "orlando city",
-    "philadelphia": "philadelphia union", "union": "philadelphia union",
-    "rsl": "real salt lake", "san jose": "san jose earthquakes",
-    "earthquakes": "san jose earthquakes", "st louis": "st louis city",
-    "st. louis": "st louis city", "toronto": "toronto fc",
-    "vancouver": "vancouver whitecaps", "whitecaps": "vancouver whitecaps"
+    "barca": "barcelona", "real": "real madrid", "madrid": "real madrid",
+    "atleti": "atletico madrid", "man utd": "manchester united", "man united": "manchester united",
+    "man city": "manchester city", "spurs": "tottenham", "juve": "juventus",
+    "inter milan": "inter", "ac milan": "milan", "as roma": "roma",
+    "bayern": "bayern munich", "bvb": "borussia dortmund", "dortmund": "borussia dortmund",
+    "psg": "paris saint-germain", "paris": "paris saint-germain",
+    "lafc": "los angeles fc", "nycfc": "new york city fc",
+    "korea republic": "south korea", "korea": "south korea"
 };
 
 function resolveAlias(name) {
@@ -2853,12 +2657,10 @@ function findLogoFuzzy(teamName) {
     const target = normalizeExact(teamName);
     if (!target) return null;
     if (teamLogosFromDB.has(target)) return teamLogosFromDB.get(target);
-
     const targetSimplified = normalizeTeamName(teamName);
     if (targetSimplified && teamLogosFromDB.has(targetSimplified)) {
         return teamLogosFromDB.get(targetSimplified);
     }
-
     let bestMatch = null;
     let bestScore = 0;
     const MIN_SCORE = 700;
@@ -2869,7 +2671,6 @@ function findLogoFuzzy(teamName) {
             bestMatch = dbLogo;
         }
     }
-
     if (!bestMatch) {
         const targetWords = normalizeTeamName(teamName).split(" ").filter(w => w.length >= 5);
         for (const [dbKey, dbLogo] of teamLogosFromDB.entries()) {
@@ -2885,39 +2686,31 @@ function findLogoFuzzy(teamName) {
 function getLogoForTeam(name, logoFromDb) {
     const dbLogo = clean(logoFromDb);
     if (dbLogo) return { type: "db", url: dbLogo };
-
     const resolvedName = resolveAlias(name);
     const fuzzyLogo = findLogoFuzzy(resolvedName);
     if (fuzzyLogo) return { type: "fuzzy", url: fuzzyLogo };
-
     if (resolvedName !== name) {
         const fuzzyLogo2 = findLogoFuzzy(name);
         if (fuzzyLogo2) return { type: "fuzzy", url: fuzzyLogo2 };
     }
-
     const key = normalizeExact(name);
     if (teamLogoCache.has(key)) {
         return { type: "cache", url: teamLogoCache.get(key) };
     }
-
     const theSportsDbKey = String(name || "").trim().toLowerCase();
     if (theSportsDbCache.has(theSportsDbKey)) {
         const url = theSportsDbCache.get(theSportsDbKey);
         if (url) return { type: "thesportsdb", url: url };
     }
-
     return null;
 }
 
-/* ============================
-   TANGGAL & WAKTU
-   ============================ */
+/* TANGGAL & WAKTU */
 const BULAN_MAP = {
     "januari": "01", "jan": "01", "january": "01",
     "februari": "02", "feb": "02", "february": "02",
     "maret": "03", "mar": "03", "march": "03",
-    "april": "04", "apr": "04",
-    "mei": "05", "may": "05",
+    "april": "04", "apr": "04", "mei": "05", "may": "05",
     "juni": "06", "jun": "06", "june": "06",
     "juli": "07", "jul": "07", "july": "07",
     "agustus": "08", "agu": "08", "aug": "08", "august": "08",
@@ -2930,28 +2723,18 @@ const BULAN_MAP = {
 function normalizeDate(input) {
     if (!input) return "";
     let s = String(input).trim().toLowerCase();
-
     if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
         const [y, m, d] = s.split("-");
         return y + "-" + m.padStart(2, "0") + "-" + d.padStart(2, "0");
     }
-
     const bulanMatch = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
     if (bulanMatch) {
-        const d = bulanMatch[1].padStart(2, "0");
-        const m = BULAN_MAP[bulanMatch[2]] || "01";
-        const y = bulanMatch[3];
-        return y + "-" + m + "-" + d;
+        return bulanMatch[3] + "-" + (BULAN_MAP[bulanMatch[2]] || "01") + "-" + bulanMatch[1].padStart(2, "0");
     }
-
     const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
     if (dmy) {
-        const d = dmy[1].padStart(2, "0");
-        const m = dmy[2].padStart(2, "0");
-        const y = dmy[3];
-        return y + "-" + m + "-" + d;
+        return dmy[3] + "-" + dmy[2].padStart(2, "0") + "-" + dmy[1].padStart(2, "0");
     }
-
     const yyyy = s.match(/(\d{4})/);
     if (yyyy) {
         const m = s.match(/(\d{1,2})/g);
@@ -2959,7 +2742,6 @@ function normalizeDate(input) {
             return yyyy[1] + "-" + m[0].padStart(2, "0") + "-" + m[1].padStart(2, "0");
         }
     }
-
     return "";
 }
 
@@ -2969,13 +2751,9 @@ function normalizeTime(input) {
     s = s.replace(/wib|utc|gmt|wita|wit/gi, "").trim();
     s = s.replace(/\./g, ":");
     const hm = s.match(/^(\d{1,2}):(\d{1,2})/);
-    if (hm) {
-        return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
-    }
+    if (hm) return hm[1].padStart(2, "0") + ":" + hm[2].padStart(2, "0");
     const four = s.match(/^(\d{2})(\d{2})$/);
-    if (four) {
-        return four[1] + ":" + four[2];
-    }
+    if (four) return four[1] + ":" + four[2];
     return "";
 }
 
@@ -2990,18 +2768,20 @@ function formatTanggalShort(date) {
 const HARI_INDO = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 const BULAN_INDO = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-function getNowWIBMs() { return Date.now() + (7 * 60 * 60 * 1000); }
+function getClockText() {
+    const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
+    return `${HARI_INDO[d.getUTCDay()]}, ${d.getUTCDate()} ${BULAN_INDO[d.getUTCMonth()]} ${d.getUTCFullYear()} ${String(d.getUTCHours()).padStart(2, "0")}.${String(d.getUTCMinutes()).padStart(2, "0")}.${String(d.getUTCSeconds()).padStart(2, "0")}`;
+}
 
+function getNowWIBMs() { return Date.now() + (7 * 60 * 60 * 1000); }
 function getTodayString() {
     const wibDate = new Date(getNowWIBMs());
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
-
 function getTomorrowString() {
     const wibDate = new Date(getNowWIBMs() + (24 * 60 * 60 * 1000));
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
-
 function get7DaysString() {
     const wibDate = new Date(getNowWIBMs() + (7 * 24 * 60 * 60 * 1000));
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
@@ -3037,7 +2817,6 @@ function getMatchStatus(data) {
     if (!kickoffWIB) return "akan";
     const now = getNowWIBMs();
     const diff = kickoffWIB - now;
-
     if (diff <= 0 && diff > -105 * 60 * 1000) return "live";
     if (diff <= -105 * 60 * 1000) return "selesai";
     return "akan";
@@ -3109,14 +2888,12 @@ function tickNextMatchCountdown() {
     else countdownEl.textContent = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
-/* ============================
-   NEWS TICKER
-   ============================ */
+/* NEWS TICKER */
 function updateNewsTicker(data) {
     const ticker = document.getElementById("newsTickerContent");
     if (!ticker) return;
     if (!data.length) {
-        ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D! • ⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat! • 🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!";
+        ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!";
         return;
     }
     const liveMatches = data.filter(item => getMatchStatus(item) === "live");
@@ -3126,33 +2903,20 @@ function updateNewsTicker(data) {
         if (d < today) return false;
         return getMatchStatus(item) === "akan";
     }).sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0)).slice(0, 5);
-    const todayMatches = data.filter(item => normalizeDate(clean(item.date)) === today).slice(0, 8);
     let newsItems = [];
     liveMatches.forEach(item => newsItems.push(`🔴 LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
     upcoming.forEach(item => {
         const countdown = getCountdownText(item);
-        newsItems.push(`⚡ ${item.home} vs ${item.away} — mulai dalam ${countdown} (${clean(item.league) || "LAINNYA"})`);
+        newsItems.push(`⚡ ${item.home} vs ${item.away} — mulai dalam ${countdown}`);
     });
-    if (newsItems.length < 6) {
-        todayMatches.forEach(item => {
-            if (newsItems.length >= 8) return;
-            if (getMatchStatus(item) === "selesai") return;
-            newsItems.push(`🎯 ${item.home} vs ${item.away} — ${clean(item.time)} WIB`);
-        });
-    }
     if (!newsItems.length) {
         newsItems.push("🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!");
-        newsItems.push("⚽ Pantau pertandingan favoritmu dengan HDP & prediksi skor akurat!");
-        newsItems.push("🏆 KIPER4D — Jagonya Prediksi, Jagonya Bikin Cuan!");
     }
-    newsItems.push("⚡ Data live & real-time, langsung dari sumber terpercaya");
-    newsItems.push("🌟 Jangan lewatkan big match malam ini!");
+    newsItems.push("⚡ Data live & real-time");
     ticker.textContent = newsItems.join("  •  ");
 }
 
-/* ============================
-   RENDER MATCH ROW — DENGAN LOGO, TANPA BADGE HOT/VIP, TANPA IKON JAM
-   ============================ */
+/* RENDER MATCH ROW */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -3218,14 +2982,12 @@ function renderMatchRowSingle(data) {
     `;
 }
 
-/* ============================
-   RENDER PREDIKSI
-   ============================ */
+/* RENDER PREDIKSI */
 function renderPrediksi(data) {
     const container = document.getElementById("prediksiContainer");
     if (!container) return;
     if (!data.length) {
-        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok dengan filter</div></div>`;
+        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Tidak ada pertandingan yang cocok</div></div>`;
         return;
     }
 
@@ -3241,7 +3003,6 @@ function renderPrediksi(data) {
 
     tanggalSorted.forEach(tanggal => {
         const matches = groupTanggal[tanggal];
-
         const dateObj = new Date(tanggal + "T00:00:00Z");
         const hari = HARI_INDO[dateObj.getUTCDay()];
         const tgl = dateObj.getUTCDate();
@@ -3264,9 +3025,7 @@ function renderPrediksi(data) {
             });
 
             Object.keys(groupLiga).sort().forEach(liga => {
-                const matchList = groupLiga[liga].sort((a, b) => {
-                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
-                });
+                const matchList = groupLiga[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
                 html += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
@@ -3282,15 +3041,12 @@ function renderPrediksi(data) {
 
             let selesaiHtml = "";
             Object.keys(groupLigaSelesai).sort().forEach(liga => {
-                const matchList = groupLigaSelesai[liga].sort((a, b) => {
-                    return (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0);
-                });
+                const matchList = groupLigaSelesai[liga].sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
                 selesaiHtml += `<div class="league"><div class="league-header">${escapeHtml(liga)}</div><div class="single-column-wrap">${rows}</div></div>`;
             });
 
             const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
-
             html += `
                 <div class="selesai-section">
                     <button type="button" class="selesai-toggle" onclick="toggleSelesai('${uniqueId}', this)">
@@ -3327,9 +3083,7 @@ window.toggleSelesai = function(id, btn) {
     }
 };
 
-/* ============================
-   FILTER
-   ============================ */
+/* FILTER */
 function updateLigaFilter(data) {
     const select = document.getElementById("ligaFilter");
     if (!select) return;
@@ -3388,7 +3142,6 @@ function applyFilter() {
             return d >= today && d <= limit;
         });
     } else if (tanggal === "live") {
-        // Khusus LIVE — hanya tampilkan pertandingan yang sedang berlangsung
         filtered = filtered.filter(item => getMatchStatus(item) === "live");
     } else if (tanggal === "all") {
         filtered = filtered.filter(item => normalizeDate(clean(item.date)) >= today);
@@ -3425,7 +3178,6 @@ function applyFilter() {
 function filterLiga() { applyFilter(); }
 function filterStatus() { applyFilter(); }
 function handleSearch() { applyFilter(); }
-
 function clearSearch() {
     const searchInput = document.getElementById("searchInput");
     if (!searchInput) return;
@@ -3486,9 +3238,7 @@ function populateDateDropdown() {
     }
 }
 
-/* ============================
-   STATS
-   ============================ */
+/* STATS */
 function animateNumber(el, target, duration) {
     if (!el) return;
     const startTime = performance.now();
@@ -3515,9 +3265,7 @@ function updateStats(data) {
     if (el3) animateNumber(el3, totalPertandingan, 1400);
 }
 
-/* ============================
-   BIG MATCH TICKER
-   ============================ */
+/* BIG MATCH TICKER */
 function bigMatchCard(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -3542,7 +3290,7 @@ function bigMatchCard(data) {
                 <div class="bmt-vs">VS</div>
                 <div class="bmt-team">${awayLogoHtml}<div class="bmt-team-name">${escapeHtml(away)}</div></div>
             </div>
-            <div class="bmt-time"><span>${escapeHtml(time)} WIB</span></div>
+            <div class="bmt-time"><span>🕐 ${escapeHtml(time)} WIB</span></div>
         </div>
     `;
 }
@@ -3579,9 +3327,7 @@ function renderBigMatch(data) {
     }
 }
 
-/* ============================
-   PROCESS DATA
-   ============================ */
+/* PROCESS DATA */
 function processData(rawDataArray) {
     const merged = new Map();
     rawDataArray.forEach(data => {
@@ -3604,11 +3350,7 @@ function processData(rawDataArray) {
         }
     });
     semuaData = Array.from(merged.values());
-    semuaData.sort((a, b) => {
-        const aTime = getKickoffWIBMs(a) || 0;
-        const bTime = getKickoffWIBMs(b) || 0;
-        return aTime - bTime;
-    });
+    semuaData.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
 
     const selectTanggal = document.getElementById("tanggalFilter");
     if (selectTanggal && !selectTanggal.dataset.initialized) {
@@ -3625,9 +3367,7 @@ function processData(rawDataArray) {
     updateLoadingProgress(100, 400);
 }
 
-/* ============================
-   LOAD DATA
-   ============================ */
+/* LOAD DATA */
 async function loadData() {
     try {
         await loadTeamLogosFromDB();
@@ -3635,10 +3375,10 @@ async function loadData() {
         const cached = loadCache(CACHE_DURATION);
         let rawData;
         if (cached && cached.length > 0) {
-            console.log("📦 Pakai cache pertandingan");
+            console.log("📦 Pakai cache");
             rawData = cached;
         } else {
-            console.log("🔥 Ambil data dari Firestore...");
+            console.log("🔥 Ambil dari Firestore...");
             const querySnapshot = await getDocs(collection(db, "predictions"));
             rawData = [];
             querySnapshot.forEach(docSnapshot => {
@@ -3651,16 +3391,12 @@ async function loadData() {
         rawData.forEach(d => {
             const home = clean(d.home);
             const away = clean(d.away);
-            if (home && !clean(d.homeLogo)) {
-                if (!findLogoFuzzy(home)) teamNeedLogo.push(home);
-            }
-            if (away && !clean(d.awayLogo)) {
-                if (!findLogoFuzzy(away)) teamNeedLogo.push(away);
-            }
+            if (home && !clean(d.homeLogo) && !findLogoFuzzy(home)) teamNeedLogo.push(home);
+            if (away && !clean(d.awayLogo) && !findLogoFuzzy(away)) teamNeedLogo.push(away);
         });
 
         prefetchAllLogosFromTheSportsDB(teamNeedLogo).then(() => {
-            console.log("🔄 Re-render setelah prefetch TheSportsDB");
+            console.log("🔄 Re-render setelah prefetch");
             applyFilter();
             renderBigMatch(semuaData);
         });
@@ -3670,19 +3406,16 @@ async function loadData() {
     } catch (error) {
         console.error("Error:", error);
         const fallback = loadCache();
-        if (fallback) {
-            processData(fallback);
-        } else {
+        if (fallback) processData(fallback);
+        else {
             const el = document.getElementById("prediksiContainer");
-            if (el) el.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Gagal memuat data. Coba refresh.</div></div>`;
+            if (el) el.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">Gagal memuat data</div></div>`;
             updateLoadingProgress(100, 300);
         }
     }
 }
 
-/* ============================
-   LOADING SCREEN
-   ============================ */
+/* LOADING */
 let loadingProgress = 0;
 let loadingFinished = false;
 const loadingTexts = document.querySelectorAll(".loading-text");
@@ -3734,9 +3467,7 @@ setTimeout(() => updateLoadingProgress(85, 600), 1200);
 setTimeout(() => updateLoadingProgress(100, 500), 1900);
 setTimeout(finishLoading, 4000);
 
-/* ============================
-   LUX MARQUEE
-   ============================ */
+/* LUX MARQUEE */
 function initLuxMarquee(containerId, intervalMs) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -3761,9 +3492,7 @@ function initLuxMarquee(containerId, intervalMs) {
 
 initLuxMarquee("luxTextTop", 4200);
 
-/* ============================
-   EVENT LISTENERS
-   ============================ */
+/* EVENTS */
 const elLiga = document.getElementById("ligaFilter");
 const elStatus = document.getElementById("statusFilter");
 const elSearch = document.getElementById("searchInput");
@@ -3794,7 +3523,6 @@ document.querySelectorAll(".tab-filter").forEach(tab => {
         }
         applyFilter();
 
-        // Kalau klik LIVE → langsung scroll ke pertandingan yang berlangsung
         if (dateValue === "live") {
             const section = document.getElementById("pertandingan");
             if (section) {
@@ -3802,28 +3530,14 @@ document.querySelectorAll(".tab-filter").forEach(tab => {
                     section.scrollIntoView({ behavior: "smooth", block: "start" });
                 }, 100);
             }
-            // Kalau tidak ada pertandingan live, tampilkan notif
-            const ada = semuaData.some(item => getMatchStatus(item) === "live");
-            if (!ada) {
-                setTimeout(() => {
-                    const container = document.getElementById("prediksiContainer");
-                    if (container) {
-                        container.innerHTML = `<div class="single-column-wrap"><div class="single-col-empty">🔴 Tidak ada pertandingan yang sedang LIVE saat ini</div></div>`;
-                    }
-                }, 200);
-            }
         }
     });
 });
 
 setInterval(updateTabClock, 1000);
 updateTabClock();
-
 setInterval(tickNextMatchCountdown, 1000);
 
-/* ============================
-   INIT
-   ============================ */
 populateDateDropdown();
 loadSavedTeamLogos();
 loadData();
