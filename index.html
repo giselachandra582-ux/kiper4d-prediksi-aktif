@@ -162,11 +162,6 @@ body {
     50% { box-shadow: 0 0 30px rgba(255, 0, 80, 0.9), 0 0 60px rgba(255, 0, 80, 0.5); }
 }
 
-@keyframes bigMatchPulse {
-    0%, 100% { box-shadow: 0 0 25px rgba(255, 0, 60, 0.6), 0 0 50px rgba(255, 0, 60, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(255, 0, 60, 0.9), 0 0 80px rgba(255, 0, 60, 0.5); }
-}
-
 .aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
 .aurora-bg::before {
     content: "";
@@ -613,18 +608,18 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ BIG MATCH TICKER — KOTAK MERAH ═══ */
+/* ═══ BIG MATCH TICKER — KOTAK HITAM, BUKAN MERAH ═══ */
 .big-match-ticker-wrap {
     position: relative;
     width: 100%;
     margin-bottom: 18px;
     border-radius: 18px;
     overflow: hidden;
-    background: #1a0000;
+    background: #0a0a0a;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 3px solid #ff1a1a;
-    animation: bigMatchPulse 3s ease-in-out infinite;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
 }
 .big-match-ticker-wrap .fade-left,
 .big-match-ticker-wrap .fade-right {
@@ -634,8 +629,8 @@ nav a.nav-daftar:hover {
     z-index: 4;
     pointer-events: none;
 }
-.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(26,0,0,1), transparent); }
-.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(26,0,0,1), transparent); }
+.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(10,10,10,1), transparent); }
+.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(10,10,10,1), transparent); }
 .big-match-ticker { position: relative; width: 100%; padding: 16px 0; overflow: hidden; }
 .big-match-ticker-track {
     display: flex; align-items: center;
@@ -648,146 +643,129 @@ nav a.nav-daftar:hover {
     padding: 25px 30px;
     font-size: 11px; font-weight: 700;
     letter-spacing: 4px;
-    color: #ff6666;
+    color: #666;
     text-align: center;
     text-transform: uppercase;
 }
 
-/* ═══ BMT CARD — WARNA-WARNI TERANG & TEBAL ═══ */
+/* ═══ BMT CARD — HITAM, BORDER WARNA-WARNI TIPIS ═══ */
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
-    width: 220px;
-    padding: 16px 14px;
+    width: 200px;
+    padding: 14px 12px;
     border-radius: 16px;
     background: #0a0a0a;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 3px solid #ff1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.15);
     overflow: hidden;
     transition: all 0.4s;
-    box-shadow: 0 0 20px rgba(255, 26, 26, 0.4), inset 0 0 20px rgba(255, 26, 26, 0.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
-.bmt-card:nth-child(4n+1) {
-    border-color: #a98bd4;
-    box-shadow: 0 0 20px rgba(169, 139, 212, 0.5), inset 0 0 20px rgba(169, 139, 212, 0.05);
-}
-.bmt-card:nth-child(4n+2) {
-    border-color: #8bb4e8;
-    box-shadow: 0 0 20px rgba(139, 180, 232, 0.5), inset 0 0 20px rgba(139, 180, 232, 0.05);
-}
-.bmt-card:nth-child(4n+3) {
-    border-color: #8bd4b8;
-    box-shadow: 0 0 20px rgba(139, 212, 184, 0.5), inset 0 0 20px rgba(139, 212, 184, 0.05);
-}
-.bmt-card:nth-child(4n+4) {
-    border-color: #d4b88b;
-    box-shadow: 0 0 20px rgba(212, 184, 139, 0.5), inset 0 0 20px rgba(212, 184, 139, 0.05);
-}
+.bmt-card:nth-child(4n+1) { border-color: rgba(169, 139, 212, 0.6); }
+.bmt-card:nth-child(4n+2) { border-color: rgba(139, 180, 232, 0.6); }
+.bmt-card:nth-child(4n+3) { border-color: rgba(139, 212, 184, 0.6); }
+.bmt-card:nth-child(4n+4) { border-color: rgba(212, 184, 139, 0.6); }
 .bmt-card:hover {
-    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(255, 26, 26, 0.6);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 30px rgba(255, 255, 255, 0.1);
     transform: translateY(-4px);
 }
 .bmt-badge {
     display: inline-flex; align-items: center;
     gap: 4px;
-    padding: 5px 14px;
+    padding: 4px 12px;
     font-family: 'Rajdhani', sans-serif;
     font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
     color: #fff;
-    background: linear-gradient(90deg, #ff1a1a, #cc0000, #ff1a1a);
+    background: linear-gradient(90deg, #ff0044, #cc0033, #ff0044);
     background-size: 300% auto;
     border: none;
     border-radius: 20px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     position: relative;
     z-index: 3;
-    box-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 68, 0.6);
     animation: jewelText 5s linear infinite;
 }
 .bmt-league {
     display: block;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10px; font-weight: 800;
+    font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #ffb3b3, #ffcccc, #ffb3b3);
+    background: linear-gradient(90deg, #8bd4b8, #8bb4e8, #a98bd4, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     position: relative;
     z-index: 3;
-    animation: jewelText 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .bmt-teams {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 8px;
+    margin-bottom: 10px;
     position: relative;
     z-index: 3;
-    padding: 0 6px;
 }
-.bmt-team { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; min-width: 0; }
+.bmt-team { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0; }
 .bmt-logo {
-    width: 44px; height: 44px;
+    width: 40px; height: 40px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 900;
+    font-size: 11px; font-weight: 900;
     color: #fff;
     background: #000;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 1.5px solid rgba(139,180,232,0.7);
     overflow: hidden;
     flex-shrink: 0;
     animation: logoFloat 2.5s ease-in-out infinite;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
-.bmt-logo img { width: 32px; height: 32px; object-fit: contain; display: block; }
-.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); }
+.bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
+.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(139,180,232,0.7); }
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px; font-weight: 800;
-    color: #fff;
-    max-width: 80px;
+    font-size: 10.5px; font-weight: 700;
+    color: #e8e8f0;
+    max-width: 72px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 .bmt-vs {
     font-family: 'Orbitron', sans-serif;
-    font-size: 13px; font-weight: 900;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 1.5px;
-    background: linear-gradient(90deg, #ff1a1a, #ff6666, #ff1a1a);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: jewelText 5s linear infinite;
-    filter: drop-shadow(0 0 8px rgba(255, 26, 26, 0.8));
+    animation: jewelText 8s linear infinite;
 }
 .bmt-time {
     display: flex; align-items: center; justify-content: center;
     gap: 5px;
-    padding: 8px 0;
+    padding: 7px 0;
     font-family: 'Teko', sans-serif;
-    font-size: 15px; font-weight: 700;
+    font-size: 13px; font-weight: 600;
     letter-spacing: 1.5px;
-    color: #fff;
-    background: rgba(255, 26, 26, 0.15);
-    border-top: 2px solid rgba(255, 26, 26, 0.5);
-    border-bottom: 2px solid rgba(255, 26, 26, 0.5);
+    color: #e8e8f0;
+    background: #000;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     border-radius: 8px;
     position: relative;
     z-index: 3;
-    text-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
 }
 
-/* ═══ BREAKING NEWS — MERAH & CANTIK ═══ */
+/* ═══ BREAKING NEWS ═══ */
 .news-ticker {
     position: relative;
     width: 100%;
