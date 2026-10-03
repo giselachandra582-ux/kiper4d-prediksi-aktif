@@ -7,248 +7,487 @@
 <title>Admin Prediksi Bola - KIPER4D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 :root {
+    /* Premium Palette */
     --gold: #d4af37;
-    --gold-light: #f4e5a1;
-    --gold-dark: #8b6914;
+    --gold-bright: #ffd700;
+    --gold-soft: #f4e5a1;
+    --gold-deep: #8b6914;
+    --emerald: #10b981;
+    --royal: #6366f1;
     --purple: #a855f7;
     --cyan: #00d4ff;
-    --bg-dark: #06040d;
-    --bg-card: rgba(20, 14, 38, 0.55);
-    --text-primary: #f8fafc;
-    --text-muted: #94a3b8;
-    --border-gold: rgba(212, 175, 55, 0.2);
-    --border-gold-hover: rgba(212, 175, 55, 0.5);
-    --shadow-gold: 0 0 40px rgba(212, 175, 55, 0.15);
+    --rose: #f43f5e;
+    --amber: #f59e0b;
+    
+    /* Backgrounds */
+    --bg-0: #030109;
+    --bg-1: #0a0618;
+    --bg-2: #120a26;
+    --surface-1: rgba(26, 16, 48, 0.7);
+    --surface-2: rgba(38, 24, 70, 0.5);
+    --surface-glass: rgba(20, 12, 40, 0.65);
+    
+    /* Text */
+    --text-1: #ffffff;
+    --text-2: #e2e8f0;
+    --text-3: #94a3b8;
+    --text-4: #64748b;
+    
+    /* Borders */
+    --border-gold: rgba(212, 175, 55, 0.25);
+    --border-gold-strong: rgba(212, 175, 55, 0.6);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    
+    /* Shadows */
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-md: 0 12px 30px rgba(0,0,0,0.4);
+    --shadow-lg: 0 24px 60px rgba(0,0,0,0.5);
+    --shadow-gold: 0 0 40px rgba(212, 175, 55, 0.25);
+    --shadow-gold-lg: 0 0 80px rgba(212, 175, 55, 0.35);
 }
+
+html, body { height: 100%; }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    min-height: 100vh;
-    background:
-        radial-gradient(ellipse at 15% 15%, rgba(168,85,247,0.25) 0%, transparent 45%),
-        radial-gradient(ellipse at 85% 20%, rgba(0,212,255,0.18) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 85%, rgba(212,175,55,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 90% 90%, rgba(168,85,247,0.15) 0%, transparent 45%),
-        linear-gradient(135deg, #06040d 0%, #0a0715 50%, #040209 100%);
-    background-size: 200% 200%;
-    animation: auroraMove 25s ease infinite;
+    color: var(--text-2);
+    background: var(--bg-0);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv01";
+    line-height: 1.5;
+    min-height: 100vh;
     position: relative;
 }
 
-@keyframes auroraMove {
-    0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    50% { background-position: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 0% 0%; }
-}
-
-/* Noise texture overlay */
-body::before {
-    content: "";
+/* ============================================
+   ANIMATED MESH BACKGROUND
+   ============================================ */
+.mesh-bg {
     position: fixed;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(168, 85, 247, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 85, 247, 0.035) 1px, transparent 1px);
-    background-size: 52px 52px;
-    pointer-events: none;
     z-index: 0;
-    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
-}
-
-/* Floating orbs */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at 10% 30%, rgba(212,175,55,0.06) 0%, transparent 8%),
-        radial-gradient(circle at 90% 60%, rgba(168,85,247,0.08) 0%, transparent 10%),
-        radial-gradient(circle at 40% 90%, rgba(0,212,255,0.05) 0%, transparent 8%);
     pointer-events: none;
-    z-index: 0;
-    animation: orbsFloat 20s ease-in-out infinite;
-}
-
-@keyframes orbsFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -20px) scale(1.1); }
-    66% { transform: translate(-20px, 30px) scale(0.95); }
-}
-
-/* ===== SCROLLBAR PREMIUM ===== */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #06040d; }
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--gold), var(--purple), var(--cyan));
-    border-radius: 20px;
-    border: 2px solid #06040d;
-    background-size: 100% 200%;
-    animation: scrollShift 4s linear infinite;
-}
-@keyframes scrollShift {
-    0% { background-position: 0 0%; }
-    100% { background-position: 0 200%; }
-}
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--cyan), var(--gold), var(--purple));
-}
-
-/* ===== HEADER ===== */
-header {
-    position: relative;
-    z-index: 2;
-    padding: 50px 20px 38px;
-    text-align: center;
-    background: linear-gradient(180deg, rgba(20,10,40,0.9), rgba(20,10,40,0));
-    border-bottom: 1px solid rgba(212,175,55,0.15);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
     overflow: hidden;
 }
 
-header::before {
+.mesh-bg::before {
     content: "";
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
-    border-radius: 50%;
-    top: -250px;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    animation: headerGlow 6s ease-in-out infinite;
+    inset: -50%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.35) 0%, transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 25%),
+        radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.25) 0%, transparent 25%),
+        radial-gradient(circle at 10% 90%, rgba(16, 185, 129, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 30%);
+    animation: meshMove 30s ease-in-out infinite;
+    filter: blur(60px);
 }
 
-@keyframes headerGlow {
-    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-    50% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+@keyframes meshMove {
+    0%, 100% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
+    25% { transform: translate(5%, -5%) rotate(90deg) scale(1.1); }
+    50% { transform: translate(-3%, 6%) rotate(180deg) scale(1.05); }
+    75% { transform: translate(4%, 3%) rotate(270deg) scale(1.15); }
 }
 
-/* Decorative corner lines */
-header::after {
+/* Grid overlay */
+.mesh-bg::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    box-shadow: 0 0 15px var(--gold);
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
 }
 
-.logo {
-    width: 115px;
-    height: 115px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 16px;
-    filter: 
-        drop-shadow(0 0 30px rgba(212,175,55,0.8)) 
-        drop-shadow(0 0 60px rgba(168,85,247,0.5));
-    position: relative;
+/* Floating particles */
+.particles {
+    position: fixed;
+    inset: 0;
     z-index: 1;
-    animation: floatLogo 4s ease-in-out infinite;
-    transition: transform 0.4s ease;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.logo:hover {
-    transform: scale(1.08);
-    filter: 
-        drop-shadow(0 0 40px rgba(212,175,55,1)) 
-        drop-shadow(0 0 80px rgba(168,85,247,0.7));
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--gold), 0 0 16px var(--gold);
+    opacity: 0.6;
+    animation: floatUp linear infinite;
 }
 
-@keyframes floatLogo {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+@keyframes floatUp {
+    from { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    to { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
-header h1 {
-    margin: 0;
+/* ============================================
+   APP LAYOUT
+   ============================================ */
+.app {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 28px 20px;
+    background: linear-gradient(180deg, rgba(10, 6, 24, 0.95), rgba(10, 6, 24, 0.75));
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-right: 1px solid var(--border-gold);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 4px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(168,85,247,0.1));
+    padding: 6px;
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 0 20px rgba(212,175,55,0.2);
+}
+
+.brand-text h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 18px;
     font-weight: 900;
-    letter-spacing: 1.5px;
-    background: linear-gradient(90deg, #d4af37, #f4e5a1, #ffffff, #c084fc, #00d4ff, #d4af37);
-    background-size: 300% auto;
+    background: linear-gradient(90deg, var(--gold-bright), var(--gold-soft), var(--gold-bright));
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shineText 8s linear infinite;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 0 60px rgba(212,175,55,0.3);
+    animation: shineText 4s linear infinite;
+    letter-spacing: 1px;
+    line-height: 1;
 }
 
-@keyframes shineText {
-    0% { background-position: 0% center; }
-    100% { background-position: 300% center; }
-}
-
-.header-subtitle {
-    margin-top: 12px;
-    color: var(--gold-light);
-    font-size: 12px;
-    letter-spacing: 5px;
+.brand-text p {
+    font-size: 9px;
+    color: var(--text-4);
+    letter-spacing: 3px;
     font-weight: 600;
-    position: relative;
-    z-index: 1;
-    opacity: 0.75;
+    margin-top: 4px;
     text-transform: uppercase;
 }
 
-.header-subtitle::before,
-.header-subtitle::after {
-    content: "◆";
-    margin: 0 12px;
-    color: var(--gold);
-    opacity: 0.6;
-    font-size: 8px;
+@keyframes shineText {
+    to { background-position: 200% center; }
+}
+
+/* Nav */
+.nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-label {
+    font-size: 9px;
+    color: var(--text-4);
+    letter-spacing: 3px;
+    font-weight: 700;
+    padding: 0 12px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 12px;
+    color: var(--text-3);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-item-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.nav-item:hover {
+    background: linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.02));
+    color: var(--gold-soft);
+    border-color: var(--border-gold);
+    transform: translateX(4px);
+}
+
+.nav-item:hover .nav-item-icon {
+    transform: scale(1.2);
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, rgba(212,175,55,0.2), rgba(168,85,247,0.05));
+    color: var(--gold-bright);
+    border-color: var(--border-gold-strong);
+    box-shadow: 
+        inset 0 0 20px rgba(212,175,55,0.1),
+        0 0 20px rgba(212,175,55,0.15);
+}
+
+.nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-bright));
+    border-radius: 2px;
+    box-shadow: 0 0 12px var(--gold);
+}
+
+/* Sidebar Status */
+.sidebar-status {
+    margin-top: auto;
+    padding: 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02));
+    border: 1px solid rgba(16,185,129,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-status::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--emerald);
+    margin-right: 8px;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.7);
+    animation: pulse 2s infinite;
     vertical-align: middle;
 }
 
-/* ===== CONTAINER ===== */
-.container {
-    position: relative;
-    z-index: 2;
-    max-width: 1180px;
-    margin: 32px auto;
-    padding: 0 18px;
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
 }
 
-/* ===== STATUS BAR ===== */
+.status-text {
+    font-size: 11px;
+    color: var(--emerald);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.status-sub {
+    font-size: 10px;
+    color: var(--text-4);
+    margin-top: 4px;
+    word-break: break-all;
+}
+
+/* ============================================
+   MAIN AREA
+   ============================================ */
+.main {
+    min-height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: 
+        radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.08), transparent 50%);
+}
+
+/* Topbar */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 18px 32px;
+    background: linear-gradient(180deg, rgba(10, 6, 24, 0.9), rgba(10, 6, 24, 0.6));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.topbar-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-1);
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.topbar-title h1 span {
+    color: var(--gold-bright);
+    text-shadow: 0 0 20px rgba(212,175,55,0.5);
+}
+
+.topbar-title p {
+    font-size: 11px;
+    color: var(--text-4);
+    letter-spacing: 2px;
+    margin-top: 2px;
+    text-transform: uppercase;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.live-clock {
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.02));
+    border: 1px solid var(--border-gold);
+    color: var(--gold-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(212,175,55,0.15);
+}
+
+.admin-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 6px 6px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(168,85,247,0.05));
+    border: 1px solid rgba(168,85,247,0.4);
+    border-radius: 40px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.admin-chip:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 25px rgba(212,175,55,0.25);
+    transform: translateY(-2px);
+}
+
+.admin-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #0a0618;
+    font-size: 14px;
+    box-shadow: 0 0 15px rgba(212,175,55,0.5);
+}
+
+.admin-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-2);
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 32px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================
+   STATUS BAR
+   ============================================ */
 .status {
     position: relative;
-    padding: 16px 22px;
-    border-radius: 16px;
-    margin-bottom: 22px;
-    background: rgba(255,255,255,0.04);
+    padding: 14px 20px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    background: var(--surface-glass);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #e2e8f0;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-2);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.3px;
     transition: all 0.3s;
+    overflow: hidden;
 }
 
 .status.success {
-    background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04));
-    border-color: rgba(34,197,94,0.4);
-    color: #86efac;
-    box-shadow: 0 0 30px rgba(34,197,94,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
+    background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.02));
+    border-color: rgba(16,185,129,0.4);
+    color: #6ee7b7;
+    box-shadow: 0 0 30px rgba(16,185,129,0.15);
 }
 
 .status.success::before {
@@ -257,208 +496,306 @@ header h1 {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #22c55e;
+    background: var(--emerald);
     margin-right: 12px;
-    box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.7);
     animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
-    70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
-    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    vertical-align: middle;
 }
 
 .status.error { 
-    background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.04));
-    border-color: rgba(239,68,68,0.4); 
-    color: #fca5a5; 
-    box-shadow: 0 0 30px rgba(239,68,68,0.15);
+    background: linear-gradient(135deg, rgba(244,63,94,0.12), rgba(244,63,94,0.02));
+    border-color: rgba(244,63,94,0.4); 
+    color: #fda4af; 
 }
 .status.warning { 
-    background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04));
+    background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.02));
     border-color: rgba(245,158,11,0.4); 
     color: #fcd34d; 
-    box-shadow: 0 0 30px rgba(245,158,11,0.15);
 }
 
-/* ===== CARD PREMIUM ===== */
+/* ============================================
+   STATS ROW
+   ============================================ */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.stat-tile {
+    position: relative;
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(26,16,48,0.7), rgba(15,8,28,0.8));
+    border: 1px solid var(--border-gold);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+}
+
+.stat-tile::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.6;
+}
+
+.stat-tile::after {
+    content: "";
+    position: absolute;
+    top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.stat-tile:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-gold-strong);
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.4),
+        0 0 40px rgba(212,175,55,0.2);
+}
+
+.stat-tile:hover::after { opacity: 1; }
+
+.stat-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(212,175,55,0.5));
+}
+
+.stat-label {
+    font-size: 10px;
+    color: var(--text-4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff, var(--gold-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+
+.stat-trend {
+    font-size: 11px;
+    color: var(--emerald);
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
 .card {
     position: relative;
-    background: 
-        linear-gradient(135deg, rgba(28, 17, 48, 0.7), rgba(15, 10, 30, 0.8));
+    background: linear-gradient(145deg, rgba(26,16,48,0.75), rgba(15,8,28,0.85));
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border-radius: 22px;
-    padding: 28px;
-    margin-bottom: 24px;
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.5),
-        0 4px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 26px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.06);
     overflow: hidden;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+    border: 1px solid transparent;
 }
 
 .card::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 22px;
-    padding: 1.5px;
-    background: linear-gradient(90deg, #a855f7, #00d4ff, #d4af37, #a855f7);
-    background-size: 300% 100%;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+        rgba(212,175,55,0.5), 
+        rgba(168,85,247,0.2), 
+        rgba(0,212,255,0.15), 
+        rgba(212,175,55,0.5));
+    background-size: 300% 300%;
     -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: borderRotate 6s linear infinite;
+    animation: borderFlow 8s linear infinite;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
-/* Golden glow spot on card */
-.card::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 20%, rgba(212,175,55,0.06), transparent 40%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-.card:hover::after { opacity: 1; }
-
-@keyframes borderRotate {
+@keyframes borderFlow {
     0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.6),
-        0 0 50px rgba(168,85,247,0.2),
-        0 0 30px rgba(212,175,55,0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 
+        var(--shadow-lg),
+        0 0 50px rgba(212,175,55,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-.card h2 {
-    margin: 0 0 12px;
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    color: #ffffff;
-    font-weight: 800;
-    letter-spacing: 0.4px;
+.card-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
 }
 
-.card h2::first-letter { color: var(--gold); }
-
-.small { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
-.small b { color: #cbd5e1; }
-.small code {
-    background: rgba(212,175,55,0.1);
-    border: 1px solid rgba(212,175,55,0.2);
-    padding: 2px 8px;
-    border-radius: 6px;
-    color: var(--gold-light);
-    font-size: 12px;
-    font-family: 'Courier New', monospace;
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* Card variants */
-.jadwal-card::before { background: linear-gradient(90deg, #3b82f6, #60a5fa, #d4af37, #3b82f6); }
-.prediksi-card::before { background: linear-gradient(90deg, #a855f7, #c084fc, #d4af37, #a855f7); }
-.database-card::before { background: linear-gradient(90deg, #f59e0b, #fbbf24, #d4af37, #f59e0b); }
+.card-title-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.03));
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 0 20px rgba(212,175,55,0.15);
+    flex-shrink: 0;
+}
 
-/* ===== SECTION LABEL ===== */
+.card-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-1);
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+.card-title p {
+    font-size: 11px;
+    color: var(--text-4);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
 .section-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 18px;
+    padding: 6px 14px;
     border-radius: 30px;
-    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.04));
-    border: 1px solid rgba(212,175,55,0.3);
-    color: var(--gold-light);
-    font-size: 11px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.03));
+    border: 1px solid var(--border-gold);
+    color: var(--gold-soft);
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 2px;
-    margin-bottom: 14px;
-    box-shadow: 0 0 20px rgba(212,175,55,0.1), inset 0 1px 0 rgba(255,255,255,0.05);
     text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(212,175,55,0.1);
+    margin-bottom: 12px;
 }
 
 .section-label::before {
     content: "◆";
-    color: var(--gold);
-    font-size: 8px;
+    color: var(--gold-bright);
+    font-size: 7px;
 }
 
-/* ===== CONTOH BOX ===== */
+.small { font-size: 13px; color: var(--text-3); line-height: 1.75; }
+.small b { color: var(--text-2); font-weight: 700; }
+.small code {
+    background: rgba(212,175,55,0.08);
+    border: 1px solid var(--border-gold);
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: var(--gold-soft);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+}
+
+/* ============================================
+   CONTOH BOX
+   ============================================ */
 .contoh {
-    background: 
-        linear-gradient(135deg, rgba(0,0,0,0.5), rgba(10,5,20,0.6));
-    border: 1px solid rgba(212,175,55,0.15);
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(10,5,20,0.7));
+    border: 1px solid var(--border-subtle);
     border-left: 3px solid var(--gold);
     border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-    font-size: 13px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 12.5px;
     line-height: 1.8;
     white-space: pre-wrap;
-    color: #cbd5e1;
-    font-family: 'Courier New', monospace;
+    color: var(--text-2);
+    font-family: 'JetBrains Mono', monospace;
     backdrop-filter: blur(10px);
     box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
-    position: relative;
     overflow: hidden;
 }
 
 .contoh::before {
     content: "CONTOH";
     position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 9px;
-    letter-spacing: 2px;
+    top: 8px; right: 14px;
+    font-size: 8px;
+    letter-spacing: 3px;
     color: var(--gold);
     opacity: 0.5;
     font-weight: 700;
+    font-family: 'Inter', sans-serif;
 }
 
-/* ===== TEXTAREA ===== */
+/* ============================================
+   TEXTAREA
+   ============================================ */
 textarea {
     width: 100%;
-    min-height: 320px;
+    min-height: 280px;
     padding: 18px 20px;
     border: 1px solid rgba(168,85,247,0.2);
-    border-radius: 16px;
+    border-radius: 14px;
     resize: vertical;
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.7;
     outline: none;
-    background: 
-        linear-gradient(135deg, rgba(6, 4, 13, 0.85), rgba(15, 8, 25, 0.85));
-    color: #f8fafc;
+    background: linear-gradient(135deg, rgba(3,1,9,0.9), rgba(15,8,28,0.9));
+    color: var(--text-1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Courier New', monospace;
+    font-family: 'JetBrains Mono', monospace;
     backdrop-filter: blur(10px);
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+    margin-top: 12px;
 }
 
 textarea::placeholder { 
     color: #4a4a5a; 
     font-style: italic;
+    font-family: 'Inter', sans-serif;
 }
 
 textarea:hover {
@@ -468,30 +805,30 @@ textarea:hover {
 textarea:focus {
     border-color: var(--gold);
     box-shadow: 
-        inset 0 2px 10px rgba(0,0,0,0.4),
+        inset 0 2px 10px rgba(0,0,0,0.5),
         0 0 0 3px rgba(212,175,55,0.12), 
         0 0 40px rgba(212,175,55,0.2);
-    background: 
-        linear-gradient(135deg, rgba(6, 4, 13, 0.9), rgba(20, 10, 35, 0.9));
 }
 
-/* ===== BUTTONS PREMIUM ===== */
+/* ============================================
+   BUTTONS
+   ============================================ */
 .buttons { 
     display: flex; 
     flex-wrap: wrap; 
-    gap: 12px; 
-    margin-top: 20px; 
+    gap: 10px; 
+    margin-top: 18px; 
 }
 
 button {
     position: relative;
     overflow: hidden;
     border: 0;
-    padding: 14px 26px;
-    border-radius: 14px;
+    padding: 13px 24px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.5px;
     color: white;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -503,15 +840,16 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    white-space: nowrap;
 }
 
 button::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
     transform: translateX(-100%);
-    transition: transform 0.6s;
+    transition: transform 0.7s;
     pointer-events: none;
 }
 
@@ -523,7 +861,7 @@ button::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.4), transparent 55%);
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.35), transparent 55%);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
@@ -536,34 +874,34 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
 .btn-blue {
     background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(59,130,246,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(59,130,246,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .btn-blue:hover {
-    box-shadow: 0 8px 30px rgba(59,130,246,0.6), 0 0 60px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(59,130,246,0.6), 0 0 60px rgba(59,130,246,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-green {
     background: linear-gradient(135deg, #15803d, #16a34a, #22c55e);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(34,197,94,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(34,197,94,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .btn-green:hover {
-    box-shadow: 0 8px 30px rgba(34,197,94,0.6), 0 0 60px rgba(34,197,94,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(34,197,94,0.6), 0 0 60px rgba(34,197,94,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-orange {
     background: linear-gradient(135deg, #b45309, #d97706, #f59e0b);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(245,158,11,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(245,158,11,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .btn-orange:hover {
-    box-shadow: 0 8px 30px rgba(245,158,11,0.6), 0 0 60px rgba(245,158,11,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(245,158,11,0.6), 0 0 60px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-red {
     background: linear-gradient(135deg, #991b1b, #dc2626, #ef4444);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(239,68,68,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(239,68,68,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .btn-red:hover {
-    box-shadow: 0 8px 30px rgba(239,68,68,0.6), 0 0 60px rgba(239,68,68,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(239,68,68,0.6), 0 0 60px rgba(239,68,68,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-dark {
@@ -571,32 +909,31 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.35), 0 0 20px rgba(71,85,105,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .btn-dark:hover {
-    box-shadow: 0 8px 30px rgba(71,85,105,0.6), 0 0 60px rgba(71,85,105,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(71,85,105,0.6), 0 0 60px rgba(71,85,105,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* ===== MATCH CARD ===== */
+/* ============================================
+   MATCH CARD
+   ============================================ */
 .match {
+    position: relative;
     border: 1px solid rgba(168,85,247,0.15);
     border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 12px;
-    background: 
-        linear-gradient(135deg, rgba(0,0,0,0.4), rgba(15, 8, 25, 0.4));
-    color: #cbd5e1;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(15,8,25,0.4));
+    color: var(--text-2);
     line-height: 1.8;
     backdrop-filter: blur(10px);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
     overflow: hidden;
-    font-size: 13.5px;
+    font-size: 13px;
 }
 
 .match::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: 3px;
     background: linear-gradient(180deg, var(--gold), var(--purple));
     opacity: 0;
@@ -604,19 +941,15 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 }
 
 .match:hover {
-    border-color: rgba(212,175,55,0.4);
+    border-color: var(--border-gold-strong);
     box-shadow: 
         0 8px 25px rgba(0,0,0,0.4),
-        0 0 30px rgba(212,175,55,0.12);
+        0 0 30px rgba(212,175,55,0.15);
     transform: translateX(4px);
 }
 
 .match:hover::before { opacity: 1; }
-
-.match strong { 
-    color: #60a5fa; 
-    font-weight: 700;
-}
+.match strong { color: var(--gold-soft); font-weight: 700; }
 
 .pred-preview { 
     border-left: 4px solid var(--purple);
@@ -625,25 +958,62 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
 .hidden { display: none !important; }
 
-/* ===== LOGIN BOX ===== */
-.login-box { 
-    text-align: center; 
-    padding: 60px 24px;
-    background: 
-        linear-gradient(135deg, rgba(30, 18, 55, 0.85), rgba(15, 8, 25, 0.9));
+/* ============================================
+   LOGIN BOX
+   ============================================ */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 20px;
+}
+
+.login-box {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    padding: 50px 30px;
+    background: linear-gradient(145deg, rgba(30,18,55,0.9), rgba(15,8,28,0.95));
+    position: relative;
+    overflow: hidden;
+}
+
+.login-box::before {
+    content: "";
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);
+    pointer-events: none;
+}
+
+.login-icon {
+    font-size: 56px;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 30px rgba(212,175,55,0.6));
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .login-box h2 { 
-    color: var(--gold); 
-    justify-content: center; 
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-bright); 
     font-size: 28px;
     margin-bottom: 12px;
-    text-shadow: 0 0 40px rgba(212,175,55,0.4);
+    text-shadow: 0 0 40px rgba(212,175,55,0.5);
 }
 
 .login-box p { 
-    color: var(--text-muted); 
-    margin-bottom: 24px;
+    color: var(--text-3); 
+    margin-bottom: 28px;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -652,52 +1022,47 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     background: linear-gradient(135deg, #6d28d9, #a855f7, #c084fc);
     box-shadow: 
         0 10px 30px rgba(168,85,247,0.4),
-        0 0 40px rgba(168,85,247,0.2),
+        0 0 40px rgba(168,85,247,0.25),
         inset 0 1px 0 rgba(255,255,255,0.2);
     padding: 16px 44px;
-    margin-top: 14px;
-    font-size: 15px;
-    letter-spacing: 1px;
+    font-size: 14px;
+    letter-spacing: 2px;
 }
 
 .login-box button:hover {
     box-shadow: 
         0 15px 50px rgba(168,85,247,0.6),
-        0 0 70px rgba(168,85,247,0.4),
+        0 0 70px rgba(168,85,247,0.45),
         inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* ===== ADMIN WELCOME ===== */
+/* ============================================
+   WELCOME BANNER
+   ============================================ */
 .admin-welcome {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 24px;
-    padding: 22px 28px;
+    padding: 24px 28px;
     border-radius: 18px;
-    background: 
-        linear-gradient(135deg, rgba(124,58,237,0.18), rgba(212,175,55,0.06));
-    border: 1px solid rgba(212,175,55,0.25);
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(212,175,55,0.08));
+    border: 1px solid var(--border-gold);
     backdrop-filter: blur(20px);
-    box-shadow: 
-        0 10px 40px rgba(0,0,0,0.4),
-        0 0 40px rgba(212,175,55,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-    position: relative;
+    box-shadow: var(--shadow-md), 0 0 40px rgba(212,175,55,0.1);
     overflow: hidden;
 }
 
 .admin-welcome::before {
     content: "";
     position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(212,175,55,0.12), transparent 70%);
+    top: -50%; right: -10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
     pointer-events: none;
-    animation: welcomeGlow 5s ease-in-out infinite;
+    animation: welcomeGlow 6s ease-in-out infinite;
 }
 
 @keyframes welcomeGlow {
@@ -706,81 +1071,80 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 }
 
 .admin-welcome-title { 
-    font-size: 18px; 
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; 
     font-weight: 800;
-    background: linear-gradient(90deg, #fff, var(--gold-light));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-1);
     letter-spacing: 0.3px;
 }
 
 .admin-welcome-text { 
     margin-top: 6px; 
-    color: var(--text-muted); 
+    color: var(--text-3); 
     font-size: 12.5px;
     letter-spacing: 0.3px;
 }
 
-.admin-welcome > div:last-child {
+.admin-welcome-badge {
     padding: 8px 18px;
     border-radius: 30px;
-    background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05));
-    border: 1px solid rgba(34,197,94,0.4);
-    color: #86efac;
-    font-size: 11px;
-    font-weight: 700;
+    background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05));
+    border: 1px solid rgba(16,185,129,0.4);
+    color: #6ee7b7;
+    font-size: 10px;
+    font-weight: 800;
     letter-spacing: 2px;
-    box-shadow: 0 0 20px rgba(34,197,94,0.2);
+    box-shadow: 0 0 20px rgba(16,185,129,0.2);
     animation: pulseBadge 2.5s ease-in-out infinite;
+    white-space: nowrap;
 }
 
 @keyframes pulseBadge {
-    0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,0.2); }
-    50% { box-shadow: 0 0 30px rgba(34,197,94,0.5); }
+    0%, 100% { box-shadow: 0 0 20px rgba(16,185,129,0.2); }
+    50% { box-shadow: 0 0 30px rgba(16,185,129,0.5); }
 }
 
-/* ===== FOOTER ===== */
+/* ============================================
+   FOOTER
+   ============================================ */
 .footer {
-    position: relative;
-    z-index: 2;
     text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    padding: 30px 0 50px;
+    color: var(--text-4);
+    font-size: 11px;
+    padding: 30px 0;
     letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.7;
+    margin-top: 30px;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .footer::before {
     content: "◆ ◆ ◆";
     display: block;
     color: var(--gold);
-    font-size: 8px;
+    font-size: 7px;
     letter-spacing: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     opacity: 0.6;
 }
 
-/* ===== TOAST ===== */
+/* ============================================
+   TOAST
+   ============================================ */
 .toast {
     position: fixed;
-    top: 30px;
-    right: 30px;
-    padding: 18px 26px;
+    top: 30px; right: 30px;
+    padding: 18px 24px;
     border-radius: 16px;
-    background: 
-        linear-gradient(135deg, rgba(28, 17, 48, 0.98), rgba(15, 8, 25, 0.98));
+    background: linear-gradient(135deg, rgba(28,17,48,0.98), rgba(15,8,25,0.98));
     backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(34, 197, 94, 0.5);
+    border: 1px solid rgba(16,185,129,0.5);
     box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.6), 
-        0 0 40px rgba(34, 197, 94, 0.35),
+        0 15px 50px rgba(0,0,0,0.6), 
+        0 0 40px rgba(16,185,129,0.35),
         inset 0 1px 0 rgba(255,255,255,0.1);
-    color: #86efac;
-    font-size: 14px;
+    color: #6ee7b7;
+    font-size: 13.5px;
     font-weight: 600;
     letter-spacing: 0.3px;
     z-index: 99999;
@@ -788,168 +1152,380 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     max-width: 420px;
     white-space: pre-line;
-    line-height: 1.6;
+    line-height: 1.55;
+    border-left: 3px solid var(--emerald);
 }
 
 .toast.show { transform: translateX(0); }
 .toast.error {
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #fca5a5;
-    box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.6), 
-        0 0 40px rgba(239, 68, 68, 0.35),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+    border-color: rgba(244,63,94,0.5);
+    border-left-color: var(--rose);
+    color: #fda4af;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(244,63,94,0.35);
 }
 .toast.warning {
-    border-color: rgba(245, 158, 11, 0.5);
+    border-color: rgba(245,158,11,0.5);
+    border-left-color: var(--amber);
     color: #fcd34d;
-    box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.6), 
-        0 0 40px rgba(245, 158, 11, 0.35),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(245,158,11,0.35);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold), var(--purple));
+    border-radius: 20px;
+    border: 2px solid var(--bg-0);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gold-bright), var(--purple));
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        z-index: 999;
+        transition: left 0.3s;
+        box-shadow: 5px 0 40px rgba(0,0,0,0.6);
+    }
+    .sidebar.open { left: 0; }
+    .mobile-toggle { display: flex !important; }
+    .content { padding: 20px 16px; }
+    .topbar { padding: 14px 16px; }
+    .topbar-title h1 { font-size: 18px; }
+    .topbar-title p { display: none; }
+    .live-clock { display: none; }
+    .admin-name { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 600px) {
-    header { padding: 32px 15px 24px; }
-    .logo { width: 90px; height: 90px; }
-    header h1 { font-size: 22px; letter-spacing: 1px; }
-    .header-subtitle { font-size: 10px; letter-spacing: 3px; }
-    .container { margin-top: 22px; padding: 0 12px; }
-    .card { padding: 20px; border-radius: 18px; }
-    .card h2 { font-size: 20px; }
+    .card { padding: 20px; border-radius: 16px; }
+    .card-title h2 { font-size: 17px; }
+    .card-title-icon { width: 36px; height: 36px; font-size: 16px; }
     .buttons { flex-direction: column; }
     button { width: 100%; }
-    textarea { min-height: 250px; }
-    .admin-welcome { flex-direction: column; align-items: flex-start; padding: 18px 20px; }
-    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; padding: 16px 20px; }
+    textarea { min-height: 220px; font-size: 12px; }
+    .admin-welcome { flex-direction: column; align-items: flex-start; padding: 20px; }
+    .admin-welcome-badge { align-self: flex-start; }
+    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat-tile { padding: 14px; }
+    .stat-value { font-size: 20px; }
     .contoh::before { display: none; }
+    .contoh { padding: 14px 16px; font-size: 11px; }
 }
+
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+    border: 1px solid var(--border-gold);
+    color: var(--gold-bright);
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 998;
+    backdrop-filter: blur(4px);
+}
+.sidebar-overlay.show { display: block; }
 </style>
 </head>
 <body>
 
-<header>
-    <img class="logo" src="logo-kiper4d.png" alt="KIPER4D">
-    <h1>⚽ ADMIN PANEL KIPER4D</h1>
-    <div class="header-subtitle">Jadwal • Prediksi • Database</div>
-</header>
+<!-- Animated background -->
+<div class="mesh-bg"></div>
+<div class="particles" id="particles"></div>
 
-<div class="container">
+<div class="app">
 
-    <div id="loginStatus" class="status">Memeriksa login Firebase...</div>
-
-    <div id="notLogged" class="card login-box hidden">
-        <h2>🔐 Belum Login</h2>
-        <p>Silakan login terlebih dahulu untuk membuka panel admin.</p>
-        <button id="btnLogin">🔑 LOGIN ADMIN</button>
-    </div>
-
-    <div id="adminContent" class="hidden">
-
-        <div class="admin-welcome">
-            <div>
-                <div class="admin-welcome-title">👋 Selamat Datang di Panel Admin</div>
-                <div class="admin-welcome-text">Kelola jadwal dan prediksi pertandingan KIPER4D.</div>
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <img class="brand-logo" src="logo-kiper4d.png" alt="KIPER4D" onerror="this.style.display='none'">
+            <div class="brand-text">
+                <h2>KIPER4D</h2>
+                <p>Admin Panel</p>
             </div>
-            <div>⚡ PANEL AKTIF</div>
         </div>
 
+        <div class="nav-section">
+            <div class="nav-label">Menu Utama</div>
+            <a class="nav-item active" onclick="scrollToSection('secJadwal', this)">
+                <span class="nav-item-icon">📅</span>
+                <span>Update Jadwal</span>
+            </a>
+            <a class="nav-item" onclick="scrollToSection('secPreviewJadwal', this)">
+                <span class="nav-item-icon">👁️</span>
+                <span>Preview Jadwal</span>
+            </a>
+            <a class="nav-item" onclick="scrollToSection('secPrediksi', this)">
+                <span class="nav-item-icon">🎯</span>
+                <span>Update Prediksi</span>
+            </a>
+            <a class="nav-item" onclick="scrollToSection('secPreviewPrediksi', this)">
+                <span class="nav-item-icon">🔮</span>
+                <span>Preview Prediksi</span>
+            </a>
+        </div>
 
-        <div class="card jadwal-card">
-            <div class="section-label">📅 Jadwal Pertandingan</div>
-            <h2>Update Jadwal</h2>
-            <p class="small">
-                <b>🧠 Parser Super Pintar — Support Semua Format!</b>
-                <br><br>
-                <b>📅 Format Tanggal:</b> <code>28/09</code>, <code>28/09/2026</code>, <code>28-09-26</code>, <code>28.09</code>, <code>28 Sep</code>, <code>28 September 2026</code>, <code>2026-09-28</code>
-                <br>
-                <b>🕐 Format Jam:</b> <code>17:25</code>, <code>17.25</code>, <code>01:45 WIB</code>
-                <br>
-                <b>🎯 Handicap:</b> <code>0:1/2</code>, <code>0 : 1/2</code>, <code>1 1/2:0</code>, <code>0.5:0</code>, <code>1-0</code>, <code>0,5 : 0</code>
-                <br>
-                <b>🔗 Pemisah:</b> <code>|</code>, spasi, atau tab
-                <br>
-                🎨 <b>Logo otomatis dari Firestore (fuzzy match pintar)</b>
-            </p>
-            <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+        <div class="nav-section">
+            <div class="nav-label">Database</div>
+            <a class="nav-item" onclick="scrollToSection('secDatabase', this)">
+                <span class="nav-item-icon">🗄️</span>
+                <span>Kelola Database</span>
+            </a>
+            <a class="nav-item" onclick="scrollToSection('secHasilCek', this)">
+                <span class="nav-item-icon">🔍</span>
+                <span>Hasil Cek</span>
+            </a>
+        </div>
+
+        <div class="sidebar-status">
+            <div class="status-text"><span class="status-dot"></span>SISTEM AKTIF</div>
+            <div class="status-sub" id="sidebarSub">Menunggu login...</div>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+        <!-- Topbar -->
+        <div class="topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <div class="mobile-toggle" onclick="toggleSidebar()">☰</div>
+                <div class="topbar-title">
+                    <h1>Dashboard <span>Admin</span></h1>
+                    <p>Prediksi Bola KIPER4D</p>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <div class="live-clock" id="liveClock">--:--:--</div>
+                <div class="admin-chip">
+                    <div class="admin-avatar">A</div>
+                    <div class="admin-name" id="adminName">Admin</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <div id="loginStatus" class="status">Memeriksa login Firebase...</div>
+
+            <!-- LOGIN BOX -->
+            <div id="notLogged" class="login-wrapper hidden">
+                <div class="card login-box">
+                    <span class="login-icon">🔐</span>
+                    <h2>Selamat Datang</h2>
+                    <p>Silakan login terlebih dahulu untuk mengakses panel admin KIPER4D.</p>
+                    <button id="btnLogin">🔑 LOGIN ADMIN</button>
+                </div>
+            </div>
+
+            <!-- ADMIN CONTENT -->
+            <div id="adminContent" class="hidden">
+
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    <div class="stat-tile">
+                        <span class="stat-icon">📅</span>
+                        <div class="stat-label">Jadwal</div>
+                        <div class="stat-value" id="statJadwal">0</div>
+                        <div class="stat-trend">Siap publish</div>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-icon">🎯</span>
+                        <div class="stat-label">Prediksi</div>
+                        <div class="stat-value" id="statPrediksi">0</div>
+                        <div class="stat-trend">Siap publish</div>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-icon">🎨</span>
+                        <div class="stat-label">Logo Cache</div>
+                        <div class="stat-value" id="statLogo">0</div>
+                        <div class="stat-trend">Tim tersedia</div>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-icon">⚡</span>
+                        <div class="stat-label">Status</div>
+                        <div class="stat-value" style="font-size:20px;">ONLINE</div>
+                        <div class="stat-trend">Panel aktif</div>
+                    </div>
+                </div>
+
+                <!-- Welcome -->
+                <div class="admin-welcome">
+                    <div>
+                        <div class="admin-welcome-title">👋 Selamat Datang di Panel Admin</div>
+                        <div class="admin-welcome-text">Kelola jadwal dan prediksi pertandingan KIPER4D dengan mudah.</div>
+                    </div>
+                    <div class="admin-welcome-badge">⚡ PANEL AKTIF</div>
+                </div>
+
+                <!-- ============ JADWAL ============ -->
+                <div class="card" id="secJadwal">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">📅</div>
+                            <div>
+                                <h2>Update Jadwal</h2>
+                                <p>Input data pertandingan</p>
+                            </div>
+                        </div>
+                        <div class="section-label">Jadwal</div>
+                    </div>
+                    <p class="small">
+                        <b>🧠 Parser Super Pintar — Support Semua Format!</b>
+                        <br>
+                        <b>📅 Tanggal:</b> <code>28/09</code> <code>28/09/2026</code> <code>28-09-26</code> <code>28.09</code> <code>28 Sep</code> <code>28 September 2026</code>
+                        <br>
+                        <b>🕐 Jam:</b> <code>17:25</code> <code>17.25</code> <code>01:45 WIB</code>
+                        <br>
+                        <b>🎯 Handicap:</b> <code>0:1/2</code> <code>1 1/2:0</code> <code>0.5:0</code> <code>1-0</code>
+                        <br>
+                        🎨 <b>Logo otomatis dari Firestore (fuzzy match pintar)</b>
+                    </p>
+                    <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
 28/09 17:25 Japan VS Venezuela 0:1/2
 
 ITALY SERIE A
 11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0
-28 Sep 21:00 England VS Portugal 1-0
-28 September 2026 22:00 Netherlands VS Belgium 0:0.5</div>
-            <textarea id="inputJadwal" placeholder="Paste data JADWAL di sini..."></textarea>
-            <div class="buttons">
-                <button id="btnProsesJadwal" class="btn-blue">⚙️ Proses Jadwal</button>
-                <button id="btnPublishJadwal" class="btn-green">🚀 Publish Jadwal</button>
-            </div>
-        </div>
+28 Sep 21:00 England VS Portugal 1-0</div>
+                    <textarea id="inputJadwal" placeholder="Paste data JADWAL di sini..."></textarea>
+                    <div class="buttons">
+                        <button id="btnProsesJadwal" class="btn-blue">⚙️ Proses Jadwal</button>
+                        <button id="btnPublishJadwal" class="btn-green">🚀 Publish Jadwal</button>
+                    </div>
+                </div>
 
+                <!-- Preview Jadwal -->
+                <div class="card" id="secPreviewJadwal">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">👁️</div>
+                            <div>
+                                <h2>Preview Jadwal</h2>
+                                <p>Hasil parsing jadwal</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hasilJadwal">Belum ada data jadwal diproses.</div>
+                </div>
 
-        <div class="card">
-            <div class="section-label">👁️ Hasil Jadwal</div>
-            <h2>Preview Jadwal</h2>
-            <div id="hasilJadwal">Belum ada data jadwal diproses.</div>
-        </div>
-
-
-        <div class="card prediksi-card">
-            <div class="section-label">🎯 Prediksi Skor</div>
-            <h2>Update Prediksi</h2>
-            <p class="small">
-                <b>Format:</b> <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
-                <br>
-                <b>Nama tim harus PERSIS SAMA dengan jadwal.</b>
-                <br>
-                Support semua format tanggal & jam seperti di Jadwal.
-            </p>
-            <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+                <!-- ============ PREDIKSI ============ -->
+                <div class="card" id="secPrediksi">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">🎯</div>
+                            <div>
+                                <h2>Update Prediksi</h2>
+                                <p>Input skor prediksi</p>
+                            </div>
+                        </div>
+                        <div class="section-label">Prediksi</div>
+                    </div>
+                    <p class="small">
+                        <b>Format:</b> <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
+                        <br>
+                        <b>Nama tim harus PERSIS SAMA dengan jadwal.</b>
+                    </p>
+                    <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
 28/09 17:25 Japan VS Venezuela 1 : 2
 
 ITALY SERIE A
 11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1 : 2
 28 Sep 21:00 England VS Portugal 2-1</div>
-            <textarea id="inputPrediksi" placeholder="Paste data PREDIKSI di sini..."></textarea>
-            <div class="buttons">
-                <button id="btnProsesPrediksi" class="btn-blue">⚙️ Proses Prediksi</button>
-                <button id="btnPublishPrediksi" class="btn-green">🚀 Publish Prediksi</button>
+                    <textarea id="inputPrediksi" placeholder="Paste data PREDIKSI di sini..."></textarea>
+                    <div class="buttons">
+                        <button id="btnProsesPrediksi" class="btn-blue">⚙️ Proses Prediksi</button>
+                        <button id="btnPublishPrediksi" class="btn-green">🚀 Publish Prediksi</button>
+                    </div>
+                </div>
+
+                <!-- Preview Prediksi -->
+                <div class="card" id="secPreviewPrediksi">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">🔮</div>
+                            <div>
+                                <h2>Preview Prediksi</h2>
+                                <p>Hasil parsing prediksi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hasilPrediksi">Belum ada data prediksi diproses.</div>
+                </div>
+
+                <!-- ============ DATABASE ============ -->
+                <div class="card" id="secDatabase">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">🗄️</div>
+                            <div>
+                                <h2>Kelola Database</h2>
+                                <p>Cek & bersihkan duplikat</p>
+                            </div>
+                        </div>
+                        <div class="section-label">Database</div>
+                    </div>
+                    <p class="small">
+                        Gunakan bagian ini untuk mengecek dan membersihkan data pertandingan yang duplikat.
+                    </p>
+                    <div class="buttons">
+                        <button id="btnCekDuplikat" class="btn-orange">🔍 Cek Duplikat</button>
+                        <button id="btnBersihkan" class="btn-red">🧹 Bersihkan Duplikat</button>
+                        <button id="btnHapusSemua" class="btn-red">🗑️ HAPUS SEMUA DATA</button>
+                        <button id="btnLogout" class="btn-dark">🚪 Logout</button>
+                    </div>
+                </div>
+
+                <!-- Hasil Cek -->
+                <div class="card" id="secHasilCek">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon">🔍</div>
+                            <div>
+                                <h2>Hasil Cek Duplikat</h2>
+                                <p>Laporan database</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hasilDuplikat">Belum melakukan pengecekan.</div>
+                </div>
+
             </div>
+
+            <div class="footer">⚽ KIPER4D • Admin Prediction Panel</div>
+
         </div>
-
-
-        <div class="card">
-            <div class="section-label">👁️ Hasil Prediksi</div>
-            <h2>Preview Prediksi</h2>
-            <div id="hasilPrediksi">Belum ada data prediksi diproses.</div>
-        </div>
-
-
-        <div class="card database-card">
-            <div class="section-label">🗄️ Database</div>
-            <h2>Database</h2>
-            <p class="small">
-                Gunakan bagian ini untuk mengecek dan membersihkan data pertandingan yang duplikat.
-            </p>
-            <div class="buttons">
-                <button id="btnCekDuplikat" class="btn-orange">🔍 Cek Duplikat</button>
-                <button id="btnBersihkan" class="btn-red">🧹 Bersihkan Duplikat</button>
-                <button id="btnHapusSemua" class="btn-red">🗑️ HAPUS SEMUA DATA</button>
-                <button id="btnLogout" class="btn-dark">🚪 Logout</button>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <div class="section-label">🔍 Database Check</div>
-            <h2>Hasil Cek Duplikat</h2>
-            <div id="hasilDuplikat">Belum melakukan pengecekan.</div>
-        </div>
-
-    </div>
-
-    <div class="footer">⚽ KIPER4D • Admin Prediction Panel</div>
-
+    </main>
 </div>
 
 
@@ -1016,6 +1592,66 @@ window.getTeamLogo = getTeamLogo;
 window.normalizeTeam = normalizeTeam;
 window.getJadwal = () => dataJadwal;
 
+
+/* ============================================
+   UI ENHANCEMENTS
+   ============================================ */
+
+// Particles
+(function createParticles() {
+    const container = document.getElementById("particles");
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.animationDuration = (Math.random() * 15 + 12) + "s";
+        p.style.animationDelay = Math.random() * 15 + "s";
+        p.style.opacity = Math.random() * 0.5 + 0.3;
+        container.appendChild(p);
+    }
+})();
+
+// Live clock
+function updateClock() {
+    const el = document.getElementById("liveClock");
+    if (!el) return;
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, "0");
+    const m = String(now.getMinutes()).padStart(2, "0");
+    const s = String(now.getSeconds()).padStart(2, "0");
+    el.textContent = h + ":" + m + ":" + s;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Mobile sidebar
+window.toggleSidebar = function() {
+    document.getElementById("sidebar").classList.toggle("open");
+    document.getElementById("sidebarOverlay").classList.toggle("show");
+};
+document.getElementById("sidebarOverlay")?.addEventListener("click", toggleSidebar);
+
+// Scroll navigation
+window.scrollToSection = function(id, el) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    if (el) el.classList.add("active");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.innerWidth <= 900) toggleSidebar();
+};
+
+// Update stats
+window.updateStats = function() {
+    const sj = document.getElementById("statJadwal");
+    const sp = document.getElementById("statPrediksi");
+    const sl = document.getElementById("statLogo");
+    if (sj) sj.textContent = dataJadwal.length;
+    if (sp) sp.textContent = dataPrediksi.length;
+    if (sl) sl.textContent = logoCache.size;
+};
+
 // Toast
 function showToast(message, type = "success") {
     const toast = document.createElement("div");
@@ -1046,12 +1682,18 @@ onAuthStateChanged(auth, (user) => {
         loginStatus.textContent = "Login berhasil: " + user.email;
         adminContent.classList.remove("hidden");
         notLogged.classList.add("hidden");
-        loadLogoCache();
+        const adminName = document.getElementById("adminName");
+        if (adminName) adminName.textContent = (user.email || "Admin").split("@")[0];
+        const sidebarSub = document.getElementById("sidebarSub");
+        if (sidebarSub) sidebarSub.textContent = user.email || "Admin";
+        loadLogoCache().then(() => window.updateStats && window.updateStats());
     } else {
         loginStatus.className = "status warning";
         loginStatus.textContent = "⚠️ Belum login";
         adminContent.classList.add("hidden");
         notLogged.classList.remove("hidden");
+        const sidebarSub = document.getElementById("sidebarSub");
+        if (sidebarSub) sidebarSub.textContent = "Belum login";
     }
 });
 
@@ -1060,9 +1702,9 @@ btnLogin.addEventListener("click", () => {
 });
 
 
-/* ============================
+/* ============================================
    HELPER FUNCTIONS
-   ============================ */
+   ============================================ */
 
 function clean(value) {
     return String(value || "").trim();
@@ -1113,9 +1755,9 @@ function matchKey(data) {
 }
 
 
-/* ============================
+/* ============================================
    CONVERT DATE
-   ============================ */
+   ============================================ */
 
 const BULAN_MAP = {
     jan: "01", januari: "01", january: "01",
@@ -1147,12 +1789,8 @@ function getSmartYear(bulanInput) {
     const tahunSekarang = now.getFullYear();
     const bulanSekarang = now.getMonth() + 1;
 
-    if (bulanInput < bulanSekarang - 6) {
-        return String(tahunSekarang + 1);
-    }
-    if (bulanInput > bulanSekarang + 6) {
-        return String(tahunSekarang - 1);
-    }
+    if (bulanInput < bulanSekarang - 6) return String(tahunSekarang + 1);
+    if (bulanInput > bulanSekarang + 6) return String(tahunSekarang - 1);
     return String(tahunSekarang);
 }
 
@@ -1199,9 +1837,9 @@ function convertDate(tanggal) {
 }
 
 
-/* ============================
+/* ============================================
    LOAD LOGO CACHE
-   ============================ */
+   ============================================ */
 
 async function loadLogoCache() {
     try {
@@ -1233,15 +1871,16 @@ async function loadLogoCache() {
             }
         });
         console.log("[LOGO] Cache loaded: " + logoCache.size + " entry");
+        window.updateStats && window.updateStats();
     } catch (error) {
         console.error("[LOGO] Gagal load cache:", error);
     }
 }
 
 
-/* ============================
+/* ============================================
    GET TEAM LOGO
-   ============================ */
+   ============================================ */
 
 function getTeamLogo(teamName) {
     const key = normalizeTeam(teamName);
@@ -1305,9 +1944,9 @@ function getTeamLogo(teamName) {
 }
 
 
-/* ============================
+/* ============================================
    BERSIHKAN BARIS
-   ============================ */
+   ============================================ */
 
 function bersihkanBaris(line) {
     let s = line;
@@ -1320,9 +1959,9 @@ function bersihkanBaris(line) {
 }
 
 
-/* ============================
+/* ============================================
    REGEX
-   ============================ */
+   ============================================ */
 
 const REGEX_DATE = "(\\d{1,4}[\\/\\-.]\\d{1,2}(?:[\\/\\-.]\\d{2,4})?|\\d{1,2}\\s+[a-zA-Z]+\\s*\\d{0,4})";
 const REGEX_TIME = "(\\d{1,2}[:.]\\d{2})";
@@ -1333,9 +1972,9 @@ const REGEX_DATETIME = new RegExp(
 );
 
 
-/* ============================
+/* ============================================
    PARSER JADWAL
-   ============================ */
+   ============================================ */
 
 function parseJadwal(text) {
 
@@ -1440,9 +2079,9 @@ function parseJadwal(text) {
 }
 
 
-/* ============================
+/* ============================================
    PARSER PREDIKSI
-   ============================ */
+   ============================================ */
 
 function parsePrediksi(text) {
 
@@ -1518,9 +2157,9 @@ function parsePrediksi(text) {
 }
 
 
-/* ============================
+/* ============================================
    PROSES JADWAL
-   ============================ */
+   ============================================ */
 
 function prosesJadwal() {
 
@@ -1540,10 +2179,12 @@ function prosesJadwal() {
             '<br><br>' +
             'Format: <code>28/09 17:25 Japan VS Venezuela 0:1/2</code>' +
             '</div>';
+        window.updateStats && window.updateStats();
         return;
     }
 
     tampilkanPreviewJadwal();
+    window.updateStats && window.updateStats();
     showToast("✅ " + dataJadwal.length + " jadwal berhasil diproses");
 }
 
@@ -1598,9 +2239,9 @@ function tampilkanPreviewJadwal() {
 }
 
 
-/* ============================
+/* ============================================
    PROSES PREDIKSI
-   ============================ */
+   ============================================ */
 
 function prosesPrediksi() {
 
@@ -1620,10 +2261,12 @@ function prosesPrediksi() {
             '<br><br>' +
             'Format: <code>28/09 17:25 Japan VS Venezuela 1 : 2</code>' +
             '</div>';
+        window.updateStats && window.updateStats();
         return;
     }
 
     tampilkanPreviewPrediksi();
+    window.updateStats && window.updateStats();
     showToast("✅ " + dataPrediksi.length + " prediksi berhasil diproses");
 }
 
@@ -1653,9 +2296,9 @@ function tampilkanPreviewPrediksi() {
 }
 
 
-/* ============================
+/* ============================================
    PUBLISH JADWAL
-   ============================ */
+   ============================================ */
 
 async function publishJadwal() {
 
@@ -1808,9 +2451,9 @@ async function publishJadwal() {
 }
 
 
-/* ============================
+/* ============================================
    PUBLISH PREDIKSI
-   ============================ */
+   ============================================ */
 
 async function publishPrediksi() {
 
@@ -1939,9 +2582,9 @@ async function publishPrediksi() {
 }
 
 
-/* ============================
+/* ============================================
    FUNGSI DATABASE
-   ============================ */
+   ============================================ */
 
 async function cekDuplikat() {
 
@@ -1988,10 +2631,10 @@ async function cekDuplikat() {
             '</div>';
 
         if (duplikatExact.length > 0) {
-            html += '<h3 style="color:#fca5a5;margin-top:16px;font-family:Playfair Display,serif">❌ Duplikat Exact</h3>';
+            html += '<h3 style="color:#fda4af;margin-top:16px;font-family:Playfair Display,serif">❌ Duplikat Exact</h3>';
             duplikatExact.forEach((d) => {
                 html += `
-                    <div class="match" style="border-left:4px solid #ef4444">
+                    <div class="match" style="border-left:4px solid #f43f5e">
                         <strong>ID: ${d.id}</strong><br>
                         📅 ${d.data.date} 🕐 ${d.data.time} WIB<br>
                         ⚽ ${d.data.home} VS ${d.data.away}
@@ -2132,9 +2775,9 @@ async function hapusSemuaData() {
 }
 
 
-/* ============================
+/* ============================================
    EVENT LISTENER
-   ============================ */
+   ============================================ */
 
 btnProsesJadwal.addEventListener("click", prosesJadwal);
 btnPublishJadwal.addEventListener("click", publishJadwal);
