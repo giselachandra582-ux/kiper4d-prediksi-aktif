@@ -449,64 +449,98 @@ nav a.nav-daftar:hover {
     box-shadow: 0 10px 45px rgba(61,43,86,0.9), 0 0 45px rgba(30,58,95,0.7);
 }
 
-/* ═══ MOBILE HEADER — KOTAK-KOTAK ATAS BAWAH ═══ */
+/* ═══ MOBILE HEADER — LOGO KIRI, TOMBOL 2x2 KANAN (SESUAI GAMBAR) ═══ */
 @media (max-width: 800px) {
     .header-inner {
-        flex-direction: column;
-        padding: 12px 14px 14px;
-        gap: 12px;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+        padding: 10px 12px 12px !important;
+        gap: 8px !important;
     }
+    
+    /* LOGO KIRI */
     .logo {
-        align-items: center;
-        width: 100%;
+        align-items: flex-start !important;
+        width: auto !important;
+        flex-shrink: 0;
     }
     .logo img {
-        width: 130px; height: 48px;
+        width: 110px !important;
+        height: 42px !important;
+        margin-bottom: 2px;
     }
     .logo-subtitle {
-        font-size: 8px;
-        letter-spacing: 2px;
-        text-align: center;
+        font-size: 7px !important;
+        letter-spacing: 1px !important;
+        text-align: left !important;
+        line-height: 1.25;
+        max-width: 115px;
     }
+    
+    /* TOMBOL 2x2 KANAN */
     nav {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        width: 100%;
-        max-width: 400px;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: auto !important;
+        max-width: 200px !important;
+        flex-shrink: 0;
     }
+    
     nav a.nav-link,
     nav a.nav-login,
     nav a.nav-daftar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 10px;
-        font-size: 12px;
-        border-radius: 12px;
-        width: 100%;
-        text-align: center;
-        letter-spacing: 0.5px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 7px 8px !important;
+        font-size: 9.5px !important;
+        border-radius: 20px !important;
+        width: 100% !important;
+        text-align: center !important;
+        letter-spacing: 0.3px !important;
+        min-width: 75px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
     }
+    
+    /* Beranda & Jadwal - Outline abu */
     nav a.nav-link {
-        background: #0a0a0a;
-        border: 1.5px solid rgba(61,43,86,0.4);
+        background: transparent !important;
+        border: 1.5px solid #2a3b4c !important;
+        color: #e0e0e0 !important;
     }
+    
+    /* Login - Outline biru */
     nav a.nav-login {
-        background: #0a0a0a;
-        border: 1.5px solid rgba(30,58,95,0.5);
-        box-shadow: 0 0 15px rgba(30,58,95,0.2);
+        background: transparent !important;
+        border: 1.5px solid #00d2ff !important;
+        color: #00d2ff !important;
+        box-shadow: 0 0 8px rgba(0, 210, 255, 0.25) !important;
     }
+    
+    /* Daftar - Isi biru menyala */
     nav a.nav-daftar {
-        background: linear-gradient(135deg, #3d2b56 0%, #1e3a5f 50%, #1e4d42 100%);
-        border: none;
-        box-shadow: 0 4px 20px rgba(61,43,86,0.5);
-        grid-column: span 2;
+        background: #00d2ff !important;
+        color: #000 !important;
+        border: 1.5px solid #00d2ff !important;
+        box-shadow: 0 0 12px rgba(0, 210, 255, 0.7) !important;
     }
+    
+    /* Matikan pseudo element */
     nav a.nav-link::before,
-    nav a.nav-login::before {
-        border-radius: 12px;
+    nav a.nav-login::before,
+    nav a.nav-daftar::before {
+        display: none !important;
     }
+    
+    /* Urutan grid: Beranda | Login */
+    /*              Jadwal  | Daftar */
+    nav a.nav-link:nth-child(1) { order: 1; }
+    nav a.nav-login { order: 2; }
+    nav a.nav-link:nth-child(2) { order: 3; }
+    nav a.nav-daftar { order: 4; }
 }
 
 .container { max-width: 1250px; margin: auto; padding: 28px 20px 70px; position: relative; z-index: 1; }
@@ -2076,11 +2110,22 @@ nav a.nav-daftar:hover {
 }
 
 @media (max-width: 430px) {
-    .logo img { width: 100px; height: 38px; }
-    .logo-subtitle { font-size: 6.5px; }
+    .logo img { width: 95px !important; height: 36px !important; }
+    .logo-subtitle { font-size: 6px !important; letter-spacing: 0.8px !important; max-width: 100px; }
+    
+    nav { 
+        max-width: 180px !important;
+        gap: 4px !important;
+    }
     nav a.nav-link,
     nav a.nav-login,
-    nav a.nav-daftar { padding: 10px 8px; font-size: 11px; }
+    nav a.nav-daftar { 
+        padding: 6px 4px !important; 
+        font-size: 8.5px !important; 
+        min-width: 65px !important;
+        letter-spacing: 0.2px !important;
+    }
+    
     .loading-logo-wrap img { width: 110px; height: 110px; }
     .loading-ring { width: 165px; height: 165px; }
     .loading-ring:nth-child(2) { width: 200px; height: 200px; }
