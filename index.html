@@ -157,6 +157,11 @@ body {
     100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
 }
 
+@keyframes fireFlicker {
+    0%   { transform: scale(1) rotate(-3deg); opacity: 0.95; }
+    100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+}
+
 .aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
 .aurora-bg::before {
     content: "";
@@ -674,10 +679,6 @@ nav a.nav-daftar:hover {
     flex-shrink: 0;
     filter: drop-shadow(0 0 6px #ff4400) drop-shadow(0 0 12px #ffaa00);
     animation: fireFlicker 0.8s ease-in-out infinite alternate;
-}
-@keyframes fireFlicker {
-    0%   { transform: scale(1) rotate(-3deg); opacity: 0.95; }
-    100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
 }
 
 .big-match-ticker-wrap {
