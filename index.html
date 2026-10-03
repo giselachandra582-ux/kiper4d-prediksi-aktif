@@ -543,6 +543,7 @@ nav a.nav-daftar:hover {
 .lux-text-item {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
+    gap: 10px;
     text-align: center;
     font-family: 'Rajdhani', sans-serif;
     font-size: 16px; font-weight: 700;
@@ -562,6 +563,16 @@ nav a.nav-daftar:hover {
 }
 .lux-text-item.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .lux-text-item.exit-up { opacity: 0; transform: translateY(-22px) scale(0.94); filter: blur(8px); }
+
+/* SVG icon di running text — pasti muncul */
+.lux-svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #8bb4e8;
+    filter: drop-shadow(0 0 6px rgba(139,180,232,0.6));
+    vertical-align: middle;
+}
 
 .banner {
     position: relative;
@@ -635,7 +646,7 @@ nav a.nav-daftar:hover {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 6px 0 14px;
+    padding: 0 16px 14px;
     margin-bottom: 4px;
 }
 .bms-title {
@@ -644,28 +655,30 @@ nav a.nav-daftar:hover {
     font-weight: 800;
     letter-spacing: 4px;
     text-transform: uppercase;
-    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: jewelText 10s linear infinite;
-    padding: 0 20px;
-    display: inline-block;
+    color: #ffffff;
+    padding: 8px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     position: relative;
+    background: #000;
+    border: 2px solid #ff0044;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(255, 0, 68, 0.6), inset 0 0 12px rgba(255, 0, 68, 0.15);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
-.bms-title::before,
-.bms-title::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #8bb4e8, transparent);
-    transform: translateY(-50%);
+.bms-title .bms-fire {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px #ff4400) drop-shadow(0 0 12px #ffaa00);
+    animation: fireFlicker 0.8s ease-in-out infinite alternate;
 }
-.bms-title::before { left: -50px; }
-.bms-title::after { right: -50px; }
+@keyframes fireFlicker {
+    0%   { transform: scale(1) rotate(-3deg); opacity: 0.95; }
+    100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+}
 
 .big-match-ticker-wrap {
     position: relative;
@@ -740,6 +753,12 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 12px rgba(255, 0, 68, 0.5);
     position: relative;
     z-index: 3;
+}
+.bmt-badge .badge-fire {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 3px rgba(255,200,0,0.8));
 }
 
 .bmt-league {
@@ -838,12 +857,14 @@ nav a.nav-daftar:hover {
     z-index: 3;
     text-transform: uppercase;
 }
-.bmt-time .time-icon {
-    font-size: 11px;
-    filter: drop-shadow(0 0 4px rgba(139, 180, 232, 0.6));
+.bmt-time .time-icon-svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 4px rgba(139, 180, 232, 0.8));
 }
 
-/* ═══ BREAKING NEWS — SIMPLE & BERSIH ═══ */
+/* ═══ BREAKING NEWS ═══ */
 .news-ticker {
     position: relative;
     width: 100%;
@@ -872,12 +893,15 @@ nav a.nav-daftar:hover {
     position: relative;
     margin: 2px;
     border-radius: 12px;
+    display: inline-flex; align-items: center; gap: 8px;
 }
-.news-ticker-label::before {
-    content: "●";
-    display: inline-block;
-    margin-right: 10px;
-    color: #fff;
+.news-ticker-label .label-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px #fff, 0 0 16px #ff6699;
     animation: newsBlink 1s ease-in-out infinite;
 }
 .news-ticker-wrap { flex: 1; overflow: hidden; position: relative; height: 50px; z-index: 2; }
@@ -982,6 +1006,15 @@ nav a.nav-daftar:hover {
     letter-spacing: 3px;
     margin: 0;
     text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-title .title-icon {
+    width: 24px;
+    height: 24px;
+    color: #8bb4e8;
+    filter: drop-shadow(0 0 8px rgba(139,180,232,0.6));
 }
 .section-title span {
     background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
@@ -1551,7 +1584,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ MATCH ROW — VERSI SEMULA (TIPIS & RAPI) ═══ */
+/* ═══ MATCH ROW — TIPIS & RAPI ═══ */
 .match-row-single {
     position: relative;
     padding: 14px 18px 12px;
@@ -1737,7 +1770,6 @@ nav a.nav-daftar:hover {
     pointer-events: none;
 }
 
-/* ═══ NAMA TIM — SATU WARNA PUTIH ═══ */
 .match-team-name-text {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11.5px;
@@ -1887,10 +1919,8 @@ nav a.nav-daftar:hover {
     .league { border-radius: 14px; margin-bottom: 16px; }
     .league-header { padding: 12px 20px; font-size: 12px; letter-spacing: 2.5px; }
     
-    .bms-title { font-size: 13px; letter-spacing: 3px; }
-    .bms-title::before, .bms-title::after { width: 25px; }
-    .bms-title::before { left: -30px; }
-    .bms-title::after { right: -30px; }
+    .bms-title { font-size: 13px; letter-spacing: 3px; padding: 7px 16px; }
+    .bms-title .bms-fire { width: 15px; height: 15px; }
     .bmt-card { width: 160px !important; padding: 8px 8px 0 !important; }
     .bmt-badge { font-size: 8px !important; padding: 3px 9px !important; }
     .bmt-league { font-size: 8.5px !important; letter-spacing: 1.2px !important; }
@@ -1915,15 +1945,19 @@ nav a.nav-daftar:hover {
     .match-extra-item .lbl { font-size: 8px; }
     .match-badge-center { font-size: 7px; padding: 1px 6px; }
     
-    .bms-title { font-size: 12px; letter-spacing: 2.5px; }
+    .bms-title { font-size: 12px; letter-spacing: 2.5px; padding: 6px 14px; }
+    .bms-title .bms-fire { width: 13px; height: 13px; }
     .bmt-card { width: 148px !important; }
     .bmt-badge { font-size: 7.5px !important; padding: 3px 8px !important; letter-spacing: 1.5px !important; }
+    .bmt-badge .badge-fire { width: 9px; height: 9px; }
     .bmt-league { font-size: 8px !important; }
     .bmt-logo { width: 32px !important; height: 32px !important; }
     .bmt-logo img { width: 22px !important; height: 22px !important; }
     .bmt-team-name { font-size: 8.5px !important; max-width: 55px !important; }
     .bmt-vs { font-size: 8.5px !important; padding-bottom: 20px !important; }
     .bmt-time { font-size: 10px !important; }
+    .lux-svg { width: 14px; height: 14px; }
+    .lux-text-item { gap: 6px; }
 }
 
 .site-footer {
@@ -2081,18 +2115,6 @@ nav a.nav-daftar:hover {
 }
 .toast.show { transform: translateX(0); }
 
-.confetti-container {
-    position: fixed; inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-    overflow: hidden;
-}
-.confetti {
-    position: absolute;
-    width: 8px; height: 8px;
-    animation: confettiFall 3s linear forwards;
-}
-
 @media (max-width: 800px) {
     body { padding-bottom: 85px; }
     .bottom-nav { display: block; }
@@ -2144,6 +2166,7 @@ nav a.nav-daftar:hover {
     #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
+    .section-title .title-icon { width: 20px; height: 20px; }
     .selesai-toggle { font-size: 11px; letter-spacing: 1.5px; padding: 11px 14px; gap: 8px; }
     .selesai-icon { font-size: 14px; }
     .selesai-arrow { font-size: 10px; }
@@ -2192,6 +2215,9 @@ nav a.nav-daftar:hover {
     .tab-clock-value { font-size: 19px; }
     #tanggalSpesifik { font-size: 12px; padding: 10px 30px 10px 12px; }
     .section-title { font-size: 16px; }
+    .section-title .title-icon { width: 18px; height: 18px; }
+    .lux-svg { width: 13px; height: 13px; }
+    .lux-text-item { gap: 5px; }
 }
 </style>
 </head>
@@ -2244,10 +2270,23 @@ nav a.nav-daftar:hover {
     <div class="icon-side left">◆</div>
     <div class="icon-side right">◆</div>
     <div class="lux-text-slide" id="luxTextTop">
-        <div class="lux-text-item active">⚽ SELAMAT DATANG DI KIPER4D — PUSAT PREDIKSI BOLA TERKINI! 🔥</div>
-        <div class="lux-text-item">🏆 JADWAL PERTANDINGAN, PREDIKSI SKOR & HANDICAP TERBARU SETIAP HARI</div>
-        <div class="lux-text-item">⚡ UPDATE PERTANDINGAN HADIR LEBIH CEPAT & PRAKTIS HANYA DI KIPER4D</div>
-        <div class="lux-text-item">🌟 KIPER4D — JAGONYA PREDIKSI, JAGONYA BIKIN CUAN!</div>
+        <div class="lux-text-item active">
+            <svg class="lux-svg" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6L13 10H17L14 13L15 17L12 14L9 17L10 13L7 10H11L12 6Z" fill="currentColor"/></svg>
+            <span>SELAMAT DATANG DI KIPER4D — PUSAT PREDIKSI BOLA TERKINI!</span>
+            <svg class="lux-svg" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="currentColor"/></svg>
+        </div>
+        <div class="lux-text-item">
+            <svg class="lux-svg" viewBox="0 0 24 24" fill="none"><path d="M5 4H19V20L12 16L5 20V4Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 8H15M9 11H15" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>JADWAL PERTANDINGAN, PREDIKSI SKOR & HANDICAP TERBARU SETIAP HARI</span>
+        </div>
+        <div class="lux-text-item">
+            <svg class="lux-svg" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/></svg>
+            <span>UPDATE PERTANDINGAN HADIR LEBIH CEPAT & PRAKTIS HANYA DI KIPER4D</span>
+        </div>
+        <div class="lux-text-item">
+            <svg class="lux-svg" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 9L22 9.5L16.5 14L18.5 21L12 17L5.5 21L7.5 14L2 9.5L9 9L12 2Z" fill="currentColor"/></svg>
+            <span>KIPER4D — JAGONYA PREDIKSI, JAGONYA BIKIN CUAN!</span>
+        </div>
     </div>
 </div>
 
@@ -2257,7 +2296,29 @@ nav a.nav-daftar:hover {
 
 <section class="big-match-section">
     <div class="bms-header">
-        <span class="bms-title">🔥 BIG MATCH HARI INI 🔥</span>
+        <span class="bms-title">
+            <svg class="bms-fire" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="url(#fireGrad)"/>
+                <defs>
+                    <linearGradient id="fireGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffaa00"/>
+                        <stop offset="50%" stop-color="#ff4400"/>
+                        <stop offset="100%" stop-color="#cc0033"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span>BIG MATCH HARI INI</span>
+            <svg class="bms-fire" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="url(#fireGrad)"/>
+                <defs>
+                    <linearGradient id="fireGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffaa00"/>
+                        <stop offset="50%" stop-color="#ff4400"/>
+                        <stop offset="100%" stop-color="#cc0033"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </span>
     </div>
     <div class="big-match-ticker-wrap">
         <div class="big-match-ticker">
@@ -2269,10 +2330,10 @@ nav a.nav-daftar:hover {
 </section>
 
 <div class="news-ticker">
-    <div class="news-ticker-label">BREAKING</div>
+    <div class="news-ticker-label"><span class="label-dot"></span><span>BREAKING</span></div>
     <div class="news-ticker-wrap">
         <div class="news-ticker-content" id="newsTickerContent">
-            🔥 Memuat berita pertandingan highlight...
+            Memuat berita pertandingan highlight...
         </div>
     </div>
 </div>
@@ -2294,7 +2355,10 @@ nav a.nav-daftar:hover {
 
 <section id="pertandingan">
     <div class="section-head">
-        <div class="section-title">⚽ <span>PERTANDINGAN</span></div>
+        <div class="section-title">
+            <svg class="title-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6L13 10H17L14 13L15 17L12 14L9 17L10 13L7 10H11L12 6Z" fill="currentColor"/></svg>
+            <span>PERTANDINGAN</span>
+        </div>
     </div>
 
     <div class="filter-row">
@@ -2360,7 +2424,7 @@ nav a.nav-daftar:hover {
         <img src="logo-kiper4d.png" alt="KIPER4D" width="140" height="60" loading="lazy" decoding="async">
     </div>
     <div class="footer-title">KIPER4D</div>
-    <div class="footer-tagline">⚽ Jagonya Prediksi • Jagonya Bikin Cuan ⚽</div>
+    <div class="footer-tagline">JAGONYA PREDIKSI • JAGONYA BIKIN CUAN</div>
     <div class="footer-copy">© 2026 <span>KIPER4D</span> • All Rights Reserved</div>
 </footer>
 
@@ -2900,7 +2964,7 @@ function tickNextMatchCountdown() {
 function updateNewsTicker(data) {
     const ticker = document.getElementById("newsTickerContent");
     if (!ticker) return;
-    if (!data.length) { ticker.textContent = "🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!"; return; }
+    if (!data.length) { ticker.textContent = "Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!"; return; }
     const liveMatches = data.filter(item => getMatchStatus(item) === "live");
     const today = getTodayString();
     const upcoming = data.filter(item => {
@@ -2909,10 +2973,10 @@ function updateNewsTicker(data) {
         return getMatchStatus(item) === "akan";
     }).sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0)).slice(0, 5);
     let newsItems = [];
-    liveMatches.forEach(item => newsItems.push(`🔴 LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
-    upcoming.forEach(item => newsItems.push(`⚡ ${item.home} vs ${item.away} — ${clean(item.time)} WIB`));
-    if (!newsItems.length) newsItems.push("🔥 Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!");
-    newsItems.push("⚡ Data live & real-time");
+    liveMatches.forEach(item => newsItems.push(`LIVE ${item.home} vs ${item.away} — ${clean(item.league) || "LAINNYA"}`));
+    upcoming.forEach(item => newsItems.push(`${item.home} vs ${item.away} — ${clean(item.time)} WIB`));
+    if (!newsItems.length) newsItems.push("Update jadwal & prediksi bola terbaru setiap hari hanya di KIPER4D!");
+    newsItems.push("Data live & real-time");
     ticker.textContent = newsItems.join("  •  ");
 }
 
@@ -3023,7 +3087,7 @@ function renderPrediksi(data) {
         const selesai = matches.filter(m => getMatchStatus(m) === "selesai");
 
         html += `<div class="date-group">`;
-        html += `<div class="date-group-header"><span>📅 ${escapeHtml(headerTgl)}</span></div>`;
+        html += `<div class="date-group-header"><span>${escapeHtml(headerTgl)}</span></div>`;
 
         if (aktif.length) {
             const groupLiga = {};
@@ -3037,7 +3101,7 @@ function renderPrediksi(data) {
                 const grup = groupLiga[key];
                 const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                html += `<div class="league"><div class="league-header"><span>🏆 ${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
+                html += `<div class="league"><div class="league-header"><span>${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
             });
         }
 
@@ -3054,13 +3118,13 @@ function renderPrediksi(data) {
                 const grup = groupLigaSelesai[key];
                 const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                selesaiHtml += `<div class="league"><div class="league-header"><span>🏆 ${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
+                selesaiHtml += `<div class="league"><div class="league-header"><span>${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
             });
             const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
             html += `
                 <div class="selesai-section">
                     <button type="button" class="selesai-toggle" onclick="toggleSelesai('${uniqueId}', this)">
-                        <span class="selesai-icon">✅</span>
+                        <span class="selesai-icon">✓</span>
                         <span class="selesai-text">LIHAT ${selesai.length} PERTANDINGAN SELESAI</span>
                         <span class="selesai-arrow">▼</span>
                     </button>
@@ -3173,7 +3237,7 @@ function handleDatePickerChange() {
             const dateObj = new Date(targetDate + "T00:00:00Z");
             const hari = HARI_INDO[dateObj.getUTCDay()];
             const bulan = BULAN_INDO[dateObj.getUTCMonth()];
-            text.textContent = `📅 ${hari}, ${value} ${bulan} ${todayParts[0]}`;
+            text.textContent = `${hari}, ${value} ${bulan} ${todayParts[0]}`;
             badge.classList.add("show");
         }
         document.querySelectorAll(".tab-filter").forEach(t => t.classList.remove("active"));
@@ -3237,16 +3301,20 @@ function bigMatchCard(data) {
         ? `<div class="bmt-logo logo-loaded"><img src="${escapeHtml(awayLogo.url)}" alt="${escapeHtml(away)}" loading="lazy" onerror="this.parentElement.textContent='?'"></div>`
         : `<div class="bmt-logo">${escapeHtml(away.substring(0, 2).toUpperCase())}</div>`;
 
+    const badgeFireSvg = `<svg class="badge-fire" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="#ffcc00"/></svg>`;
+
+    const clockSvg = `<svg class="time-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#8bb4e8" stroke-width="2"/><path d="M12 7V12L15 14" stroke="#8bb4e8" stroke-width="2" stroke-linecap="round"/></svg>`;
+
     return `
         <div class="bmt-card">
-            <div class="bmt-badge"><span>🔥</span><span>BIG MATCH</span></div>
+            <div class="bmt-badge">${badgeFireSvg}<span>BIG MATCH</span></div>
             <div class="bmt-league">${escapeHtml(league)}</div>
             <div class="bmt-teams">
                 <div class="bmt-team">${homeLogoHtml}<div class="bmt-team-name">${escapeHtml(home)}</div></div>
                 <div class="bmt-vs">VS</div>
                 <div class="bmt-team">${awayLogoHtml}<div class="bmt-team-name">${escapeHtml(away)}</div></div>
             </div>
-            <div class="bmt-time"><span class="time-icon">🕐</span><span>${escapeHtml(time)} WIB</span></div>
+            <div class="bmt-time">${clockSvg}<span>${escapeHtml(time)} WIB</span></div>
         </div>
     `;
 }
