@@ -13,25 +13,18 @@
 html { scroll-behavior: smooth; }
 
 :root {
-    /* ─── BACKGROUND LAYERS ─── */
     --bg-0: #050a14;
     --bg-1: #0a1628;
     --bg-2: #0f1e35;
     --bg-3: #152a47;
-    
-    /* ─── SURFACES (Glass) ─── */
     --surface-1: rgba(15, 30, 53, 0.7);
     --surface-2: rgba(21, 42, 71, 0.55);
     --surface-glass: rgba(10, 22, 40, 0.75);
-    
-    /* ─── PRIMARY ACCENTS (Cyan Family) ─── */
     --cyan: #06b6d4;
     --cyan-bright: #22d3ee;
     --cyan-soft: #67e8f9;
     --blue: #0ea5e9;
     --blue-bright: #38bdf8;
-    
-    /* ─── STATUS COLORS ─── */
     --emerald: #10b981;
     --emerald-bright: #34d399;
     --amber: #f59e0b;
@@ -39,19 +32,13 @@ html { scroll-behavior: smooth; }
     --rose: #f43f5e;
     --rose-bright: #fb7185;
     --purple: #8b5cf6;
-    
-    /* ─── TEXT ─── */
     --text-1: #ffffff;
     --text-2: #e2e8f0;
     --text-3: #94a3b8;
     --text-4: #64748b;
-    
-    /* ─── BORDERS ─── */
     --border-cyan: rgba(6, 182, 212, 0.25);
     --border-cyan-strong: rgba(6, 182, 212, 0.6);
     --border-subtle: rgba(148, 163, 184, 0.1);
-    
-    /* ─── SHADOWS & GLOWS ─── */
     --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
     --shadow-md: 0 12px 30px rgba(0,0,0,0.4);
     --shadow-lg: 0 24px 60px rgba(0,0,0,0.5);
@@ -76,9 +63,6 @@ body {
     position: relative;
 }
 
-/* ═══════════════════════════════════════════════
-   BACKGROUND — Hex Mesh + Aurora
-   ═══════════════════════════════════════════════ */
 .bg-layer {
     position: fixed;
     inset: 0;
@@ -106,7 +90,6 @@ body {
     66% { transform: translate(-3%, 4%) scale(0.95); }
 }
 
-/* Hex grid */
 .bg-layer::after {
     content: "";
     position: absolute;
@@ -119,7 +102,6 @@ body {
     -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 80%);
 }
 
-/* Scan-line sweep */
 .scanline {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -138,7 +120,6 @@ body {
     100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* Particles */
 .particles {
     position: fixed;
     inset: 0;
@@ -165,9 +146,6 @@ body {
     to { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
-/* ═══════════════════════════════════════════════
-   APP LAYOUT
-   ═══════════════════════════════════════════════ */
 .app {
     position: relative;
     z-index: 2;
@@ -176,9 +154,6 @@ body {
     min-height: 100vh;
 }
 
-/* ═══════════════════════════════════════════════
-   SIDEBAR
-   ═══════════════════════════════════════════════ */
 .sidebar {
     position: sticky;
     top: 0;
@@ -204,7 +179,6 @@ body {
     opacity: 0.5;
 }
 
-/* Brand */
 .brand {
     display: flex;
     align-items: center;
@@ -251,7 +225,6 @@ body {
     to { background-position: 200% center; }
 }
 
-/* Nav */
 .nav-section {
     display: flex;
     flex-direction: column;
@@ -340,7 +313,6 @@ body {
 
 .nav-item.active .nav-item-icon { filter: grayscale(0); }
 
-/* Sidebar Status */
 .sidebar-status {
     margin-top: auto;
     padding: 14px;
@@ -392,9 +364,6 @@ body {
     word-break: break-all;
 }
 
-/* ═══════════════════════════════════════════════
-   MAIN
-   ═══════════════════════════════════════════════ */
 .main {
     min-height: 100vh;
     display: flex;
@@ -402,7 +371,6 @@ body {
     background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.06), transparent 50%);
 }
 
-/* Topbar */
 .topbar {
     position: sticky;
     top: 0;
@@ -530,7 +498,6 @@ body {
     color: var(--text-2);
 }
 
-/* Content */
 .content {
     flex: 1;
     padding: 28px;
@@ -539,9 +506,6 @@ body {
     margin: 0 auto;
 }
 
-/* ═══════════════════════════════════════════════
-   STATUS BAR
-   ═══════════════════════════════════════════════ */
 .status {
     position: relative;
     padding: 14px 20px;
@@ -589,9 +553,6 @@ body {
     color: var(--amber-bright); 
 }
 
-/* ═══════════════════════════════════════════════
-   STATS ROW
-   ═══════════════════════════════════════════════ */
 .stats-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -620,7 +581,6 @@ body {
     opacity: 0.6;
 }
 
-/* Corner brackets */
 .stat-tile::after {
     content: "";
     position: absolute;
@@ -707,7 +667,6 @@ body {
     font-size: 8px;
 }
 
-/* Mini progress bar */
 .stat-progress {
     height: 3px;
     background: rgba(6,182,212,0.1);
@@ -729,9 +688,6 @@ body {
     to { width: var(--fill, 75%); }
 }
 
-/* ═══════════════════════════════════════════════
-   WIDGETS ROW (Activity + System)
-   ═══════════════════════════════════════════════ */
 .widgets-row {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
@@ -792,7 +748,6 @@ body {
     color: var(--cyan-bright);
 }
 
-/* Activity feed */
 .feed-item {
     display: flex;
     align-items: flex-start;
@@ -835,7 +790,6 @@ body {
 
 .feed-text b { color: var(--text-2); }
 
-/* System status */
 .sys-item {
     display: flex;
     align-items: center;
@@ -890,9 +844,6 @@ body {
     text-align: right;
 }
 
-/* ═══════════════════════════════════════════════
-   CARD
-   ═══════════════════════════════════════════════ */
 .card {
     position: relative;
     background: linear-gradient(145deg, rgba(15,30,53,0.8), rgba(10,22,40,0.9));
@@ -935,7 +886,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Corner brackets sci-fi */
 .card::after {
     content: "";
     position: absolute;
@@ -1045,9 +995,6 @@ body {
     font-weight: 500;
 }
 
-/* ═══════════════════════════════════════════════
-   CONTOH BOX
-   ═══════════════════════════════════════════════ */
 .contoh {
     position: relative;
     background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(10,22,40,0.6));
@@ -1078,9 +1025,6 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* ═══════════════════════════════════════════════
-   TEXTAREA
-   ═══════════════════════════════════════════════ */
 textarea {
     width: 100%;
     min-height: 260px;
@@ -1118,9 +1062,6 @@ textarea:focus {
         var(--glow-cyan);
 }
 
-/* ═══════════════════════════════════════════════
-   BUTTONS
-   ═══════════════════════════════════════════════ */
 .buttons { 
     display: flex; 
     flex-wrap: wrap; 
@@ -1218,9 +1159,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     box-shadow: 0 8px 30px rgba(71,85,105,0.6), 0 0 60px rgba(71,85,105,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* ═══════════════════════════════════════════════
-   MATCH CARD
-   ═══════════════════════════════════════════════ */
 .match {
     position: relative;
     border: 1px solid rgba(6,182,212,0.15);
@@ -1264,9 +1202,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
 .hidden { display: none !important; }
 
-/* ═══════════════════════════════════════════════
-   LOGIN BOX
-   ═══════════════════════════════════════════════ */
 .login-wrapper {
     display: flex;
     align-items: center;
@@ -1342,9 +1277,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
         inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* ═══════════════════════════════════════════════
-   WELCOME BANNER
-   ═══════════════════════════════════════════════ */
 .admin-welcome {
     position: relative;
     display: flex;
@@ -1411,9 +1343,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     50% { box-shadow: 0 0 30px rgba(16,185,129,0.5); }
 }
 
-/* ═══════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════ */
 .footer {
     text-align: center;
     color: var(--text-4);
@@ -1435,9 +1364,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     opacity: 0.6;
 }
 
-/* ═══════════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════════ */
 .toast {
     position: fixed;
     top: 30px; right: 30px;
@@ -1477,9 +1403,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(245,158,11,0.35);
 }
 
-/* ═══════════════════════════════════════════════
-   SCROLLBAR
-   ═══════════════════════════════════════════════ */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
 ::-webkit-scrollbar-thumb {
@@ -1491,9 +1414,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
     background: linear-gradient(180deg, var(--cyan-bright), var(--blue-bright));
 }
 
-/* ═══════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════ */
 .mobile-toggle {
     display: none;
     align-items: center;
@@ -1568,7 +1488,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
 <div class="app">
 
-    <!-- ═══════════ SIDEBAR ═══════════ -->
     <aside class="sidebar" id="sidebar">
         <div class="brand">
             <img class="brand-logo" src="logo-kiper4d.png" alt="KIPER4D" onerror="this.style.display='none'">
@@ -1622,7 +1541,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ═══════════ MAIN ═══════════ -->
     <main class="main">
 
         <div class="topbar">
@@ -1658,7 +1576,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 
             <div id="adminContent" class="hidden">
 
-                <!-- Stats Row -->
                 <div class="stats-row">
                     <div class="stat-tile">
                         <div class="stat-header">
@@ -1702,7 +1619,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                     </div>
                 </div>
 
-                <!-- Widgets Row -->
                 <div class="widgets-row">
                     <div class="widget">
                         <div class="widget-header">
@@ -1750,7 +1666,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                     </div>
                 </div>
 
-                <!-- Welcome -->
                 <div class="admin-welcome">
                     <div>
                         <div class="admin-welcome-title">👋 Selamat Datang di Command Center</div>
@@ -1759,7 +1674,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                     <div class="admin-welcome-badge">⚡ Panel Aktif</div>
                 </div>
 
-                <!-- ═══ JADWAL ═══ -->
                 <div class="card" id="secJadwal">
                     <div class="card-header">
                         <div class="card-title">
@@ -1781,6 +1695,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                         <b>🎯 Handicap:</b> <code>0:1/2</code> <code>1 1/2:0</code> <code>0.5:0</code> <code>1-0</code>
                         <br>
                         🎨 <b>Logo otomatis dari Firestore (fuzzy match pintar)</b>
+                        <br>
+                        🛡️ <b>Anti-duplikat aktif (nama tim beda format tetap terdeteksi)</b>
                     </p>
                     <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
 28/09 17:25 Japan VS Venezuela 0:1/2
@@ -1795,7 +1711,6 @@ ITALY SERIE A
                     </div>
                 </div>
 
-                <!-- Preview Jadwal -->
                 <div class="card" id="secPreviewJadwal">
                     <div class="card-header">
                         <div class="card-title">
@@ -1809,7 +1724,6 @@ ITALY SERIE A
                     <div id="hasilJadwal">Belum ada data jadwal diproses.</div>
                 </div>
 
-                <!-- ═══ PREDIKSI ═══ -->
                 <div class="card" id="secPrediksi">
                     <div class="card-header">
                         <div class="card-title">
@@ -1839,7 +1753,6 @@ ITALY SERIE A
                     </div>
                 </div>
 
-                <!-- Preview Prediksi -->
                 <div class="card" id="secPreviewPrediksi">
                     <div class="card-header">
                         <div class="card-title">
@@ -1853,7 +1766,6 @@ ITALY SERIE A
                     <div id="hasilPrediksi">Belum ada data prediksi diproses.</div>
                 </div>
 
-                <!-- ═══ DATABASE ═══ -->
                 <div class="card" id="secDatabase">
                     <div class="card-header">
                         <div class="card-title">
@@ -1866,7 +1778,8 @@ ITALY SERIE A
                         <div class="section-label">DATABASE</div>
                     </div>
                     <p class="small">
-                        Gunakan bagian ini untuk mengecek dan membersihkan data pertandingan yang duplikat.
+                        Gunakan bagian ini untuk mengecek dan membersihkan data pertandingan yang duplikat.<br>
+                        🛡️ <b>Anti-duplikat fuzzy aktif</b> — nama tim beda penulisan (contoh: CZECHIA vs CZECH REPUBLIC) akan terdeteksi sebagai duplikat.
                     </p>
                     <div class="buttons">
                         <button id="btnCekDuplikat" class="btn-orange">🔍 Cek Duplikat</button>
@@ -1876,7 +1789,6 @@ ITALY SERIE A
                     </div>
                 </div>
 
-                <!-- Hasil Cek -->
                 <div class="card" id="secHasilCek">
                     <div class="card-header">
                         <div class="card-title">
@@ -1967,7 +1879,6 @@ window.getJadwal = () => dataJadwal;
    UI ENHANCEMENTS
    ═══════════════════════════════════════════════ */
 
-// Particles
 (function createParticles() {
     const container = document.getElementById("particles");
     if (!container) return;
@@ -1982,7 +1893,6 @@ window.getJadwal = () => dataJadwal;
     }
 })();
 
-// Live clock
 function updateClock() {
     const el = document.getElementById("liveClock");
     if (!el) return;
@@ -1995,7 +1905,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Sidebar
 window.toggleSidebar = function() {
     document.getElementById("sidebar").classList.toggle("open");
     document.getElementById("sidebarOverlay").classList.toggle("show");
@@ -2020,7 +1929,6 @@ window.updateStats = function() {
     if (sl) sl.textContent = logoCache.size;
 };
 
-// Activity Feed
 window.addActivity = function(text, color = "cyan") {
     const feed = document.getElementById("activityFeed");
     if (!feed) return;
@@ -2048,7 +1956,6 @@ window.addActivity = function(text, color = "cyan") {
     }
 };
 
-// Toast
 function showToast(message, type = "success") {
     const toast = document.createElement("div");
     toast.className = "toast " + type;
@@ -2061,7 +1968,6 @@ function showToast(message, type = "success") {
     }, 4000);
 }
 
-// Ripple
 document.addEventListener("mousemove", (e) => {
     const btn = e.target.closest("button");
     if (!btn) return;
@@ -2107,23 +2013,132 @@ function clean(value) {
     return String(value || "").trim();
 }
 
+/* ============================================================
+   ALIAS TIM — samakan dengan fetcher.html
+   ============================================================ */
+const TEAM_ALIAS = {
+    // === Eropa Timur ===
+    "czech republic": "czechia",
+    "korea republic": "south korea",
+    "korea dpr": "north korea",
+    "ir iran": "iran",
+    "bosnia and herzegovina": "bosnia",
+    "republic of ireland": "ireland",
+    "north macedonia": "macedonia",
+    "macedonia": "north macedonia",
+
+    // === Benua Amerika ===
+    "usa": "united states",
+    "united states of america": "united states",
+
+    // === Afrika ===
+    "ivory coast": "cote divoire",
+    "cote d'ivoire": "cote divoire",
+
+    // === Inggris ===
+    "man united": "manchester united",
+    "man utd": "manchester united",
+    "man city": "manchester city",
+    "newcastle": "newcastle united",
+    "brighton": "brighton hove albion",
+    "spurs": "tottenham",
+    "tottenham hotspur": "tottenham",
+    "west ham": "west ham united",
+    "wolves": "wolverhampton",
+    "wolverhampton wanderers": "wolverhampton",
+    "nottingham forest": "nottingham",
+    "nottm forest": "nottingham",
+    "sheffield utd": "sheffield united",
+    "leeds": "leeds united",
+    "leicester": "leicester city",
+
+    // === Spanyol ===
+    "atletico madrid": "atletico",
+    "atletico de madrid": "atletico",
+    "athletic bilbao": "athletic club",
+    "real betis": "betis",
+    "real sociedad": "sociedad",
+    "celta vigo": "celta",
+    "rayo vallecano": "rayo",
+
+    // === Italia ===
+    "inter": "inter milan",
+    "internazionale": "inter milan",
+    "ac milan": "milan",
+    "juventus": "juve",
+    "as roma": "roma",
+    "ss lazio": "lazio",
+
+    // === Jerman ===
+    "bayern munich": "bayern munchen",
+    "bayern": "bayern munchen",
+    "borussia dortmund": "dortmund",
+    "bvb": "dortmund",
+    "rb leipzig": "leipzig",
+    "bayer leverkusen": "leverkusen",
+    "eintracht frankfurt": "frankfurt",
+
+    // === Prancis ===
+    "paris saint germain": "psg",
+    "paris sg": "psg",
+    "marseille": "olympique marseille",
+    "lyon": "olympique lyonnais",
+
+    // === Portugal ===
+    "sporting cp": "sporting",
+    "sporting lisbon": "sporting",
+    "fc porto": "porto",
+    "sl benfica": "benfica",
+
+    // === Belanda ===
+    "ajax amsterdam": "ajax",
+    "psv eindhoven": "psv",
+    "feyenoord rotterdam": "feyenoord",
+
+    // === Turki ===
+    "galatasaray sk": "galatasaray",
+    "fenerbahce sk": "fenerbahce",
+    "besiktas jk": "besiktas",
+
+    // === Timnas ===
+    "saudi arabia": "arab saudi",
+    "uae": "uni emirat arab",
+    "united arab emirates": "uni emirat arab",
+    "china pr": "china",
+    "pr china": "china",
+    "congo dr": "kongo",
+    "dr congo": "kongo",
+};
+
 function normalizeTeam(name) {
-    return clean(name)
+    let n = clean(name)
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9\s]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
+
+    // Hapus suffix/prefix umum klub
+    n = n.replace(/\b(fc|cf|sc|ac|afc|cd|ud|sv|if|bk|fk|sk|jk|as|ss|ssc|sl)\b/g, "");
+    n = n.replace(/\s+/g, " ").trim();
+
+    // Cek alias — samakan nama yang beda penulisan
+    if (TEAM_ALIAS[n]) n = TEAM_ALIAS[n];
+
+    return n;
 }
 
 const KATA_UMUM = /\b(fc|sc|cf|afc|ac|as|sk|if|bk|sv|kv|nk|club|football|sport|sports|soccer|team|the|of|and|de|do|da|la|le|el|city|united|utd)\b/gi;
 
 function normalizeClean(name) {
-    return normalizeTeam(name)
-        .replace(KATA_UMUM, "")
-        .replace(/\s+/g, " ")
-        .trim();
+    // Pakai normalizeTeam dulu (biar alias ke-apply)
+    let n = normalizeTeam(name);
+    // Lalu buang kata umum
+    n = n.replace(KATA_UMUM, "").replace(/\s+/g, " ").trim();
+    // Cek alias lagi (kalau setelah buang kata umum ada yang berubah)
+    if (TEAM_ALIAS[n]) n = TEAM_ALIAS[n];
+    return n;
 }
 
 function normalizeTime(t) {
