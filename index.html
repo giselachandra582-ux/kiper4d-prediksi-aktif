@@ -33,19 +33,20 @@
 html { scroll-behavior: smooth; }
 
 :root {
-    /* ═══ 4 WARNA GELAP BORDER ═══ */
-    --c1: #4a1a5c;
-    --c2: #1a3a6b;
-    --c3: #1a5c4a;
-    --c4: #5c3a1a;
+    /* ═══ 4 WARNA JEWEL GELAP (border) ═══ */
+    --j1: #3d2b56;
+    --j2: #1e3a5f;
+    --j3: #1e4d42;
+    --j4: #4d3520;
 
-    /* ═══ 4 WARNA TERANG SOFT (untuk TEXT) ═══ */
-    --t1: #b07ad9;   /* ungu soft */
-    --t2: #7aa8e8;   /* biru soft */
-    --t3: #7ad9b0;   /* teal soft */
-    --t4: #e8b87a;   /* gold soft */
+    /* ═══ 4 WARNA JEWEL CERAH SOFT (text) ═══ */
+    --jc1: #a98bd4;
+    --jc2: #8bb4e8;
+    --jc3: #8bd4b8;
+    --jc4: #d4b88b;
 
     --bg-0: #000805;
+    --bg-black: #000000;
     --text-soft: #a8c8b8;
 }
 
@@ -61,18 +62,13 @@ body {
 }
 
 /* ═══ ANIMASI ═══ */
-@keyframes darkRainbow {
+@keyframes jewelFlow {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-@keyframes darkRainbowText {
-    0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
-}
-
-@keyframes softRainbow {
+@keyframes jewelText {
     0%   { background-position: 0% center; }
     100% { background-position: 300% center; }
 }
@@ -109,8 +105,8 @@ body {
 }
 
 @keyframes livePulse {
-    0%, 100% { box-shadow: 0 0 15px rgba(74,26,92,0.8); }
-    50% { box-shadow: 0 0 25px rgba(26,58,107,1); }
+    0%, 100% { box-shadow: 0 0 15px rgba(61,43,86,0.8); }
+    50% { box-shadow: 0 0 25px rgba(30,58,95,1); }
 }
 
 @keyframes liveBlink {
@@ -161,27 +157,22 @@ body {
     50%, 100% { opacity: 0.2; }
 }
 
-@keyframes confettiFall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
-
 @keyframes rippleExpand {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
     100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
 }
 
-/* ═══ AURORA ═══ */
+/* ═══ AURORA (tetap di background body) ═══ */
 .aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
 .aurora-bg::before {
     content: "";
     position: absolute;
     inset: -50%;
     background:
-        radial-gradient(ellipse 55% 45% at 20% 25%, rgba(74,26,92,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 45% at 80% 75%, rgba(26,58,107,0.20) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 35% at 50% 50%, rgba(26,92,74,0.15) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 30% at 70% 20%, rgba(92,58,26,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 20% 25%, rgba(61,43,86,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 80% 75%, rgba(30,58,95,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 50% 50%, rgba(30,77,66,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 70% 20%, rgba(77,53,32,0.15) 0%, transparent 60%),
         linear-gradient(180deg, #021410 0%, #000805 100%);
     animation: auroraMove 25s ease-in-out infinite;
     filter: blur(70px);
@@ -193,12 +184,12 @@ body {
     position: fixed;
     top: 0; left: 0;
     height: 3px; width: 0%;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% auto;
     z-index: 99999;
     transition: width 0.1s ease-out;
-    box-shadow: 0 0 15px rgba(74,26,92,0.8);
-    animation: progressShine 4s linear infinite;
+    box-shadow: 0 0 15px rgba(61,43,86,0.8);
+    animation: progressShine 5s linear infinite;
 }
 
 /* Loading */
@@ -216,8 +207,8 @@ body {
     position: absolute;
     width: 3px; height: 3px;
     border-radius: 50%;
-    background: #7aa8e8;
-    box-shadow: 0 0 10px #b07ad9, 0 0 20px #7ad9b0;
+    background: #8bb4e8;
+    box-shadow: 0 0 10px #a98bd4, 0 0 20px #8bd4b8;
     animation: floatParticle 6s ease-in-out infinite;
 }
 .loading-logo-wrap {
@@ -229,14 +220,14 @@ body {
     position: absolute;
     width: 200px; height: 200px;
     border-radius: 50%;
-    border: 1.5px solid rgba(74,26,92,0.3);
-    border-top-color: #b07ad9;
+    border: 1.5px solid rgba(61,43,86,0.3);
+    border-top-color: #a98bd4;
     animation: loadingRingSpin 2.2s linear infinite;
 }
 .loading-ring:nth-child(2) {
     width: 245px; height: 245px;
-    border: 1.5px solid rgba(26,58,107,0.25);
-    border-bottom-color: #7aa8e8;
+    border: 1.5px solid rgba(30,58,95,0.25);
+    border-bottom-color: #8bb4e8;
     animation-duration: 3.2s;
     animation-direction: reverse;
 }
@@ -245,7 +236,7 @@ body {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 0 30px rgba(74,26,92,0.9)) drop-shadow(0 0 60px rgba(26,58,107,0.5));
+    filter: drop-shadow(0 0 30px rgba(61,43,86,0.9)) drop-shadow(0 0 60px rgba(30,58,95,0.5));
     animation: floatLogo 2.5s ease-in-out infinite;
 }
 .loading-text-wrap {
@@ -260,7 +251,7 @@ body {
     font-family: 'Rajdhani', sans-serif;
     font-size: 14px; font-weight: 700;
     letter-spacing: 4px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -269,14 +260,14 @@ body {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.5s, transform 0.5s;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .loading-text.active { opacity: 1; transform: translateY(0); }
 .loading-text.exit { opacity: 0; transform: translateY(-12px); }
 .loading-bar {
     width: 280px; height: 4px;
     border-radius: 20px;
-    background: rgba(74,26,92,0.2);
+    background: rgba(61,43,86,0.2);
     overflow: hidden;
     margin-bottom: 18px;
     position: relative;
@@ -287,9 +278,9 @@ body {
     inset: 0;
     border-radius: 20px;
     padding: 1px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 6s linear infinite;
+    animation: jewelFlow 8s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -298,17 +289,17 @@ body {
 }
 .loading-bar-fill {
     height: 100%; width: 0%;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% auto;
     border-radius: 20px;
     transition: width 0.3s ease-out;
-    box-shadow: 0 0 15px rgba(74,26,92,0.8);
-    animation: progressShine 5s linear infinite;
+    box-shadow: 0 0 15px rgba(61,43,86,0.8);
+    animation: progressShine 6s linear infinite;
 }
 .loading-percent {
     font-family: 'Teko', sans-serif;
     font-size: 42px; font-weight: 700;
-    background: linear-gradient(180deg, #b07ad9, #7aa8e8, #7ad9b0);
+    background: linear-gradient(180deg, #a98bd4, #8bb4e8, #8bd4b8);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -317,7 +308,7 @@ body {
 .loading-percent::after {
     content: "%";
     font-size: 22px;
-    background: linear-gradient(180deg, #b07ad9, #7aa8e8);
+    background: linear-gradient(180deg, #a98bd4, #8bb4e8);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -327,12 +318,12 @@ body {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px; font-weight: 900;
     letter-spacing: 10px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
     opacity: 0.9;
 }
 
@@ -341,7 +332,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(2, 20, 16, 0.88);
+    background: rgba(0,0,0,0.92);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-bottom: none;
@@ -353,9 +344,9 @@ header::before {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: headerBorder 10s linear infinite;
+    animation: headerBorder 12s linear infinite;
     z-index: 1;
 }
 .header-inner {
@@ -377,24 +368,24 @@ header::before {
     display: block;
     width: 150px; height: 55px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(74,26,92,0.8)) drop-shadow(0 0 25px rgba(26,58,107,0.5));
+    filter: drop-shadow(0 0 15px rgba(61,43,86,0.8)) drop-shadow(0 0 25px rgba(30,58,95,0.5));
     transition: filter 0.3s;
     animation: floatLogo 3.5s ease-in-out infinite;
 }
 .logo:hover img {
-    filter: drop-shadow(0 0 20px rgba(74,26,92,1)) drop-shadow(0 0 35px rgba(26,58,107,0.8));
+    filter: drop-shadow(0 0 20px rgba(61,43,86,1)) drop-shadow(0 0 35px rgba(30,58,95,0.8));
 }
 .logo-subtitle {
     margin-top: 4px;
     font-family: 'Rajdhani', sans-serif;
     font-size: 10px; font-weight: 700;
     letter-spacing: 3px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 nav a.nav-link {
@@ -409,13 +400,14 @@ nav a.nav-link {
     border: 1.5px solid transparent;
     transition: all 0.3s;
     position: relative;
+    background: #000;
     background-clip: padding-box;
 }
 nav a.nav-link:hover {
     color: #fff;
-    background: linear-gradient(135deg, rgba(74,26,92,0.3), rgba(26,58,107,0.2));
+    background: #000;
     border-color: transparent;
-    box-shadow: 0 0 25px rgba(74,26,92,0.5), 0 0 25px rgba(26,58,107,0.3);
+    box-shadow: 0 0 25px rgba(61,43,86,0.5);
     transform: translateY(-2px);
 }
 nav a.nav-link:hover::before {
@@ -424,9 +416,9 @@ nav a.nav-link:hover::before {
     inset: 0;
     border-radius: 22px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 4s linear infinite;
+    animation: jewelFlow 6s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -443,9 +435,9 @@ nav a.nav-login {
     letter-spacing: 1px;
     text-transform: uppercase;
     position: relative;
-    background: rgba(255,255,255,0.05);
+    background: #000;
     border: none;
-    box-shadow: 0 0 18px rgba(26,58,107,0.3);
+    box-shadow: 0 0 18px rgba(30,58,95,0.3);
     transition: all 0.3s;
 }
 nav a.nav-login::before {
@@ -454,9 +446,9 @@ nav a.nav-login::before {
     inset: 0;
     border-radius: 24px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 6s linear infinite;
+    animation: jewelFlow 8s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -464,12 +456,12 @@ nav a.nav-login::before {
     pointer-events: none;
 }
 nav a.nav-login:hover {
-    color: #021410;
-    background: linear-gradient(135deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    color: #000;
+    background: linear-gradient(135deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     background-size: 300% auto;
-    box-shadow: 0 0 35px rgba(74,26,92,0.8), 0 0 35px rgba(26,58,107,0.6);
+    box-shadow: 0 0 35px rgba(61,43,86,0.8), 0 0 35px rgba(30,58,95,0.6);
     transform: translateY(-2px);
-    animation: softRainbow 4s linear infinite;
+    animation: jewelText 5s linear infinite;
 }
 nav a.nav-daftar {
     color: #fff;
@@ -480,16 +472,16 @@ nav a.nav-daftar {
     font-size: 13px; font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #4a1a5c 0%, #1a3a6b 33%, #1a5c4a 66%, #5c3a1a 100%);
+    background: linear-gradient(135deg, #3d2b56 0%, #1e3a5f 33%, #1e4d42 66%, #4d3520 100%);
     background-size: 300% auto;
-    box-shadow: 0 6px 25px rgba(74,26,92,0.6), 0 0 25px rgba(26,58,107,0.4);
-    animation: darkRainbowText 5s linear infinite;
+    box-shadow: 0 6px 25px rgba(61,43,86,0.6), 0 0 25px rgba(30,58,95,0.4);
+    animation: jewelText 7s linear infinite;
     transition: all 0.3s;
     position: relative;
 }
 nav a.nav-daftar:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 45px rgba(74,26,92,0.9), 0 0 45px rgba(26,58,107,0.7);
+    box-shadow: 0 10px 45px rgba(61,43,86,0.9), 0 0 45px rgba(30,58,95,0.7);
 }
 
 .container { max-width: 1250px; margin: auto; padding: 28px 20px 70px; position: relative; z-index: 1; }
@@ -502,13 +494,13 @@ nav a.nav-daftar:hover {
     padding: 20px 65px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(5,32,24,0.85);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: none;
     min-height: 68px;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 30px rgba(74,26,92,0.18), 0 0 30px rgba(26,58,107,0.12);
+    box-shadow: 0 0 30px rgba(61,43,86,0.18), 0 0 30px rgba(30,58,95,0.12);
 }
 .lux-text-wrap::before {
     content: "";
@@ -516,9 +508,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 18px;
     padding: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -530,7 +522,7 @@ nav a.nav-daftar:hover {
 .lux-text-wrap .corner-br {
     position: absolute;
     width: 22px; height: 22px;
-    border: 2px solid #7aa8e8;
+    border: 2px solid #8bb4e8;
     pointer-events: none;
     z-index: 5;
 }
@@ -541,11 +533,11 @@ nav a.nav-daftar:hover {
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    background: linear-gradient(135deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    background: linear-gradient(135deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: iconSpin 8s linear infinite;
+    animation: iconSpin 10s linear infinite;
     pointer-events: none;
     z-index: 3;
 }
@@ -570,12 +562,12 @@ nav a.nav-daftar:hover {
     filter: blur(8px);
     transition: opacity 0.8s, transform 0.8s, filter 0.8s;
     pointer-events: none;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 10s linear infinite;
+    animation: jewelText 12s linear infinite;
 }
 .lux-text-item.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .lux-text-item.exit-up { opacity: 0; transform: translateY(-22px) scale(0.94); filter: blur(8px); }
@@ -587,9 +579,9 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     margin-bottom: 26px;
     border: none;
-    background: var(--bg-0);
+    background: #000;
     line-height: 0;
-    box-shadow: 0 0 40px rgba(74,26,92,0.3), 0 0 80px rgba(26,58,107,0.18);
+    box-shadow: 0 0 40px rgba(61,43,86,0.3), 0 0 80px rgba(30,58,95,0.18);
 }
 .banner::before {
     content: "";
@@ -597,9 +589,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 24px;
     padding: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 9s linear infinite;
+    animation: jewelFlow 11s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -615,7 +607,7 @@ nav a.nav-daftar:hover {
     width: 60%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transform: skewX(-20deg);
-    animation: bannerShine 8s infinite;
+    animation: bannerShine 9s infinite;
     pointer-events: none;
     z-index: 2;
 }
@@ -627,7 +619,7 @@ nav a.nav-daftar:hover {
     margin-bottom: 18px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(5,32,24,0.85);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: none;
@@ -638,9 +630,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 18px;
     padding: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 10s linear infinite;
+    animation: jewelFlow 12s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -656,8 +648,8 @@ nav a.nav-daftar:hover {
     z-index: 4;
     pointer-events: none;
 }
-.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(0,8,5,1), transparent); }
-.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(0,8,5,1), transparent); }
+.big-match-ticker-wrap .fade-left { left: 0; background: linear-gradient(90deg, rgba(0,0,0,1), transparent); }
+.big-match-ticker-wrap .fade-right { right: 0; background: linear-gradient(-90deg, rgba(0,0,0,1), transparent); }
 .big-match-ticker { position: relative; width: 100%; padding: 16px 0; overflow: hidden; }
 .big-match-ticker-track {
     display: flex; align-items: center;
@@ -667,7 +659,7 @@ nav a.nav-daftar:hover {
 }
 .big-match-ticker-wrap:hover .big-match-ticker-track { animation-play-state: paused; }
 .big-match-ticker-wrap:hover .bmt-card {
-    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(74,26,92,0.5);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(61,43,86,0.5);
     transform: translateY(-4px);
 }
 .big-match-ticker-empty {
@@ -684,7 +676,7 @@ nav a.nav-daftar:hover {
     width: 200px;
     padding: 14px;
     border-radius: 16px;
-    background: rgba(10,40,30,0.9);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: none;
@@ -697,9 +689,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 16px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 7s linear infinite;
+    animation: jewelFlow 9s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -715,7 +707,7 @@ nav a.nav-daftar:hover {
     font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
     color: #fff;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #4d3520, #3d2b56);
     background-size: 300% auto;
     border: none;
     border-radius: 20px;
@@ -723,15 +715,15 @@ nav a.nav-daftar:hover {
     margin-bottom: 8px;
     position: relative;
     z-index: 3;
-    box-shadow: 0 0 12px rgba(74,26,92,0.5);
-    animation: darkRainbowText 5s linear infinite;
+    box-shadow: 0 0 12px rgba(61,43,86,0.5);
+    animation: jewelText 7s linear infinite;
 }
 .bmt-league {
     display: block;
     font-family: 'Rajdhani', sans-serif;
     font-size: 9px; font-weight: 800;
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #7ad9b0, #7aa8e8, #b07ad9, #7ad9b0);
+    background: linear-gradient(90deg, #8bd4b8, #8bb4e8, #a98bd4, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -741,7 +733,7 @@ nav a.nav-daftar:hover {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     position: relative;
     z-index: 3;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .bmt-teams {
     display: grid;
@@ -759,14 +751,14 @@ nav a.nav-daftar:hover {
     display: flex; align-items: center; justify-content: center;
     font-size: 11px; font-weight: 900;
     color: #fff;
-    background: radial-gradient(circle, #0a2818, #021410);
-    border: 1.5px solid rgba(122,168,232,0.7);
+    background: #000;
+    border: 1.5px solid rgba(139,180,232,0.7);
     overflow: hidden;
     flex-shrink: 0;
     animation: logoFloat 2.5s ease-in-out infinite;
 }
 .bmt-logo img { width: 30px; height: 30px; object-fit: contain; display: block; }
-.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(122,168,232,0.7); }
+.bmt-logo.logo-loaded { background: radial-gradient(circle, #ffffff, #eeeeee); border: 1.5px solid rgba(139,180,232,0.7); }
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
     font-size: 10.5px; font-weight: 700;
@@ -778,12 +770,12 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px; font-weight: 800;
     letter-spacing: 1.5px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 6s linear infinite;
+    animation: jewelText 8s linear infinite;
 }
 .bmt-time {
     display: flex; align-items: center; justify-content: center;
@@ -793,14 +785,12 @@ nav a.nav-daftar:hover {
     font-size: 13px; font-weight: 600;
     letter-spacing: 1.5px;
     color: #e8e8f0;
-    background: linear-gradient(90deg, rgba(74,26,92,0.25), rgba(26,58,107,0.2), rgba(26,92,74,0.2), rgba(74,26,92,0.25));
-    background-size: 300% auto;
+    background: #000;
     border-top: 1px solid rgba(255,255,255,0.08);
     border-bottom: 1px solid rgba(255,255,255,0.08);
     border-radius: 8px;
     position: relative;
     z-index: 3;
-    animation: darkRainbowText 8s linear infinite;
 }
 
 /* Breaking news */
@@ -809,14 +799,14 @@ nav a.nav-daftar:hover {
     width: 100%;
     overflow: hidden;
     border-radius: 14px;
-    background: rgba(30,5,15,0.9);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
     margin-bottom: 26px;
     display: flex; align-items: center;
     min-height: 46px;
-    box-shadow: 0 0 30px rgba(74,26,92,0.2);
+    box-shadow: 0 0 30px rgba(61,43,86,0.2);
 }
 .news-ticker::before {
     content: "";
@@ -824,9 +814,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -837,7 +827,7 @@ nav a.nav-daftar:hover {
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 20px;
-    background: linear-gradient(135deg, #4a1a5c, #1a3a6b, #5c3a1a, #4a1a5c);
+    background: linear-gradient(135deg, #3d2b56, #1e3a5f, #4d3520, #3d2b56);
     background-size: 300% auto;
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
@@ -845,7 +835,7 @@ nav a.nav-daftar:hover {
     letter-spacing: 3px;
     text-transform: uppercase;
     z-index: 4;
-    animation: darkRainbowText 6s linear infinite;
+    animation: jewelText 8s linear infinite;
 }
 .news-ticker-label::before {
     content: "●";
@@ -861,12 +851,12 @@ nav a.nav-daftar:hover {
     white-space: nowrap;
     font-family: 'Rajdhani', sans-serif;
     font-size: 14px; font-weight: 600;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: newsScroll 60s linear infinite, softRainbow 12s linear infinite;
+    animation: newsScroll 60s linear infinite, jewelText 14s linear infinite;
     padding-left: 100%;
 }
 
@@ -877,7 +867,7 @@ nav a.nav-daftar:hover {
     padding: 20px 14px 18px;
     text-align: center;
     border-radius: 18px;
-    background: rgba(5,32,24,0.75);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: none;
@@ -890,9 +880,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 18px;
     padding: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 9s linear infinite;
+    animation: jewelFlow 11s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -903,7 +893,7 @@ nav a.nav-daftar:hover {
 .stat-box:nth-child(2)::before { animation-delay: -3s; }
 .stat-box:nth-child(3)::before { animation-delay: -6s; }
 .stat-box:hover {
-    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(74,26,92,0.4), 0 0 50px rgba(26,58,107,0.3);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.75), 0 0 50px rgba(61,43,86,0.4), 0 0 50px rgba(30,58,95,0.3);
     transform: translateY(-4px);
 }
 .stat-box::after {
@@ -912,12 +902,12 @@ nav a.nav-daftar:hover {
     top: 6px; left: 50%;
     transform: translateX(-50%);
     font-size: 10px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
     z-index: 2;
 }
 .stat-number {
@@ -926,12 +916,12 @@ nav a.nav-daftar:hover {
     font-size: 38px; font-weight: 700;
     margin-bottom: 2px;
     line-height: 1;
-    background: linear-gradient(180deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    background: linear-gradient(180deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 10s linear infinite;
+    animation: jewelText 12s linear infinite;
     text-shadow: none;
     position: relative;
     z-index: 2;
@@ -961,12 +951,12 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 .section-title span {
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 9s linear infinite;
+    animation: jewelText 11s linear infinite;
 }
 .filter-row {
     display: flex; align-items: center;
@@ -974,11 +964,11 @@ nav a.nav-daftar:hover {
     flex-wrap: wrap;
     padding: 14px;
     border-radius: 18px;
-    background: rgba(5,32,24,0.85);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
-    box-shadow: 0 0 30px rgba(74,26,92,0.12), 0 0 30px rgba(26,58,107,0.08);
+    box-shadow: 0 0 30px rgba(61,43,86,0.12), 0 0 30px rgba(30,58,95,0.08);
     position: relative;
 }
 .filter-row::before {
@@ -987,9 +977,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 18px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 9s linear infinite;
+    animation: jewelFlow 11s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1002,7 +992,7 @@ nav a.nav-daftar:hover {
     width: 100%;
     border-radius: 14px;
     overflow: hidden;
-    background: rgba(10,40,30,0.9);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
@@ -1015,9 +1005,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 7s linear infinite;
+    animation: jewelFlow 9s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1038,13 +1028,13 @@ nav a.nav-daftar:hover {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11px; font-weight: 800;
     letter-spacing: 3px;
-    background: linear-gradient(90deg, #7ad9b0, #7aa8e8, #b07ad9, #7ad9b0);
+    background: linear-gradient(90deg, #8bd4b8, #8bb4e8, #a98bd4, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .next-match-teams {
     font-family: 'Rajdhani', sans-serif;
@@ -1058,11 +1048,25 @@ nav a.nav-daftar:hover {
     letter-spacing: 2px;
     padding: 3px 16px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a);
-    background-size: 300% auto;
+    background: #000;
     color: #fff;
-    animation: darkRainbowText 6s linear infinite;
-    box-shadow: 0 0 20px rgba(74,26,92,0.5), 0 0 20px rgba(26,58,107,0.3);
+    box-shadow: 0 0 20px rgba(61,43,86,0.5), 0 0 20px rgba(30,58,95,0.3);
+    position: relative;
+}
+.next-match-countdown::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
+    background-size: 300% 100%;
+    animation: jewelFlow 7s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 .tab-filter-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; width: 100%; position: relative; z-index: 2; }
 .tab-clock {
@@ -1070,12 +1074,12 @@ nav a.nav-daftar:hover {
     gap: 6px;
     padding: 9px 16px;
     border-radius: 14px;
-    background: rgba(10,40,30,0.85);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
     flex-shrink: 0;
-    box-shadow: 0 0 15px rgba(26,58,107,0.12);
+    box-shadow: 0 0 15px rgba(30,58,95,0.12);
     position: relative;
 }
 .tab-clock::before {
@@ -1084,9 +1088,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1105,19 +1109,19 @@ nav a.nav-daftar:hover {
 }
 .tab-clock-value::after {
     content: ":";
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 4s linear infinite, blink 1s infinite;
+    animation: jewelText 5s linear infinite, blink 1s infinite;
     margin: 0 2px;
 }
 .tab-clock-label {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11px; font-weight: 800;
     letter-spacing: 1.5px;
-    background: linear-gradient(90deg, #7ad9b0, #7aa8e8, #b07ad9, #7ad9b0);
+    background: linear-gradient(90deg, #8bd4b8, #8bb4e8, #a98bd4, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1125,7 +1129,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     position: relative;
     z-index: 2;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .tab-filter-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; position: relative; z-index: 2; }
 .tab-filter {
@@ -1138,7 +1142,7 @@ nav a.nav-daftar:hover {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #a8c8b8;
-    background: rgba(10,40,30,0.7);
+    background: #000;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1.5px solid rgba(255,255,255,0.08);
@@ -1153,9 +1157,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 7s linear infinite;
+    animation: jewelFlow 9s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1166,27 +1170,25 @@ nav a.nav-daftar:hover {
 }
 .tab-filter:hover {
     color: #fff;
-    box-shadow: 0 0 20px rgba(74,26,92,0.4);
+    box-shadow: 0 0 20px rgba(61,43,86,0.4);
     transform: translateY(-2px);
 }
 .tab-filter:hover::before { opacity: 1; }
 .tab-filter.active {
     color: #fff;
-    background: linear-gradient(135deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a);
-    background-size: 300% auto;
-    box-shadow: 0 4px 25px rgba(74,26,92,0.5), 0 0 25px rgba(26,58,107,0.3);
-    animation: darkRainbowText 5s linear infinite;
+    background: #000;
+    box-shadow: 0 4px 25px rgba(61,43,86,0.5), 0 0 25px rgba(30,58,95,0.3);
     font-weight: 900;
     border-color: transparent;
 }
-.tab-filter.active::before { opacity: 0; }
+.tab-filter.active::before { opacity: 1; }
 .tab-icon { font-size: 14px; position: relative; z-index: 2; }
 .tab-text { font-size: 12.5px; position: relative; z-index: 2; }
 .search-box {
     position: relative;
     display: flex; align-items: center;
     min-width: 230px;
-    background: rgba(10,40,30,0.8);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
@@ -1200,9 +1202,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1211,11 +1213,11 @@ nav a.nav-daftar:hover {
     z-index: 1;
 }
 .search-box:focus-within {
-    box-shadow: 0 0 30px rgba(74,26,92,0.4), 0 0 30px rgba(26,58,107,0.3);
+    box-shadow: 0 0 30px rgba(61,43,86,0.4), 0 0 30px rgba(30,58,95,0.3);
 }
 .search-icon {
     padding: 0 14px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1224,7 +1226,7 @@ nav a.nav-daftar:hover {
     pointer-events: none;
     position: relative;
     z-index: 2;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 #searchInput {
     flex: 1;
@@ -1252,56 +1254,15 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 .search-clear:hover {
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 5s linear infinite;
+    animation: jewelText 6s linear infinite;
 }
 .search-clear.hidden { display: none; }
 
-.date-filter { display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
-.date-filter label {
-    color: #a8d0b8;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11.5px; font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-#tanggalFilter,
-#ligaFilter {
-    appearance: none;
-    border: none;
-    background-color: #021410;
-    color: #fff;
-    padding: 11px 38px 11px 16px;
-    border-radius: 14px;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    outline: none;
-    cursor: pointer;
-    max-width: 220px;
-    background-image:
-        linear-gradient(145deg, rgba(10,40,30,1), rgba(2,20,16,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237aa8e8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
-    background-repeat: no-repeat, no-repeat;
-    background-position: 0 0, right 14px center;
-    background-size: 100% 100%, 12px 12px;
-    color-scheme: dark;
-    position: relative;
-}
-#tanggalFilter option,
-#ligaFilter option {
-    background-color: #021410;
-    color: #fff;
-    font-weight: 700;
-}
-#tanggalFilter:focus,
-#ligaFilter:focus {
-    box-shadow: 0 0 28px rgba(74,26,92,0.5), 0 0 28px rgba(26,58,107,0.3);
-}
 .date-picker-filter { display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
 .date-picker-filter label {
     color: #a8d0b8;
@@ -1314,7 +1275,7 @@ nav a.nav-daftar:hover {
     appearance: none;
     -webkit-appearance: none;
     border: none;
-    background-color: #021410;
+    background-color: #000;
     padding: 11px 38px 11px 16px;
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
@@ -1325,24 +1286,24 @@ nav a.nav-daftar:hover {
     transition: all 0.3s;
     min-width: 160px;
     background-image:
-        linear-gradient(145deg, rgba(10,40,30,1), rgba(2,20,16,1)),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237aa8e8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        linear-gradient(145deg, #000, #000),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238bb4e8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, right 14px center;
     background-size: 100% 100%, 12px 12px;
     color-scheme: dark;
     position: relative;
 }
-#tanggalSpesifik option { background-color: #021410; color: #7aa8e8; font-weight: 700; }
-#tanggalSpesifik:focus { box-shadow: 0 0 28px rgba(74,26,92,0.5), 0 0 28px rgba(26,58,107,0.3); }
+#tanggalSpesifik option { background-color: #000; color: #8bb4e8; font-weight: 700; }
+#tanggalSpesifik:focus { box-shadow: 0 0 28px rgba(61,43,86,0.5), 0 0 28px rgba(30,58,95,0.3); }
 .date-active-badge {
     display: none;
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(74,26,92,0.25), rgba(26,58,107,0.2));
-    border: 1.5px solid rgba(74,26,92,0.6);
+    background: #000;
+    border: 1.5px solid rgba(61,43,86,0.6);
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px; font-weight: 800;
@@ -1353,13 +1314,12 @@ nav a.nav-daftar:hover {
 }
 .date-active-badge.show { display: inline-flex; }
 .date-active-badge:hover {
-    background: linear-gradient(135deg, rgba(74,26,92,0.4), rgba(26,58,107,0.3));
-    box-shadow: 0 0 25px rgba(74,26,92,0.5), 0 0 25px rgba(26,58,107,0.3);
+    box-shadow: 0 0 25px rgba(61,43,86,0.5), 0 0 25px rgba(30,58,95,0.3);
 }
 .date-active-badge .close-x {
     font-size: 14px;
     color: #fff;
-    background: rgba(74,26,92,0.9);
+    background: rgba(61,43,86,0.9);
     width: 20px; height: 20px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -1377,12 +1337,12 @@ nav a.nav-daftar:hover {
     padding: 12px 20px;
     margin-bottom: 14px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(74,26,92,0.15), rgba(26,58,107,0.1));
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
     text-align: center;
-    box-shadow: 0 0 25px rgba(74,26,92,0.2), 0 0 25px rgba(26,58,107,0.15);
+    box-shadow: 0 0 25px rgba(61,43,86,0.2), 0 0 25px rgba(30,58,95,0.15);
     position: relative;
     overflow: hidden;
 }
@@ -1392,9 +1352,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1409,18 +1369,18 @@ nav a.nav-daftar:hover {
     width: 60%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     transform: skewX(-20deg);
-    animation: shineSweep 6s ease-in-out infinite;
+    animation: shineSweep 7s ease-in-out infinite;
     pointer-events: none;
 }
 .date-group-header span {
     position: relative;
     z-index: 2;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 9s linear infinite;
+    animation: jewelText 11s linear infinite;
 }
 .selesai-section { margin-top: 14px; margin-bottom: 10px; }
 .selesai-toggle {
@@ -1429,7 +1389,7 @@ nav a.nav-daftar:hover {
     width: 100%;
     padding: 12px 20px;
     border-radius: 14px;
-    background: rgba(74,26,92,0.12);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
@@ -1440,7 +1400,7 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.35s;
-    box-shadow: 0 0 20px rgba(74,26,92,0.15);
+    box-shadow: 0 0 20px rgba(61,43,86,0.15);
     position: relative;
 }
 .selesai-toggle::before {
@@ -1449,9 +1409,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 7s linear infinite;
+    animation: jewelFlow 9s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1460,12 +1420,8 @@ nav a.nav-daftar:hover {
     z-index: 1;
 }
 .selesai-toggle:hover {
-    background: rgba(74,26,92,0.2);
-    box-shadow: 0 0 30px rgba(74,26,92,0.4), 0 0 30px rgba(26,58,107,0.2);
+    box-shadow: 0 0 30px rgba(61,43,86,0.4), 0 0 30px rgba(30,58,95,0.2);
     transform: translateY(-2px);
-}
-.selesai-toggle.open {
-    background: rgba(74,26,92,0.2);
 }
 .selesai-icon {
     font-size: 15px;
@@ -1476,12 +1432,12 @@ nav a.nav-daftar:hover {
     flex: 1; text-align: center;
     position: relative;
     z-index: 2;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 9s linear infinite;
+    animation: jewelText 11s linear infinite;
 }
 .selesai-arrow {
     font-size: 11px;
@@ -1492,7 +1448,7 @@ nav a.nav-daftar:hover {
 .selesai-content {
     margin-top: 16px;
     padding-top: 16px;
-    border-top: 1.5px dashed rgba(74,26,92,0.2);
+    border-top: 1.5px dashed rgba(61,43,86,0.2);
     animation: fadeInSelesai 0.4s ease;
 }
 @keyframes fadeInSelesai {
@@ -1500,12 +1456,12 @@ nav a.nav-daftar:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ═══ LEAGUE BOX ═══ */
+/* ═══ LEAGUE BOX — dengan HEADER LIGA ═══ */
 .league {
     margin-bottom: 20px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(5,20,15,0.9);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: none;
@@ -1519,9 +1475,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 18px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 9s linear infinite;
+    animation: jewelFlow 11s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1530,7 +1486,29 @@ nav a.nav-daftar:hover {
     z-index: 1;
 }
 .league:hover {
-    box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(74,26,92,0.2), 0 0 40px rgba(26,58,107,0.15);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(61,43,86,0.2), 0 0 40px rgba(30,58,95,0.15);
+}
+.league-header {
+    position: relative;
+    padding: 14px 25px;
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: #000;
+    border-bottom: 1px solid rgba(61,43,86,0.3);
+    position: relative;
+    z-index: 2;
+}
+.league-header span {
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: jewelText 11s linear infinite;
 }
 
 /* ═══ MATCH CARD ═══ */
@@ -1546,7 +1524,7 @@ nav a.nav-daftar:hover {
 .match-row-single {
     position: relative;
     padding: 10px 10px 8px;
-    background: linear-gradient(180deg, rgba(5,20,15,0.5), rgba(2,10,8,0.7));
+    background: #000;
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -1565,7 +1543,7 @@ nav a.nav-daftar:hover {
 }
 
 .match-row-single:hover {
-    background: linear-gradient(180deg, rgba(74,26,92,0.06), rgba(26,58,107,0.04));
+    background: #050505;
 }
 
 .match-row-single:hover::before {
@@ -1576,7 +1554,7 @@ nav a.nav-daftar:hover {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, rgba(74,26,92,0.08), transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(61,43,86,0.08), transparent 70%);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
@@ -1600,46 +1578,33 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     z-index: 5;
     white-space: nowrap;
-}
-
-.match-badge-center.selesai {
+    background: #000;
     color: #fff;
-    background: linear-gradient(135deg, #1a5c4a, #1a3a6b, #1a5c4a);
-    background-size: 300% auto;
-    border: none;
-    box-shadow: 0 0 8px rgba(26,92,74,0.5);
-    animation: darkRainbowText 5s linear infinite;
+    position: relative;
 }
-.match-badge-center.selesai::before {
-    content: "●";
-    font-size: 6px;
+.match-badge-center::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
+    background-size: 300% 100%;
+    animation: jewelFlow 6s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
+.match-badge-center.selesai { box-shadow: 0 0 8px rgba(61,43,86,0.5); }
 .match-badge-center.live {
-    color: #fff;
-    background: linear-gradient(135deg, #4a1a5c, #5c3a1a, #4a1a5c);
-    background-size: 300% auto;
-    border: none;
-    box-shadow: 0 0 12px rgba(74,26,92,0.7), 0 0 12px rgba(92,58,26,0.4);
-    animation: livePulse 1.5s ease-in-out infinite, darkRainbowText 4s linear infinite;
+    box-shadow: 0 0 12px rgba(61,43,86,0.7), 0 0 12px rgba(77,53,32,0.4);
+    animation: livePulse 1.5s ease-in-out infinite;
 }
-.match-badge-center.live::before {
-    content: "●";
-    font-size: 6px;
-    animation: liveBlink 1s ease-in-out infinite;
-}
-
 .match-badge-center.akan {
-    color: #fff;
-    background: linear-gradient(135deg, #1a3a6b, #1a5c4a, #1a3a6b);
-    background-size: 300% auto;
-    border: none;
-    box-shadow: 0 0 10px rgba(26,58,107,0.6);
-    animation: darkRainbowText 5s linear infinite;
-}
-.match-badge-center.akan::before {
-    content: "◷";
-    font-size: 8px;
+    box-shadow: 0 0 10px rgba(30,58,95,0.6);
 }
 
 /* Layout utama */
@@ -1671,13 +1636,13 @@ nav a.nav-daftar:hover {
     border-radius: 50%;
     padding: 0;
     display: block;
-    filter: drop-shadow(0 0 5px rgba(74,26,92,0.4)) drop-shadow(0 2px 3px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 0 5px rgba(61,43,86,0.4)) drop-shadow(0 2px 3px rgba(0,0,0,0.6));
     transition: transform 0.3s, filter 0.3s;
 }
 
 .match-row-single:hover .match-team-logo {
     transform: scale(1.08);
-    filter: drop-shadow(0 0 10px rgba(74,26,92,0.7)) drop-shadow(0 0 10px rgba(26,58,107,0.5)) drop-shadow(0 2px 5px rgba(0,0,0,0.7));
+    filter: drop-shadow(0 0 10px rgba(61,43,86,0.7)) drop-shadow(0 0 10px rgba(30,58,95,0.5)) drop-shadow(0 2px 5px rgba(0,0,0,0.7));
 }
 
 .match-team-logo-initial {
@@ -1690,14 +1655,28 @@ nav a.nav-daftar:hover {
     font-weight: 900;
     font-size: 11px;
     color: #fff;
-    background: linear-gradient(135deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a);
-    background-size: 300% auto;
+    background: #000;
     border-radius: 50%;
     box-shadow: 
         0 0 0 2px rgba(255,255,255,0.08),
-        0 0 12px rgba(74,26,92,0.4),
+        0 0 12px rgba(61,43,86,0.4),
         0 3px 8px rgba(0,0,0,0.5);
-    animation: darkRainbowText 5s linear infinite;
+    position: relative;
+}
+.match-team-logo-initial::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 1.5px;
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
+    background-size: 300% 100%;
+    animation: jewelFlow 5s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 /* ═══ NAMA TIM — WARNA SOFT BERBEDA ═══ */
@@ -1710,25 +1689,22 @@ nav a.nav-daftar:hover {
     line-height: 1.2;
     max-width: 100%;
     word-break: break-word;
-    /* warna di-set lewat inline style di JS */
 }
-
-/* Default kalau tidak ada warna */
 .match-team-side.left .match-team-name-text {
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 10s linear infinite;
+    animation: jewelText 12s linear infinite;
 }
 .match-team-side.right .match-team-name-text {
-    background: linear-gradient(90deg, #7ad9b0, #e8b87a, #7ad9b0);
+    background: linear-gradient(90deg, #8bd4b8, #d4b88b, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 10s linear infinite;
+    animation: jewelText 12s linear infinite;
 }
 
 /* VS center */
@@ -1741,54 +1717,54 @@ nav a.nav-daftar:hover {
     padding: 3px 8px;
     min-width: 44px;
     border-radius: 8px;
-    background: linear-gradient(145deg, rgba(74,26,92,0.08), rgba(26,58,107,0.04));
+    background: #000;
     border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: inset 0 0 10px rgba(74,26,92,0.05);
+    box-shadow: inset 0 0 10px rgba(61,43,86,0.05);
 }
 
-/* ═══ VS TEXT — WARNA TERANG SOFT ═══ */
+/* VS TEXT */
 .match-vs-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 1.5px;
-    background: linear-gradient(135deg, #7aa8e8, #7ad9b0, #b07ad9, #7aa8e8);
+    background: linear-gradient(135deg, #8bb4e8, #8bd4b8, #a98bd4, #8bb4e8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
-    filter: drop-shadow(0 0 6px rgba(122,168,232,0.5));
+    animation: jewelText 10s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(139,180,232,0.4));
 }
 
-/* ═══ TIME TEXT — WARNA GOLD SOFT ═══ */
+/* TIME TEXT */
 .match-vs-time {
     font-family: 'Teko', sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.8px;
     line-height: 1;
-    background: linear-gradient(90deg, #e8b87a, #e8d8a0, #e8b87a);
+    background: linear-gradient(90deg, #d4b88b, #e8d4a0, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 7s linear infinite;
+    animation: jewelText 9s linear infinite;
 }
 
-/* ═══ DATE TEXT — WARNA TEAL SOFT ═══ */
+/* DATE TEXT */
 .match-vs-date {
     font-family: 'Rajdhani', sans-serif;
     font-size: 7px;
     font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    background: linear-gradient(90deg, #7ad9b0, #a0e8c8, #7ad9b0);
+    background: linear-gradient(90deg, #8bd4b8, #a0e8c8, #8bd4b8);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 
 /* HDP + Pred row */
@@ -1808,7 +1784,6 @@ nav a.nav-daftar:hover {
     gap: 5px;
 }
 
-/* ═══ LABEL HDP/PREDIKSI — WARNA SOFT BERBEDA ═══ */
 .match-extra-item .lbl {
     font-family: 'Rajdhani', sans-serif;
     font-size: 8px;
@@ -1825,14 +1800,13 @@ nav a.nav-daftar:hover {
     line-height: 1;
 }
 
-/* ═══ HDP — WARNA UNGU SOFT CERAH ═══ */
 .match-extra-item.hdp .lbl {
-    background: linear-gradient(90deg, #b07ad9, #d0a0f0, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #d0a0f0, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .match-extra-item.hdp .val {
     background: linear-gradient(90deg, #c89aeb, #e0b8ff, #c89aeb);
@@ -1840,27 +1814,26 @@ nav a.nav-daftar:hover {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 7s linear infinite;
-    filter: drop-shadow(0 0 5px rgba(176,122,217,0.4));
+    animation: jewelText 9s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(169,139,212,0.4));
 }
 
-/* ═══ PREDIKSI — WARNA ORANGE SOFT CERAH ═══ */
 .match-extra-item.pred .lbl {
-    background: linear-gradient(90deg, #e8b87a, #ffd9a0, #e8b87a);
+    background: linear-gradient(90deg, #d4b88b, #ffd9a0, #d4b88b);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 8s linear infinite;
+    animation: jewelText 10s linear infinite;
 }
 .match-extra-item.pred .val {
-    background: linear-gradient(90deg, #ffc98a, #ffe0b0, #ffc98a);
+    background: linear-gradient(90deg, #e8c98a, #ffe0b0, #e8c98a);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 7s linear infinite;
-    filter: drop-shadow(0 0 5px rgba(232,184,122,0.4));
+    animation: jewelText 9s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(212,184,139,0.4));
 }
 
 .single-col-empty {
@@ -1925,6 +1898,7 @@ nav a.nav-daftar:hover {
     .date-group { margin-bottom: 18px; }
     .date-group-header { font-size: 13px; padding: 10px 14px; margin-bottom: 12px; letter-spacing: 2px; }
     .league { border-radius: 14px; margin-bottom: 16px; }
+    .league-header { padding: 12px 20px; font-size: 12px; letter-spacing: 2.5px; }
 }
 
 @media (max-width: 430px) {
@@ -1945,7 +1919,7 @@ nav a.nav-daftar:hover {
     margin-top: 60px;
     padding: 50px 15px 35px;
     text-align: center;
-    background: rgba(5,20,15,0.7);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: none;
@@ -1956,9 +1930,9 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 10s linear infinite;
+    animation: jewelFlow 12s linear infinite;
 }
 .footer-logo-wrap {
     position: relative;
@@ -1969,7 +1943,7 @@ nav a.nav-daftar:hover {
 .footer-logo-wrap img {
     width: 140px; height: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(74,26,92,0.8)) drop-shadow(0 0 30px rgba(26,58,107,0.5));
+    filter: drop-shadow(0 0 30px rgba(61,43,86,0.8)) drop-shadow(0 0 30px rgba(30,58,95,0.5));
     animation: floatLogo 3.5s ease-in-out infinite;
 }
 .footer-title {
@@ -1977,12 +1951,12 @@ nav a.nav-daftar:hover {
     font-size: 26px; font-weight: 700;
     letter-spacing: 10px;
     margin: 15px 0 12px;
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 10s linear infinite;
+    animation: jewelText 12s linear infinite;
     text-transform: uppercase;
 }
 .footer-tagline {
@@ -2001,12 +1975,12 @@ nav a.nav-daftar:hover {
     margin-top: 15px;
 }
 .footer-copy span {
-    background: linear-gradient(90deg, #b07ad9, #7aa8e8, #7ad9b0, #e8b87a, #b07ad9);
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #a98bd4);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: softRainbow 7s linear infinite;
+    animation: jewelText 9s linear infinite;
     font-weight: 800;
 }
 
@@ -2017,7 +1991,7 @@ nav a.nav-daftar:hover {
     bottom: 0; left: 0; right: 0;
     z-index: 1000;
     padding: 10px 12px 12px;
-    background: rgba(5,20,15,0.92);
+    background: #000;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-top: none;
@@ -2028,9 +2002,9 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 8s linear infinite;
+    animation: jewelFlow 10s linear infinite;
 }
 .bottom-nav-inner {
     max-width: 500px;
@@ -2056,8 +2030,8 @@ nav a.nav-daftar:hover {
 }
 .bottom-nav-item:hover {
     color: #fff;
-    background: linear-gradient(135deg, rgba(74,26,92,0.2), rgba(26,58,107,0.15));
-    border-color: rgba(74,26,92,0.4);
+    background: #0a0a0a;
+    border-color: rgba(61,43,86,0.4);
 }
 .bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
 
@@ -2067,11 +2041,11 @@ nav a.nav-daftar:hover {
     top: 30px; right: 30px;
     padding: 16px 24px;
     border-radius: 14px;
-    background: rgba(10,40,30,0.98);
+    background: #000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: none;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74,26,92,0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(61,43,86,0.3);
     color: #fff;
     font-size: 14px; font-weight: 700;
     z-index: 99999;
@@ -2086,9 +2060,9 @@ nav a.nav-daftar:hover {
     inset: 0;
     border-radius: 14px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #4a1a5c, #1a3a6b, #1a5c4a, #5c3a1a, #4a1a5c);
+    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: darkRainbow 7s linear infinite;
+    animation: jewelFlow 9s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -2121,7 +2095,7 @@ nav a.nav-daftar:hover {
     nav a.nav-daftar { padding: 7px 16px; font-size: 11px; }
     .container { padding: 14px 10px 45px; }
     .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
-    .news-ticker-content { font-size: 11px !important; animation-duration: 30s, 8s !important; }
+    .news-ticker-content { font-size: 11px !important; animation-duration: 30s, 10s !important; }
     .news-ticker-wrap { height: 36px; }
     .news-ticker { min-height: 36px; margin-bottom: 18px; }
     .lux-text-wrap { padding: 12px 38px; min-height: 54px; height: auto; margin-bottom: 14px; border-radius: 14px; }
@@ -2166,9 +2140,6 @@ nav a.nav-daftar:hover {
     .tab-text { font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .search-box { width: 100%; min-width: unset; }
     #searchInput { font-size: 13px; }
-    .date-filter { width: 100%; }
-    .date-filter label { font-size: 11px; letter-spacing: 1px; min-width: 55px; }
-    #ligaFilter { flex: 1; width: 100%; max-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     .date-picker-filter { width: 100%; }
     #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
@@ -2194,7 +2165,7 @@ nav a.nav-daftar:hover {
     .loading-ring:nth-child(2) { width: 200px; height: 200px; }
     .loading-percent { font-size: 34px; }
     .news-ticker-label { font-size: 9px; padding: 6px 10px; letter-spacing: 1.2px; }
-    .news-ticker-content { font-size: 10px !important; animation-duration: 25s, 7s !important; }
+    .news-ticker-content { font-size: 10px !important; animation-duration: 25s, 9s !important; }
     .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
     .lux-text-wrap .icon-side { font-size: 11px; }
     .lux-text-wrap .icon-side.left { left: 11px; }
@@ -2214,12 +2185,11 @@ nav a.nav-daftar:hover {
     .footer-title { font-size: 18px; letter-spacing: 6px; }
     .footer-tagline { font-size: 10px; letter-spacing: 2px; }
     .date-group-header { font-size: 12px; padding: 10px 12px; letter-spacing: 1.5px; }
+    .league-header { font-size: 11px; padding: 11px 20px; letter-spacing: 2px; }
     .tab-filter { padding: 9px 4px; font-size: 10px; gap: 4px; }
     .tab-icon { font-size: 12px; }
     .tab-text { font-size: 10px; }
     .tab-clock-value { font-size: 19px; }
-    .date-filter label { font-size: 10.5px; min-width: 50px; }
-    #ligaFilter { font-size: 12px; padding: 10px 30px 10px 12px; }
     #tanggalSpesifik { font-size: 12px; padding: 10px 30px 10px 12px; }
     .section-title { font-size: 16px; }
 }
@@ -2352,11 +2322,6 @@ nav a.nav-daftar:hover {
             <button type="button" id="btnClearSearch" class="search-clear hidden" title="Hapus pencarian">✕</button>
         </div>
 
-        <div class="date-filter">
-            <label for="ligaFilter">🏆 Liga</label>
-            <select id="ligaFilter"><option value="all">Semua Liga</option></select>
-        </div>
-
         <div class="date-picker-filter">
             <label for="tanggalSpesifik">📅 Tanggal</label>
             <select id="tanggalSpesifik"><option value="">Pilih Tanggal</option></select>
@@ -2442,7 +2407,7 @@ let selectedDateSpecific = "";
     document.addEventListener("mouseleave", () => { mouse.x = -9999; mouse.y = -9999; });
 
     function createParticle() {
-        const colors = ["74,26,92", "26,58,107", "26,92,74", "92,58,26"];
+        const colors = ["61,43,86", "30,58,95", "30,77,66", "77,53,32"];
         const color = colors[Math.floor(Math.random() * colors.length)];
         return { x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, size: Math.random() * 2 + 1, color: color, alpha: Math.random() * 0.5 + 0.3 };
     }
@@ -2471,7 +2436,7 @@ let selectedDateSpecific = "";
                     const opacity = (1 - dist / MAX_DISTANCE) * 0.12;
                     ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(26, 58, 107, ${opacity})`;
+                    ctx.strokeStyle = `rgba(30, 58, 95, ${opacity})`;
                     ctx.lineWidth = 0.5; ctx.stroke();
                 }
             }
@@ -2485,7 +2450,7 @@ let selectedDateSpecific = "";
 (function initRippleOnClick() {
     document.addEventListener("click", (e) => {
         const ripple = document.createElement("div");
-        ripple.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,rgba(176,122,217,0.6),rgba(122,168,232,0.4),rgba(122,217,176,0.3),transparent);transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:99999;animation:rippleExpand 0.6s ease-out forwards;`;
+        ripple.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,rgba(169,139,212,0.6),rgba(139,180,232,0.4),rgba(139,212,184,0.3),transparent);transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:99999;animation:rippleExpand 0.6s ease-out forwards;`;
         document.body.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
     });
@@ -2545,7 +2510,7 @@ window.fadeInContent = function() {
 })();
 
 /* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v32";
+const CACHE_KEY = "kiper4d_data_cache_v33";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {} }
@@ -2562,7 +2527,7 @@ function loadCache(maxAge) {
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
 /* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v45";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v46";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2588,7 +2553,7 @@ async function loadTeamLogosFromDB() {
 
 /* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v10";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v11";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2849,32 +2814,16 @@ function get7DaysString() {
     return wibDate.getUTCFullYear() + "-" + String(wibDate.getUTCMonth() + 1).padStart(2, "0") + "-" + String(wibDate.getUTCDate()).padStart(2, "0");
 }
 
-function getLiveClockText() {
-    const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
-    return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
-}
-function getTodayIndoText() {
-    const d = new Date(Date.now() + (7 * 60 * 60 * 1000));
-    return HARI_INDO[d.getUTCDay()] + ", " + d.getUTCDate() + " " + BULAN_INDO[d.getUTCMonth()] + " " + d.getUTCFullYear();
-}
-
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 
+/* ═══ KEY UNIK ANTI DUPLIKAT ═══ */
 function matchKey(data) {
     return [
         normalizeDate(clean(data.date)),
         normalizeTime(clean(data.time)),
         ultraNormalizeTeam(data.home),
         ultraNormalizeTeam(data.away)
-    ].join("|");
-}
-
-function simpleKey(data) {
-    return [
-        normalizeDate(clean(data.date)),
-        normalizeTime(clean(data.time)),
-        ultraNormalizeTeam(data.home)
     ].join("|");
 }
 
@@ -2963,7 +2912,7 @@ function updateNewsTicker(data) {
     ticker.textContent = newsItems.join("  •  ");
 }
 
-/* ═══ RENDER MATCH CARD — WARNA TERANG SOFT BERBEDA ═══ */
+/* RENDER MATCH CARD */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
     const away = clean(data.away);
@@ -3085,7 +3034,7 @@ function renderPrediksi(data) {
                 const grup = groupLiga[key];
                 const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                html += `<div class="league"><div class="single-column-wrap">${rows}</div></div>`;
+                html += `<div class="league"><div class="league-header"><span>🏆 ${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
             });
         }
 
@@ -3102,7 +3051,7 @@ function renderPrediksi(data) {
                 const grup = groupLigaSelesai[key];
                 const matchList = grup.items.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
                 const rows = matchList.map(renderMatchRowSingle).join("");
-                selesaiHtml += `<div class="league"><div class="single-column-wrap">${rows}</div></div>`;
+                selesaiHtml += `<div class="league"><div class="league-header"><span>🏆 ${escapeHtml(grup.display)}</span></div><div class="single-column-wrap">${rows}</div></div>`;
             });
             const uniqueId = "selesai-" + tanggal.replace(/-/g, "");
             html += `
@@ -3139,37 +3088,13 @@ window.toggleSelesai = function(id, btn) {
     }
 };
 
-function updateLigaFilter(data) {
-    const select = document.getElementById("ligaFilter");
-    if (!select) return;
-    const currentValue = select.value;
-    const ligaCount = {};
-    const ligaDisplay = {};
-    data.forEach(item => {
-        const key = normalizeLeague(item.league);
-        if (!ligaCount[key]) { ligaCount[key] = 0; ligaDisplay[key] = displayLeagueName(item.league); }
-        ligaCount[key]++;
-    });
-    const ligaList = Object.keys(ligaCount).sort();
-    select.innerHTML = `<option value="all">Semua Liga</option>`;
-    ligaList.forEach(key => {
-        const option = document.createElement("option");
-        option.value = key;
-        option.textContent = ligaDisplay[key];
-        select.appendChild(option);
-    });
-    if (ligaList.includes(currentValue)) select.value = currentValue;
-}
-
 function applyFilter() {
     const selectTanggal = document.getElementById("tanggalFilter");
-    const selectLiga = document.getElementById("ligaFilter");
     const searchInput = document.getElementById("searchInput");
     const btnClear = document.getElementById("btnClearSearch");
-    if (!selectTanggal || !selectLiga || !searchInput) return;
+    if (!selectTanggal || !searchInput) return;
 
     const tanggal = selectTanggal.value;
-    const selectedLiga = selectLiga.value;
     const keyword = clean(searchInput.value).toLowerCase();
     const today = getTodayString();
     const tomorrow = getTomorrowString();
@@ -3194,7 +3119,6 @@ function applyFilter() {
         filtered = filtered.filter(item => { const d = normalizeDate(clean(item.date)); return d === today || d === tomorrow; });
     }
 
-    if (selectedLiga !== "all") filtered = filtered.filter(item => normalizeLeague(item.league) === selectedLiga);
     if (keyword) filtered = filtered.filter(item => {
         const league = clean(item.league).toLowerCase();
         const home = clean(item.home).toLowerCase();
@@ -3208,7 +3132,6 @@ function applyFilter() {
     renderPrediksi(filtered);
 }
 
-function filterLiga() { applyFilter(); }
 function handleSearch() { applyFilter(); }
 function clearSearch() {
     const searchInput = document.getElementById("searchInput");
@@ -3350,28 +3273,20 @@ function renderBigMatch(data) {
     }
 }
 
+/* ═══ PROSES DATA — ANTI DUPLIKAT KUAT ═══ */
 function processData(rawDataArray) {
     const merged = new Map();
-    const simpleKeyMap = new Map();
     
     rawDataArray.forEach(data => {
         if (!dataLengkap(data)) return;
         if (!dataMasihAktif(data)) return;
         
         const key = matchKey(data);
-        const skey = simpleKey(data);
         
-        let targetKey = key;
-        if (simpleKeyMap.has(skey)) {
-            targetKey = simpleKeyMap.get(skey);
+        if (!merged.has(key)) {
+            merged.set(key, { ...data });
         } else {
-            simpleKeyMap.set(skey, key);
-        }
-        
-        if (!merged.has(targetKey)) {
-            merged.set(targetKey, { ...data });
-        } else {
-            const existing = merged.get(targetKey);
+            const existing = merged.get(key);
             if (!clean(existing.league) && clean(data.league)) existing.league = data.league;
             if (!clean(existing.handicap) && clean(data.handicap)) existing.handicap = data.handicap;
             if (!clean(existing.homeLogo) && clean(data.homeLogo)) existing.homeLogo = data.homeLogo;
@@ -3380,7 +3295,7 @@ function processData(rawDataArray) {
             if (!clean(existing.predictionScoreAway) && clean(data.predictionScoreAway)) existing.predictionScoreAway = data.predictionScoreAway;
             if (!clean(existing.actualScoreHome) && clean(data.actualScoreHome)) existing.actualScoreHome = data.actualScoreHome;
             if (!clean(existing.actualScoreAway) && clean(data.actualScoreAway)) existing.actualScoreAway = data.actualScoreAway;
-            merged.set(targetKey, existing);
+            merged.set(key, existing);
         }
     });
     
@@ -3390,7 +3305,6 @@ function processData(rawDataArray) {
     const selectTanggal = document.getElementById("tanggalFilter");
     if (selectTanggal && !selectTanggal.dataset.initialized) { selectTanggal.value = "today"; selectTanggal.dataset.initialized = "true"; }
 
-    updateLigaFilter(semuaData);
     updateStats(semuaData);
     updateNewsTicker(semuaData);
     updateNextMatchBar(semuaData);
@@ -3501,13 +3415,11 @@ function initLuxMarquee(containerId, intervalMs) {
 
 initLuxMarquee("luxTextTop", 4200);
 
-const elLiga = document.getElementById("ligaFilter");
 const elSearch = document.getElementById("searchInput");
 const elClear = document.getElementById("btnClearSearch");
 const elTanggal = document.getElementById("tanggalFilter");
 const elDateSelect = document.getElementById("tanggalSpesifik");
 
-if (elLiga) elLiga.addEventListener("change", filterLiga);
 if (elSearch) elSearch.addEventListener("input", handleSearch);
 if (elClear) elClear.addEventListener("click", clearSearch);
 if (elDateSelect) elDateSelect.addEventListener("change", handleDatePickerChange);
