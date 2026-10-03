@@ -1122,383 +1122,287 @@ nav a.nav-daftar:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   MATCH CARD — CLEAN CYAN COMPACT
+   MATCH CARD — STYLE SEPERTI SCREENSHOT (2 TIM KIRI-KANAN)
    ═══════════════════════════════════════════════════════════ */
 .single-column-wrap {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 14px 12px 12px;
+    gap: 0;
+    padding: 12px 10px;
 }
 
 .match-row-single {
     position: relative;
-    padding: 10px 14px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, rgba(8,15,28,0.95), rgba(4,8,18,0.98));
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    padding: 20px 16px 16px;
+    background: linear-gradient(180deg, rgba(6,12,22,0.6), rgba(3,6,14,0.85));
     overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-        0 4px 18px rgba(0,0,0,0.5),
-        0 0 0 1px rgba(0,212,255,0.18) inset;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border-bottom: 1px solid rgba(0,212,255,0.15);
+}
+
+.match-row-single:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.match-row-single:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom: none;
+}
+
+.match-row-single:hover {
+    background: linear-gradient(180deg, rgba(10,20,38,0.8), rgba(6,12,24,0.95));
+}
+
+.match-row-single:hover::before {
+    opacity: 1;
 }
 
 .match-row-single::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 12px;
-    padding: 1px;
-    background: linear-gradient(
-        120deg,
-        rgba(0,212,255,0.6) 0%,
-        rgba(51,221,255,0.8) 25%,
-        rgba(93,45,232,0.5) 50%,
-        rgba(51,221,255,0.8) 75%,
-        rgba(0,212,255,0.6) 100%
-    );
-    background-size: 300% 100%;
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: cleanBorder 8s linear infinite;
+    background: radial-gradient(ellipse at center, rgba(0,212,255,0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
     pointer-events: none;
-    opacity: 0.85;
-    z-index: 3;
 }
 
-@keyframes cleanBorder {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
-}
-
-.match-row-single .shine-sweep {
+/* Badge status di tengah — SELESAI / LIVE / AKAN */
+.match-badge-center {
     position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.8s ease;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.match-row-single:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 8px 30px rgba(0,0,0,0.7),
-        0 0 25px rgba(0,212,255,0.25),
-        0 0 0 1px rgba(0,212,255,0.4) inset;
-}
-
-.match-row-single:hover .shine-sweep {
-    left: 150%;
-}
-
-/* Grid layout */
-.match-row-inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 12px;
-    position: relative;
-    z-index: 2;
-}
-
-/* Time box — CYAN */
-.match-time-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1px;
-    padding: 6px 11px;
-    min-width: 58px;
-    border-radius: 9px;
-    background: linear-gradient(145deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
-    border: 1px solid rgba(0,212,255,0.4);
-    box-shadow: inset 0 0 12px rgba(0,212,255,0.05);
-}
-
-.match-time-box .time-value {
-    font-family: 'Teko', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: #67e8f9;
-    line-height: 1;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(0,212,255,0.6);
-}
-
-.match-time-box .time-date {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 8.5px;
-    font-weight: 700;
-    color: rgba(103,232,249,0.6);
-    letter-spacing: 1px;
-}
-
-/* Teams — RAPI RATA */
-.match-teams-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-}
-
-.match-team-mini {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    min-width: 0;
-    justify-content: flex-end;
-}
-
-.match-team-mini.right {
-    justify-content: flex-start;
-    flex-direction: row-reverse;
-}
-
-.match-team-mini .mini-logo {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    background: #fff;
-    border-radius: 50%;
-    padding: 1.5px;
-    flex-shrink: 0;
-    box-shadow:
-        0 0 0 1.5px rgba(0,212,255,0.5),
-        0 0 8px rgba(0,212,255,0.25);
-    transition: all 0.3s;
-}
-
-.match-row-single:hover .match-team-mini .mini-logo {
-    box-shadow:
-        0 0 0 1.5px rgba(51,221,255,0.9),
-        0 0 14px rgba(0,212,255,0.6);
-    transform: scale(1.1);
-}
-
-.match-team-mini .mini-logo-initial {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 9px;
-    color: #02040a;
-    background: linear-gradient(135deg, #33ddff, #00d4ff);
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow:
-        0 0 0 1.5px rgba(0,212,255,0.5),
-        0 0 8px rgba(0,212,255,0.25);
-}
-
-.match-team-mini .mini-name {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    text-shadow: 0 0 8px rgba(0,212,255,0.15);
-    min-width: 0;
-    flex: 1;
-}
-
-/* Home team: rata kanan (name sebelah kiri logo) */
-.match-team-mini:not(.right) .mini-name {
-    text-align: right;
-}
-
-/* Away team: rata kiri */
-.match-team-mini.right .mini-name {
-    text-align: left;
-}
-
-.match-vs-mini {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
-    color: #00d4ff;
-    letter-spacing: 1px;
-    padding: 2px 7px;
-    border-radius: 20px;
-    background: rgba(0,212,255,0.08);
-    border: 1px solid rgba(0,212,255,0.35);
-    box-shadow: 0 0 10px rgba(0,212,255,0.15);
-    flex-shrink: 0;
-}
-
-/* Right side: HDP + PREDIKSI stacked — semua CYAN */
-.match-values-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 3px;
-    min-width: 100px;
-}
-
-.match-value-line {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 7px;
-    width: 100%;
-    white-space: nowrap;
-}
-
-.match-value-line .val-label {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 8.5px;
-    font-weight: 800;
-    letter-spacing: 1.3px;
-    text-transform: uppercase;
-    flex-shrink: 0;
-}
-
-.match-value-line .val-number {
-    font-family: 'Teko', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 0.3px;
-    text-align: right;
-    min-width: 50px;
-    flex-shrink: 0;
-}
-
-/* HDP — cyan dim */
-.match-value-line.hdp .val-label {
-    color: rgba(103,232,249,0.7);
-}
-.match-value-line.hdp .val-number {
-    color: #cffafe;
-    text-shadow: 0 0 10px rgba(0,212,255,0.5);
-}
-
-/* PRED — cyan bright */
-.match-value-line.pred .val-label {
-    color: rgba(51,221,255,0.85);
-}
-.match-value-line.pred .val-number {
-    color: #ffffff;
-    text-shadow: 0 0 14px rgba(0,212,255,0.9), 0 0 30px rgba(0,212,255,0.4);
-}
-
-.match-value-line.empty .val-number {
-    color: #475569;
-    text-shadow: none;
-    opacity: 0.5;
-}
-
-/* Status badge */
-.match-status-badge {
-    position: absolute;
-    top: 8px;
-    right: 12px;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 2px 9px;
+    gap: 5px;
+    padding: 3px 14px;
     border-radius: 20px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 8.5px;
-    font-weight: 900;
-    letter-spacing: 1.3px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
     text-transform: uppercase;
     z-index: 5;
+    white-space: nowrap;
 }
 
-.match-status-badge.live {
-    color: #fee2e2;
-    background: linear-gradient(135deg, rgba(153,27,27,0.95), rgba(220,38,38,0.9));
-    border: 1px solid rgba(248,113,113,0.8);
-    box-shadow: 0 0 12px rgba(220,38,38,0.6);
-    animation: cleanLivePulse 1.8s ease-in-out infinite;
-}
-.match-status-badge.live::before {
-    content: "";
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 6px #fff;
-    animation: cleanLiveDot 1.2s ease-in-out infinite;
-}
-@keyframes cleanLivePulse {
-    0%, 100% { box-shadow: 0 0 12px rgba(220,38,38,0.6); }
-    50% { box-shadow: 0 0 22px rgba(220,38,38,1); }
-}
-@keyframes cleanLiveDot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
-.match-status-badge.selesai {
+.match-badge-center.selesai {
     color: #d1fae5;
-    background: linear-gradient(135deg, rgba(4,120,87,0.95), rgba(16,185,129,0.9));
+    background: linear-gradient(135deg, rgba(4,120,87,0.95), rgba(16,185,129,0.85));
     border: 1px solid rgba(110,231,183,0.8);
     box-shadow: 0 0 12px rgba(16,185,129,0.4);
 }
-.match-status-badge.selesai::before {
-    content: "✓";
-    font-size: 9px;
-    font-weight: 900;
+.match-badge-center.selesai::before {
+    content: "●";
+    font-size: 8px;
+    animation: none;
 }
 
-.match-status-badge.akan {
+.match-badge-center.live {
+    color: #fee2e2;
+    background: linear-gradient(135deg, rgba(153,27,27,0.95), rgba(220,38,38,0.9));
+    border: 1px solid rgba(248,113,113,0.8);
+    box-shadow: 0 0 15px rgba(220,38,38,0.7);
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+.match-badge-center.live::before {
+    content: "●";
+    font-size: 8px;
+    animation: liveBlink 1s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(220,38,38,0.7); }
+    50% { box-shadow: 0 0 25px rgba(220,38,38,1); }
+}
+@keyframes liveBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.match-badge-center.akan {
     color: #cffafe;
     background: linear-gradient(135deg, rgba(8,90,120,0.95), rgba(0,180,220,0.9));
     border: 1px solid rgba(103,232,249,0.8);
     box-shadow: 0 0 12px rgba(0,212,255,0.4);
 }
-.match-status-badge.akan::before {
+.match-badge-center.akan::before {
     content: "◷";
     font-size: 9px;
-    font-weight: 900;
 }
 
-/* League label */
-.match-league-label {
-    position: absolute;
-    top: 8px;
-    left: 14px;
-    display: inline-flex;
+/* Layout utama: 2 tim kiri-kanan, VS tengah */
+.match-main-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 5px;
+    gap: 16px;
+    padding-top: 8px;
+}
+
+/* Team box */
+.match-team-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    min-width: 0;
+    padding: 4px;
+}
+
+.match-team-side.left {
+    align-items: center;
+}
+
+.match-team-side.right {
+    align-items: center;
+}
+
+/* Logo */
+.match-team-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    background: transparent;
+    border-radius: 50%;
+    padding: 0;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.match-row-single:hover .match-team-logo {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 15px rgba(0,212,255,0.8)) drop-shadow(0 2px 6px rgba(0,0,0,0.7));
+}
+
+.match-team-logo-initial {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: #02040a;
+    background: linear-gradient(135deg, #33ddff, #00d4ff);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 2px rgba(0,212,255,0.6),
+        0 0 15px rgba(0,212,255,0.5),
+        0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Team name */
+.match-team-name-text {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 9.5px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1.25;
+    max-width: 100%;
+    word-break: break-word;
+    text-shadow: 0 0 10px rgba(0,212,255,0.2), 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* VS center */
+.match-vs-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 14px;
+    min-width: 60px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(0,212,255,0.08), rgba(93,45,232,0.05));
+    border: 1px solid rgba(0,212,255,0.35);
+    box-shadow: inset 0 0 15px rgba(0,212,255,0.05);
+}
+
+.match-vs-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #33ddff, #00d4ff, #5d2de8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.8));
+}
+
+.match-vs-time {
+    font-family: 'Teko', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #67e8f9;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-shadow: 0 0 8px rgba(0,212,255,0.6);
+}
+
+.match-vs-date {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(103,232,249,0.65);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* HDP + PRED row (di bawah, kalau ada) */
+.match-extra-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(0,212,255,0.15);
+}
+
+.match-extra-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.match-extra-item .lbl {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 9px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #67e8f9;
     text-transform: uppercase;
-    max-width: 60%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    z-index: 5;
-    text-shadow: 0 0 8px rgba(0,212,255,0.5);
+    color: rgba(103,232,249,0.7);
 }
 
-.match-league-label::before {
-    content: "🏆";
-    font-size: 10px;
-    flex-shrink: 0;
+.match-extra-item .val {
+    font-family: 'Teko', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(0,212,255,0.6);
+}
+
+.match-extra-item.hdp .val {
+    color: #c4b5fd;
+    text-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
+
+.match-extra-item.pred .val {
+    color: #fef3c7;
+    text-shadow: 0 0 12px rgba(250,204,21,0.7);
 }
 
 .single-col-empty {
@@ -1514,96 +1418,60 @@ nav a.nav-daftar:hover {
 /* ── MOBILE ── */
 @media (max-width: 800px) {
     .single-column-wrap {
-        gap: 6px;
-        padding: 10px 8px 10px;
+        padding: 8px 6px;
     }
 
     .match-row-single {
-        padding: 22px 10px 8px;
-        border-radius: 10px;
+        padding: 22px 10px 12px;
     }
 
-    .match-row-inner {
-        grid-template-columns: auto 1fr;
-        grid-template-areas:
-            "time teams"
-            "values values";
+    .match-main-row {
         gap: 8px;
-        row-gap: 6px;
     }
 
-    .match-time-box {
-        grid-area: time;
-        min-width: 52px;
-        padding: 5px 8px;
-    }
-
-    .match-time-box .time-value {
+    .match-team-logo,
+    .match-team-logo-initial {
+        width: 42px;
+        height: 42px;
         font-size: 15px;
     }
 
-    .match-time-box .time-date {
-        font-size: 8px;
-    }
-
-    .match-teams-row {
-        grid-area: teams;
-        gap: 8px;
-    }
-
-    .match-team-mini .mini-logo,
-    .match-team-mini .mini-logo-initial {
-        width: 20px;
-        height: 20px;
-        font-size: 8px;
-    }
-
-    .match-team-mini .mini-name {
+    .match-team-name-text {
         font-size: 11px;
+        letter-spacing: 0.5px;
     }
 
-    .match-vs-mini {
-        font-size: 8px;
-        padding: 2px 5px;
+    .match-vs-center {
+        padding: 5px 10px;
+        min-width: 52px;
     }
 
-    .match-values-stack {
-        grid-area: values;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        min-width: unset;
-        width: 100%;
-        padding-top: 6px;
-        border-top: 1px dashed rgba(0,212,255,0.15);
+    .match-vs-text {
+        font-size: 12px;
     }
 
-    .match-value-line {
-        width: auto;
-        justify-content: flex-start;
-        gap: 5px;
+    .match-vs-time {
+        font-size: 13px;
     }
 
-    .match-value-line .val-label {
+    .match-vs-date {
         font-size: 8px;
     }
 
-    .match-value-line .val-number {
-        font-size: 14px;
-        min-width: unset;
+    .match-badge-center {
+        font-size: 9px;
+        padding: 2px 11px;
+        letter-spacing: 1.5px;
     }
 
-    .match-league-label {
-        font-size: 8.5px;
-        letter-spacing: 1.2px;
+    .match-extra-row {
+        gap: 16px;
+        margin-top: 10px;
+        padding-top: 8px;
     }
 
-    .match-status-badge {
-        font-size: 8px;
-        padding: 2px 7px;
-        letter-spacing: 1px;
-        top: 6px;
-        right: 8px;
+    .match-extra-item .val {
+        font-size: 16px;
     }
 
     .date-group { margin-bottom: 18px; }
@@ -1613,15 +1481,14 @@ nav a.nav-daftar:hover {
 }
 
 @media (max-width: 430px) {
-    .match-row-single { padding: 22px 8px 8px; }
-    .match-team-mini .mini-name { font-size: 10px; }
-    .match-team-mini .mini-logo,
-    .match-team-mini .mini-logo-initial { width: 18px; height: 18px; font-size: 7px; }
-    .match-time-box { min-width: 48px; padding: 4px 6px; }
-    .match-time-box .time-value { font-size: 14px; }
-    .match-value-line .val-number { font-size: 13px; }
-    .match-league-label { font-size: 8px; }
-    .match-status-badge { font-size: 7.5px; }
+    .match-row-single { padding: 22px 8px 10px; }
+    .match-team-logo,
+    .match-team-logo-initial { width: 36px; height: 36px; font-size: 13px; }
+    .match-team-name-text { font-size: 10px; }
+    .match-vs-text { font-size: 11px; }
+    .match-vs-time { font-size: 12px; }
+    .match-extra-item .val { font-size: 14px; }
+    .match-extra-item .lbl { font-size: 8px; }
 }
 
 .site-footer {
@@ -2198,7 +2065,7 @@ window.fadeInContent = function() {
 })();
 
 /* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v30";
+const CACHE_KEY = "kiper4d_data_cache_v31";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {} }
@@ -2215,7 +2082,7 @@ function loadCache(maxAge) {
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
 /* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v43";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v44";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2241,7 +2108,7 @@ async function loadTeamLogosFromDB() {
 
 /* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v8";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v9";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2316,7 +2183,6 @@ function normalizeTeamName(name) {
         .replace(/\s+/g, " ").trim();
 }
 
-/* ⭐ FIX: ultraNormalizeTeam yang lebih bersih untuk dedupe */
 function ultraNormalizeTeam(name) {
     if (!name) return "";
     let s = String(name).toLowerCase()
@@ -2515,7 +2381,6 @@ function getTodayIndoText() {
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 
-/* ⭐ FIX: matchKey pakai versi simple untuk dedupe */
 function matchKey(data) {
     return [
         normalizeDate(clean(data.date)),
@@ -2525,7 +2390,6 @@ function matchKey(data) {
     ].join("|");
 }
 
-/* ⭐ FIX: simpleKey — dedupe paksa by date+time+home */
 function simpleKey(data) {
     return [
         normalizeDate(clean(data.date)),
@@ -2620,7 +2484,7 @@ function updateNewsTicker(data) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   RENDER MATCH CARD — CLEAN CYAN COMPACT
+   RENDER MATCH CARD — 2 TIM KIRI-KANAN + VS TENGAH
    ═══════════════════════════════════════════════════════════ */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
@@ -2630,75 +2494,73 @@ function renderMatchRowSingle(data) {
     const handicap = clean(data.handicap);
     const scoreHome = clean(data.predictionScoreHome);
     const scoreAway = clean(data.predictionScoreAway);
-    const league = displayLeagueName(data.league);
     const status = getMatchStatus(data);
 
     const hasHdp = handicap !== "";
-    const hdpClass = hasHdp ? "" : "empty";
-    const hdpText = hasHdp ? handicap : "-";
-
     const hasPred = scoreHome !== "" && scoreAway !== "";
-    const predClass = hasPred ? "" : "empty";
-    const predText = hasPred ? escapeHtml(scoreHome) + " - " + escapeHtml(scoreAway) : "-";
 
-    let statusBadge = "";
-    if (status === "live") {
-        statusBadge = `<div class="match-status-badge live">LIVE</div>`;
-    } else if (status === "selesai") {
-        statusBadge = `<div class="match-status-badge selesai">SELESAI</div>`;
-    } else {
-        statusBadge = `<div class="match-status-badge akan">AKAN</div>`;
-    }
+    let badgeClass = "akan";
+    let badgeText = "AKAN";
+    if (status === "live") { badgeClass = "live"; badgeText = "LIVE"; }
+    else if (status === "selesai") { badgeClass = "selesai"; badgeText = "SELESAI"; }
 
     const homeLogo = getLogoForTeam(home, data.homeLogo);
     const awayLogo = getLogoForTeam(away, data.awayLogo);
 
     const homeLogoHtml = homeLogo
-        ? `<img class="mini-logo" src="${escapeHtml(homeLogo.url)}" alt="${escapeHtml(home)}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="mini-logo-initial">${escapeHtml(home.substring(0,2).toUpperCase())}</div>`;
+        ? `<img class="match-team-logo" src="${escapeHtml(homeLogo.url)}" alt="${escapeHtml(home)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.querySelector('.match-team-logo-initial') && (this.parentElement.querySelector('.match-team-logo-initial').style.display='flex');">`
+        : `<div class="match-team-logo-initial">${escapeHtml(home.substring(0,2).toUpperCase())}</div>`;
 
     const awayLogoHtml = awayLogo
-        ? `<img class="mini-logo" src="${escapeHtml(awayLogo.url)}" alt="${escapeHtml(away)}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="mini-logo-initial">${escapeHtml(away.substring(0,2).toUpperCase())}</div>`;
+        ? `<img class="match-team-logo" src="${escapeHtml(awayLogo.url)}" alt="${escapeHtml(away)}" loading="lazy" onerror="this.style.display='none';">`
+        : `<div class="match-team-logo-initial">${escapeHtml(away.substring(0,2).toUpperCase())}</div>`;
 
     const formattedDate = formatTanggalShort(date);
 
+    // Extra row: HDP + Prediksi (hanya tampil kalau ada datanya)
+    let extraRowHtml = "";
+    if (hasHdp || hasPred) {
+        let items = [];
+        if (hasHdp) {
+            items.push(`
+                <div class="match-extra-item hdp">
+                    <span class="lbl">HDP</span>
+                    <span class="val">${escapeHtml(handicap)}</span>
+                </div>
+            `);
+        }
+        if (hasPred) {
+            items.push(`
+                <div class="match-extra-item pred">
+                    <span class="lbl">PREDIKSI</span>
+                    <span class="val">${escapeHtml(scoreHome)} - ${escapeHtml(scoreAway)}</span>
+                </div>
+            `);
+        }
+        extraRowHtml = `<div class="match-extra-row">${items.join("")}</div>`;
+    }
+
     return `
         <div class="match-row-single">
-            <div class="shine-sweep"></div>
-
-            <div class="match-league-label">${escapeHtml(league)}</div>
-            ${statusBadge}
-
-            <div class="match-row-inner" style="padding-top: 18px;">
-                <div class="match-time-box">
-                    <span class="time-value">${escapeHtml(time)}</span>
-                    <span class="time-date">${escapeHtml(formattedDate)}</span>
+            <div class="match-badge-center ${badgeClass}">${badgeText}</div>
+            <div class="match-main-row">
+                <div class="match-team-side left">
+                    ${homeLogoHtml}
+                    <div class="match-team-name-text">${escapeHtml(home)}</div>
                 </div>
 
-                <div class="match-teams-row">
-                    <div class="match-team-mini">
-                        ${homeLogoHtml}
-                        <div class="mini-name">${escapeHtml(home)}</div>
-                    </div>
-                    <div class="match-vs-mini">VS</div>
-                    <div class="match-team-mini right">
-                        <div class="mini-name">${escapeHtml(away)}</div>
-                        ${awayLogoHtml}
-                    </div>
+                <div class="match-vs-center">
+                    <div class="match-vs-text">VS</div>
+                    <div class="match-vs-time">${escapeHtml(time)}</div>
+                    <div class="match-vs-date">${escapeHtml(formattedDate)}</div>
                 </div>
 
-                <div class="match-values-stack">
-                    <div class="match-value-line hdp ${hdpClass}">
-                        <span class="val-label">HDP</span>
-                        <span class="val-number">${escapeHtml(hdpText)}</span>
-                    </div>
-                    <div class="match-value-line pred ${predClass}">
-                        <span class="val-label">PRED</span>
-                        <span class="val-number">${predText}</span>
-                    </div>
+                <div class="match-team-side right">
+                    ${awayLogoHtml}
+                    <div class="match-team-name-text">${escapeHtml(away)}</div>
                 </div>
             </div>
+            ${extraRowHtml}
         </div>
     `;
 }
@@ -3018,7 +2880,6 @@ function renderBigMatch(data) {
     }
 }
 
-/* ⭐ FIX: processData dengan DOUBLE DEDUPE (matchKey + simpleKey) */
 function processData(rawDataArray) {
     const merged = new Map();
     const simpleKeyMap = new Map();
@@ -3030,8 +2891,6 @@ function processData(rawDataArray) {
         const key = matchKey(data);
         const skey = simpleKey(data);
         
-        // Cek apakah sudah ada di simpleKeyMap (dengan date+time+home yang sama)
-        // Kalau ada, merge ke existing
         let targetKey = key;
         if (simpleKeyMap.has(skey)) {
             targetKey = simpleKeyMap.get(skey);
