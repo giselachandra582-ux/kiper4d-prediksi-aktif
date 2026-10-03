@@ -1122,7 +1122,7 @@ nav a.nav-daftar:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   MATCH CARD — ROYAL LUXURY COMPACT
+   MATCH CARD — CLEAN CYAN COMPACT
    ═══════════════════════════════════════════════════════════ */
 .single-column-wrap {
     display: flex;
@@ -1133,16 +1133,16 @@ nav a.nav-daftar:hover {
 
 .match-row-single {
     position: relative;
-    padding: 10px 14px 10px;
+    padding: 10px 14px;
     border-radius: 12px;
-    background: linear-gradient(145deg, rgba(10,15,26,0.95), rgba(5,7,15,0.98));
+    background: linear-gradient(145deg, rgba(8,15,28,0.95), rgba(4,8,18,0.98));
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     overflow: hidden;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow:
         0 4px 18px rgba(0,0,0,0.5),
-        0 0 0 1px rgba(212,175,55,0.18) inset;
+        0 0 0 1px rgba(0,212,255,0.18) inset;
     cursor: pointer;
 }
 
@@ -1154,11 +1154,11 @@ nav a.nav-daftar:hover {
     padding: 1px;
     background: linear-gradient(
         120deg,
-        rgba(212,175,55,0.7) 0%,
-        rgba(245,215,110,0.9) 25%,
-        rgba(16,185,129,0.5) 50%,
-        rgba(245,215,110,0.9) 75%,
-        rgba(212,175,55,0.7) 100%
+        rgba(0,212,255,0.6) 0%,
+        rgba(51,221,255,0.8) 25%,
+        rgba(93,45,232,0.5) 50%,
+        rgba(51,221,255,0.8) 75%,
+        rgba(0,212,255,0.6) 100%
     );
     background-size: 300% 100%;
     -webkit-mask:
@@ -1166,13 +1166,13 @@ nav a.nav-daftar:hover {
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: royalBorder 8s linear infinite;
+    animation: cleanBorder 8s linear infinite;
     pointer-events: none;
     opacity: 0.85;
     z-index: 3;
 }
 
-@keyframes royalBorder {
+@keyframes cleanBorder {
     0% { background-position: 0% 50%; }
     100% { background-position: 300% 50%; }
 }
@@ -1181,7 +1181,7 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: -100%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(245,215,110,0.12), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
     transform: skewX(-20deg);
     transition: left 0.8s ease;
     pointer-events: none;
@@ -1192,8 +1192,8 @@ nav a.nav-daftar:hover {
     transform: translateY(-2px);
     box-shadow:
         0 8px 30px rgba(0,0,0,0.7),
-        0 0 25px rgba(212,175,55,0.25),
-        0 0 0 1px rgba(212,175,55,0.4) inset;
+        0 0 25px rgba(0,212,255,0.25),
+        0 0 0 1px rgba(0,212,255,0.4) inset;
 }
 
 .match-row-single:hover .shine-sweep {
@@ -1210,7 +1210,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* Time box */
+/* Time box — CYAN */
 .match-time-box {
     display: flex;
     flex-direction: column;
@@ -1220,35 +1220,35 @@ nav a.nav-daftar:hover {
     padding: 6px 11px;
     min-width: 58px;
     border-radius: 9px;
-    background: linear-gradient(145deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
-    border: 1px solid rgba(212,175,55,0.4);
-    box-shadow: inset 0 0 12px rgba(212,175,55,0.05);
+    background: linear-gradient(145deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
+    border: 1px solid rgba(0,212,255,0.4);
+    box-shadow: inset 0 0 12px rgba(0,212,255,0.05);
 }
 
 .match-time-box .time-value {
     font-family: 'Teko', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #f5d76e;
+    color: #67e8f9;
     line-height: 1;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(212,175,55,0.6);
+    text-shadow: 0 0 10px rgba(0,212,255,0.6);
 }
 
 .match-time-box .time-date {
     font-family: 'Rajdhani', sans-serif;
     font-size: 8.5px;
     font-weight: 700;
-    color: rgba(245,215,110,0.6);
+    color: rgba(103,232,249,0.6);
     letter-spacing: 1px;
 }
 
-/* Teams */
+/* Teams — RAPI RATA */
 .match-teams-row {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     min-width: 0;
 }
 
@@ -1274,15 +1274,15 @@ nav a.nav-daftar:hover {
     padding: 1.5px;
     flex-shrink: 0;
     box-shadow:
-        0 0 0 1.5px rgba(212,175,55,0.5),
-        0 0 8px rgba(212,175,55,0.25);
+        0 0 0 1.5px rgba(0,212,255,0.5),
+        0 0 8px rgba(0,212,255,0.25);
     transition: all 0.3s;
 }
 
 .match-row-single:hover .match-team-mini .mini-logo {
     box-shadow:
-        0 0 0 1.5px rgba(245,215,110,0.9),
-        0 0 14px rgba(212,175,55,0.6);
+        0 0 0 1.5px rgba(51,221,255,0.9),
+        0 0 14px rgba(0,212,255,0.6);
     transform: scale(1.1);
 }
 
@@ -1295,13 +1295,13 @@ nav a.nav-daftar:hover {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
     font-size: 9px;
-    color: #05070f;
-    background: linear-gradient(135deg, #f5d76e, #d4af37);
+    color: #02040a;
+    background: linear-gradient(135deg, #33ddff, #00d4ff);
     border-radius: 50%;
     flex-shrink: 0;
     box-shadow:
-        0 0 0 1.5px rgba(212,175,55,0.5),
-        0 0 8px rgba(212,175,55,0.25);
+        0 0 0 1.5px rgba(0,212,255,0.5),
+        0 0 8px rgba(0,212,255,0.25);
 }
 
 .match-team-mini .mini-name {
@@ -1314,24 +1314,36 @@ nav a.nav-daftar:hover {
     text-overflow: ellipsis;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    text-shadow: 0 0 8px rgba(212,175,55,0.15);
+    text-shadow: 0 0 8px rgba(0,212,255,0.15);
     min-width: 0;
+    flex: 1;
+}
+
+/* Home team: rata kanan (name sebelah kiri logo) */
+.match-team-mini:not(.right) .mini-name {
+    text-align: right;
+}
+
+/* Away team: rata kiri */
+.match-team-mini.right .mini-name {
+    text-align: left;
 }
 
 .match-vs-mini {
     font-family: 'Orbitron', sans-serif;
     font-size: 9px;
     font-weight: 800;
-    color: #d4af37;
+    color: #00d4ff;
     letter-spacing: 1px;
     padding: 2px 7px;
     border-radius: 20px;
-    background: rgba(212,175,55,0.08);
-    border: 1px solid rgba(212,175,55,0.35);
-    box-shadow: 0 0 10px rgba(212,175,55,0.15);
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.35);
+    box-shadow: 0 0 10px rgba(0,212,255,0.15);
+    flex-shrink: 0;
 }
 
-/* Right side: HDP + PREDIKSI stacked */
+/* Right side: HDP + PREDIKSI stacked — semua CYAN */
 .match-values-stack {
     display: flex;
     flex-direction: column;
@@ -1370,20 +1382,22 @@ nav a.nav-daftar:hover {
     flex-shrink: 0;
 }
 
+/* HDP — cyan dim */
 .match-value-line.hdp .val-label {
-    color: rgba(196,181,253,0.75);
+    color: rgba(103,232,249,0.7);
 }
 .match-value-line.hdp .val-number {
-    color: #e9d5ff;
-    text-shadow: 0 0 10px rgba(139,92,246,0.6);
+    color: #cffafe;
+    text-shadow: 0 0 10px rgba(0,212,255,0.5);
 }
 
+/* PRED — cyan bright */
 .match-value-line.pred .val-label {
-    color: rgba(245,215,110,0.8);
+    color: rgba(51,221,255,0.85);
 }
 .match-value-line.pred .val-number {
-    color: #fef3c7;
-    text-shadow: 0 0 14px rgba(245,215,110,0.9), 0 0 30px rgba(212,175,55,0.4);
+    color: #ffffff;
+    text-shadow: 0 0 14px rgba(0,212,255,0.9), 0 0 30px rgba(0,212,255,0.4);
 }
 
 .match-value-line.empty .val-number {
@@ -1392,7 +1406,7 @@ nav a.nav-daftar:hover {
     opacity: 0.5;
 }
 
-/* Status badge — dipasang di atas card */
+/* Status badge */
 .match-status-badge {
     position: absolute;
     top: 8px;
@@ -1415,7 +1429,7 @@ nav a.nav-daftar:hover {
     background: linear-gradient(135deg, rgba(153,27,27,0.95), rgba(220,38,38,0.9));
     border: 1px solid rgba(248,113,113,0.8);
     box-shadow: 0 0 12px rgba(220,38,38,0.6);
-    animation: royalLivePulse 1.8s ease-in-out infinite;
+    animation: cleanLivePulse 1.8s ease-in-out infinite;
 }
 .match-status-badge.live::before {
     content: "";
@@ -1424,13 +1438,13 @@ nav a.nav-daftar:hover {
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 6px #fff;
-    animation: royalLiveDot 1.2s ease-in-out infinite;
+    animation: cleanLiveDot 1.2s ease-in-out infinite;
 }
-@keyframes royalLivePulse {
+@keyframes cleanLivePulse {
     0%, 100% { box-shadow: 0 0 12px rgba(220,38,38,0.6); }
     50% { box-shadow: 0 0 22px rgba(220,38,38,1); }
 }
-@keyframes royalLiveDot {
+@keyframes cleanLiveDot {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
 }
@@ -1448,10 +1462,10 @@ nav a.nav-daftar:hover {
 }
 
 .match-status-badge.akan {
-    color: #fef3c7;
-    background: linear-gradient(135deg, rgba(146,64,14,0.95), rgba(217,119,6,0.9));
-    border: 1px solid rgba(252,211,77,0.8);
-    box-shadow: 0 0 12px rgba(245,158,11,0.4);
+    color: #cffafe;
+    background: linear-gradient(135deg, rgba(8,90,120,0.95), rgba(0,180,220,0.9));
+    border: 1px solid rgba(103,232,249,0.8);
+    box-shadow: 0 0 12px rgba(0,212,255,0.4);
 }
 .match-status-badge.akan::before {
     content: "◷";
@@ -1459,7 +1473,7 @@ nav a.nav-daftar:hover {
     font-weight: 900;
 }
 
-/* League label kecil di atas kiri */
+/* League label */
 .match-league-label {
     position: absolute;
     top: 8px;
@@ -1471,25 +1485,20 @@ nav a.nav-daftar:hover {
     font-size: 9.5px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #f5d76e;
+    color: #67e8f9;
     text-transform: uppercase;
     max-width: 60%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     z-index: 5;
-    text-shadow: 0 0 8px rgba(212,175,55,0.5);
+    text-shadow: 0 0 8px rgba(0,212,255,0.5);
 }
 
 .match-league-label::before {
     content: "🏆";
     font-size: 10px;
     flex-shrink: 0;
-}
-
-/* Spacer untuk label di atas */
-.match-header-spacer {
-    height: 20px;
 }
 
 .single-col-empty {
@@ -1566,7 +1575,7 @@ nav a.nav-daftar:hover {
         min-width: unset;
         width: 100%;
         padding-top: 6px;
-        border-top: 1px dashed rgba(212,175,55,0.15);
+        border-top: 1px dashed rgba(0,212,255,0.15);
     }
 
     .match-value-line {
@@ -2189,7 +2198,7 @@ window.fadeInContent = function() {
 })();
 
 /* CACHE */
-const CACHE_KEY = "kiper4d_data_cache_v29";
+const CACHE_KEY = "kiper4d_data_cache_v30";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
 function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch (error) {} }
@@ -2206,7 +2215,7 @@ function loadCache(maxAge) {
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
 /* LOGO CACHE */
-const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v42";
+const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v43";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
 
@@ -2232,7 +2241,7 @@ async function loadTeamLogosFromDB() {
 
 /* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
-const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v7";
+const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v8";
 const theSportsDbCache = new Map();
 
 (function loadTheSportsDbCache() {
@@ -2307,6 +2316,7 @@ function normalizeTeamName(name) {
         .replace(/\s+/g, " ").trim();
 }
 
+/* ⭐ FIX: ultraNormalizeTeam yang lebih bersih untuk dedupe */
 function ultraNormalizeTeam(name) {
     if (!name) return "";
     let s = String(name).toLowerCase()
@@ -2505,12 +2515,22 @@ function getTodayIndoText() {
 function dataMasihAktif(data) { return data.active !== false; }
 function dataLengkap(data) { return clean(data.date) && clean(data.time) && clean(data.home) && clean(data.away); }
 
+/* ⭐ FIX: matchKey pakai versi simple untuk dedupe */
 function matchKey(data) {
     return [
         normalizeDate(clean(data.date)),
         normalizeTime(clean(data.time)),
         ultraNormalizeTeam(data.home),
         ultraNormalizeTeam(data.away)
+    ].join("|");
+}
+
+/* ⭐ FIX: simpleKey — dedupe paksa by date+time+home */
+function simpleKey(data) {
+    return [
+        normalizeDate(clean(data.date)),
+        normalizeTime(clean(data.time)),
+        ultraNormalizeTeam(data.home)
     ].join("|");
 }
 
@@ -2600,7 +2620,7 @@ function updateNewsTicker(data) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   RENDER MATCH CARD — ROYAL LUXURY COMPACT
+   RENDER MATCH CARD — CLEAN CYAN COMPACT
    ═══════════════════════════════════════════════════════════ */
 function renderMatchRowSingle(data) {
     const home = clean(data.home);
@@ -2998,15 +3018,31 @@ function renderBigMatch(data) {
     }
 }
 
+/* ⭐ FIX: processData dengan DOUBLE DEDUPE (matchKey + simpleKey) */
 function processData(rawDataArray) {
     const merged = new Map();
+    const simpleKeyMap = new Map();
+    
     rawDataArray.forEach(data => {
         if (!dataLengkap(data)) return;
         if (!dataMasihAktif(data)) return;
+        
         const key = matchKey(data);
-        if (!merged.has(key)) merged.set(key, { ...data });
-        else {
-            const existing = merged.get(key);
+        const skey = simpleKey(data);
+        
+        // Cek apakah sudah ada di simpleKeyMap (dengan date+time+home yang sama)
+        // Kalau ada, merge ke existing
+        let targetKey = key;
+        if (simpleKeyMap.has(skey)) {
+            targetKey = simpleKeyMap.get(skey);
+        } else {
+            simpleKeyMap.set(skey, key);
+        }
+        
+        if (!merged.has(targetKey)) {
+            merged.set(targetKey, { ...data });
+        } else {
+            const existing = merged.get(targetKey);
             if (!clean(existing.league) && clean(data.league)) existing.league = data.league;
             if (!clean(existing.handicap) && clean(data.handicap)) existing.handicap = data.handicap;
             if (!clean(existing.homeLogo) && clean(data.homeLogo)) existing.homeLogo = data.homeLogo;
@@ -3015,9 +3051,10 @@ function processData(rawDataArray) {
             if (!clean(existing.predictionScoreAway) && clean(data.predictionScoreAway)) existing.predictionScoreAway = data.predictionScoreAway;
             if (!clean(existing.actualScoreHome) && clean(data.actualScoreHome)) existing.actualScoreHome = data.actualScoreHome;
             if (!clean(existing.actualScoreAway) && clean(data.actualScoreAway)) existing.actualScoreAway = data.actualScoreAway;
-            merged.set(key, existing);
+            merged.set(targetKey, existing);
         }
     });
+    
     semuaData = Array.from(merged.values());
     semuaData.sort((a, b) => (getKickoffWIBMs(a) || 0) - (getKickoffWIBMs(b) || 0));
 
