@@ -827,15 +827,14 @@ nav a.nav-daftar:hover {
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 20px;
-    background: linear-gradient(135deg, #3d2b56, #1e3a5f, #4d3520, #3d2b56);
-    background-size: 300% auto;
+    background: #cc0000; /* Warna Merah untuk Breaking News */
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
     font-size: 12px; font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
     z-index: 4;
-    animation: jewelText 8s linear infinite;
+    animation: newsBlink 1.5s ease-in-out infinite; /* Efek kedip merah */
 }
 .news-ticker-label::before {
     content: "●";
@@ -1523,7 +1522,7 @@ nav a.nav-daftar:hover {
 
 .match-row-single {
     position: relative;
-    padding: 10px 10px 8px;
+    padding: 10px 5px 8px; /* Padding dikurangi agar lebih kecil */
     background: #000;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -1612,7 +1611,7 @@ nav a.nav-daftar:hover {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 8px;
+    gap: 4px; /* Gap dikurangi agar lebih rapat */
     padding-top: 4px;
 }
 
@@ -1625,6 +1624,16 @@ nav a.nav-daftar:hover {
     text-align: center;
     min-width: 0;
     padding: 2px;
+}
+
+/* Geser tim ke ujung kiri dan kanan */
+.match-team-side.left {
+    align-items: flex-start;
+    padding-left: 2px; /* Sedikit geser ke kiri */
+}
+.match-team-side.right {
+    align-items: flex-end;
+    padding-right: 2px; /* Sedikit geser ke kanan */
 }
 
 /* Logo tim */
@@ -1714,8 +1723,8 @@ nav a.nav-daftar:hover {
     align-items: center;
     justify-content: center;
     gap: 1px;
-    padding: 3px 8px;
-    min-width: 44px;
+    padding: 3px 6px; /* Padding dikurangi */
+    min-width: 40px;
     border-radius: 8px;
     background: #000;
     border: 1px solid rgba(255,255,255,0.06);
@@ -1853,11 +1862,11 @@ nav a.nav-daftar:hover {
     }
 
     .match-row-single {
-        padding: 14px 6px 6px;
+        padding: 12px 4px 6px; /* Padding dikurangi untuk mobile */
     }
 
     .match-main-row {
-        gap: 5px;
+        gap: 2px; /* Gap lebih rapat */
     }
 
     .match-team-logo,
@@ -1873,8 +1882,8 @@ nav a.nav-daftar:hover {
     }
 
     .match-vs-center {
-        padding: 2px 6px;
-        min-width: 38px;
+        padding: 2px 4px; /* Padding lebih kecil */
+        min-width: 34px;
     }
 
     .match-vs-text { font-size: 9px; }
@@ -1902,7 +1911,7 @@ nav a.nav-daftar:hover {
 }
 
 @media (max-width: 430px) {
-    .match-row-single { padding: 14px 5px 5px; }
+    .match-row-single { padding: 12px 3px 5px; }
     .match-team-logo,
     .match-team-logo-initial { width: 26px; height: 26px; font-size: 9px; }
     .match-team-name-text { font-size: 9px; }
@@ -2094,7 +2103,7 @@ nav a.nav-daftar:hover {
     nav a.nav-login { padding: 6px 14px; font-size: 11px; }
     nav a.nav-daftar { padding: 7px 16px; font-size: 11px; }
     .container { padding: 14px 10px 45px; }
-    .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
+    .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; background: #cc0000; }
     .news-ticker-content { font-size: 11px !important; animation-duration: 30s, 10s !important; }
     .news-ticker-wrap { height: 36px; }
     .news-ticker { min-height: 36px; margin-bottom: 18px; }
@@ -2164,7 +2173,7 @@ nav a.nav-daftar:hover {
     .loading-ring { width: 165px; height: 165px; }
     .loading-ring:nth-child(2) { width: 200px; height: 200px; }
     .loading-percent { font-size: 34px; }
-    .news-ticker-label { font-size: 9px; padding: 6px 10px; letter-spacing: 1.2px; }
+    .news-ticker-label { font-size: 9px; padding: 6px 10px; letter-spacing: 1.2px; background: #cc0000; }
     .news-ticker-content { font-size: 10px !important; animation-duration: 25s, 9s !important; }
     .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
     .lux-text-wrap .icon-side { font-size: 11px; }
