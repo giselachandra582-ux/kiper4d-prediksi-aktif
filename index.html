@@ -157,12 +157,6 @@ body {
     100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
 }
 
-@keyframes breakingFlow {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 .aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
 .aurora-bg::before {
     content: "";
@@ -771,7 +765,7 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
-/* ═══ BREAKING NEWS ═══ */
+/* ═══ BREAKING NEWS — SIMPLE & BERSIH ═══ */
 .news-ticker {
     position: relative;
     width: 100%;
@@ -780,41 +774,23 @@ nav a.nav-daftar:hover {
     background: #0a0000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: none;
+    border: 1px solid rgba(255,255,255,0.08);
     margin-bottom: 26px;
     display: flex; align-items: center;
     min-height: 50px;
     padding: 2px;
-}
-.news-ticker::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    padding: 2px;
-    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #d4b88b, #ff99bb, #a98bd4);
-    background-size: 400% 100%;
-    animation: breakingFlow 6s linear infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-    z-index: 1;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 22px;
-    background: linear-gradient(135deg, #ff0044, #cc0033, #ff0066, #ff0044);
-    background-size: 300% auto;
+    background: linear-gradient(135deg, #ff0044, #cc0033);
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
     font-size: 13px; font-weight: 900;
     letter-spacing: 4px;
     text-transform: uppercase;
     z-index: 4;
-    animation: jewelText 4s linear infinite;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 0, 80, 0.6);
     position: relative;
     margin: 2px;
     border-radius: 12px;
@@ -825,7 +801,6 @@ nav a.nav-daftar:hover {
     margin-right: 10px;
     color: #fff;
     animation: newsBlink 1s ease-in-out infinite;
-    text-shadow: 0 0 10px #fff, 0 0 20px #ff0044;
 }
 .news-ticker-wrap { flex: 1; overflow: hidden; position: relative; height: 50px; z-index: 2; }
 .news-ticker-content {
@@ -838,7 +813,6 @@ nav a.nav-daftar:hover {
     color: #ffffff;
     animation: newsScroll 50s linear infinite;
     padding-left: 100%;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 /* ═══ STATS ═══ */
@@ -1499,7 +1473,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ MATCH ROW — GARIS TEBAL 3 WARNA ═══ */
+/* ═══ MATCH ROW — VERSI SEMULA (TIPIS & RAPI) ═══ */
 .match-row-single {
     position: relative;
     padding: 14px 18px 12px;
@@ -1507,27 +1481,9 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: none;
-    z-index: 1;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-/* Garis gradasi 3 warna animasi di bagian bawah tiap kotak */
-.match-row-single::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #a98bd4);
-    background-size: 300% 100%;
-    animation: jewelFlow 6s linear infinite;
-    z-index: 3;
-    pointer-events: none;
-    box-shadow: 0 0 10px rgba(139, 180, 232, 0.6), 0 0 10px rgba(169, 139, 212, 0.4);
-}
-
-/* Kotak pertama & terakhir tetap punya sudut membulat */
 .match-row-single:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -1535,9 +1491,7 @@ nav a.nav-daftar:hover {
 .match-row-single:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-}
-.match-row-single:last-child::after {
-    display: none;
+    border-bottom: none;
 }
 
 .match-row-single:hover {
