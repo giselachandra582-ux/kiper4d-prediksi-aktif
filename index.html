@@ -771,7 +771,7 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
-/* ═══ BREAKING NEWS — TEKS PUTIH SATU WARNA ═══ */
+/* ═══ BREAKING NEWS ═══ */
 .news-ticker {
     position: relative;
     width: 100%;
@@ -1499,7 +1499,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ MATCH ROW ═══ */
+/* ═══ MATCH ROW — GARIS TEBAL 3 WARNA ═══ */
 .match-row-single {
     position: relative;
     padding: 14px 18px 12px;
@@ -1507,18 +1507,37 @@ nav a.nav-daftar:hover {
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border: none;
+    z-index: 1;
 }
 
+/* Garis gradasi 3 warna animasi di bagian bawah tiap kotak */
+.match-row-single::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #a98bd4, #8bb4e8, #8bd4b8, #a98bd4);
+    background-size: 300% 100%;
+    animation: jewelFlow 6s linear infinite;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(139, 180, 232, 0.6), 0 0 10px rgba(169, 139, 212, 0.4);
+}
+
+/* Kotak pertama & terakhir tetap punya sudut membulat */
 .match-row-single:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-
 .match-row-single:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-bottom: none;
+}
+.match-row-single:last-child::after {
+    display: none;
 }
 
 .match-row-single:hover {
