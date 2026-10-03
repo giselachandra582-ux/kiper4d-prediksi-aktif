@@ -2,34 +2,16 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>KIPER4D — Prediksi Bola Hari Ini, Jadwal & Handicap Terbaru</title>
 <meta name="description" content="Prediksi bola hari ini terlengkap! Jadwal pertandingan, prediksi skor, handicap, dan informasi sepak bola terbaru setiap hari hanya di KIPER4D.">
-<meta name="keywords" content="prediksi bola, jadwal bola, prediksi skor, handicap bola, prediksi hari ini, KIPER4D, bola online">
-<meta name="author" content="KIPER4D">
-<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#021410">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KIPER4D — Prediksi Bola Hari Ini">
-<meta property="og:description" content="Prediksi bola hari ini terlengkap! Jadwal pertandingan, prediksi skor, handicap.">
-<meta property="og:image" content="banner-kiper4d-baru.png">
-<meta property="og:url" content="https://kiper4d.com">
-<meta property="og:site_name" content="KIPER4D">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="KIPER4D — Prediksi Bola Hari Ini">
-<meta name="twitter:description" content="Prediksi bola hari ini terlengkap! Jadwal pertandingan, prediksi skor, handicap.">
-<meta name="twitter:image" content="banner-kiper4d-baru.png">
 <link rel="icon" type="image/png" href="favicon.png">
-<link rel="preload" as="image" href="logo-kiper4d.png">
-<link rel="preload" as="image" href="banner-kiper4d-baru.png">
-<link rel="preconnect" href="https://www.gstatic.com">
-<link rel="preconnect" href="https://firestore.googleapis.com">
-<link rel="preconnect" href="https://www.thesportsdb.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
 
 :root {
@@ -37,12 +19,7 @@ html { scroll-behavior: smooth; }
     --j2: #1e3a5f;
     --j3: #1e4d42;
     --j4: #4d3520;
-    --jc1: #a98bd4;
-    --jc2: #8bb4e8;
-    --jc3: #8bd4b8;
-    --jc4: #d4b88b;
     --bg-0: #000805;
-    --bg-black: #000000;
     --text-soft: #a8c8b8;
 }
 
@@ -82,11 +59,6 @@ body {
 @keyframes progressShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
-}
-
-@keyframes headerBorder {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
 }
 
 @keyframes newsBlink {
@@ -130,11 +102,6 @@ body {
     0% { transform: translateY(-50%) rotate(0deg) scale(1); }
     50% { transform: translateY(-50%) rotate(180deg) scale(1.2); }
     100% { transform: translateY(-50%) rotate(360deg) scale(1); }
-}
-
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-3px) scale(1.05); }
 }
 
 @keyframes floatParticle {
@@ -325,11 +292,12 @@ body {
     opacity: 0.9;
 }
 
+/* ═══ HEADER ═══ */
 header {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(0,0,0,0.92);
+    background: rgba(0,0,0,0.95);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-bottom: none;
@@ -343,7 +311,7 @@ header::before {
     width: 100%; height: 2px;
     background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
     background-size: 300% 100%;
-    animation: headerBorder 12s linear infinite;
+    animation: jewelFlow 12s linear infinite;
     z-index: 1;
 }
 .header-inner {
@@ -481,8 +449,69 @@ nav a.nav-daftar:hover {
     box-shadow: 0 10px 45px rgba(61,43,86,0.9), 0 0 45px rgba(30,58,95,0.7);
 }
 
+/* ═══ MOBILE HEADER — KOTAK-KOTAK ATAS BAWAH ═══ */
+@media (max-width: 800px) {
+    .header-inner {
+        flex-direction: column;
+        padding: 12px 14px 14px;
+        gap: 12px;
+    }
+    .logo {
+        align-items: center;
+        width: 100%;
+    }
+    .logo img {
+        width: 130px; height: 48px;
+    }
+    .logo-subtitle {
+        font-size: 8px;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+    nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        max-width: 400px;
+    }
+    nav a.nav-link,
+    nav a.nav-login,
+    nav a.nav-daftar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 10px;
+        font-size: 12px;
+        border-radius: 12px;
+        width: 100%;
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+    nav a.nav-link {
+        background: #0a0a0a;
+        border: 1.5px solid rgba(61,43,86,0.4);
+    }
+    nav a.nav-login {
+        background: #0a0a0a;
+        border: 1.5px solid rgba(30,58,95,0.5);
+        box-shadow: 0 0 15px rgba(30,58,95,0.2);
+    }
+    nav a.nav-daftar {
+        background: linear-gradient(135deg, #3d2b56 0%, #1e3a5f 50%, #1e4d42 100%);
+        border: none;
+        box-shadow: 0 4px 20px rgba(61,43,86,0.5);
+        grid-column: span 2;
+    }
+    nav a.nav-link::before,
+    nav a.nav-login::before {
+        border-radius: 12px;
+    }
+}
+
 .container { max-width: 1250px; margin: auto; padding: 28px 20px 70px; position: relative; z-index: 1; }
 
+/* ═══ LUX TEXT ═══ */
 .lux-text-wrap {
     position: relative;
     width: 100%;
@@ -569,7 +598,6 @@ nav a.nav-daftar:hover {
 .lux-text-item.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .lux-text-item.exit-up { opacity: 0; transform: translateY(-22px) scale(0.94); filter: blur(8px); }
 
-/* SVG icon di running text — pasti muncul */
 .lux-svg {
     width: 18px;
     height: 18px;
@@ -619,7 +647,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ BIG MATCH SECTION — PERSIS SEPERTI GAMBAR ═══ */
+/* ═══ BIG MATCH SECTION ═══ */
 .big-match-section {
     position: relative;
     width: 100%;
@@ -717,7 +745,7 @@ nav a.nav-daftar:hover {
     width: 100%;
 }
 
-/* ═══ BMT CARD — PERSIS SEPERTI GAMBAR ═══ */
+/* ═══ BMT CARD ═══ */
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
@@ -1585,7 +1613,7 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ MATCH ROW — TIPIS & RAPI ═══ */
+/* ═══ MATCH ROW ═══ */
 .match-row-single {
     position: relative;
     padding: 14px 18px 12px;
@@ -1624,7 +1652,6 @@ nav a.nav-daftar:hover {
     pointer-events: none;
 }
 
-/* Badge status */
 .match-badge-center {
     position: absolute;
     top: 4px;
@@ -1667,7 +1694,6 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 10px rgba(30,58,95,0.6);
 }
 
-/* ═══ LIVE BADGE — MERAH MENYALA ═══ */
 .match-badge-center.live {
     background: #ff0000 !important;
     color: #fff !important;
@@ -1691,7 +1717,6 @@ nav a.nav-daftar:hover {
     text-shadow: 0 0 8px #fff, 0 0 16px #ff0000;
 }
 
-/* Grid 3 kolom */
 .match-main-row {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -1900,7 +1925,9 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 
+/* ═══ RESPONSIVE MOBILE ═══ */
 @media (max-width: 800px) {
+    .container { padding: 14px 10px 45px; }
     .single-column-wrap { padding: 6px; }
     .match-row-single { padding: 14px 12px 10px; }
     .match-main-row { gap: 6px; }
@@ -1922,18 +1949,184 @@ nav a.nav-daftar:hover {
     
     .bms-title { font-size: 13px; letter-spacing: 3px; padding: 7px 16px; }
     .bms-title .bms-fire { width: 15px; height: 15px; }
-    .bmt-card { width: 160px !important; padding: 8px 8px 0 !important; }
-    .bmt-badge { font-size: 8px !important; padding: 3px 9px !important; }
-    .bmt-league { font-size: 8.5px !important; letter-spacing: 1.2px !important; }
-    .bmt-logo { width: 36px !important; height: 36px !important; }
-    .bmt-logo img { width: 26px !important; height: 26px !important; }
-    .bmt-team-name { font-size: 9px !important; max-width: 62px !important; }
-    .bmt-vs { font-size: 9px !important; padding-bottom: 22px !important; }
-    .bmt-time { font-size: 11px !important; padding: 6px 0 !important; margin: 0 -8px !important; }
-    .big-match-ticker-track { gap: 8px !important; padding: 4px 8px !important; }
+    
+    /* ═══ BIG MATCH CARD — LEBIH KECIL BIAR 3-4 KELIHATAN ═══ */
+    .bmt-card { 
+        width: 140px !important; 
+        padding: 8px 8px 0 !important;
+        border-radius: 12px !important;
+    }
+    .bmt-badge { 
+        font-size: 7.5px !important; 
+        padding: 3px 8px !important; 
+        letter-spacing: 1.2px !important;
+        margin-bottom: 6px !important;
+    }
+    .bmt-badge .badge-fire { width: 9px !important; height: 9px !important; }
+    .bmt-league { 
+        font-size: 7.5px !important; 
+        letter-spacing: 1px !important; 
+        margin-bottom: 8px !important;
+        min-height: 10px !important;
+    }
+    .bmt-logo { 
+        width: 32px !important; 
+        height: 32px !important; 
+        border-width: 1.5px !important;
+    }
+    .bmt-logo img { width: 22px !important; height: 22px !important; }
+    .bmt-team-name { 
+        font-size: 8px !important; 
+        max-width: 55px !important; 
+        letter-spacing: 0.4px !important;
+    }
+    .bmt-vs { 
+        font-size: 8px !important; 
+        padding-bottom: 20px !important; 
+        letter-spacing: 1px !important;
+    }
+    .bmt-time { 
+        font-size: 10px !important; 
+        padding: 5px 0 !important; 
+        margin: 0 -8px !important;
+        gap: 3px !important;
+    }
+    .bmt-time .time-icon-svg { width: 10px !important; height: 10px !important; }
+    .big-match-ticker-track { 
+        gap: 8px !important; 
+        padding: 4px 8px !important; 
+    }
+    .big-match-ticker-wrap .fade-left,
+    .big-match-ticker-wrap .fade-right {
+        width: 30px !important;
+    }
+    
+    /* ═══ NEWS TICKER MOBILE ═══ */
+    .news-ticker-label { font-size: 11px; padding: 10px 14px; letter-spacing: 2px; }
+    .news-ticker-content { font-size: 12px !important; animation-duration: 35s !important; }
+    .news-ticker-wrap { height: 42px; }
+    .news-ticker { min-height: 42px; margin-bottom: 18px; }
+    
+    /* ═══ LUX TEXT MOBILE ═══ */
+    .lux-text-wrap { padding: 12px 38px; min-height: 54px; height: auto; margin-bottom: 14px; border-radius: 14px; }
+    .lux-text-wrap .icon-side { font-size: 13px; }
+    .lux-text-wrap .icon-side.left { left: 15px; }
+    .lux-text-wrap .icon-side.right { right: 15px; }
+    .lux-text-wrap .corner-bl, .lux-text-wrap .corner-br { width: 16px; height: 16px; }
+    .lux-text-slide { height: auto; min-height: 46px; position: relative; }
+    .lux-text-item { position: relative; inset: auto; display: none; font-size: 11.5px; letter-spacing: 1.2px; line-height: 1.45; white-space: normal; padding: 4px 0; word-break: break-word; }
+    .lux-text-item.active { display: flex; }
+    .lux-text-item.exit-up { display: none; }
+    .lux-svg { width: 14px; height: 14px; }
+    .lux-text-item { gap: 6px; }
+    
+    /* ═══ BANNER MOBILE ═══ */
+    .banner { border-radius: 16px; margin-bottom: 16px; }
+    .banner img { width: 100%; height: auto; object-fit: contain; }
+    
+    /* ═══ STATS MOBILE ═══ */
+    .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+    .stat-box { padding: 14px 6px 12px; border-radius: 14px; }
+    .stat-number { font-size: 26px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    
+    /* ═══ FILTER MOBILE ═══ */
+    .filter-row { display: flex; flex-direction: column; gap: 10px; padding: 12px; width: 100%; }
+    .next-match-bar-inline { width: 100%; margin-bottom: 4px; }
+    .next-match-inner { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; text-align: center; }
+    .next-match-label { font-size: 10px; letter-spacing: 2.5px; }
+    .next-match-teams { font-size: 13.5px; text-align: center; }
+    .next-match-countdown { font-size: 20px; padding: 4px 20px; }
+    .tab-filter-row { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .tab-clock { display: flex; justify-content: center; padding: 10px 16px; width: 100%; }
+    .tab-clock-icon { font-size: 15px; }
+    .tab-clock-value { font-size: 21px; }
+    .tab-clock-label { font-size: 11.5px; letter-spacing: 1.5px; }
+    .tab-filter-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; }
+    .tab-filter { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px 6px; font-size: 10.5px; width: 100%; letter-spacing: 0.5px; text-align: center; min-width: 0; }
+    .tab-icon { font-size: 13px; }
+    .tab-text { font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .search-box { width: 100%; min-width: unset; }
+    #searchInput { font-size: 13px; }
+    .date-picker-filter { width: 100%; }
+    #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
+    
+    /* ═══ SECTION MOBILE ═══ */
+    .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
+    .section-title { font-size: 18px; letter-spacing: 2px; }
+    .section-title .title-icon { width: 20px; height: 20px; }
+    .selesai-toggle { font-size: 11px; letter-spacing: 1.5px; padding: 11px 14px; gap: 8px; }
+    .selesai-icon { font-size: 14px; }
+    .selesai-arrow { font-size: 10px; }
+    
+    /* ═══ FOOTER MOBILE ═══ */
+    .footer-logo-wrap { min-height: 70px; }
+    .footer-logo-wrap img { width: 110px; height: 48px; }
+    .footer-title { font-size: 20px; letter-spacing: 7px; }
+    .footer-tagline { font-size: 11px; letter-spacing: 2.5px; }
+    
+    /* ═══ TOAST MOBILE ═══ */
+    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
+    
+    /* ═══ BOTTOM NAV MOBILE ═══ */
+    body { padding-bottom: 85px; }
+    .bottom-nav { display: block; }
+    .logo img { width: 115px; height: 42px; }
+    .logo-subtitle { font-size: 7px; letter-spacing: 1.5px; }
 }
 
 @media (max-width: 430px) {
+    .logo img { width: 100px; height: 38px; }
+    .logo-subtitle { font-size: 6.5px; }
+    nav a.nav-link,
+    nav a.nav-login,
+    nav a.nav-daftar { padding: 10px 8px; font-size: 11px; }
+    .loading-logo-wrap img { width: 110px; height: 110px; }
+    .loading-ring { width: 165px; height: 165px; }
+    .loading-ring:nth-child(2) { width: 200px; height: 200px; }
+    .loading-percent { font-size: 34px; }
+    .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
+    .news-ticker-content { font-size: 11px !important; animation-duration: 30s !important; }
+    .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
+    .lux-text-wrap .icon-side { font-size: 11px; }
+    .lux-text-wrap .icon-side.left { left: 11px; }
+    .lux-text-wrap .icon-side.right { right: 11px; }
+    .lux-text-slide { height: auto; min-height: 42px; }
+    .lux-text-item { font-size: 10.5px; letter-spacing: 0.8px; line-height: 1.45; }
+    .banner { border-radius: 14px; margin-bottom: 14px; }
+    
+    /* ═══ BIG MATCH CARD EXTRA SMALL ═══ */
+    .bmt-card { width: 125px !important; padding: 6px 6px 0 !important; }
+    .bmt-badge { font-size: 7px !important; padding: 2px 7px !important; letter-spacing: 1px !important; }
+    .bmt-badge .badge-fire { width: 8px !important; height: 8px !important; }
+    .bmt-league { font-size: 7px !important; letter-spacing: 0.8px !important; }
+    .bmt-logo { width: 28px !important; height: 28px !important; }
+    .bmt-logo img { width: 18px !important; height: 18px !important; }
+    .bmt-team-name { font-size: 7.5px !important; max-width: 48px !important; }
+    .bmt-vs { font-size: 7.5px !important; padding-bottom: 18px !important; }
+    .bmt-time { font-size: 9px !important; padding: 4px 0 !important; margin: 0 -6px !important; }
+    .bmt-time .time-icon-svg { width: 9px !important; height: 9px !important; }
+    .big-match-ticker-track { gap: 6px !important; padding: 4px 6px !important; }
+    .big-match-ticker-wrap .fade-left,
+    .big-match-ticker-wrap .fade-right { width: 20px !important; }
+    
+    .footer-logo-wrap { min-height: 60px; }
+    .footer-logo-wrap img { width: 90px; height: 40px; }
+    .footer-title { font-size: 18px; letter-spacing: 6px; }
+    .footer-tagline { font-size: 10px; letter-spacing: 2px; }
+    .date-group-header { font-size: 13px; padding: 10px 12px; letter-spacing: 1.5px; }
+    .league-header { font-size: 11px; padding: 11px 20px; letter-spacing: 2px; }
+    .tab-filter { padding: 9px 4px; font-size: 10px; gap: 4px; }
+    .tab-icon { font-size: 12px; }
+    .tab-text { font-size: 10px; }
+    .tab-clock-value { font-size: 19px; }
+    #tanggalSpesifik { font-size: 12px; padding: 10px 30px 10px 12px; }
+    .section-title { font-size: 16px; }
+    .section-title .title-icon { width: 18px; height: 18px; }
+    .lux-svg { width: 13px; height: 13px; }
+    .lux-text-item { gap: 5px; }
+    
+    /* ═══ MATCH ROW EXTRA SMALL ═══ */
     .match-row-single { padding: 14px 8px 8px; }
     .match-team-logo, .match-team-logo-initial { width: 30px; height: 30px; font-size: 10px; }
     .match-team-name-text { font-size: 10px; }
@@ -1945,22 +2138,9 @@ nav a.nav-daftar:hover {
     .match-extra-item .val { font-size: 12px; }
     .match-extra-item .lbl { font-size: 8px; }
     .match-badge-center { font-size: 7px; padding: 1px 6px; }
-    
-    .bms-title { font-size: 12px; letter-spacing: 2.5px; padding: 6px 14px; }
-    .bms-title .bms-fire { width: 13px; height: 13px; }
-    .bmt-card { width: 148px !important; }
-    .bmt-badge { font-size: 7.5px !important; padding: 3px 8px !important; letter-spacing: 1.5px !important; }
-    .bmt-badge .badge-fire { width: 9px; height: 9px; }
-    .bmt-league { font-size: 8px !important; }
-    .bmt-logo { width: 32px !important; height: 32px !important; }
-    .bmt-logo img { width: 22px !important; height: 22px !important; }
-    .bmt-team-name { font-size: 8.5px !important; max-width: 55px !important; }
-    .bmt-vs { font-size: 8.5px !important; padding-bottom: 20px !important; }
-    .bmt-time { font-size: 10px !important; }
-    .lux-svg { width: 14px; height: 14px; }
-    .lux-text-item { gap: 6px; }
 }
 
+/* ═══ FOOTER ═══ */
 .site-footer {
     position: relative;
     margin-top: 60px;
@@ -2031,6 +2211,7 @@ nav a.nav-daftar:hover {
     font-weight: 800;
 }
 
+/* ═══ BOTTOM NAV ═══ */
 .bottom-nav {
     display: none;
     position: fixed;
@@ -2115,111 +2296,6 @@ nav a.nav-daftar:hover {
     pointer-events: none;
 }
 .toast.show { transform: translateX(0); }
-
-@media (max-width: 800px) {
-    body { padding-bottom: 85px; }
-    .bottom-nav { display: block; }
-    .header-inner { padding: 10px 12px; }
-    .logo img { width: 115px; height: 42px; }
-    .logo-subtitle { font-size: 7px; letter-spacing: 1.5px; }
-    nav { gap: 5px; }
-    nav a.nav-link { padding: 7px 12px; font-size: 11px; }
-    nav a.nav-login { padding: 6px 14px; font-size: 11px; }
-    nav a.nav-daftar { padding: 7px 16px; font-size: 11px; }
-    .container { padding: 14px 10px 45px; }
-    .news-ticker-label { font-size: 11px; padding: 10px 14px; letter-spacing: 2px; }
-    .news-ticker-content { font-size: 12px !important; animation-duration: 35s !important; }
-    .news-ticker-wrap { height: 42px; }
-    .news-ticker { min-height: 42px; margin-bottom: 18px; }
-    .lux-text-wrap { padding: 12px 38px; min-height: 54px; height: auto; margin-bottom: 14px; border-radius: 14px; }
-    .lux-text-wrap .icon-side { font-size: 13px; }
-    .lux-text-wrap .icon-side.left { left: 15px; }
-    .lux-text-wrap .icon-side.right { right: 15px; }
-    .lux-text-wrap .corner-bl, .lux-text-wrap .corner-br { width: 16px; height: 16px; }
-    .lux-text-slide { height: auto; min-height: 46px; position: relative; }
-    .lux-text-item { position: relative; inset: auto; display: none; font-size: 11.5px; letter-spacing: 1.2px; line-height: 1.45; white-space: normal; padding: 4px 0; word-break: break-word; }
-    .lux-text-item.active { display: flex; }
-    .lux-text-item.exit-up { display: none; }
-    .banner { border-radius: 16px; margin-bottom: 16px; }
-    .banner img { width: 100%; height: auto; object-fit: contain; }
-    .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
-    .stat-box { padding: 14px 6px 12px; border-radius: 14px; }
-    .stat-number { font-size: 26px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
-    .filter-row { display: flex; flex-direction: column; gap: 10px; padding: 12px; width: 100%; }
-    .next-match-bar-inline { width: 100%; margin-bottom: 4px; }
-    .next-match-inner { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; text-align: center; }
-    .next-match-label { font-size: 10px; letter-spacing: 2.5px; }
-    .next-match-teams { font-size: 13.5px; text-align: center; }
-    .next-match-countdown { font-size: 20px; padding: 4px 20px; }
-    .tab-filter-row { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-    .tab-clock { display: flex; justify-content: center; padding: 10px 16px; width: 100%; }
-    .tab-clock-icon { font-size: 15px; }
-    .tab-clock-value { font-size: 21px; }
-    .tab-clock-label { font-size: 11.5px; letter-spacing: 1.5px; }
-    .tab-filter-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; }
-    .tab-filter { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px 6px; font-size: 10.5px; width: 100%; letter-spacing: 0.5px; text-align: center; min-width: 0; }
-    .tab-icon { font-size: 13px; }
-    .tab-text { font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .search-box { width: 100%; min-width: unset; }
-    #searchInput { font-size: 13px; }
-    .date-picker-filter { width: 100%; }
-    #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
-    .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
-    .section-title { font-size: 18px; letter-spacing: 2px; }
-    .section-title .title-icon { width: 20px; height: 20px; }
-    .selesai-toggle { font-size: 11px; letter-spacing: 1.5px; padding: 11px 14px; gap: 8px; }
-    .selesai-icon { font-size: 14px; }
-    .selesai-arrow { font-size: 10px; }
-    .footer-logo-wrap { min-height: 70px; }
-    .footer-logo-wrap img { width: 110px; height: 48px; }
-    .footer-title { font-size: 20px; letter-spacing: 7px; }
-    .footer-tagline { font-size: 11px; letter-spacing: 2.5px; }
-    .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
-}
-
-@media (max-width: 430px) {
-    .logo img { width: 100px; height: 38px; }
-    .logo-subtitle { font-size: 6.5px; }
-    nav a.nav-link { padding: 6px 10px; font-size: 10px; }
-    nav a.nav-login { padding: 5px 12px; font-size: 10px; }
-    nav a.nav-daftar { padding: 6px 14px; font-size: 10px; }
-    .loading-logo-wrap img { width: 110px; height: 110px; }
-    .loading-ring { width: 165px; height: 165px; }
-    .loading-ring:nth-child(2) { width: 200px; height: 200px; }
-    .loading-percent { font-size: 34px; }
-    .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
-    .news-ticker-content { font-size: 11px !important; animation-duration: 30s !important; }
-    .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
-    .lux-text-wrap .icon-side { font-size: 11px; }
-    .lux-text-wrap .icon-side.left { left: 11px; }
-    .lux-text-wrap .icon-side.right { right: 11px; }
-    .lux-text-slide { height: auto; min-height: 42px; }
-    .lux-text-item { font-size: 10.5px; letter-spacing: 0.8px; line-height: 1.45; }
-    .banner { border-radius: 14px; margin-bottom: 14px; }
-    .bmt-card { width: 148px !important; padding: 8px 8px 0 !important; }
-    .bmt-logo { width: 30px !important; height: 30px !important; }
-    .bmt-logo img { width: 22px !important; height: 22px !important; }
-    .bmt-team-name { font-size: 8.5px !important; max-width: 55px !important; }
-    .bmt-time { font-size: 10px !important; }
-    .bmt-league { font-size: 8px !important; }
-    .big-match-ticker-track { gap: 8px !important; }
-    .footer-logo-wrap { min-height: 60px; }
-    .footer-logo-wrap img { width: 90px; height: 40px; }
-    .footer-title { font-size: 18px; letter-spacing: 6px; }
-    .footer-tagline { font-size: 10px; letter-spacing: 2px; }
-    .date-group-header { font-size: 13px; padding: 10px 12px; letter-spacing: 1.5px; }
-    .league-header { font-size: 11px; padding: 11px 20px; letter-spacing: 2px; }
-    .tab-filter { padding: 9px 4px; font-size: 10px; gap: 4px; }
-    .tab-icon { font-size: 12px; }
-    .tab-text { font-size: 10px; }
-    .tab-clock-value { font-size: 19px; }
-    #tanggalSpesifik { font-size: 12px; padding: 10px 30px 10px 12px; }
-    .section-title { font-size: 16px; }
-    .section-title .title-icon { width: 18px; height: 18px; }
-    .lux-svg { width: 13px; height: 13px; }
-    .lux-text-item { gap: 5px; }
-}
 </style>
 </head>
 <body id="top">
@@ -2228,6 +2304,7 @@ nav a.nav-daftar:hover {
 <div class="aurora-bg"></div>
 <canvas id="particleCanvas"></canvas>
 
+<!-- Loading screen -->
 <div id="loadingScreen">
     <div class="loading-particles" id="loadingParticles"></div>
     <div class="loading-logo-wrap">
@@ -2248,6 +2325,7 @@ nav a.nav-daftar:hover {
     <div class="loading-brand">KIPER4D PREMIUM</div>
 </div>
 
+<!-- HEADER -->
 <header>
 <div class="header-inner">
     <a href="https://rotasy.link/Kiper4D" class="logo" target="_blank" rel="noopener noreferrer">
@@ -2265,6 +2343,7 @@ nav a.nav-daftar:hover {
 
 <div class="container">
 
+<!-- LUX TEXT -->
 <div class="lux-text-wrap">
     <div class="corner-bl"></div>
     <div class="corner-br"></div>
@@ -2291,10 +2370,12 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
+<!-- BANNER -->
 <div class="banner">
     <img src="banner-kiper4d-baru.png" alt="KIPER4D Prediksi Bola" loading="eager" decoding="async">
 </div>
 
+<!-- BIG MATCH -->
 <section class="big-match-section">
     <div class="bms-header">
         <span class="bms-title">
@@ -2330,6 +2411,7 @@ nav a.nav-daftar:hover {
     </div>
 </section>
 
+<!-- BREAKING NEWS -->
 <div class="news-ticker">
     <div class="news-ticker-label"><span class="label-dot"></span><span>BREAKING</span></div>
     <div class="news-ticker-wrap">
@@ -2339,6 +2421,7 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
+<!-- STATS -->
 <div class="stats">
     <div class="stat-box">
         <span class="stat-number" id="totalPrediksi">0</span>
@@ -2354,6 +2437,7 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
+<!-- PERTANDINGAN -->
 <section id="pertandingan">
     <div class="section-head">
         <div class="section-title">
@@ -2420,6 +2504,7 @@ nav a.nav-daftar:hover {
 
 </div>
 
+<!-- FOOTER -->
 <footer class="site-footer">
     <div class="footer-logo-wrap">
         <img src="logo-kiper4d.png" alt="KIPER4D" width="140" height="60" loading="lazy" decoding="async">
@@ -2429,6 +2514,7 @@ nav a.nav-daftar:hover {
     <div class="footer-copy">© 2026 <span>KIPER4D</span> • All Rights Reserved</div>
 </footer>
 
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
     <div class="bottom-nav-inner">
         <a href="#top" class="bottom-nav-item"><span class="bn-icon">🏠</span><span>Beranda</span></a>
@@ -2439,7 +2525,6 @@ nav a.nav-daftar:hover {
 </nav>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
