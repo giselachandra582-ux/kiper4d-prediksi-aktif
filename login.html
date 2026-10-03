@@ -1,308 +1,683 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- ✅ FAVICON pakai file lokal -->
 <link rel="icon" type="image/png" href="favicon.png">
-
 <title>Login Admin - KIPER4D</title>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-* {
-    box-sizing: border-box;
+:root {
+    --bg-0: #050a14;
+    --bg-1: #0a1628;
+    --cyan: #06b6d4;
+    --cyan-bright: #22d3ee;
+    --cyan-soft: #67e8f9;
+    --blue: #0ea5e9;
+    --blue-bright: #38bdf8;
+    --emerald: #10b981;
+    --emerald-bright: #34d399;
+    --amber: #f59e0b;
+    --amber-bright: #fbbf24;
+    --rose: #f43f5e;
+    --text-1: #ffffff;
+    --text-2: #e2e8f0;
+    --text-3: #94a3b8;
+    --text-4: #64748b;
+    --border-cyan: rgba(6, 182, 212, 0.25);
+    --border-cyan-strong: rgba(6, 182, 212, 0.6);
+    --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.4);
+    --glow-cyan-lg: 0 0 60px rgba(6, 182, 212, 0.5);
 }
+
+html, body { height: 100%; }
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-
-    background:
-        radial-gradient(circle at top, #3b0764, #090014 55%, #000000);
-
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-0);
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    color: white;
+    color: var(--text-2);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    padding: 20px;
+    position: relative;
 }
 
+/* ═══════════════════════════════════════════════
+   ANIMATED BACKGROUND
+   ═══════════════════════════════════════════════ */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-layer::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.35) 0%, transparent 35%),
+        radial-gradient(circle at 80% 25%, rgba(14, 165, 233, 0.3) 0%, transparent 35%),
+        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.2) 0%, transparent 35%);
+    animation: auroraShift 20s ease-in-out infinite;
+    filter: blur(80px);
+}
+
+@keyframes auroraShift {
+    0%, 100% { transform: translate(0%, 0%) scale(1); }
+    33% { transform: translate(4%, -3%) scale(1.1); }
+    66% { transform: translate(-3%, 4%) scale(0.95); }
+}
+
+.bg-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(6, 182, 212, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, #000 25%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 75%);
+}
+
+/* Scan-line */
+.scanline {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(6,182,212,0.7), transparent);
+    box-shadow: 0 0 15px rgba(6,182,212,0.8);
+    z-index: 1;
+    pointer-events: none;
+    animation: scanMove 6s linear infinite;
+}
+
+@keyframes scanMove {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Particles */
+.particles {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--cyan-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--cyan-bright), 0 0 12px var(--cyan);
+    opacity: 0.6;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    to { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   LOGIN BOX
+   ═══════════════════════════════════════════════ */
 .box {
-    width: 90%;
-    max-width: 420px;
-
-    background: rgba(20, 10, 35, 0.95);
-
-    border: 1px solid rgba(255, 215, 0, 0.35);
-
-    border-radius: 20px;
-
-    padding: 35px 30px;
-
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(145deg, rgba(15, 30, 53, 0.85), rgba(5, 10, 20, 0.95));
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-radius: 24px;
+    padding: 40px 34px 30px;
     box-shadow:
-        0 0 30px rgba(255, 215, 0, 0.15),
-        0 0 80px rgba(128, 0, 255, 0.15);
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(6, 182, 212, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    animation: boxFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =========================
-   LOGO (GAMBAR LOKAL)
-========================= */
+@keyframes boxFadeIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
+/* Animated gold/cyan border */
+.box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, 
+        rgba(6,182,212,0.8), 
+        rgba(14,165,233,0.3), 
+        rgba(16,185,129,0.3), 
+        rgba(6,182,212,0.8));
+    background-size: 300% 300%;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderFlow 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Corner brackets sci-fi */
+.box::after {
+    content: "";
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 22px; height: 22px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 4px 0 0 0;
+}
+
+/* Top glow */
+.corner-tr {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 22px; height: 22px;
+    border-top: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 0 4px 0 0;
+}
+
+.corner-bl {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    width: 22px; height: 22px;
+    border-bottom: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 0 0 0 4px;
+}
+
+.corner-br {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    width: 22px; height: 22px;
+    border-bottom: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 0 0 4px 0;
+}
+
+/* Ambient light inside box */
+.box-glow {
+    position: absolute;
+    top: -50%; left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.25), transparent 70%);
+    pointer-events: none;
+    animation: glowPulse 5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+/* ═══════════════════════════════════════════════
+   LOGO
+   ═══════════════════════════════════════════════ */
 .logo {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%);
+}
+
+.logo-wrapper::before,
+.logo-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    animation: ringPulse 3s ease-out infinite;
+}
+
+.logo-wrapper::after {
+    animation-delay: 1.5s;
+}
+
+@keyframes ringPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.4); opacity: 0; }
 }
 
 .logo img {
-    width: 180px;
-    max-width: 80%;
-
+    width: 140px;
+    max-width: 70%;
     display: block;
     margin: auto;
-
+    position: relative;
+    z-index: 1;
     filter:
-        drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
-
-    transition: filter 0.3s ease, transform 0.3s ease;
+        drop-shadow(0 0 15px rgba(6, 182, 212, 0.6))
+        drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));
+    transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .logo img:hover {
     filter:
-        drop-shadow(0 0 18px rgba(255, 215, 0, 0.75));
-    transform: scale(1.03);
+        drop-shadow(0 0 25px rgba(6, 182, 212, 0.9))
+        drop-shadow(0 0 50px rgba(14, 165, 233, 0.6));
+    transform: scale(1.05);
 }
 
-/* =========================
+/* ═══════════════════════════════════════════════
    HEADING
-========================= */
-
+   ═══════════════════════════════════════════════ */
 h1 {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 6px 0 28px;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, var(--cyan-bright), var(--cyan-soft), var(--blue-bright), var(--cyan-bright));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 4s linear infinite;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+}
 
-    font-size: 24px;
-
-    margin: 10px 0 25px;
-
-    color: #ffd700;
+@keyframes shineText {
+    to { background-position: 200% center; }
 }
 
 h1 .icon-shield {
     width: 26px;
     height: 26px;
-
     flex-shrink: 0;
-
-    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.55));
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.7));
+    animation: shieldFloat 3s ease-in-out infinite;
 }
 
+@keyframes shieldFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* ═══════════════════════════════════════════════
+   FORM
+   ═══════════════════════════════════════════════ */
 label {
     display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    padding-left: 4px;
+}
 
-    margin-bottom: 7px;
+label::before {
+    content: "▸";
+    color: var(--cyan-bright);
+    margin-right: 6px;
+    font-size: 8px;
+}
 
-    font-weight: bold;
+.input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 1;
+}
 
-    font-size: 14px;
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--cyan-soft);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 2;
+}
 
-    color: #ddd;
+.input-wrapper:focus-within .input-icon {
+    opacity: 1;
+    color: var(--cyan-bright);
+    filter: drop-shadow(0 0 6px var(--cyan));
 }
 
 input {
     width: 100%;
-
-    padding: 14px;
-
-    margin-bottom: 18px;
-
-    border-radius: 10px;
-
-    border: 1px solid #4b3b63;
-
-    background: #12091d;
-
-    color: white;
-
+    padding: 15px 16px 15px 48px;
+    border-radius: 12px;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    background: linear-gradient(135deg, rgba(5, 10, 20, 0.9), rgba(10, 22, 40, 0.85));
+    color: var(--text-1);
     outline: none;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+}
 
-    font-size: 15px;
+input::placeholder {
+    color: var(--text-4);
+    font-style: italic;
+}
+
+input:hover {
+    border-color: rgba(6, 182, 212, 0.4);
 }
 
 input:focus {
-    border-color: #ffd700;
-
+    border-color: var(--cyan);
+    background: linear-gradient(135deg, rgba(5, 10, 20, 0.95), rgba(15, 30, 53, 0.9));
     box-shadow:
-        0 0 8px rgba(255, 215, 0, 0.2);
+        inset 0 2px 8px rgba(0,0,0,0.4),
+        0 0 0 3px rgba(6, 182, 212, 0.15),
+        0 0 30px rgba(6, 182, 212, 0.35);
 }
 
+/* ═══════════════════════════════════════════════
+   BUTTON
+   ═══════════════════════════════════════════════ */
 button {
+    position: relative;
+    overflow: hidden;
     width: 100%;
-
-    padding: 15px;
-
+    padding: 16px;
     border: none;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(135deg, #ffd700, #ff9800);
-
-    color: #1a0b00;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0369a1, #0ea5e9, #22d3ee);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
     cursor: pointer;
-
-    transition: 0.2s;
-
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    box-shadow:
+        0 8px 25px rgba(6, 182, 212, 0.35),
+        0 0 40px rgba(6, 182, 212, 0.2),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    z-index: 1;
+    margin-top: 8px;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.7s;
+    pointer-events: none;
+}
+
+button:hover:not(:disabled)::before {
+    transform: translateX(100%);
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.4), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+button:hover:not(:disabled)::after { opacity: 1; }
+
+button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow:
+        0 15px 40px rgba(6, 182, 212, 0.5),
+        0 0 70px rgba(6, 182, 212, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: linear-gradient(135deg, #334155, #475569);
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 button .icon-btn {
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
-button:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 0 20px rgba(255, 215, 0, 0.35);
-}
-
-button:disabled {
-    background: #777;
-
-    color: #ddd;
-
-    cursor: not-allowed;
-}
-
+/* ═══════════════════════════════════════════════
+   RESULT
+   ═══════════════════════════════════════════════ */
 #hasil {
-    margin-top: 20px;
-
+    margin-top: 22px;
     text-align: center;
-
     line-height: 1.6;
-
-    font-size: 14px;
-
+    font-size: 13px;
     word-break: break-word;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(6, 182, 212, 0.04);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    color: var(--text-3);
+    position: relative;
+    z-index: 1;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s;
+}
+
+#hasil.success-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.02));
+    border-color: rgba(16, 185, 129, 0.4);
+    color: var(--emerald-bright);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+#hasil.error-box {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.12), rgba(244, 63, 94, 0.02));
+    border-color: rgba(244, 63, 94, 0.4);
+    color: #fda4af;
+    box-shadow: 0 0 25px rgba(244, 63, 94, 0.15);
 }
 
 #hasil .icon-inline {
     width: 16px;
     height: 16px;
-
     vertical-align: -3px;
-
     margin-right: 6px;
+    flex-shrink: 0;
 }
 
-.success {
-    color: #4ade80;
-}
+.success { color: #34d399; }
+.error { color: #fda4af; }
 
-.error {
-    color: #ff6b6b;
-}
-
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
 .footer {
-    margin-top: 25px;
-
+    margin-top: 22px;
     text-align: center;
-
-    font-size: 12px;
-
-    color: #888;
+    font-size: 10px;
+    color: var(--text-4);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    padding-top: 18px;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    font-weight: 600;
 }
 
-</style>
+.footer::before {
+    content: "◆ ◆ ◆";
+    display: block;
+    color: var(--cyan);
+    font-size: 7px;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    opacity: 0.6;
+}
 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .box { padding: 32px 22px 26px; border-radius: 20px; }
+    .logo img { width: 110px; }
+    h1 { font-size: 18px; letter-spacing: 1px; }
+    input { padding: 13px 14px 13px 44px; font-size: 13px; }
+    .input-icon { left: 14px; width: 16px; height: 16px; }
+    button { padding: 14px; font-size: 13px; }
+}
+</style>
 </head>
 
 
 <body>
 
+<div class="bg-layer"></div>
+<div class="scanline"></div>
+<div class="particles" id="particles"></div>
+
 <div class="box">
+    <div class="box-glow"></div>
+    <div class="corner-tr"></div>
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
 
     <div class="logo">
-        <!-- ✅ LOGO pakai file lokal -->
-        <img
-            src="logo-kiper4d.png"
-            alt="KIPER4D">
+        <div class="logo-wrapper">
+            <img src="logo-kiper4d.png" alt="KIPER4D">
+        </div>
     </div>
-
 
     <h1>
         <svg class="icon-shield" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L4 5V11C4 16.05 7.41 20.74 12 22C16.59 20.74 20 16.05 20 11V5L12 2Z"
-                  fill="url(#goldGrad)" stroke="#ffd700" stroke-width="1.2" stroke-linejoin="round"/>
-            <path d="M9 12L11 14L15 10"
-                  stroke="#1a0b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <defs>
-                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#ffd700"/>
-                    <stop offset="100%" stop-color="#ff9800"/>
+                <linearGradient id="cyanGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#22d3ee"/>
+                    <stop offset="100%" stop-color="#0ea5e9"/>
                 </linearGradient>
             </defs>
+            <path d="M12 2L4 5V11C4 16.05 7.41 20.74 12 22C16.59 20.74 20 16.05 20 11V5L12 2Z"
+                  fill="url(#cyanGrad)" stroke="#22d3ee" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10"
+                  stroke="#050a14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         LOGIN ADMIN
     </h1>
 
-
     <label>Email Admin</label>
-
-    <input
-        type="email"
-        id="email"
-        placeholder="Masukkan email admin"
-        autocomplete="email">
-
+    <div class="input-wrapper">
+        <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <input type="email" id="email" placeholder="Masukkan email admin" autocomplete="email">
+    </div>
 
     <label>Password</label>
-
-    <input
-        type="password"
-        id="password"
-        placeholder="Masukkan password"
-        autocomplete="current-password">
-
+    <div class="input-wrapper">
+        <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M7 11V7C7 4.24 9.24 2 12 2C14.76 2 17 4.24 17 7V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+        </svg>
+        <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
+    </div>
 
     <button id="loginButton">
-
         <svg class="icon-btn" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 3H19C20.1 3 21 3.9 21 5V19C21 20.1 20.1 21 19 21H15"
-                  stroke="#1a0b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10 17L15 12L10 7"
-                  stroke="#1a0b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M15 12H3"
-                  stroke="#1a0b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-
         LOGIN ADMIN
-
     </button>
-
 
     <div id="hasil">
         Silakan masukkan email dan password.
     </div>
-
 
     <div class="footer">
         KIPER4D • Admin Panel
@@ -330,43 +705,53 @@ from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 ========================= */
 
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyB1i3mpTNKNlk54qQqk8xONAsaw66SOVs4",
-
-    authDomain:
-        "prediksipanel.firebaseapp.com",
-
-    projectId:
-        "prediksipanel",
-
-    storageBucket:
-        "prediksipanel.firebasestorage.app",
-
-    messagingSenderId:
-        "487032542947",
-
-    appId:
-        "1:487032542947:web:46a3d64e3abdece53e17d6",
-
-    measurementId:
-        "G-TQTEN9LEDW"
-
+    apiKey: "AIzaSyB1i3mpTNKNlk54qQqk8xONAsaw66SOVs4",
+    authDomain: "prediksipanel.firebaseapp.com",
+    projectId: "prediksipanel",
+    storageBucket: "prediksipanel.firebasestorage.app",
+    messagingSenderId: "487032542947",
+    appId: "1:487032542947:web:46a3d64e3abdece53e17d6",
+    measurementId: "G-TQTEN9LEDW"
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const auth =
-    getAuth(app);
+const tombol = document.getElementById("loginButton");
+const hasil = document.getElementById("hasil");
 
 
-const tombol =
-    document.getElementById("loginButton");
+/* =========================
+   PARTICLES
+========================= */
 
-const hasil =
-    document.getElementById("hasil");
+(function createParticles() {
+    const container = document.getElementById("particles");
+    if (!container) return;
+    for (let i = 0; i < 25; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.animationDuration = (Math.random() * 12 + 10) + "s";
+        p.style.animationDelay = Math.random() * 12 + "s";
+        p.style.opacity = Math.random() * 0.5 + 0.3;
+        container.appendChild(p);
+    }
+})();
+
+
+/* =========================
+   RIPPLE EFFECT
+========================= */
+
+document.addEventListener("mousemove", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty("--x", (e.clientX - rect.left) + "px");
+    btn.style.setProperty("--y", (e.clientY - rect.top) + "px");
+});
 
 
 /* =========================
@@ -374,13 +759,9 @@ const hasil =
 ========================= */
 
 const ICONS = {
-
-    loading: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="40 20" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></circle></svg>',
-
-    error: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#ff6b6b" stroke-width="2"/><path d="M8 8L16 16M16 8L8 16" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round"/></svg>',
-
-    success: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#4ade80" stroke-width="2"/><path d="M7 12.5L10.5 16L17 9" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-
+    loading: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="40 20" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></circle></svg>',
+    error: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#fda4af" stroke-width="2"/><path d="M8 8L16 16M16 8L8 16" stroke="#fda4af" stroke-width="2" stroke-linecap="round"/></svg>',
+    success: '<svg class="icon-inline" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#34d399" stroke-width="2"/><path d="M7 12.5L10.5 16L17 9" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 
 
@@ -390,84 +771,46 @@ const ICONS = {
 
 tombol.addEventListener("click", async function () {
 
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
     if (!email || !password) {
-
-        hasil.innerHTML =
-            '<span class="error">' + ICONS.error + 'Email dan password wajib diisi.</span>';
-
+        hasil.className = "error-box";
+        hasil.innerHTML = '<span class="error">' + ICONS.error + 'Email dan password wajib diisi.</span>';
         return;
     }
 
-
     tombol.disabled = true;
+    tombol.innerText = "MEMPROSES...";
 
-    tombol.innerText =
-        "MEMPROSES...";
-
-
-    hasil.innerHTML =
-        ICONS.loading + "Sedang login...";
-
+    hasil.className = "";
+    hasil.innerHTML = ICONS.loading + "Sedang login...";
 
     try {
 
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
+        await setPersistence(auth, browserLocalPersistence);
 
+        const hasilLogin = await signInWithEmailAndPassword(auth, email, password);
 
-        const hasilLogin =
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+        hasil.className = "success-box";
+        hasil.innerHTML = '<span class="success">' + ICONS.success + 'LOGIN BERHASIL!<br><br>Memasuki Admin Panel...</span>';
 
+        tombol.innerText = "LOGIN BERHASIL";
 
-        hasil.innerHTML =
-            '<span class="success">' + ICONS.success + 'LOGIN BERHASIL!<br><br>Memasuki Admin Panel...</span>';
-
-
-        tombol.innerText =
-            "LOGIN BERHASIL";
-
-
-        console.log(
-            "USER FIREBASE:",
-            hasilLogin.user
-        );
-
+        console.log("USER FIREBASE:", hasilLogin.user);
 
         setTimeout(function () {
-
-            window.location.href =
-                "/admin.html";
-
+            window.location.href = "/admin.html";
         }, 700);
-
 
     } catch (error) {
 
-        console.error(
-            "LOGIN ERROR:",
-            error
-        );
-
+        console.error("LOGIN ERROR:", error);
 
         tombol.disabled = false;
+        tombol.innerText = "LOGIN ADMIN";
 
-        tombol.innerText =
-            "LOGIN ADMIN";
-
-
+        hasil.className = "error-box";
         hasil.innerHTML =
             '<span class="error">' +
             ICONS.error +
@@ -488,20 +831,13 @@ tombol.addEventListener("click", async function () {
    ENTER = LOGIN
 ========================= */
 
-document
-    .getElementById("password")
-    .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-
-            tombol.click();
-
-        }
-
-    });
+document.getElementById("password").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        tombol.click();
+    }
+});
 
 </script>
 
 </body>
-
 </html>
