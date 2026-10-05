@@ -843,8 +843,7 @@ body {
     min-width: 38px;
     text-align: right;
 }
-
-.card {
+    .card {
     position: relative;
     background: linear-gradient(145deg, rgba(15,30,53,0.8), rgba(10,22,40,0.9));
     backdrop-filter: blur(30px) saturate(180%);
@@ -1688,6 +1687,18 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                     <p class="small">
                         <b>🧠 Parser Super Pintar — Support Semua Format!</b>
                         <br>
+                        <b>📅 Format LENGKAP (tanggal + jam):</b>
+                        <br>
+                        &nbsp;&nbsp;<code>28/09 17:25 Japan VS Venezuela 0:1/2</code>
+                        <br>
+                        &nbsp;&nbsp;<code>11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0</code>
+                        <br>
+                        <b>🕐 Format JAM SAJA (pakai tanggal hari ini):</b>
+                        <br>
+                        &nbsp;&nbsp;<code>13:30 Ecuador VS Panama 0:1/4</code>
+                        <br>
+                        &nbsp;&nbsp;<code>17:30 Japan VS New Zealand 0:1</code>
+                        <br>
                         <b>📅 Tanggal:</b> <code>28/09</code> <code>28/09/2026</code> <code>28-09-26</code> <code>28.09</code> <code>28 Sep</code> <code>28 September 2026</code>
                         <br>
                         <b>🕐 Jam:</b> <code>17:25</code> <code>17.25</code> <code>01:45 WIB</code>
@@ -1698,12 +1709,15 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
                         <br>
                         🛡️ <b>Anti-duplikat aktif (nama tim beda format tetap terdeteksi)</b>
                     </p>
-                    <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+                    <div class="contoh">KIRIN CUP [ IN JAPAN ]
+13:30 Ecuador VS Panama 0:1/4
+17:30 Japan VS New Zealand 0:1
+
+KIRIN CHALLENGE CUP
 28/09 17:25 Japan VS Venezuela 0:1/2
 
 ITALY SERIE A
-11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0
-28 Sep 21:00 England VS Portugal 1-0</div>
+11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1/4 : 0</div>
                     <textarea id="inputJadwal" placeholder="Paste data JADWAL di sini..."></textarea>
                     <div class="buttons">
                         <button id="btnProsesJadwal" class="btn-blue">⚙️ Proses Jadwal</button>
@@ -1736,16 +1750,21 @@ ITALY SERIE A
                         <div class="section-label">PREDIKSI</div>
                     </div>
                     <p class="small">
-                        <b>Format:</b> <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
+                        <b>Format LENGKAP:</b> <b>TANGGAL JAM [WIB] [|] HOME VS AWAY [|] SKOR</b>
+                        <br>
+                        <b>Format JAM SAJA:</b> <b>JAM HOME VS AWAY SKOR</b> (pakai tanggal hari ini)
                         <br>
                         <b>Nama tim harus PERSIS SAMA dengan jadwal.</b>
                     </p>
-                    <div class="contoh">KIRIN CHALLENGE CUP [ IN JAPAN ]
+                    <div class="contoh">KIRIN CUP [ IN JAPAN ]
+13:30 Ecuador VS Panama 1 : 2
+17:30 Japan VS New Zealand 2 : 1
+
+KIRIN CHALLENGE CUP
 28/09 17:25 Japan VS Venezuela 1 : 2
 
 ITALY SERIE A
-11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1 : 2
-28 Sep 21:00 England VS Portugal 2-1</div>
+11/09/2026 01:45 WIB | Venezia VS Fiorentina | 1 : 2</div>
                     <textarea id="inputPrediksi" placeholder="Paste data PREDIKSI di sini..."></textarea>
                     <div class="buttons">
                         <button id="btnProsesPrediksi" class="btn-blue">⚙️ Proses Prediksi</button>
@@ -1809,8 +1828,6 @@ ITALY SERIE A
         </div>
     </main>
 </div>
-
-
 <script type="module">
 
 import { initializeApp }
@@ -1934,7 +1951,6 @@ window.addActivity = function(text, color = "cyan") {
     if (!feed) return;
     const now = new Date();
     const time = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
-    
     const item = document.createElement("div");
     item.className = "feed-item";
     item.style.opacity = "0";
@@ -1950,7 +1966,6 @@ window.addActivity = function(text, color = "cyan") {
         item.style.opacity = "1";
         item.style.transform = "translateX(0)";
     }, 50);
-    
     while (feed.children.length > 8) {
         feed.removeChild(feed.lastChild);
     }
@@ -2011,6 +2026,18 @@ btnLogin.addEventListener("click", () => {
 
 function clean(value) {
     return String(value || "").trim();
+}
+
+/* ============================================================
+   ✅ TAMBAHAN BARU: Dapatkan tanggal HARI INI (WIB)
+   ============================================================ */
+function getTodayWIB() {
+    const now = new Date();
+    const wib = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+    const yyyy = wib.getUTCFullYear();
+    const mm = String(wib.getUTCMonth() + 1).padStart(2, "0");
+    const dd = String(wib.getUTCDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
 }
 
 /* ============================================================
@@ -2119,11 +2146,9 @@ function normalizeTeam(name) {
         .replace(/\s+/g, " ")
         .trim();
 
-    // Hapus suffix/prefix umum klub
     n = n.replace(/\b(fc|cf|sc|ac|afc|cd|ud|sv|if|bk|fk|sk|jk|as|ss|ssc|sl)\b/g, "");
     n = n.replace(/\s+/g, " ").trim();
 
-    // Cek alias — samakan nama yang beda penulisan
     if (TEAM_ALIAS[n]) n = TEAM_ALIAS[n];
 
     return n;
@@ -2132,11 +2157,8 @@ function normalizeTeam(name) {
 const KATA_UMUM = /\b(fc|sc|cf|afc|ac|as|sk|if|bk|sv|kv|nk|club|football|sport|sports|soccer|team|the|of|and|de|do|da|la|le|el|city|united|utd)\b/gi;
 
 function normalizeClean(name) {
-    // Pakai normalizeTeam dulu (biar alias ke-apply)
     let n = normalizeTeam(name);
-    // Lalu buang kata umum
     n = n.replace(KATA_UMUM, "").replace(/\s+/g, " ").trim();
-    // Cek alias lagi (kalau setelah buang kata umum ada yang berubah)
     if (TEAM_ALIAS[n]) n = TEAM_ALIAS[n];
     return n;
 }
@@ -2384,9 +2406,16 @@ const REGEX_DATETIME = new RegExp(
     "i"
 );
 
+/* ✅ TAMBAHAN: Regex deteksi "jam saja" tanpa tanggal
+   Contoh: "13:30 Ecuador VS Panama 0:1/4"  */
+const REGEX_TIME_ONLY = new RegExp(
+    "^" + REGEX_TIME + "\\s*(?:WIB|WIT|WITA)?\\s*\\|?\\s*(.+)$",
+    "i"
+);
+
 
 /* ═══════════════════════════════════════════════
-   PARSER JADWAL
+   PARSER JADWAL — Support format LENGKAP + JAM SAJA
    ═══════════════════════════════════════════════ */
 
 function parseJadwal(text) {
@@ -2402,16 +2431,36 @@ function parseJadwal(text) {
         if (!line) continue;
         if (/^id\s*=/i.test(line)) continue;
 
-        const dateTimeMatch = line.match(REGEX_DATETIME);
+        // ── STEP 1: Coba format LENGKAP (tanggal + jam) ──
+        let dateTimeMatch = line.match(REGEX_DATETIME);
+        let tanggal = null;
+        let jam = null;
+        let sisa = null;
 
-        if (!dateTimeMatch) {
+        if (dateTimeMatch) {
+            tanggal = dateTimeMatch[1];
+            jam = dateTimeMatch[2];
+            sisa = dateTimeMatch[3].trim();
+        } else {
+            // ── STEP 2: Coba format JAM SAJA (tanpa tanggal) ──
+            const timeOnlyMatch = line.match(REGEX_TIME_ONLY);
+
+            if (timeOnlyMatch) {
+                // Cek beneran pertandingan (ada " VS ")
+                const testSisa = timeOnlyMatch[2];
+                if (/\s+VS\s+/i.test(testSisa)) {
+                    tanggal = getTodayWIB();  // pakai tanggal hari ini
+                    jam = timeOnlyMatch[1];
+                    sisa = testSisa.trim();
+                }
+            }
+        }
+
+        // Kalau gak ada tanggal & jam → ini nama liga
+        if (!tanggal || !jam || !sisa) {
             liga = line;
             continue;
         }
-
-        const tanggal = dateTimeMatch[1];
-        const jam = dateTimeMatch[2];
-        let sisa = dateTimeMatch[3].trim();
 
         sisa = sisa.replace(/[\s|]+$/g, "").trim();
 
@@ -2493,7 +2542,7 @@ function parseJadwal(text) {
 
 
 /* ═══════════════════════════════════════════════
-   PARSER PREDIKSI
+   PARSER PREDIKSI — Support format LENGKAP + JAM SAJA
    ═══════════════════════════════════════════════ */
 
 function parsePrediksi(text) {
@@ -2509,16 +2558,34 @@ function parsePrediksi(text) {
         if (!line) continue;
         if (/^id\s*=/i.test(line)) continue;
 
-        const dateTimeMatch = line.match(REGEX_DATETIME);
+        // ── STEP 1: Coba format LENGKAP (tanggal + jam) ──
+        let dateTimeMatch = line.match(REGEX_DATETIME);
+        let tanggal = null;
+        let jam = null;
+        let sisa = null;
 
-        if (!dateTimeMatch) {
+        if (dateTimeMatch) {
+            tanggal = dateTimeMatch[1];
+            jam = dateTimeMatch[2];
+            sisa = dateTimeMatch[3].trim();
+        } else {
+            // ── STEP 2: Coba format JAM SAJA (tanpa tanggal) ──
+            const timeOnlyMatch = line.match(REGEX_TIME_ONLY);
+
+            if (timeOnlyMatch) {
+                const testSisa = timeOnlyMatch[2];
+                if (/\s+VS\s+/i.test(testSisa)) {
+                    tanggal = getTodayWIB();
+                    jam = timeOnlyMatch[1];
+                    sisa = testSisa.trim();
+                }
+            }
+        }
+
+        if (!tanggal || !jam || !sisa) {
             liga = line;
             continue;
         }
-
-        const tanggal = dateTimeMatch[1];
-        const jam = dateTimeMatch[2];
-        let sisa = dateTimeMatch[3].trim();
 
         sisa = sisa.replace(/[\s|]+$/g, "").trim();
 
@@ -2590,7 +2657,9 @@ function prosesJadwal() {
             '<div class="status error">' +
             '❌ Tidak ada jadwal yang berhasil dibaca.' +
             '<br><br>' +
-            'Format: <code>28/09 17:25 Japan VS Venezuela 0:1/2</code>' +
+            'Format LENGKAP: <code>28/09 17:25 Japan VS Venezuela 0:1/2</code>' +
+            '<br>' +
+            'Format JAM SAJA: <code>13:30 Ecuador VS Panama 0:1/4</code>' +
             '</div>';
         window.updateStats && window.updateStats();
         return;
@@ -2673,7 +2742,9 @@ function prosesPrediksi() {
             '<div class="status error">' +
             '❌ Tidak ada prediksi yang berhasil dibaca.' +
             '<br><br>' +
-            'Format: <code>28/09 17:25 Japan VS Venezuela 1 : 2</code>' +
+            'Format LENGKAP: <code>28/09 17:25 Japan VS Venezuela 1 : 2</code>' +
+            '<br>' +
+            'Format JAM SAJA: <code>13:30 Ecuador VS Panama 1 : 2</code>' +
             '</div>';
         window.updateStats && window.updateStats();
         return;
