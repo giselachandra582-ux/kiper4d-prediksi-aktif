@@ -21,6 +21,10 @@ html { scroll-behavior: smooth; }
     --j4: #4d3520;
     --bg-0: #000805;
     --text-soft: #a8c8b8;
+    --gold-1: #f5d76e;
+    --gold-2: #d4af37;
+    --gold-3: #b8941f;
+    --cyan-glow: #00e5ff;
 }
 
 body {
@@ -127,6 +131,42 @@ body {
 @keyframes fireFlicker {
     0%   { transform: scale(1) rotate(-3deg); opacity: 0.95; }
     100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+}
+
+/* ✅ Premium gold shimmer untuk Big Match */
+@keyframes goldShimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes premiumGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 0 1px rgba(245, 215, 110, 0.15),
+            0 8px 24px rgba(0, 0, 0, 0.9),
+            0 0 30px rgba(245, 215, 110, 0.15),
+            0 0 60px rgba(0, 229, 255, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    50% { 
+        box-shadow: 
+            0 0 0 1px rgba(245, 215, 110, 0.35),
+            0 8px 24px rgba(0, 0, 0, 0.9),
+            0 0 40px rgba(245, 215, 110, 0.3),
+            0 0 80px rgba(0, 229, 255, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+}
+
+@keyframes premiumBorder {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes cornerPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
 }
 
 .aurora-bg { position: fixed; inset: 0; z-index: -4; pointer-events: none; overflow: hidden; }
@@ -449,7 +489,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 10px 45px rgba(61,43,86,0.9), 0 0 45px rgba(30,58,95,0.7);
 }
 
-/* ═══ MOBILE HEADER — LOGO KIRI, TOMBOL 2x2 KANAN (SESUAI GAMBAR) ═══ */
+/* ═══ MOBILE HEADER ═══ */
 @media (max-width: 800px) {
     .header-inner {
         flex-direction: row !important;
@@ -459,7 +499,6 @@ nav a.nav-daftar:hover {
         gap: 8px !important;
     }
     
-    /* LOGO KIRI */
     .logo {
         align-items: flex-start !important;
         width: auto !important;
@@ -478,7 +517,6 @@ nav a.nav-daftar:hover {
         max-width: 115px;
     }
     
-    /* TOMBOL 2x2 KANAN */
     nav {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -505,14 +543,12 @@ nav a.nav-daftar:hover {
         text-transform: uppercase !important;
     }
     
-    /* Beranda & Jadwal - Outline abu */
     nav a.nav-link {
         background: transparent !important;
         border: 1.5px solid #2a3b4c !important;
         color: #e0e0e0 !important;
     }
     
-    /* Login - Outline biru */
     nav a.nav-login {
         background: transparent !important;
         border: 1.5px solid #00d2ff !important;
@@ -520,7 +556,6 @@ nav a.nav-daftar:hover {
         box-shadow: 0 0 8px rgba(0, 210, 255, 0.25) !important;
     }
     
-    /* Daftar - Isi biru menyala */
     nav a.nav-daftar {
         background: #00d2ff !important;
         color: #000 !important;
@@ -528,15 +563,12 @@ nav a.nav-daftar:hover {
         box-shadow: 0 0 12px rgba(0, 210, 255, 0.7) !important;
     }
     
-    /* Matikan pseudo element */
     nav a.nav-link::before,
     nav a.nav-login::before,
     nav a.nav-daftar::before {
         display: none !important;
     }
     
-    /* Urutan grid: Beranda | Login */
-    /*              Jadwal  | Daftar */
     nav a.nav-link:nth-child(1) { order: 1; }
     nav a.nav-login { order: 2; }
     nav a.nav-link:nth-child(2) { order: 3; }
@@ -763,9 +795,9 @@ nav a.nav-daftar:hover {
 .big-match-ticker { position: relative; width: 100%; padding: 4px 0; overflow: hidden; }
 .big-match-ticker-track {
     display: flex; align-items: stretch;
-    gap: 12px;
+    gap: 14px;
     width: max-content;
-    padding: 4px 12px;
+    padding: 6px 12px;
     animation: tickerRun 40s linear infinite;
 }
 .big-match-ticker-wrap:hover .big-match-ticker-track { animation-play-state: paused; }
@@ -779,26 +811,122 @@ nav a.nav-daftar:hover {
     width: 100%;
 }
 
-/* ═══ BMT CARD ═══ */
+/* ═══ BMT CARD — PREMIUM LUXURY EDITION ═══ */
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
-    width: 195px;
-    padding: 10px 10px 0;
-    border-radius: 14px;
-    background: #0a0a0a;
-    border: 1.5px solid rgba(139, 180, 232, 0.35);
+    width: 200px;
+    padding: 12px 12px 0;
+    border-radius: 18px;
+    background: 
+        radial-gradient(ellipse at top, rgba(245, 215, 110, 0.06) 0%, transparent 60%),
+        linear-gradient(160deg, #0c1015 0%, #050608 45%, #0a0e14 100%);
+    border: none;
     overflow: hidden;
-    transition: all 0.35s;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(30, 58, 95, 0.15);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: premiumGlow 4s ease-in-out infinite;
     display: flex;
     flex-direction: column;
+    isolation: isolate;
 }
+
+/* Premium animated border */
+.bmt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1.5px;
+    background: linear-gradient(
+        90deg, 
+        rgba(245, 215, 110, 0.7), 
+        rgba(0, 229, 255, 0.5), 
+        rgba(169, 139, 212, 0.6), 
+        rgba(245, 215, 110, 0.7),
+        rgba(0, 229, 255, 0.5),
+        rgba(245, 215, 110, 0.7)
+    );
+    background-size: 300% 100%;
+    animation: premiumBorder 6s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Shine sweep premium */
+.bmt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.03) 30%,
+        rgba(245, 215, 110, 0.15) 50%,
+        rgba(0, 229, 255, 0.12) 70%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    animation: premiumShine 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 4;
+}
+
+@keyframes premiumShine {
+    0% { left: -150%; }
+    40% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* Inner glow */
+.bmt-card .bmt-inner-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: radial-gradient(ellipse at 50% -20%, rgba(245, 215, 110, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 .bmt-card:hover {
-    border-color: rgba(139, 180, 232, 0.7);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(139, 180, 232, 0.3);
-    transform: translateY(-3px);
+    transform: translateY(-6px) scale(1.03);
+    animation: premiumGlow 2s ease-in-out infinite;
 }
+
+.bmt-card:hover::before {
+    background: linear-gradient(
+        90deg, 
+        rgba(245, 215, 110, 1), 
+        rgba(0, 229, 255, 0.8), 
+        rgba(169, 139, 212, 0.9), 
+        rgba(245, 215, 110, 1),
+        rgba(0, 229, 255, 0.8),
+        rgba(245, 215, 110, 1)
+    );
+    background-size: 300% 100%;
+    animation: premiumBorder 3s linear infinite;
+}
+
+/* Corner accent premium */
+.bmt-card .bmt-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid rgba(245, 215, 110, 0.7);
+    pointer-events: none;
+    z-index: 5;
+    animation: cornerPulse 3s ease-in-out infinite;
+}
+.bmt-card .bmt-corner.tl { top: 5px; left: 5px; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
+.bmt-card .bmt-corner.tr { top: 5px; right: 5px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
+.bmt-card .bmt-corner.bl { bottom: 5px; left: 5px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
+.bmt-card .bmt-corner.br { bottom: 5px; right: 5px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
 
 .bmt-badge {
     display: inline-flex; align-items: center; justify-content: center;
@@ -813,9 +941,10 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     margin-bottom: 8px;
     align-self: flex-start;
-    box-shadow: 0 0 12px rgba(255, 0, 68, 0.5);
+    box-shadow: 0 0 12px rgba(255, 0, 68, 0.5), 0 0 20px rgba(255, 0, 68, 0.25);
     position: relative;
-    z-index: 3;
+    z-index: 6;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .bmt-badge .badge-fire {
     width: 11px;
@@ -829,14 +958,20 @@ nav a.nav-daftar:hover {
     font-family: 'Rajdhani', sans-serif;
     font-size: 9.5px; font-weight: 800;
     letter-spacing: 1.8px;
-    color: #a8c8e8;
+    background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     margin-bottom: 12px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     position: relative;
-    z-index: 3;
+    z-index: 6;
     text-align: center;
     min-height: 12px;
+    animation: goldShimmer 3s linear infinite;
+    text-shadow: 0 0 20px rgba(245, 215, 110, 0.3);
 }
 
 .bmt-teams {
@@ -846,7 +981,7 @@ nav a.nav-daftar:hover {
     gap: 6px;
     margin-bottom: 12px;
     position: relative;
-    z-index: 3;
+    z-index: 6;
     padding: 0;
 }
 .bmt-team {
@@ -858,73 +993,99 @@ nav a.nav-daftar:hover {
     min-width: 0;
 }
 .bmt-logo {
-    width: 42px; height: 42px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 900;
-    color: #8bb4e8;
+    color: #f5d76e;
     background: radial-gradient(circle at 50% 30%, #1a2a3a, #000 80%);
-    border: 2px solid rgba(139, 180, 232, 0.5);
+    border: 2px solid rgba(245, 215, 110, 0.6);
     overflow: hidden;
     flex-shrink: 0;
-    box-shadow: 0 0 12px rgba(139, 180, 232, 0.35), inset 0 0 12px rgba(30, 58, 95, 0.5);
+    box-shadow: 
+        0 0 12px rgba(245, 215, 110, 0.4), 
+        0 0 24px rgba(245, 215, 110, 0.15),
+        inset 0 0 12px rgba(30, 58, 95, 0.5);
     position: relative;
+    transition: all 0.4s;
+}
+.bmt-card:hover .bmt-logo {
+    box-shadow: 
+        0 0 18px rgba(245, 215, 110, 0.7), 
+        0 0 36px rgba(245, 215, 110, 0.3),
+        inset 0 0 15px rgba(30, 58, 95, 0.8);
+    border-color: rgba(245, 215, 110, 0.9);
 }
 .bmt-logo img {
-    width: 30px; height: 30px;
+    width: 32px; height: 32px;
     object-fit: contain;
     display: block;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 .bmt-logo.logo-loaded {
-    background: radial-gradient(circle, #ffffff 0%, #e0e6ee 60%, #c8d0dc 100%);
-    border-color: rgba(255,255,255,0.6);
-    box-shadow: 0 0 14px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    background: radial-gradient(circle, #ffffff 0%, #f5f0e0 60%, #e8dfc8 100%);
+    border-color: rgba(245, 215, 110, 0.8);
+    box-shadow: 
+        0 0 14px rgba(245, 215, 110, 0.6), 
+        0 0 28px rgba(245, 215, 110, 0.25),
+        inset 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .bmt-team-name {
     font-family: 'Rajdhani', sans-serif;
     font-size: 10px; font-weight: 800;
     letter-spacing: 0.8px;
-    max-width: 80px;
+    max-width: 82px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     line-height: 1.2;
     text-align: center;
-    color: #e0e8f0;
+    color: #e8e0d0;
     text-transform: uppercase;
-    text-shadow: 0 0 6px rgba(139, 180, 232, 0.3);
+    text-shadow: 0 0 6px rgba(245, 215, 110, 0.3);
 }
 
 .bmt-vs {
     font-family: 'Orbitron', sans-serif;
     font-size: 10px; font-weight: 900;
     letter-spacing: 1.5px;
-    color: #8bb4e8;
-    text-shadow: 0 0 10px rgba(139, 180, 232, 0.8);
+    background: linear-gradient(135deg, #f5d76e, #d4af37, #f5d76e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(245, 215, 110, 0.8));
     align-self: center;
     padding-bottom: 24px;
+    animation: goldShimmer 3s linear infinite;
 }
 
 .bmt-time {
     display: flex; align-items: center; justify-content: center;
     gap: 5px;
-    padding: 8px 0;
-    margin: 0 -10px;
+    padding: 9px 0;
+    margin: 0 -12px;
     font-family: 'Teko', sans-serif;
     font-size: 13px; font-weight: 600;
     letter-spacing: 1.5px;
-    color: #d0dae6;
-    background: linear-gradient(180deg, rgba(30, 58, 95, 0.25), rgba(0,0,0,0.6));
-    border-top: 1px solid rgba(139, 180, 232, 0.25);
+    color: #f5e8c8;
+    background: linear-gradient(180deg, rgba(245, 215, 110, 0.08), rgba(0,0,0,0.7));
+    border-top: 1px solid rgba(245, 215, 110, 0.25);
     position: relative;
-    z-index: 3;
+    z-index: 6;
     text-transform: uppercase;
+}
+.bmt-time::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245, 215, 110, 0.6), transparent);
 }
 .bmt-time .time-icon-svg {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 4px rgba(139, 180, 232, 0.8));
+    filter: drop-shadow(0 0 4px rgba(245, 215, 110, 0.8));
 }
 
 /* ═══ BREAKING NEWS ═══ */
@@ -976,7 +1137,7 @@ nav a.nav-daftar:hover {
     font-family: 'Rajdhani', sans-serif;
     font-size: 15px; font-weight: 700;
     color: #ffffff;
-    animation: newsScroll 50s linear infinite;
+    animation: newsScroll 90s linear infinite;
     padding-left: 100%;
 }
 
@@ -1723,9 +1884,31 @@ nav a.nav-daftar:hover {
     pointer-events: none;
 }
 
-.match-badge-center.selesai { box-shadow: 0 0 8px rgba(61,43,86,0.5); }
+/* Badge SELESAI warna hijau */
+.match-badge-center.selesai {
+    background: linear-gradient(135deg, #1a5c3a, #0d3d24) !important;
+    color: #7dffb0 !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    box-shadow: 0 0 12px rgba(0, 255, 100, 0.5), 0 0 24px rgba(0, 255, 100, 0.25) !important;
+    text-shadow: 0 0 6px rgba(125, 255, 176, 0.8) !important;
+    border: 1.5px solid #2ecc71 !important;
+}
+.match-badge-center.selesai::before {
+    display: none;
+}
+/* Badge SEGERA warna ungu-biru */
 .match-badge-center.akan {
-    box-shadow: 0 0 10px rgba(30,58,95,0.6);
+    background: linear-gradient(135deg, #3d2b56, #1e3a5f) !important;
+    color: #c8b8ff !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    box-shadow: 0 0 12px rgba(139, 180, 232, 0.5), 0 0 24px rgba(139, 180, 232, 0.25) !important;
+    text-shadow: 0 0 6px rgba(200, 184, 255, 0.8) !important;
+    border: 1.5px solid #8bb4e8 !important;
+}
+.match-badge-center.akan::before {
+    display: none;
 }
 
 .match-badge-center.live {
@@ -1961,7 +2144,7 @@ nav a.nav-daftar:hover {
 
 /* ═══ RESPONSIVE MOBILE ═══ */
 @media (max-width: 800px) {
-    .container { padding: 14px 10px 45px; }
+    .container { padding: 14px 10px 30px; }
     .single-column-wrap { padding: 6px; }
     .match-row-single { padding: 14px 12px 10px; }
     .match-main-row { gap: 6px; }
@@ -1984,12 +2167,13 @@ nav a.nav-daftar:hover {
     .bms-title { font-size: 13px; letter-spacing: 3px; padding: 7px 16px; }
     .bms-title .bms-fire { width: 15px; height: 15px; }
     
-    /* ═══ BIG MATCH CARD — LEBIH KECIL BIAR 3-4 KELIHATAN ═══ */
+    /* BMT Card mobile */
     .bmt-card { 
-        width: 140px !important; 
-        padding: 8px 8px 0 !important;
-        border-radius: 12px !important;
+        width: 150px !important; 
+        padding: 10px 10px 0 !important;
+        border-radius: 16px !important;
     }
+    .bmt-card .bmt-corner { width: 10px; height: 10px; }
     .bmt-badge { 
         font-size: 7.5px !important; 
         padding: 3px 8px !important; 
@@ -2004,14 +2188,14 @@ nav a.nav-daftar:hover {
         min-height: 10px !important;
     }
     .bmt-logo { 
-        width: 32px !important; 
-        height: 32px !important; 
+        width: 34px !important; 
+        height: 34px !important; 
         border-width: 1.5px !important;
     }
-    .bmt-logo img { width: 22px !important; height: 22px !important; }
+    .bmt-logo img { width: 24px !important; height: 24px !important; }
     .bmt-team-name { 
         font-size: 8px !important; 
-        max-width: 55px !important; 
+        max-width: 58px !important; 
         letter-spacing: 0.4px !important;
     }
     .bmt-vs { 
@@ -2021,13 +2205,13 @@ nav a.nav-daftar:hover {
     }
     .bmt-time { 
         font-size: 10px !important; 
-        padding: 5px 0 !important; 
-        margin: 0 -8px !important;
+        padding: 6px 0 !important; 
+        margin: 0 -10px !important;
         gap: 3px !important;
     }
     .bmt-time .time-icon-svg { width: 10px !important; height: 10px !important; }
     .big-match-ticker-track { 
-        gap: 8px !important; 
+        gap: 10px !important; 
         padding: 4px 8px !important; 
     }
     .big-match-ticker-wrap .fade-left,
@@ -2035,13 +2219,11 @@ nav a.nav-daftar:hover {
         width: 30px !important;
     }
     
-    /* ═══ NEWS TICKER MOBILE ═══ */
     .news-ticker-label { font-size: 11px; padding: 10px 14px; letter-spacing: 2px; }
-    .news-ticker-content { font-size: 12px !important; animation-duration: 35s !important; }
+    .news-ticker-content { font-size: 12px !important; animation-duration: 65s !important; }
     .news-ticker-wrap { height: 42px; }
     .news-ticker { min-height: 42px; margin-bottom: 18px; }
     
-    /* ═══ LUX TEXT MOBILE ═══ */
     .lux-text-wrap { padding: 12px 38px; min-height: 54px; height: auto; margin-bottom: 14px; border-radius: 14px; }
     .lux-text-wrap .icon-side { font-size: 13px; }
     .lux-text-wrap .icon-side.left { left: 15px; }
@@ -2054,17 +2236,14 @@ nav a.nav-daftar:hover {
     .lux-svg { width: 14px; height: 14px; }
     .lux-text-item { gap: 6px; }
     
-    /* ═══ BANNER MOBILE ═══ */
     .banner { border-radius: 16px; margin-bottom: 16px; }
     .banner img { width: 100%; height: auto; object-fit: contain; }
     
-    /* ═══ STATS MOBILE ═══ */
     .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
     .stat-box { padding: 14px 6px 12px; border-radius: 14px; }
     .stat-number { font-size: 26px; }
     .stat-label { font-size: 9px; letter-spacing: 1px; }
     
-    /* ═══ FILTER MOBILE ═══ */
     .filter-row { display: flex; flex-direction: column; gap: 10px; padding: 12px; width: 100%; }
     .next-match-bar-inline { width: 100%; margin-bottom: 4px; }
     .next-match-inner { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; text-align: center; }
@@ -2085,7 +2264,6 @@ nav a.nav-daftar:hover {
     .date-picker-filter { width: 100%; }
     #tanggalSpesifik { flex: 1; width: 100%; min-width: unset; font-size: 12.5px; padding: 11px 34px 11px 14px; }
     
-    /* ═══ SECTION MOBILE ═══ */
     .section-head { flex-direction: row; align-items: center; justify-content: flex-start; margin: 20px 0 14px; }
     .section-title { font-size: 18px; letter-spacing: 2px; }
     .section-title .title-icon { width: 20px; height: 20px; }
@@ -2093,18 +2271,16 @@ nav a.nav-daftar:hover {
     .selesai-icon { font-size: 14px; }
     .selesai-arrow { font-size: 10px; }
     
-    /* ═══ FOOTER MOBILE ═══ */
     .footer-logo-wrap { min-height: 70px; }
     .footer-logo-wrap img { width: 110px; height: 48px; }
     .footer-title { font-size: 20px; letter-spacing: 7px; }
     .footer-tagline { font-size: 11px; letter-spacing: 2.5px; }
     
-    /* ═══ TOAST MOBILE ═══ */
     .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
     
-    /* ═══ BOTTOM NAV MOBILE ═══ */
-    body { padding-bottom: 85px; }
-    .bottom-nav { display: block; }
+    /* ✅ Bottom nav DIHAPUS — tidak ada padding-bottom lagi */
+    body { padding-bottom: 20px; }
+    .bottom-nav { display: none !important; }
     .logo img { width: 115px; height: 42px; }
     .logo-subtitle { font-size: 7px; letter-spacing: 1.5px; }
 }
@@ -2131,7 +2307,7 @@ nav a.nav-daftar:hover {
     .loading-ring:nth-child(2) { width: 200px; height: 200px; }
     .loading-percent { font-size: 34px; }
     .news-ticker-label { font-size: 10px; padding: 8px 12px; letter-spacing: 1.5px; }
-    .news-ticker-content { font-size: 11px !important; animation-duration: 30s !important; }
+    .news-ticker-content { font-size: 11px !important; animation-duration: 55s !important; }
     .lux-text-wrap { padding: 13px 34px; min-height: 56px; }
     .lux-text-wrap .icon-side { font-size: 11px; }
     .lux-text-wrap .icon-side.left { left: 11px; }
@@ -2140,18 +2316,17 @@ nav a.nav-daftar:hover {
     .lux-text-item { font-size: 10.5px; letter-spacing: 0.8px; line-height: 1.45; }
     .banner { border-radius: 14px; margin-bottom: 14px; }
     
-    /* ═══ BIG MATCH CARD EXTRA SMALL ═══ */
-    .bmt-card { width: 125px !important; padding: 6px 6px 0 !important; }
+    .bmt-card { width: 135px !important; padding: 8px 8px 0 !important; }
     .bmt-badge { font-size: 7px !important; padding: 2px 7px !important; letter-spacing: 1px !important; }
     .bmt-badge .badge-fire { width: 8px !important; height: 8px !important; }
     .bmt-league { font-size: 7px !important; letter-spacing: 0.8px !important; }
-    .bmt-logo { width: 28px !important; height: 28px !important; }
-    .bmt-logo img { width: 18px !important; height: 18px !important; }
-    .bmt-team-name { font-size: 7.5px !important; max-width: 48px !important; }
+    .bmt-logo { width: 30px !important; height: 30px !important; }
+    .bmt-logo img { width: 20px !important; height: 20px !important; }
+    .bmt-team-name { font-size: 7.5px !important; max-width: 50px !important; }
     .bmt-vs { font-size: 7.5px !important; padding-bottom: 18px !important; }
-    .bmt-time { font-size: 9px !important; padding: 4px 0 !important; margin: 0 -6px !important; }
+    .bmt-time { font-size: 9px !important; padding: 5px 0 !important; margin: 0 -8px !important; }
     .bmt-time .time-icon-svg { width: 9px !important; height: 9px !important; }
-    .big-match-ticker-track { gap: 6px !important; padding: 4px 6px !important; }
+    .big-match-ticker-track { gap: 8px !important; padding: 4px 6px !important; }
     .big-match-ticker-wrap .fade-left,
     .big-match-ticker-wrap .fade-right { width: 20px !important; }
     
@@ -2171,7 +2346,6 @@ nav a.nav-daftar:hover {
     .lux-svg { width: 13px; height: 13px; }
     .lux-text-item { gap: 5px; }
     
-    /* ═══ MATCH ROW EXTRA SMALL ═══ */
     .match-row-single { padding: 14px 8px 8px; }
     .match-team-logo, .match-team-logo-initial { width: 30px; height: 30px; font-size: 10px; }
     .match-team-name-text { font-size: 10px; }
@@ -2256,56 +2430,10 @@ nav a.nav-daftar:hover {
     font-weight: 800;
 }
 
-/* ═══ BOTTOM NAV ═══ */
+/* ═══ BOTTOM NAV — HIDDEN (DIHAPUS) ═══ */
 .bottom-nav {
-    display: none;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 1000;
-    padding: 10px 12px 12px;
-    background: #000;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-top: none;
-    position: relative;
+    display: none !important;
 }
-.bottom-nav::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: linear-gradient(90deg, #3d2b56, #1e3a5f, #1e4d42, #4d3520, #3d2b56);
-    background-size: 300% 100%;
-    animation: jewelFlow 10s linear infinite;
-}
-.bottom-nav-inner {
-    max-width: 500px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-}
-.bottom-nav-item {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 4px;
-    padding: 8px 5px;
-    border-radius: 14px;
-    text-decoration: none;
-    color: #8ab8a8;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 10.5px; font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 1.5px solid transparent;
-    transition: all 0.4s;
-    position: relative;
-}
-.bottom-nav-item:hover {
-    color: #fff;
-    background: #0a0a0a;
-    border-color: rgba(61,43,86,0.4);
-}
-.bottom-nav-item .bn-icon { font-size: 22px; line-height: 1; }
 
 .toast {
     position: fixed;
@@ -2559,15 +2687,7 @@ nav a.nav-daftar:hover {
     <div class="footer-copy">© 2026 <span>KIPER4D</span> • All Rights Reserved</div>
 </footer>
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-    <div class="bottom-nav-inner">
-        <a href="#top" class="bottom-nav-item"><span class="bn-icon">🏠</span><span>Beranda</span></a>
-        <a href="#pertandingan" class="bottom-nav-item"><span class="bn-icon">⚽</span><span>Jadwal</span></a>
-        <a href="https://rotasy.link/Kiper4D" class="bottom-nav-item" target="_blank" rel="noopener noreferrer"><span class="bn-icon">🔑</span><span>Login</span></a>
-        <a href="https://rotasy.link/Kiper4D" class="bottom-nav-item" target="_blank" rel="noopener noreferrer"><span class="bn-icon">✨</span><span>Daftar</span></a>
-    </div>
-</nav>
+<!-- BOTTOM NAV DIHAPUS — tidak lagi digunakan di mobile -->
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -3125,7 +3245,7 @@ function renderMatchRowSingle(data) {
     const hasPred = scoreHome !== "" && scoreAway !== "";
 
     let badgeClass = "akan";
-    let badgeText = "AKAN";
+    let badgeText = "SEGERA";
     if (status === "live") { badgeClass = "live"; badgeText = "LIVE"; }
     else if (status === "selesai") { badgeClass = "selesai"; badgeText = "SELESAI"; }
 
@@ -3434,10 +3554,15 @@ function bigMatchCard(data) {
 
     const badgeFireSvg = `<svg class="badge-fire" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="#ffcc00"/></svg>`;
 
-    const clockSvg = `<svg class="time-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#8bb4e8" stroke-width="2"/><path d="M12 7V12L15 14" stroke="#8bb4e8" stroke-width="2" stroke-linecap="round"/></svg>`;
+    const clockSvg = `<svg class="time-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#f5d76e" stroke-width="2"/><path d="M12 7V12L15 14" stroke="#f5d76e" stroke-width="2" stroke-linecap="round"/></svg>`;
 
     return `
         <div class="bmt-card">
+            <div class="bmt-corner tl"></div>
+            <div class="bmt-corner tr"></div>
+            <div class="bmt-corner bl"></div>
+            <div class="bmt-corner br"></div>
+            <div class="bmt-inner-glow"></div>
             <div class="bmt-badge">${badgeFireSvg}<span>BIG MATCH</span></div>
             <div class="bmt-league">${escapeHtml(league)}</div>
             <div class="bmt-teams">
@@ -3466,7 +3591,7 @@ function renderBigMatch(data) {
     if (!top8.length) { track.innerHTML = `<div class="big-match-ticker-empty">Belum ada pertandingan pilihan hari ini</div>`; return; }
     const cardsHTML = top8.map(bigMatchCard).join("");
     track.innerHTML = cardsHTML + cardsHTML;
-    const duration = (215 * top8.length) / 60;
+    const duration = (380 * top8.length) / 60;
     track.style.animationDuration = duration + "s";
     const wrap = document.querySelector(".big-match-ticker-wrap");
     if (wrap && !wrap.querySelector(".fade-left")) {
