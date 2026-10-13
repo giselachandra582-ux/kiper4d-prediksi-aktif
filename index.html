@@ -21,10 +21,14 @@ html { scroll-behavior: smooth; }
     --j4: #4d3520;
     --bg-0: #000805;
     --text-soft: #a8c8b8;
-    --gold-1: #f5d76e;
-    --gold-2: #d4af37;
-    --gold-3: #b8941f;
-    --cyan-glow: #00e5ff;
+    /* ✅ PALET BARU — bukan kuning lagi */
+    --accent-1: #06b6d4;   /* cyan */
+    --accent-2: #8b5cf6;   /* purple */
+    --accent-3: #10b981;   /* emerald */
+    --accent-4: #0ea5e9;   /* sky blue */
+    --glow-1: rgba(6, 182, 212, 0.6);
+    --glow-2: rgba(139, 92, 246, 0.5);
+    --glow-3: rgba(16, 185, 129, 0.45);
 }
 
 body {
@@ -43,127 +47,108 @@ body {
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
 @keyframes jewelText {
     0%   { background-position: 0% center; }
     100% { background-position: 300% center; }
 }
-
 @keyframes floatLogo {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
-
 @keyframes auroraMove {
     0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
     33% { transform: translate(6%, -6%) rotate(120deg) scale(1.15); }
     66% { transform: translate(-6%, 6%) rotate(240deg) scale(0.9); }
 }
-
 @keyframes progressShine {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
 @keyframes newsBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
 }
-
 @keyframes newsScroll {
     0% { transform: translate(0, -50%); }
     100% { transform: translate(-100%, -50%); }
 }
-
 @keyframes livePulse {
     0%, 100% { box-shadow: 0 0 12px rgba(255, 0, 0, 0.9), 0 0 24px rgba(255, 0, 0, 0.6); }
     50% { box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.9); }
 }
-
 @keyframes liveTextBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
 }
-
 @keyframes tickerRun {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-
 @keyframes bannerShine {
     0% { left: -120%; }
     35% { left: 140%; }
     100% { left: 140%; }
 }
-
 @keyframes shineSweep {
     0% { left: -120%; }
     40% { left: 140%; }
     100% { left: 140%; }
 }
-
 @keyframes iconSpin {
     0% { transform: translateY(-50%) rotate(0deg) scale(1); }
     50% { transform: translateY(-50%) rotate(180deg) scale(1.2); }
     100% { transform: translateY(-50%) rotate(360deg) scale(1); }
 }
-
 @keyframes floatParticle {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
     50% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 1; }
 }
-
 @keyframes loadingRingSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 @keyframes blink {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0.2; }
 }
-
 @keyframes rippleExpand {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
     100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
 }
-
 @keyframes fireFlicker {
     0%   { transform: scale(1) rotate(-3deg); opacity: 0.95; }
     100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
 }
 
-/* ✅ Premium gold shimmer untuk Big Match */
-@keyframes goldShimmer {
-    0%   { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+/* ✅ BARU: Gradient cyan-purple-emerald */
+@keyframes luxGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
 @keyframes premiumGlow {
     0%, 100% { 
         box-shadow: 
-            0 0 0 1px rgba(245, 215, 110, 0.15),
+            0 0 0 1px rgba(6, 182, 212, 0.15),
             0 8px 24px rgba(0, 0, 0, 0.9),
-            0 0 30px rgba(245, 215, 110, 0.15),
-            0 0 60px rgba(0, 229, 255, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            0 0 30px rgba(6, 182, 212, 0.2),
+            0 0 60px rgba(139, 92, 246, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
     50% { 
         box-shadow: 
-            0 0 0 1px rgba(245, 215, 110, 0.35),
+            0 0 0 1px rgba(6, 182, 212, 0.4),
             0 8px 24px rgba(0, 0, 0, 0.9),
-            0 0 40px rgba(245, 215, 110, 0.3),
-            0 0 80px rgba(0, 229, 255, 0.15),
+            0 0 40px rgba(6, 182, 212, 0.4),
+            0 0 80px rgba(139, 92, 246, 0.25),
             inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 }
-
 @keyframes premiumBorder {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
 @keyframes cornerPulse {
     0%, 100% { opacity: 0.4; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.15); }
@@ -489,7 +474,6 @@ nav a.nav-daftar:hover {
     box-shadow: 0 10px 45px rgba(61,43,86,0.9), 0 0 45px rgba(30,58,95,0.7);
 }
 
-/* ═══ MOBILE HEADER ═══ */
 @media (max-width: 800px) {
     .header-inner {
         flex-direction: row !important;
@@ -498,77 +482,15 @@ nav a.nav-daftar:hover {
         padding: 10px 12px 12px !important;
         gap: 8px !important;
     }
-    
-    .logo {
-        align-items: flex-start !important;
-        width: auto !important;
-        flex-shrink: 0;
-    }
-    .logo img {
-        width: 110px !important;
-        height: 42px !important;
-        margin-bottom: 2px;
-    }
-    .logo-subtitle {
-        font-size: 7px !important;
-        letter-spacing: 1px !important;
-        text-align: left !important;
-        line-height: 1.25;
-        max-width: 115px;
-    }
-    
-    nav {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 6px !important;
-        width: auto !important;
-        max-width: 200px !important;
-        flex-shrink: 0;
-    }
-    
-    nav a.nav-link,
-    nav a.nav-login,
-    nav a.nav-daftar {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 7px 8px !important;
-        font-size: 9.5px !important;
-        border-radius: 20px !important;
-        width: 100% !important;
-        text-align: center !important;
-        letter-spacing: 0.3px !important;
-        min-width: 75px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-    }
-    
-    nav a.nav-link {
-        background: transparent !important;
-        border: 1.5px solid #2a3b4c !important;
-        color: #e0e0e0 !important;
-    }
-    
-    nav a.nav-login {
-        background: transparent !important;
-        border: 1.5px solid #00d2ff !important;
-        color: #00d2ff !important;
-        box-shadow: 0 0 8px rgba(0, 210, 255, 0.25) !important;
-    }
-    
-    nav a.nav-daftar {
-        background: #00d2ff !important;
-        color: #000 !important;
-        border: 1.5px solid #00d2ff !important;
-        box-shadow: 0 0 12px rgba(0, 210, 255, 0.7) !important;
-    }
-    
-    nav a.nav-link::before,
-    nav a.nav-login::before,
-    nav a.nav-daftar::before {
-        display: none !important;
-    }
-    
+    .logo { align-items: flex-start !important; width: auto !important; flex-shrink: 0; }
+    .logo img { width: 110px !important; height: 42px !important; margin-bottom: 2px; }
+    .logo-subtitle { font-size: 7px !important; letter-spacing: 1px !important; text-align: left !important; line-height: 1.25; max-width: 115px; }
+    nav { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6px !important; width: auto !important; max-width: 200px !important; flex-shrink: 0; }
+    nav a.nav-link, nav a.nav-login, nav a.nav-daftar { display: flex !important; align-items: center !important; justify-content: center !important; padding: 7px 8px !important; font-size: 9.5px !important; border-radius: 20px !important; width: 100% !important; text-align: center !important; letter-spacing: 0.3px !important; min-width: 75px !important; font-weight: 800 !important; text-transform: uppercase !important; }
+    nav a.nav-link { background: transparent !important; border: 1.5px solid #2a3b4c !important; color: #e0e0e0 !important; }
+    nav a.nav-login { background: transparent !important; border: 1.5px solid #00d2ff !important; color: #00d2ff !important; box-shadow: 0 0 8px rgba(0, 210, 255, 0.25) !important; }
+    nav a.nav-daftar { background: #00d2ff !important; color: #000 !important; border: 1.5px solid #00d2ff !important; box-shadow: 0 0 12px rgba(0, 210, 255, 0.7) !important; }
+    nav a.nav-link::before, nav a.nav-login::before, nav a.nav-daftar::before { display: none !important; }
     nav a.nav-link:nth-child(1) { order: 1; }
     nav a.nav-login { order: 2; }
     nav a.nav-link:nth-child(2) { order: 3; }
@@ -577,7 +499,6 @@ nav a.nav-daftar:hover {
 
 .container { max-width: 1250px; margin: auto; padding: 28px 20px 70px; position: relative; z-index: 1; }
 
-/* ═══ LUX TEXT ═══ */
 .lux-text-wrap {
     position: relative;
     width: 100%;
@@ -748,30 +669,45 @@ nav a.nav-daftar:hover {
     padding: 0 16px 14px;
     margin-bottom: 4px;
 }
+
+/* ✅ TITLE BIG MATCH — gradient cyan-purple */
 .bms-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 16px;
     font-weight: 800;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #ffffff;
-    padding: 8px 24px;
+    color: #fff;
+    padding: 9px 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     position: relative;
     background: #000;
-    border: 2px solid #ff0044;
-    border-radius: 4px;
-    box-shadow: 0 0 15px rgba(255, 0, 68, 0.6), inset 0 0 12px rgba(255, 0, 68, 0.15);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background-image: 
+        linear-gradient(#000, #000),
+        linear-gradient(90deg, #06b6d4, #8b5cf6, #10b981, #06b6d4);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 300% 100%;
+    animation: premiumBorder 5s linear infinite;
+    box-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.5),
+        0 0 30px rgba(139, 92, 246, 0.3),
+        inset 0 0 15px rgba(6, 182, 212, 0.1);
+    text-shadow: 
+        0 0 10px rgba(6, 182, 212, 0.8),
+        0 0 20px rgba(139, 92, 246, 0.5);
 }
+
 .bms-title .bms-fire {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 6px #ff4400) drop-shadow(0 0 12px #ffaa00);
+    filter: drop-shadow(0 0 6px #06b6d4) drop-shadow(0 0 12px #8b5cf6);
     animation: fireFlicker 0.8s ease-in-out infinite alternate;
 }
 
@@ -811,7 +747,7 @@ nav a.nav-daftar:hover {
     width: 100%;
 }
 
-/* ═══ BMT CARD — PREMIUM LUXURY EDITION ═══ */
+/* ═══ BMT CARD — PREMIUM CYAN-PURPLE EDITION ═══ */
 .bmt-card {
     position: relative;
     flex: 0 0 auto;
@@ -819,8 +755,9 @@ nav a.nav-daftar:hover {
     padding: 12px 12px 0;
     border-radius: 18px;
     background: 
-        radial-gradient(ellipse at top, rgba(245, 215, 110, 0.06) 0%, transparent 60%),
-        linear-gradient(160deg, #0c1015 0%, #050608 45%, #0a0e14 100%);
+        radial-gradient(ellipse at top, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1018 0%, #050608 45%, #080c14 100%);
     border: none;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -830,7 +767,7 @@ nav a.nav-daftar:hover {
     isolation: isolate;
 }
 
-/* Premium animated border */
+/* ✅ Border gradient cyan-purple-emerald bergerak */
 .bmt-card::before {
     content: "";
     position: absolute;
@@ -839,12 +776,12 @@ nav a.nav-daftar:hover {
     padding: 1.5px;
     background: linear-gradient(
         90deg, 
-        rgba(245, 215, 110, 0.7), 
-        rgba(0, 229, 255, 0.5), 
-        rgba(169, 139, 212, 0.6), 
-        rgba(245, 215, 110, 0.7),
-        rgba(0, 229, 255, 0.5),
-        rgba(245, 215, 110, 0.7)
+        rgba(6, 182, 212, 0.8), 
+        rgba(139, 92, 246, 0.7), 
+        rgba(16, 185, 129, 0.6), 
+        rgba(6, 182, 212, 0.8),
+        rgba(139, 92, 246, 0.7),
+        rgba(6, 182, 212, 0.8)
     );
     background-size: 300% 100%;
     animation: premiumBorder 6s linear infinite;
@@ -856,7 +793,7 @@ nav a.nav-daftar:hover {
     z-index: 3;
 }
 
-/* Shine sweep premium */
+/* Shine sweep */
 .bmt-card::after {
     content: "";
     position: absolute;
@@ -868,8 +805,8 @@ nav a.nav-daftar:hover {
         90deg, 
         transparent 0%, 
         rgba(255, 255, 255, 0.03) 30%,
-        rgba(245, 215, 110, 0.15) 50%,
-        rgba(0, 229, 255, 0.12) 70%,
+        rgba(6, 182, 212, 0.2) 50%,
+        rgba(139, 92, 246, 0.15) 70%,
         transparent 100%
     );
     transform: skewX(-25deg);
@@ -884,12 +821,11 @@ nav a.nav-daftar:hover {
     100% { left: 150%; }
 }
 
-/* Inner glow */
 .bmt-card .bmt-inner-glow {
     position: absolute;
     inset: 0;
     border-radius: 18px;
-    background: radial-gradient(ellipse at 50% -20%, rgba(245, 215, 110, 0.08) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 50% -20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
     pointer-events: none;
     z-index: 1;
 }
@@ -902,23 +838,23 @@ nav a.nav-daftar:hover {
 .bmt-card:hover::before {
     background: linear-gradient(
         90deg, 
-        rgba(245, 215, 110, 1), 
-        rgba(0, 229, 255, 0.8), 
-        rgba(169, 139, 212, 0.9), 
-        rgba(245, 215, 110, 1),
-        rgba(0, 229, 255, 0.8),
-        rgba(245, 215, 110, 1)
+        rgba(6, 182, 212, 1), 
+        rgba(139, 92, 246, 0.9), 
+        rgba(16, 185, 129, 0.9), 
+        rgba(6, 182, 212, 1),
+        rgba(139, 92, 246, 0.9),
+        rgba(6, 182, 212, 1)
     );
     background-size: 300% 100%;
     animation: premiumBorder 3s linear infinite;
 }
 
-/* Corner accent premium */
+/* Corner accent */
 .bmt-card .bmt-corner {
     position: absolute;
     width: 12px;
     height: 12px;
-    border: 1.5px solid rgba(245, 215, 110, 0.7);
+    border: 1.5px solid rgba(6, 182, 212, 0.7);
     pointer-events: none;
     z-index: 5;
     animation: cornerPulse 3s ease-in-out infinite;
@@ -928,6 +864,7 @@ nav a.nav-daftar:hover {
 .bmt-card .bmt-corner.bl { bottom: 5px; left: 5px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
 .bmt-card .bmt-corner.br { bottom: 5px; right: 5px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
 
+/* Badge BIG MATCH — gradient cyan-purple */
 .bmt-badge {
     display: inline-flex; align-items: center; justify-content: center;
     gap: 4px;
@@ -936,29 +873,35 @@ nav a.nav-daftar:hover {
     font-size: 9px; font-weight: 900;
     letter-spacing: 2px;
     color: #fff;
-    background: linear-gradient(135deg, #ff0044, #cc0033);
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6, #10b981);
+    background-size: 200% auto;
+    animation: luxGradient 4s ease infinite;
     border-radius: 6px;
     text-transform: uppercase;
     margin-bottom: 8px;
     align-self: flex-start;
-    box-shadow: 0 0 12px rgba(255, 0, 68, 0.5), 0 0 20px rgba(255, 0, 68, 0.25);
+    box-shadow: 
+        0 0 12px rgba(6, 182, 212, 0.6), 
+        0 0 24px rgba(139, 92, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 6;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .bmt-badge .badge-fire {
     width: 11px;
     height: 11px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 3px rgba(255,200,0,0.8));
+    filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.9));
 }
 
+/* League text — cyan-emerald gradient */
 .bmt-league {
     display: block;
     font-family: 'Rajdhani', sans-serif;
     font-size: 9.5px; font-weight: 800;
     letter-spacing: 1.8px;
-    background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
+    background: linear-gradient(90deg, #06b6d4, #10b981, #06b6d4);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -970,8 +913,8 @@ nav a.nav-daftar:hover {
     z-index: 6;
     text-align: center;
     min-height: 12px;
-    animation: goldShimmer 3s linear infinite;
-    text-shadow: 0 0 20px rgba(245, 215, 110, 0.3);
+    animation: luxGradient 4s ease infinite;
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
 }
 
 .bmt-teams {
@@ -992,29 +935,31 @@ nav a.nav-daftar:hover {
     text-align: center;
     min-width: 0;
 }
+
+/* Logo tim — border cyan */
 .bmt-logo {
     width: 44px; height: 44px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 900;
-    color: #f5d76e;
-    background: radial-gradient(circle at 50% 30%, #1a2a3a, #000 80%);
-    border: 2px solid rgba(245, 215, 110, 0.6);
+    color: #06b6d4;
+    background: radial-gradient(circle at 50% 30%, #0a1a2a, #000 80%);
+    border: 2px solid rgba(6, 182, 212, 0.6);
     overflow: hidden;
     flex-shrink: 0;
     box-shadow: 
-        0 0 12px rgba(245, 215, 110, 0.4), 
-        0 0 24px rgba(245, 215, 110, 0.15),
-        inset 0 0 12px rgba(30, 58, 95, 0.5);
+        0 0 12px rgba(6, 182, 212, 0.4), 
+        0 0 24px rgba(139, 92, 246, 0.2),
+        inset 0 0 12px rgba(6, 182, 212, 0.2);
     position: relative;
     transition: all 0.4s;
 }
 .bmt-card:hover .bmt-logo {
     box-shadow: 
-        0 0 18px rgba(245, 215, 110, 0.7), 
-        0 0 36px rgba(245, 215, 110, 0.3),
-        inset 0 0 15px rgba(30, 58, 95, 0.8);
-    border-color: rgba(245, 215, 110, 0.9);
+        0 0 18px rgba(6, 182, 212, 0.7), 
+        0 0 36px rgba(139, 92, 246, 0.4),
+        inset 0 0 15px rgba(6, 182, 212, 0.4);
+    border-color: rgba(6, 182, 212, 1);
 }
 .bmt-logo img {
     width: 32px; height: 32px;
@@ -1023,12 +968,12 @@ nav a.nav-daftar:hover {
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 .bmt-logo.logo-loaded {
-    background: radial-gradient(circle, #ffffff 0%, #f5f0e0 60%, #e8dfc8 100%);
-    border-color: rgba(245, 215, 110, 0.8);
+    background: radial-gradient(circle, #ffffff 0%, #f0f9ff 60%, #dceaf5 100%);
+    border-color: rgba(6, 182, 212, 0.8);
     box-shadow: 
-        0 0 14px rgba(245, 215, 110, 0.6), 
-        0 0 28px rgba(245, 215, 110, 0.25),
-        inset 0 0 10px rgba(255, 255, 255, 0.4);
+        0 0 14px rgba(6, 182, 212, 0.6), 
+        0 0 28px rgba(6, 182, 212, 0.3),
+        inset 0 0 10px rgba(6, 182, 212, 0.2);
 }
 
 .bmt-team-name {
@@ -1039,26 +984,28 @@ nav a.nav-daftar:hover {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     line-height: 1.2;
     text-align: center;
-    color: #e8e0d0;
+    color: #d8e8f0;
     text-transform: uppercase;
-    text-shadow: 0 0 6px rgba(245, 215, 110, 0.3);
+    text-shadow: 0 0 6px rgba(6, 182, 212, 0.4);
 }
 
+/* VS text — cyan-purple gradient */
 .bmt-vs {
     font-family: 'Orbitron', sans-serif;
     font-size: 10px; font-weight: 900;
     letter-spacing: 1.5px;
-    background: linear-gradient(135deg, #f5d76e, #d4af37, #f5d76e);
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6, #06b6d4);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(245, 215, 110, 0.8));
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.9));
     align-self: center;
     padding-bottom: 24px;
-    animation: goldShimmer 3s linear infinite;
+    animation: luxGradient 3s ease infinite;
 }
 
+/* Time footer — cyan background */
 .bmt-time {
     display: flex; align-items: center; justify-content: center;
     gap: 5px;
@@ -1067,9 +1014,9 @@ nav a.nav-daftar:hover {
     font-family: 'Teko', sans-serif;
     font-size: 13px; font-weight: 600;
     letter-spacing: 1.5px;
-    color: #f5e8c8;
-    background: linear-gradient(180deg, rgba(245, 215, 110, 0.08), rgba(0,0,0,0.7));
-    border-top: 1px solid rgba(245, 215, 110, 0.25);
+    color: #c8f0ff;
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.12), rgba(0,0,0,0.7));
+    border-top: 1px solid rgba(6, 182, 212, 0.35);
     position: relative;
     z-index: 6;
     text-transform: uppercase;
@@ -1079,13 +1026,13 @@ nav a.nav-daftar:hover {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(245, 215, 110, 0.6), transparent);
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), transparent);
 }
 .bmt-time .time-icon-svg {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 4px rgba(245, 215, 110, 0.8));
+    filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.9));
 }
 
 /* ═══ BREAKING NEWS ═══ */
@@ -1107,7 +1054,7 @@ nav a.nav-daftar:hover {
 .news-ticker-label {
     flex-shrink: 0;
     padding: 12px 22px;
-    background: linear-gradient(135deg, #ff0044, #cc0033);
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
     color: #fff;
     font-family: 'Rajdhani', sans-serif;
     font-size: 13px; font-weight: 900;
@@ -1118,6 +1065,7 @@ nav a.nav-daftar:hover {
     margin: 2px;
     border-radius: 12px;
     display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
 }
 .news-ticker-label .label-dot {
     width: 10px;
@@ -1125,7 +1073,7 @@ nav a.nav-daftar:hover {
     border-radius: 50%;
     background: #fff;
     flex-shrink: 0;
-    box-shadow: 0 0 8px #fff, 0 0 16px #ff6699;
+    box-shadow: 0 0 8px #fff, 0 0 16px #06b6d4;
     animation: newsBlink 1s ease-in-out infinite;
 }
 .news-ticker-wrap { flex: 1; overflow: hidden; position: relative; height: 50px; z-index: 2; }
@@ -1141,7 +1089,6 @@ nav a.nav-daftar:hover {
     padding-left: 100%;
 }
 
-/* ═══ STATS ═══ */
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 32px; }
 .stat-box {
     position: relative;
@@ -1712,11 +1659,7 @@ nav a.nav-daftar:hover {
     box-shadow: 0 0 30px rgba(61,43,86,0.4), 0 0 30px rgba(30,58,95,0.2);
     transform: translateY(-2px);
 }
-.selesai-icon {
-    font-size: 15px;
-    position: relative;
-    z-index: 2;
-}
+.selesai-icon { font-size: 15px; position: relative; z-index: 2; }
 .selesai-text {
     flex: 1; text-align: center;
     position: relative;
@@ -1808,7 +1751,6 @@ nav a.nav-daftar:hover {
     z-index: 2;
 }
 
-/* ═══ MATCH ROW ═══ */
 .match-row-single {
     position: relative;
     padding: 14px 18px 12px;
@@ -1818,7 +1760,6 @@ nav a.nav-daftar:hover {
     cursor: pointer;
     border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-
 .match-row-single:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -1828,15 +1769,12 @@ nav a.nav-daftar:hover {
     border-bottom-right-radius: 10px;
     border-bottom: none;
 }
-
 .match-row-single:hover {
     background: #050505;
 }
-
 .match-row-single:hover::before {
     opacity: 1;
 }
-
 .match-row-single::before {
     content: "";
     position: absolute;
@@ -1883,8 +1821,6 @@ nav a.nav-daftar:hover {
     mask-composite: exclude;
     pointer-events: none;
 }
-
-/* Badge SELESAI warna hijau */
 .match-badge-center.selesai {
     background: linear-gradient(135deg, #1a5c3a, #0d3d24) !important;
     color: #7dffb0 !important;
@@ -1894,10 +1830,7 @@ nav a.nav-daftar:hover {
     text-shadow: 0 0 6px rgba(125, 255, 176, 0.8) !important;
     border: 1.5px solid #2ecc71 !important;
 }
-.match-badge-center.selesai::before {
-    display: none;
-}
-/* Badge SEGERA warna ungu-biru */
+.match-badge-center.selesai::before { display: none; }
 .match-badge-center.akan {
     background: linear-gradient(135deg, #3d2b56, #1e3a5f) !important;
     color: #c8b8ff !important;
@@ -1907,10 +1840,7 @@ nav a.nav-daftar:hover {
     text-shadow: 0 0 6px rgba(200, 184, 255, 0.8) !important;
     border: 1.5px solid #8bb4e8 !important;
 }
-.match-badge-center.akan::before {
-    display: none;
-}
-
+.match-badge-center.akan::before { display: none; }
 .match-badge-center.live {
     background: #ff0000 !important;
     color: #fff !important;
@@ -1921,9 +1851,7 @@ nav a.nav-daftar:hover {
     text-shadow: 0 0 8px #fff, 0 0 16px #ff6666 !important;
     border: 1.5px solid #ffffff !important;
 }
-.match-badge-center.live::before {
-    display: none;
-}
+.match-badge-center.live::before { display: none; }
 .match-badge-center.live::after {
     content: "●";
     display: inline-block;
@@ -1941,7 +1869,6 @@ nav a.nav-daftar:hover {
     gap: 8px;
     padding-top: 6px;
 }
-
 .match-team-side {
     display: flex;
     flex-direction: column;
@@ -1952,7 +1879,6 @@ nav a.nav-daftar:hover {
     min-width: 0;
     padding: 4px 8px;
 }
-
 .match-team-side.left {
     align-items: center;
     padding-right: 16px;
@@ -1961,7 +1887,6 @@ nav a.nav-daftar:hover {
     align-items: center;
     padding-left: 16px;
 }
-
 .match-team-logo {
     width: 36px;
     height: 36px;
@@ -1973,12 +1898,10 @@ nav a.nav-daftar:hover {
     filter: drop-shadow(0 0 6px rgba(61,43,86,0.5)) drop-shadow(0 2px 4px rgba(0,0,0,0.7));
     transition: transform 0.3s, filter 0.3s;
 }
-
 .match-row-single:hover .match-team-logo {
     transform: scale(1.1);
     filter: drop-shadow(0 0 12px rgba(61,43,86,0.8)) drop-shadow(0 0 12px rgba(30,58,95,0.6)) drop-shadow(0 2px 5px rgba(0,0,0,0.7));
 }
-
 .match-team-logo-initial {
     width: 36px;
     height: 36px;
@@ -2012,7 +1935,6 @@ nav a.nav-daftar:hover {
     mask-composite: exclude;
     pointer-events: none;
 }
-
 .match-team-name-text {
     font-family: 'Rajdhani', sans-serif;
     font-size: 11.5px;
@@ -2036,7 +1958,6 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: #ffffff !important;
     animation: none !important;
 }
-
 .match-vs-center {
     display: flex;
     flex-direction: column;
@@ -2050,7 +1971,6 @@ nav a.nav-daftar:hover {
     border: 1.5px solid rgba(255,255,255,0.12);
     box-shadow: inset 0 0 10px rgba(61,43,86,0.05);
 }
-
 .match-vs-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 11px;
@@ -2064,7 +1984,6 @@ nav a.nav-daftar:hover {
     animation: jewelText 10s linear infinite;
     filter: drop-shadow(0 0 6px rgba(139,180,232,0.4));
 }
-
 .match-vs-time {
     font-family: 'Teko', sans-serif;
     font-size: 13px;
@@ -2078,7 +1997,6 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: jewelText 9s linear infinite;
 }
-
 .match-vs-date {
     font-family: 'Rajdhani', sans-serif;
     font-size: 8px;
@@ -2092,7 +2010,6 @@ nav a.nav-daftar:hover {
     -webkit-text-fill-color: transparent;
     animation: jewelText 10s linear infinite;
 }
-
 .match-extra-row {
     display: flex;
     justify-content: center;
@@ -2102,13 +2019,11 @@ nav a.nav-daftar:hover {
     padding-top: 8px;
     border-top: 1px dashed rgba(255,255,255,0.06);
 }
-
 .match-extra-item {
     display: flex;
     align-items: center;
     gap: 6px;
 }
-
 .match-extra-item .lbl {
     font-family: 'Rajdhani', sans-serif;
     font-size: 9px;
@@ -2117,7 +2032,6 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
     color: #a0c8b8;
 }
-
 .match-extra-item .val {
     font-family: 'Teko', sans-serif;
     font-size: 15px;
@@ -2126,7 +2040,6 @@ nav a.nav-daftar:hover {
     line-height: 1;
     color: #ffffff;
 }
-
 .match-extra-item.hdp .lbl { color: #a98bd4; }
 .match-extra-item.hdp .val { color: #d0b3ff; }
 .match-extra-item.pred .lbl { color: #d4b88b; }
@@ -2142,7 +2055,6 @@ nav a.nav-daftar:hover {
     text-transform: uppercase;
 }
 
-/* ═══ RESPONSIVE MOBILE ═══ */
 @media (max-width: 800px) {
     .container { padding: 14px 10px 30px; }
     .single-column-wrap { padding: 6px; }
@@ -2167,7 +2079,6 @@ nav a.nav-daftar:hover {
     .bms-title { font-size: 13px; letter-spacing: 3px; padding: 7px 16px; }
     .bms-title .bms-fire { width: 15px; height: 15px; }
     
-    /* BMT Card mobile */
     .bmt-card { 
         width: 150px !important; 
         padding: 10px 10px 0 !important;
@@ -2278,7 +2189,6 @@ nav a.nav-daftar:hover {
     
     .toast { top: 15px; right: 15px; left: 15px; max-width: unset; }
     
-    /* ✅ Bottom nav DIHAPUS — tidak ada padding-bottom lagi */
     body { padding-bottom: 20px; }
     .bottom-nav { display: none !important; }
     .logo img { width: 115px; height: 42px; }
@@ -2359,7 +2269,6 @@ nav a.nav-daftar:hover {
     .match-badge-center { font-size: 7px; padding: 1px 6px; }
 }
 
-/* ═══ FOOTER ═══ */
 .site-footer {
     position: relative;
     margin-top: 60px;
@@ -2430,10 +2339,7 @@ nav a.nav-daftar:hover {
     font-weight: 800;
 }
 
-/* ═══ BOTTOM NAV — HIDDEN (DIHAPUS) ═══ */
-.bottom-nav {
-    display: none !important;
-}
+.bottom-nav { display: none !important; }
 
 .toast {
     position: fixed;
@@ -2477,7 +2383,6 @@ nav a.nav-daftar:hover {
 <div class="aurora-bg"></div>
 <canvas id="particleCanvas"></canvas>
 
-<!-- Loading screen -->
 <div id="loadingScreen">
     <div class="loading-particles" id="loadingParticles"></div>
     <div class="loading-logo-wrap">
@@ -2498,7 +2403,6 @@ nav a.nav-daftar:hover {
     <div class="loading-brand">KIPER4D PREMIUM</div>
 </div>
 
-<!-- HEADER -->
 <header>
 <div class="header-inner">
     <a href="https://rotasy.link/Kiper4D" class="logo" target="_blank" rel="noopener noreferrer">
@@ -2516,7 +2420,6 @@ nav a.nav-daftar:hover {
 
 <div class="container">
 
-<!-- LUX TEXT -->
 <div class="lux-text-wrap">
     <div class="corner-bl"></div>
     <div class="corner-br"></div>
@@ -2543,12 +2446,10 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
-<!-- BANNER -->
 <div class="banner">
     <img src="banner-kiper4d-baru.png" alt="KIPER4D Prediksi Bola" loading="eager" decoding="async">
 </div>
 
-<!-- BIG MATCH -->
 <section class="big-match-section">
     <div class="bms-header">
         <span class="bms-title">
@@ -2556,9 +2457,9 @@ nav a.nav-daftar:hover {
                 <path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="url(#fireGrad)"/>
                 <defs>
                     <linearGradient id="fireGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#ffaa00"/>
-                        <stop offset="50%" stop-color="#ff4400"/>
-                        <stop offset="100%" stop-color="#cc0033"/>
+                        <stop offset="0%" stop-color="#06b6d4"/>
+                        <stop offset="50%" stop-color="#8b5cf6"/>
+                        <stop offset="100%" stop-color="#10b981"/>
                     </linearGradient>
                 </defs>
             </svg>
@@ -2567,9 +2468,9 @@ nav a.nav-daftar:hover {
                 <path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="url(#fireGrad)"/>
                 <defs>
                     <linearGradient id="fireGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#ffaa00"/>
-                        <stop offset="50%" stop-color="#ff4400"/>
-                        <stop offset="100%" stop-color="#cc0033"/>
+                        <stop offset="0%" stop-color="#06b6d4"/>
+                        <stop offset="50%" stop-color="#8b5cf6"/>
+                        <stop offset="100%" stop-color="#10b981"/>
                     </linearGradient>
                 </defs>
             </svg>
@@ -2584,7 +2485,6 @@ nav a.nav-daftar:hover {
     </div>
 </section>
 
-<!-- BREAKING NEWS -->
 <div class="news-ticker">
     <div class="news-ticker-label"><span class="label-dot"></span><span>BREAKING</span></div>
     <div class="news-ticker-wrap">
@@ -2594,7 +2494,6 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
-<!-- STATS -->
 <div class="stats">
     <div class="stat-box">
         <span class="stat-number" id="totalPrediksi">0</span>
@@ -2610,7 +2509,6 @@ nav a.nav-daftar:hover {
     </div>
 </div>
 
-<!-- PERTANDINGAN -->
 <section id="pertandingan">
     <div class="section-head">
         <div class="section-title">
@@ -2677,7 +2575,6 @@ nav a.nav-daftar:hover {
 
 </div>
 
-<!-- FOOTER -->
 <footer class="site-footer">
     <div class="footer-logo-wrap">
         <img src="logo-kiper4d.png" alt="KIPER4D" width="140" height="60" loading="lazy" decoding="async">
@@ -2686,8 +2583,6 @@ nav a.nav-daftar:hover {
     <div class="footer-tagline">JAGONYA PREDIKSI • JAGONYA BIKIN CUAN</div>
     <div class="footer-copy">© 2026 <span>KIPER4D</span> • All Rights Reserved</div>
 </footer>
-
-<!-- BOTTOM NAV DIHAPUS — tidak lagi digunakan di mobile -->
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -2709,7 +2604,6 @@ const db = getFirestore(app);
 let semuaData = [];
 let selectedDateSpecific = "";
 
-/* PARTICLE BACKGROUND */
 (function initParticles() {
     const canvas = document.getElementById("particleCanvas");
     if (!canvas) return;
@@ -2766,7 +2660,6 @@ let selectedDateSpecific = "";
     draw();
 })();
 
-/* RIPPLE */
 (function initRippleOnClick() {
     document.addEventListener("click", (e) => {
         const ripple = document.createElement("div");
@@ -2782,7 +2675,6 @@ let selectedDateSpecific = "";
     }
 })();
 
-/* READING PROGRESS */
 (function initReadingProgress() {
     const bar = document.getElementById("readingProgress");
     if (!bar) return;
@@ -2829,7 +2721,6 @@ window.fadeInContent = function() {
     }
 })();
 
-/* CACHE */
 const CACHE_KEY = "kiper4d_data_cache_v33";
 const CACHE_DURATION = 3 * 60 * 60 * 1000;
 
@@ -2846,7 +2737,6 @@ function loadCache(maxAge) {
 }
 function clearCache() { try { localStorage.removeItem(CACHE_KEY); } catch (error) {} }
 
-/* LOGO CACHE */
 const TEAM_LOGO_CACHE_KEY = "kiper4d_team_logo_cache_v46";
 const teamLogoCache = new Map();
 const teamLogosFromDB = new Map();
@@ -2871,7 +2761,6 @@ async function loadTeamLogosFromDB() {
     } catch (err) { console.warn("⚠️ Gagal load team-logos:", err); }
 }
 
-/* THESPORTSDB */
 const THESPORTSDB_API_KEY = "123";
 const THESPORTSDB_CACHE_KEY = "kiper4d_thesportsdb_logo_cache_v11";
 const theSportsDbCache = new Map();
@@ -2925,7 +2814,6 @@ async function prefetchAllLogosFromTheSportsDB(teamNames) {
     }
 }
 
-/* UTILITY */
 function clean(value) { if (value === undefined || value === null) return ""; return String(value).trim(); }
 function escapeHtml(value) { return clean(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
 function normalizeExact(name) { return clean(name).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ").replace(/[.'’`]/g, "").replace(/[-_/]/g, " ").replace(/\s+/g, " ").trim(); }
@@ -3069,7 +2957,6 @@ function getLogoForTeam(name, logoFromDb) {
     return null;
 }
 
-/* TANGGAL & WAKTU */
 const BULAN_MAP = {
     "januari": "01", "jan": "01", "january": "01",
     "februari": "02", "feb": "02", "february": "02",
@@ -3552,9 +3439,9 @@ function bigMatchCard(data) {
         ? `<div class="bmt-logo logo-loaded"><img src="${escapeHtml(awayLogo.url)}" alt="${escapeHtml(away)}" loading="lazy" onerror="this.parentElement.textContent='?'"></div>`
         : `<div class="bmt-logo">${escapeHtml(away.substring(0, 2).toUpperCase())}</div>`;
 
-    const badgeFireSvg = `<svg class="badge-fire" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="#ffcc00"/></svg>`;
+    const badgeFireSvg = `<svg class="badge-fire" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 8 6 8 10C8 12 9 13 9 13C9 13 7 11 7 8C7 8 4 11 4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15C20 11.5 17.5 9 16 7C16 7 16.5 9.5 15 11C15 11 15 8 12 2Z" fill="#ffffff"/></svg>`;
 
-    const clockSvg = `<svg class="time-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#f5d76e" stroke-width="2"/><path d="M12 7V12L15 14" stroke="#f5d76e" stroke-width="2" stroke-linecap="round"/></svg>`;
+    const clockSvg = `<svg class="time-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#06b6d4" stroke-width="2"/><path d="M12 7V12L15 14" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/></svg>`;
 
     return `
         <div class="bmt-card">
